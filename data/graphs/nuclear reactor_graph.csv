@@ -1,0 +1,913 @@
+,paper_id,target,type
+0,https://openalex.org/W4285389467,Afshin Hedayat,author
+1,https://openalex.org/W4285389467,"Reactor and Nuclear Safety Research School, Nuclear Science and Technology Research Institute (NSTRI) , End of North Karegar Street, P.O. Box: 14395-836 , Tehran , Iran",institution
+2,https://openalex.org/W4285389467,IR,country
+3,https://openalex.org/W4285389467,advanced nuclear reactors,keyword
+4,https://openalex.org/W4285389467,sustainable energy supplies,keyword
+5,https://openalex.org/W4285389467,non-electrical,keyword
+6,https://openalex.org/W3010970006,K. Karichev,author
+7,https://openalex.org/W3010970006,National Research Tomsk Polytechnic University,institution
+8,https://openalex.org/W3010970006,RU,country
+9,https://openalex.org/W3010970006,A. Kudrov,author
+12,https://openalex.org/W3010970006,S. Lavrinenko,author
+15,https://openalex.org/W3010970006,spherical fuel cell,keyword
+16,https://openalex.org/W3010970006,high-temperature,keyword
+17,https://openalex.org/W2931816982,Michael I. Ojovan,author
+18,https://openalex.org/W2931816982,"Department of Materials, Imperial College London, United Kingdom; International Atomic Energy Agency, Wien, Austria",institution
+19,https://openalex.org/W2931816982,AT,country
+20,https://openalex.org/W2931816982,GB,country
+21,https://openalex.org/W2931816982,William E. Lee,author
+22,https://openalex.org/W2931816982,"Centre for Nuclear Engineering, Imperial College London, United Kingdom; Nuclear Futures Institute, Bangor University, United Kingdom",institution
+24,https://openalex.org/W2931816982,Stepan N. Kalmykov,author
+25,https://openalex.org/W2931816982,"Department of Radiochemistry, Faculty of Chemistry, Lomonosov Moscow State University, Russian Federation",institution
+26,https://openalex.org/W2931816982,RU,country
+27,https://openalex.org/W2931816982,energy,keyword
+28,https://openalex.org/W2931816982,power,keyword
+29,https://openalex.org/W4385354459,Ali Zamani Paydar,author
+30,https://openalex.org/W4385354459,"Amirkabir University of Technology, Tehran, Iran",institution
+31,https://openalex.org/W4385354459,IR,country
+32,https://openalex.org/W4385354459,Seyed Kamal Mousavi Balgehshiri,author
+35,https://openalex.org/W4385354459,Bahman Zohuri,author
+36,https://openalex.org/W4385354459,"Golden Gate University, San Francisco, CA, United States",institution
+37,https://openalex.org/W4385354459,US,country
+38,https://openalex.org/W4385354459,fission,keyword
+39,https://openalex.org/W4385354459,pipe,keyword
+40,https://openalex.org/W4385354280,Ali Zamani Paydar,author
+41,https://openalex.org/W4385354280,"Amirkabir University of Technology, Tehran, Iran",institution
+42,https://openalex.org/W4385354280,IR,country
+43,https://openalex.org/W4385354280,Seyed Kamal Mousavi Balgehshiri,author
+46,https://openalex.org/W4385354280,Bahman Zohuri,author
+47,https://openalex.org/W4385354280,"Golden Gate University, San Francisco, CA, United States",institution
+48,https://openalex.org/W4385354280,US,country
+49,https://openalex.org/W4385354280,nuclear thermal hydraulics,keyword
+50,https://openalex.org/W4385354280,safety,keyword
+51,https://openalex.org/W4385354280,heat,keyword
+52,https://openalex.org/W2398377145,A.G. Kalashnikov,author
+53,https://openalex.org/W2398377145,"Joint Stock Company ""State Scientific Centre of the Russian Federation – Institute for Physics and Power Engineering named after A. I. Leypunsky"" (IPPE), 1, Bondarenko Sq., Obninsk, Kaluga Region, 249033 Russia",institution
+54,https://openalex.org/W2398377145,RU,country
+55,https://openalex.org/W2398377145,A.L. Moseev,author
+58,https://openalex.org/W2398377145,V.M. Dekusar,author
+61,https://openalex.org/W2398377145,V.V. Korobeynikov,author
+64,https://openalex.org/W2398377145,P.A. Moseev,author
+67,https://openalex.org/W2398377145,nuclear fuel cycle,keyword
+68,https://openalex.org/W2398377145,cycle code,keyword
+69,https://openalex.org/W2398377145,nuclear fuel,keyword
+70,https://openalex.org/W2486603451,S. Katyshev,author
+71,https://openalex.org/W2486603451,Ural Federal University >  >  >  >,institution
+72,https://openalex.org/W2486603451,RU,country
+73,https://openalex.org/W2486603451,L. Teslyuk,author
+76,https://openalex.org/W2486603451,ionic melts,keyword
+77,https://openalex.org/W3196180701,T. S. Dikova,author
+78,https://openalex.org/W3196180701,"National Research Nuclear University MEPhI (Moscow Engineering Physics Institute), 31 Kashirskoe shosse, 115409 Moscow, Russia",institution
+79,https://openalex.org/W3196180701,RU,country
+80,https://openalex.org/W3196180701,Yu E. Karazhelevskaya,author
+83,https://openalex.org/W3196180701,A. M. Terekhova,author
+86,https://openalex.org/W3196180701,reactor,keyword
+87,https://openalex.org/W3196180701,cm,keyword
+88,https://openalex.org/W2031265405,A.V. Zrodnikov,author
+89,https://openalex.org/W2031265405,"State Scientific Center of Russian Federation Institute for Physics and Power Engineering, 1 Bondarenko sq., Obninsk 249033, Kaluga Region, Russia",institution
+90,https://openalex.org/W2031265405,RU,country
+91,https://openalex.org/W2031265405,G.I. Toshinsky,author
+94,https://openalex.org/W2031265405,O.G. Komlev,author
+97,https://openalex.org/W2031265405,Yu.G. Dragunov,author
+98,https://openalex.org/W2031265405,"Experimental Design Bureau “Gidropress”, 21 Ordzhonikidze st., Podolsk 142103, Moscow Region, Russia",institution
+100,https://openalex.org/W2031265405,V.S. Stepanov,author
+103,https://openalex.org/W2031265405,N.N. Klimov,author
+106,https://openalex.org/W2031265405,I.I. Kopytov,author
+107,https://openalex.org/W2031265405,"“Atomenergoproekt” Building 1, 7 Bakuninskaya st., Moscow, B-5, 107005, Russia",institution
+109,https://openalex.org/W2031265405,V.N. Krushelnitsky,author
+112,https://openalex.org/W2031265405,nuclear power development,keyword
+113,https://openalex.org/W2031265405,fast reactors,keyword
+114,https://openalex.org/W2031265405,multi-purpose,keyword
+115,https://openalex.org/W2125398595,Y.A. Svistunov,author
+116,https://openalex.org/W2125398595,"D. V. Efremov Science Research Institute of Electrophysical Apparatus, Saint Petersburg, Russia",institution
+117,https://openalex.org/W2125398595,RU,country
+118,https://openalex.org/W2125398595,M.F. Vorogushin,author
+121,https://openalex.org/W2125398595,optimization,keyword
+122,https://openalex.org/W2125398595,nuclear,keyword
+123,https://openalex.org/W2125398595,energetics,keyword
+124,https://openalex.org/W2399326571,Salah Ud-Din Khan,author
+125,https://openalex.org/W2399326571,"Sustainable Energy Technologies Center, King Saud University, P.O. Box 800, Riyadh 11421, Saudi Arabia",institution
+126,https://openalex.org/W2399326571,SA,country
+127,https://openalex.org/W2399326571,Shahab Ud-Din Khan,author
+128,https://openalex.org/W2399326571,"Institute of Plasma Physics, Chinese Academy of Sciences, Hefei, Anhui, PR China",institution
+129,https://openalex.org/W2399326571,CN,country
+130,https://openalex.org/W2399326571,Sajjad Haider,author
+131,https://openalex.org/W2399326571,"Department of Chemical Engineering, College of Engineering, King Saud University, P.O. Box 800, Riyadh 11421,Saudi Arabia",institution
+133,https://openalex.org/W2399326571,Abdelrahman El-Leathy,author
+134,https://openalex.org/W2399326571,"Department of Mechanical Engineering, College of Engineering, King Saud University, P.O. Box 800, Riyadh 11421, Saudi Arabia; Mechanical Power Engineering Department, Faculty of Engineering, El-Mataria, Helwan University, Cairo, Egypt",institution
+135,https://openalex.org/W2399326571,EG,country
+137,https://openalex.org/W2399326571,Usman Ali Rana,author
+140,https://openalex.org/W2399326571,Syed Noman Danish,author
+143,https://openalex.org/W2399326571,Ramzan Ullah,author
+144,https://openalex.org/W2399326571,"Department of Physics, COMSATS Institute of Information Technology, Islamabad 45550, Pakistan; Shanghai Ultra-Precision Optical Manufacturing Engineering Center, Department of Optical Science and Engineering, Fudan University, Shanghai 200433, China",institution
+146,https://openalex.org/W2399326571,PK,country
+147,https://openalex.org/W2399326571,desalination system,keyword
+148,https://openalex.org/W2399326571,small modular nuclear reactor,keyword
+149,https://openalex.org/W2399326571,middle east,keyword
+150,https://openalex.org/W2399326571,africa,keyword
+151,https://openalex.org/W2399326571,techno-economic,keyword
+152,https://openalex.org/W2006508698,F. Zareian Ronizi,author
+153,https://openalex.org/W2006508698,"Faculty of Energy Engineering and Physics, Amirkabir University of Technology (Tehran Polytechnic), Hafez Street, Tehran, Iran",institution
+154,https://openalex.org/W2006508698,IR,country
+155,https://openalex.org/W2006508698,A.H. Fadaei,author
+158,https://openalex.org/W2006508698,S. Setayeshi,author
+161,https://openalex.org/W2006508698,A.R. Shahidi,author
+162,https://openalex.org/W2006508698,"Atomic Energy Organization of Iran (AEOI), North Kargar Street, Tehran, Iran",institution
+164,https://openalex.org/W2006508698,fuel lattice pitch,keyword
+165,https://openalex.org/W2006508698,neutronic parameters,keyword
+166,https://openalex.org/W2006508698,reactor performance,keyword
+167,https://openalex.org/W2585185224,M. Zaidabadi nejad,author
+168,https://openalex.org/W2585185224,"Department of Nuclear Engineering, Faculty of Advanced Sciences and Technologies, University of Isfahan, 81746-73441 Isfahan, Iran",institution
+169,https://openalex.org/W2585185224,IR,country
+170,https://openalex.org/W2585185224,G.R. Ansarifar,author
+173,https://openalex.org/W2585185224,multipoint reactors model,keyword
+174,https://openalex.org/W2585185224,adaptive robust control,keyword
+175,https://openalex.org/W2585185224,axial offset,keyword
+176,https://openalex.org/W2585185224,nuclear reactors,keyword
+177,https://openalex.org/W2585185224,load-following,keyword
+178,https://openalex.org/W4256124764,A Salar Elahi,author
+179,https://openalex.org/W4256124764,"Plasma Physics Research Center, Science and Research Branch, Islamic Azad University, Tehran, Iran",institution
+180,https://openalex.org/W4256124764,IR,country
+181,https://openalex.org/W4256124764,M Ghoranneviss,author
+184,https://openalex.org/W4256124764,Claude Deutsch,author
+185,https://openalex.org/W4256124764,"CNRS Research Center, Paris, France",institution
+186,https://openalex.org/W4256124764,FR,country
+187,https://openalex.org/W4256124764,M Waseem Ahmed,author
+188,https://openalex.org/W4256124764,"Department of Physics, North Carolina Central University (NCCU), Durham, NC, USA",institution
+189,https://openalex.org/W4256124764,US,country
+190,https://openalex.org/W2774738975,Svetlana Maykova,author
+191,https://openalex.org/W2774738975,"National Research Tomsk polytechnic university, 634050 Tomsk, Russia",institution
+192,https://openalex.org/W2774738975,RU,country
+193,https://openalex.org/W2774738975,Vassily Borisov,author
+196,https://openalex.org/W2774738975,Aleksandra Antonova,author
+199,https://openalex.org/W2774738975,Aleksandr Vorobiev,author
+202,https://openalex.org/W2774738975,Alexey Abramovskikh,author
+205,https://openalex.org/W2774738975,regenerative feed water,keyword
+206,https://openalex.org/W2774738975,kind resuperheat,keyword
+207,https://openalex.org/W2774738975,thermodynamic efficiency,keyword
+208,https://openalex.org/W2774738975,reactor,keyword
+209,https://openalex.org/W2774738975,steam-coolant,keyword
+210,https://openalex.org/W4210418310,A Moseev,author
+211,https://openalex.org/W4210418310,A.I. Leypunsky Institute for Physics and Power Engineering,institution
+212,https://openalex.org/W4210418310,RU,country
+213,https://openalex.org/W4210418310,V Dekusar,author
+216,https://openalex.org/W4210418310,V Korobeinikov,author
+219,https://openalex.org/W4210418310,V Eliseev,author
+222,https://openalex.org/W4210418310,nuclear energy system,keyword
+223,https://openalex.org/W4210418310,potential,keyword
+224,https://openalex.org/W4210418310,two-component,keyword
+225,https://openalex.org/W3021220781,A. V. Gulevich,author
+226,https://openalex.org/W3021220781,"Joint-Stock Company State Scientific Center of the Russian Federation Physics and Power Institute, Obninsk, Russia",institution
+227,https://openalex.org/W3021220781,RU,country
+228,https://openalex.org/W3021220781,V. M. Dekusar,author
+231,https://openalex.org/W3021220781,A. A. Kamaev,author
+234,https://openalex.org/W3021220781,D. A. Klinov,author
+237,https://openalex.org/W3021220781,A. L. Moseev,author
+240,https://openalex.org/W3021220781,B. A. Vasiliev,author
+241,https://openalex.org/W3021220781,,institution
+242,https://openalex.org/W3021220781,A. V. Vasyaev,author
+244,https://openalex.org/W3021220781,S. F. Shepelev,author
+246,https://openalex.org/W3021220781,fast sodium reactors,keyword
+247,https://openalex.org/W3021220781,nuclear fuel cycle,keyword
+248,https://openalex.org/W3021220781,power system,keyword
+249,https://openalex.org/W2765291943,M. Zaidabadinejad,author
+250,https://openalex.org/W2765291943,"Department of Nuclear Engineering, Faculty of Advanced Sciences & Technologies, University of Isfahan, Postal Code: 81746-73441, Isfahan, Iran",institution
+251,https://openalex.org/W2765291943,IR,country
+252,https://openalex.org/W2765291943,G. R. Ansarifar,author
+255,https://openalex.org/W2765291943,robust observer,keyword
+256,https://openalex.org/W2765291943,multipoint reactors model,keyword
+257,https://openalex.org/W2765291943,axial offset,keyword
+258,https://openalex.org/W2765291943,lyapunov approach,keyword
+259,https://openalex.org/W2765291943,nuclear reactors,keyword
+260,https://openalex.org/W2765291943,pressurized-water,keyword
+261,https://openalex.org/W3151850153,Vyacheslav S. Kostarev,author
+262,https://openalex.org/W3151850153,"Ural Federal University Named After the First President of Russia B. N. Yeltsin,Nuclear Power Plants and Renewable Energy Sources Department,Ekaterinburg,Russian Federation",institution
+263,https://openalex.org/W3151850153,RU,country
+264,https://openalex.org/W3151850153,Ivan A. Shirmanov,author
+267,https://openalex.org/W3151850153,Danil N. Litvinov,author
+270,https://openalex.org/W3151850153,Sergey E. Shcheklein,author
+273,https://openalex.org/W3151850153,nuclear fuel usage,keyword
+274,https://openalex.org/W3151850153,nuclear fuel,keyword
+275,https://openalex.org/W3151850153,steam,keyword
+276,https://openalex.org/W3151850153,vver-type,keyword
+277,https://openalex.org/W3151850153,fossil-fired,keyword
+278,https://openalex.org/W4210472392,V Dekusar,author
+279,https://openalex.org/W4210472392,A.I. Leypunsky Institute for Physics and Power Engineering,institution
+280,https://openalex.org/W4210472392,RU,country
+281,https://openalex.org/W4210472392,A Zrodnikov,author
+284,https://openalex.org/W4210472392,V Eliseev,author
+287,https://openalex.org/W4210472392,A Moseev,author
+290,https://openalex.org/W4210472392,reactor utilization,keyword
+291,https://openalex.org/W4210472392,americium,keyword
+292,https://openalex.org/W4210472392,accumulation,keyword
+293,https://openalex.org/W3175869395,G G Kulikov,author
+294,https://openalex.org/W3175869395,"Institute of Nuclear Physics and Engineering, National Research Nuclear University MEPhI (Moscow Engineering Physics Institute), Kashirskoe shosse, 31, Moscow, 115409, Russian Federation",institution
+295,https://openalex.org/W3175869395,RU,country
+296,https://openalex.org/W3175869395,A N Shmelev,author
+299,https://openalex.org/W3175869395,V A Apse,author
+302,https://openalex.org/W3175869395,E G Kulikov,author
+305,https://openalex.org/W3175869395,thermonuclear reactors,keyword
+306,https://openalex.org/W2997544731,R Pioro,author
+307,https://openalex.org/W2997544731,"Faculty of Physics, Lomonosov Moscow State University",institution
+308,https://openalex.org/W2997544731,RU,country
+309,https://openalex.org/W2997544731,TJ,country
+310,https://openalex.org/W2997544731,A Zvorykin,author
+311,https://openalex.org/W2997544731,National Technical University of Ukraine “Igor Sikorsky Kiev Polytechnic Institute”,institution
+312,https://openalex.org/W2997544731,UA,country
+313,https://openalex.org/W2997544731,R Machrafi,author
+314,https://openalex.org/W2997544731,University of Ontario Institute of Technology,institution
+315,https://openalex.org/W2997544731,CA,country
+316,https://openalex.org/W2997544731,I Pioro,author
+319,https://openalex.org/W2997544731,nuclear-power nuclear-power,keyword
+320,https://openalex.org/W2997544731,future trends,keyword
+321,https://openalex.org/W2997544731,industry,keyword
+322,https://openalex.org/W2288314849,E.N. Avrorin,author
+323,https://openalex.org/W2288314849,"Russian Federal Nuclear Center – Research Institute of Technical Physics named afteracademician E.L. Zababakhin, Snezhinsk, Chelyabinsk region, Russia",institution
+324,https://openalex.org/W2288314849,RU,country
+325,https://openalex.org/W2288314849,A.N. Chebeskov,author
+326,https://openalex.org/W2288314849,"State Scientific Center of the Russian Federation – Institute for Physics and PowerEngineering named after A. I. Leypunsky, Obninsk, Kaluga region, Russia",institution
+328,https://openalex.org/W2288314849,fast reactors,keyword
+329,https://openalex.org/W2898366774,R. Pioro,author
+330,https://openalex.org/W2898366774,"Lomonosov Moscow State University, #R##N#Moscow, Russia",institution
+331,https://openalex.org/W2898366774,RU,country
+332,https://openalex.org/W2898366774,A. Zvorykin,author
+333,https://openalex.org/W2898366774,"National Technical University of Ukraine, Kyiv, UKRAINE",institution
+334,https://openalex.org/W2898366774,UA,country
+335,https://openalex.org/W2898366774,R. Machrafi,author
+336,https://openalex.org/W2898366774,", University of Ontario Institute of Technology, Oshawa, ON, Canada",institution
+337,https://openalex.org/W2898366774,CA,country
+338,https://openalex.org/W2898366774,I. Pioro,author
+341,https://openalex.org/W2898366774,future developments,keyword
+342,https://openalex.org/W2898366774,industry,keyword
+343,https://openalex.org/W2898366774,nuclear-power,keyword
+344,https://openalex.org/W3008168727,M. Zaidabadi nejad,author
+345,https://openalex.org/W3008168727,"Department of Nuclear Engineering, University of Isfahan, Postal Code: 81746-73441, Isfahan, Iran",institution
+346,https://openalex.org/W3008168727,IR,country
+347,https://openalex.org/W3008168727,G.R. Ansarifar,author
+350,https://openalex.org/W3008168727,reactors,keyword
+351,https://openalex.org/W3008168727,axial power distribution,keyword
+352,https://openalex.org/W3008168727,observer,keyword
+353,https://openalex.org/W3008168727,feedback-linearization,keyword
+354,https://openalex.org/W2263439983,Gang Li,author
+355,https://openalex.org/W2263439983,"Graduate School at Shenzhen, Tsinghua University, Shenzhen 518055, China; Tsinghua National Laboratory for Information Science and Technology, Beijing 100084, China",institution
+356,https://openalex.org/W2263439983,CN,country
+357,https://openalex.org/W2263439983,Xueqian Wang,author
+360,https://openalex.org/W2263439983,Bin Liang,author
+363,https://openalex.org/W2263439983,Xiu Li,author
+366,https://openalex.org/W2263439983,Bo Zhang,author
+367,https://openalex.org/W2263439983,"School of Astronautics, Harbin Institute of Technology, Harbin 150001, China; Tsinghua National Laboratory for Information Science and Technology, Beijing 100084, China",institution
+369,https://openalex.org/W2263439983,Yu Zou,author
+372,https://openalex.org/W2263439983,nuclear reactor cores,keyword
+373,https://openalex.org/W2263439983,electricity generation,keyword
+374,https://openalex.org/W2340345969,Yican Wu,author
+375,https://openalex.org/W2340345969,"Key Laboratory of Neutronics and Radiation Safety, Institute of Nuclear Energy Safety Technology, Chinese Academy of Sciences, Hefei 230031, China",institution
+376,https://openalex.org/W2340345969,CN,country
+377,https://openalex.org/W2340345969,reactor,keyword
+378,https://openalex.org/W2340345969,lead-based,keyword
+379,https://openalex.org/W1968301541,G.I. Toshinsky,author
+380,https://openalex.org/W1968301541,"State Scientific Center of Russian Federation, Institute for Physics and Power Engineering, 1, Bondarenko sq., Obninsk, Kaluga rg., 249033, Russia",institution
+381,https://openalex.org/W1968301541,RU,country
+382,https://openalex.org/W1968301541,O.G. Komlev,author
+385,https://openalex.org/W1968301541,K.G. Mel’nikov,author
+388,https://openalex.org/W1968301541,sustainable nuclear power development,keyword
+389,https://openalex.org/W1968301541,nuclear power technologies,keyword
+390,https://openalex.org/W2903090042,A. P. Soloveva,author
+391,https://openalex.org/W2903090042,"Student of Master Program, National Research Nuclear University MEPhI, Moscow, Russia",institution
+392,https://openalex.org/W2903090042,RU,country
+393,https://openalex.org/W2903090042,Y. A. Ulyanin,author
+394,https://openalex.org/W2903090042,"First Deputy Director General, TENEX (Rosatom Company), Moscow, Russia",institution
+396,https://openalex.org/W2903090042,V. V. Kharitonov,author
+397,https://openalex.org/W2903090042,"Professor, Dr. Sci. (Phys.-Math.), National Research Nuclear University MEPhI, Moscow, Russia",institution
+399,https://openalex.org/W2903090042,nuclear power plants,keyword
+400,https://openalex.org/W2903090042,forecasting,keyword
+401,https://openalex.org/W1982929533,A.V. Miroshnichenko,author
+402,https://openalex.org/W1982929533,"Tomsk Polytechnic University, Tomsk, Russia",institution
+403,https://openalex.org/W1982929533,RU,country
+404,https://openalex.org/W1982929533,temperature,keyword
+405,https://openalex.org/W1982929533,multi-dimensional,keyword
+406,https://openalex.org/W2969359964,Gulevich Av,author
+407,https://openalex.org/W2969359964,A.I. Leypunsky Institute for Physics and Power Engineering,institution
+408,https://openalex.org/W2969359964,RU,country
+409,https://openalex.org/W2969359964,Dekusar Vm,author
+412,https://openalex.org/W2969359964,Klinov Da,author
+415,https://openalex.org/W2969359964,Chebeskov An,author
+418,https://openalex.org/W2969359964,russian fast reactors,keyword
+419,https://openalex.org/W2969359964,closed nuclear fuel cycle,keyword
+420,https://openalex.org/W2969359964,export potential,keyword
+421,https://openalex.org/W4366146380,Nikolay N. Oshkanov,author
+422,https://openalex.org/W4366146380,"Ural Federal University ""UrFU"",Ekaterinburg,Russian Federation",institution
+423,https://openalex.org/W4366146380,RU,country
+424,https://openalex.org/W4366146380,Maria A. Metelnikova,author
+427,https://openalex.org/W4366146380,Gleb A. Vaulin,author
+430,https://openalex.org/W4366146380,subcritical mode,keyword
+431,https://openalex.org/W4366146380,nuclear reactor,keyword
+432,https://openalex.org/W4366146380,emergency protection,keyword
+433,https://openalex.org/W2155696275,K Torabi,author
+434,https://openalex.org/W2155696275,University of Kashan; Kashan Iran,institution
+435,https://openalex.org/W2155696275,IR,country
+436,https://openalex.org/W2155696275,O Safarzadeh,author
+437,https://openalex.org/W2155696275,"Shahid Beheshti Univ, Tehran, Iran",institution
+439,https://openalex.org/W2155696275,A Rahimi-Moghaddam,author
+442,https://openalex.org/W2155696275,pwr core power,keyword
+443,https://openalex.org/W2155696275,pwr core,keyword
+444,https://openalex.org/W2171850032,A. Romenkov,author
+445,https://openalex.org/W2171850032,"N.A. Dollezhal Research and Development Institute of Power Engineering (NIKIET), Moscow, Russian Federation",institution
+446,https://openalex.org/W2171850032,RU,country
+447,https://openalex.org/W2171850032,nuclear reactor,keyword
+448,https://openalex.org/W2171850032,atomic energy use,keyword
+449,https://openalex.org/W2171850032,ruta,keyword
+450,https://openalex.org/W2171850032,energy use,keyword
+451,https://openalex.org/W2171850032,pool-type,keyword
+452,https://openalex.org/W2018541336,E.O Adamov,author
+453,https://openalex.org/W2018541336,"Ministry of Russian Federation for Atomic Energy, 101000, P.O.B. 911, Moscow, Russia",institution
+454,https://openalex.org/W2018541336,RU,country
+455,https://openalex.org/W2018541336,I.Kh Ganev,author
+456,https://openalex.org/W2018541336,"Research and Development Institute of Power Engineering, 101000, P.O.B. 788, Moscow, Russia",institution
+458,https://openalex.org/W2018541336,A.V Lopatkin,author
+461,https://openalex.org/W2018541336,V.V Orlov,author
+464,https://openalex.org/W2018541336,V.S Smirnov,author
+467,https://openalex.org/W2018541336,fuel cycle,keyword
+468,https://openalex.org/W2018541336,nuclear power,keyword
+469,https://openalex.org/W2018541336,self-consistent,keyword
+470,https://openalex.org/W3080750648,Hassan Zarabadipoor,author
+471,https://openalex.org/W3080750648,"Islamic Azad University takestan,Iran",institution
+472,https://openalex.org/W3080750648,IR,country
+473,https://openalex.org/W3080750648,H. Emadi,author
+476,https://openalex.org/W3080750648,optimal controller design,keyword
+477,https://openalex.org/W3080750648,nuclear reactor,keyword
+478,https://openalex.org/W3080750648,controller design,keyword
+479,https://openalex.org/W2237469567,Mehrdad Boroushaki,author
+480,https://openalex.org/W2237469567,"Sharif University of Technology, Department of Mechanical Engineering P.O. Box 11365-9567, Tehran, Iran",institution
+481,https://openalex.org/W2237469567,IR,country
+482,https://openalex.org/W2237469567,Mohammad B. Ghofrani,author
+485,https://openalex.org/W2237469567,Caro Lucas,author
+486,https://openalex.org/W2237469567,"Tehran University, Department of Electrical and Computer Engineering P.O. Box 14395-515, Tehran, Iran",institution
+488,https://openalex.org/W2237469567,neural computing,keyword
+489,https://openalex.org/W2237469567,nuclear reactor cores,keyword
+490,https://openalex.org/W2237469567,spatio-temporal,keyword
+491,https://openalex.org/W2327822717,A.P. Glebov,author
+492,https://openalex.org/W2327822717,"State Scientific Center of Russian Federation - Institute for Physics and Power Engineering, Bondarenko sq.1, Obninsk, Kaluga reg. 249033, Russia",institution
+493,https://openalex.org/W2327822717,RU,country
+494,https://openalex.org/W2327822717,A.V. Klushin,author
+497,https://openalex.org/W2327822717,Yu.D. Baranaev,author
+500,https://openalex.org/W2327822717,closed fuel cycle,keyword
+501,https://openalex.org/W2327822717,reactor,keyword
+502,https://openalex.org/W2327822717,vver-skd,keyword
+503,https://openalex.org/W3022703126,P N Alekseev,author
+504,https://openalex.org/W3022703126,"Federal Budgetary State Institution National Research Center “Kurchatov Institute”, Moscow",institution
+505,https://openalex.org/W3022703126,RU,country
+506,https://openalex.org/W3022703126,A V Gurin,author
+509,https://openalex.org/W3022703126,S A Subbotin,author
+512,https://openalex.org/W3022703126,B Ya Zilberman,author
+513,https://openalex.org/W3022703126,"Khlopin Radium Institute, JSC, Saint Petersburg",institution
+515,https://openalex.org/W3022703126,N V Kovalev,author
+518,https://openalex.org/W3022703126,closed nuclear fuel cycle,keyword
+519,https://openalex.org/W3022703126,transition,keyword
+520,https://openalex.org/W3022703126,possible scenarios,keyword
+521,https://openalex.org/W1982530201,Reza Gholizadeh Aghoyeh,author
+522,https://openalex.org/W1982530201,"School of Research and Development of Nuclear Reactors and Accelerators, Nuclear Science and Technology Research Institute (NSTRI), Atomic Energy Organization of Iran (AEOI), P.O. Box 14155-1339, Tehran, Iran",institution
+523,https://openalex.org/W1982530201,IR,country
+524,https://openalex.org/W1982530201,Hosein Khalafi,author
+527,https://openalex.org/W1982530201,water purification system,keyword
+528,https://openalex.org/W1982530201,nuclear fuels storage pool,keyword
+529,https://openalex.org/W1982530201,tehran research reactor,keyword
+530,https://openalex.org/W1982530201,wet storage,keyword
+531,https://openalex.org/W4206742775,M. Arkani,author
+532,https://openalex.org/W4206742775,"Reactor and Nuclear Safety Research School, Nuclear Science and Technology Research Institute (NSTRI), Tehran, Iran",institution
+533,https://openalex.org/W4206742775,IR,country
+534,https://openalex.org/W4206742775,S. Khakshournia,author
+535,https://openalex.org/W4206742775,"Nuclear Physics and Accelerators Research School, Nuclear Science and Technology Research Institute (NSTRI), Tehran, Iran",institution
+537,https://openalex.org/W4206742775,fast fission factor,keyword
+538,https://openalex.org/W4206742775,reactor,keyword
+539,https://openalex.org/W2774483911,M. Zaidabadi nejad,author
+540,https://openalex.org/W2774483911,"Department of Nuclear Engineering, Faculty of Advanced Sciences and Technologies, University of Isfahan, 81746-73441, Isfahan, Iran",institution
+541,https://openalex.org/W2774483911,IR,country
+542,https://openalex.org/W2774483911,G.R. Ansarifar,author
+545,https://openalex.org/W2774483911,water reactors,keyword
+546,https://openalex.org/W2774483911,axial power distribution,keyword
+547,https://openalex.org/W2774483911,feedback-linearization,keyword
+548,https://openalex.org/W2774483911,load-following,keyword
+549,https://openalex.org/W4313142368,V. S. Okunev,author
+550,https://openalex.org/W4313142368,"Bauman Moscow State Technical University, Moscow, Russia",institution
+551,https://openalex.org/W4313142368,RU,country
+552,https://openalex.org/W4313142368,green nuclear power,keyword
+553,https://openalex.org/W4313142368,conflict-free,keyword
+554,https://openalex.org/W4313142368,two-component,keyword
+555,https://openalex.org/W4210691177,D Klinov,author
+556,https://openalex.org/W4210691177,A.I. Leypunsky Institute for Physics and Power Engineering,institution
+557,https://openalex.org/W4210691177,RU,country
+558,https://openalex.org/W4210691177,A Gulevich,author
+561,https://openalex.org/W4210691177,V Eliseev,author
+564,https://openalex.org/W4210691177,V Usanov,author
+567,https://openalex.org/W4210691177,B Dekusar,author
+570,https://openalex.org/W4210691177,I Tormyshev,author
+573,https://openalex.org/W4210691177,I Buriyevskiy,author
+576,https://openalex.org/W4210691177,V Dolgikh,author
+579,https://openalex.org/W4210691177,V Mishin,author
+582,https://openalex.org/W4210691177,refining plutonium,keyword
+583,https://openalex.org/W4220768846,Shojaa A. Aljasar,author
+584,https://openalex.org/W4220768846,"School of Nuclear Science and Engineering, Tomsk Polytechnic University, Tomsk, Russian Federation",institution
+585,https://openalex.org/W4220768846,RU,country
+586,https://openalex.org/W4220768846,Artyom G. Naymushin,author
+589,https://openalex.org/W4220768846,Y Xu,author
+592,https://openalex.org/W4220768846,neutronics calculations,keyword
+593,https://openalex.org/W4220768846,mcu simulation,keyword
+594,https://openalex.org/W2587298052,I S Saldikov,author
+595,https://openalex.org/W2587298052,"National Research Nuclear University “Moscow Engineering Physics Institute” (NRNU MEPhI), 31 Kashirskoe highway, Moscow 115409 (Russian Federation)",institution
+596,https://openalex.org/W2587298052,RU,country
+597,https://openalex.org/W2587298052,M Yu Ternovykh,author
+600,https://openalex.org/W2587298052,P A Fomichenko,author
+601,https://openalex.org/W2587298052,"National Research Center “Kurchatov Institute”, 123183, Kurchatov square, 1, Moscow, Russia.",institution
+603,https://openalex.org/W2587298052,A S Gerasimov,author
+604,https://openalex.org/W2587298052,"Institute for Theoretical and Experimental Physics, 117218, Bolshaya Cheremushkinskaya street, 25, Moscow, Russia.",institution
+606,https://openalex.org/W2587298052,fast reactor core,keyword
+607,https://openalex.org/W2587298052,isotopic composition,keyword
+608,https://openalex.org/W2039399987,A.V. Zrodnikov,author
+609,https://openalex.org/W2039399987,"State Scientific Centre RF, Institute of Physics and Power Engineering, Bondarenko Square 1, 249020 Obninsk, Russian Federation",institution
+610,https://openalex.org/W2039399987,RU,country
+611,https://openalex.org/W2039399987,F.M. Mittenkov,author
+614,https://openalex.org/W2039399987,V.M. Poplavsky,author
+617,https://openalex.org/W2039399987,A.I. Kiryushin,author
+620,https://openalex.org/W2039399987,neutron,keyword
+621,https://openalex.org/W3179963275,P. Alekseev,author
+622,https://openalex.org/W3179963275,,institution
+623,https://openalex.org/W3179963275,P. Fomichenko,author
+625,https://openalex.org/W3179963275,K. Mikityuk,author
+627,https://openalex.org/W3179963275,V. Nevinitsa,author
+629,https://openalex.org/W3179963275,T. Shchepetina,author
+631,https://openalex.org/W3179963275,S. Subbotin,author
+633,https://openalex.org/W3179963275,A. Vasiliev,author
+634,https://openalex.org/W3179963275,"Kurchatov Institute, Russian Research Centre, Moscow (Russian Federation)",institution
+635,https://openalex.org/W3179963275,RU,country
+636,https://openalex.org/W3179963275,fast reactor,keyword
+637,https://openalex.org/W3179963275,lead-bismuth-cooled,keyword
+638,https://openalex.org/W2116580797,Sümer Şahin,author
+639,https://openalex.org/W2116580797,"Beykoz Lojistik Meslek Yüksekokulu, Beykoz, İstanbul, TÜRKİYE",institution
+640,https://openalex.org/W2116580797,TR,country
+641,https://openalex.org/W2116580797,Hacı Mehmet Şahin,author
+642,https://openalex.org/W2116580797,"Gazi Üniversitesi, Teknik Eğitim Fakültesi, Teknikokullar, 06503 Ankara, Turkey",institution
+644,https://openalex.org/W2116580797,Adem Acır,author
+647,https://openalex.org/W2116580797,Tawfik Ahmed Al-Kusayer,author
+648,https://openalex.org/W2116580797,"King Saud University, College of Engineering, P.O. Box 800, Riyadh 11421, Saudi Arabia",institution
+649,https://openalex.org/W2116580797,SA,country
+650,https://openalex.org/W2116580797,thorium fuel,keyword
+651,https://openalex.org/W2116580797,nuclear reactor,keyword
+652,https://openalex.org/W2116580797,plutonium,keyword
+653,https://openalex.org/W2116580797,criticality,keyword
+654,https://openalex.org/W4210494880,V Dekusar,author
+655,https://openalex.org/W4210494880,A.I. Leypunsky Institute for Physics and Power Engineering,institution
+656,https://openalex.org/W4210494880,RU,country
+657,https://openalex.org/W4210494880,O Gurskaya,author
+660,https://openalex.org/W4210494880,plutonium cost,keyword
+661,https://openalex.org/W4210494880,nuclear,keyword
+662,https://openalex.org/W4210494880,power system,keyword
+663,https://openalex.org/W4210494880,two-component,keyword
+664,https://openalex.org/W3048005128,Dmitrii Samokhin,author
+665,https://openalex.org/W3048005128,"Head, Department of Nuclear Physics and Engineering, Obninsk Institute for Nuclear Power Engineering of the National Research Nuclear University, Obninsk, Russian Federation",institution
+666,https://openalex.org/W3048005128,RU,country
+667,https://openalex.org/W3048005128,nuclear power technologies,keyword
+668,https://openalex.org/W3048005128,recent advances,keyword
+669,https://openalex.org/W4385354060,Ali Zamani Paydar,author
+670,https://openalex.org/W4385354060,"Amirkabir University of Technology, Tehran, Iran",institution
+671,https://openalex.org/W4385354060,IR,country
+672,https://openalex.org/W4385354060,Seyed Kamal Mousavi Balgehshiri,author
+675,https://openalex.org/W4385354060,Bahman Zohuri,author
+676,https://openalex.org/W4385354060,"Golden Gate University, San Francisco, CA, United States",institution
+677,https://openalex.org/W4385354060,US,country
+678,https://openalex.org/W4385354060,ngnp,keyword
+679,https://openalex.org/W4385354060,nuclear plant,keyword
+680,https://openalex.org/W4385354060,next generation,keyword
+681,https://openalex.org/W2021397052,B.F. Gromov,author
+682,https://openalex.org/W2021397052,"State Scientific Centre RF, Institute of Physics and Power Engineering, Bondarenko Sq. 1, Obninsk, Kaluga Region 249020, Russia",institution
+683,https://openalex.org/W2021397052,RU,country
+684,https://openalex.org/W2021397052,Yu.S. Belomitcev,author
+687,https://openalex.org/W2021397052,E.I. Yefimov,author
+690,https://openalex.org/W2021397052,M.P. Leonchuk,author
+693,https://openalex.org/W2021397052,P.N. Martinov,author
+696,https://openalex.org/W2021397052,Yu.I. Orlov,author
+699,https://openalex.org/W2021397052,D.V. Pankratov,author
+702,https://openalex.org/W2021397052,Yu.G. Pashkin,author
+705,https://openalex.org/W2021397052,G.I. Toshinsky,author
+708,https://openalex.org/W2021397052,V.V. Chekunov,author
+711,https://openalex.org/W2021397052,B.A. Shmatko,author
+714,https://openalex.org/W2021397052,V.S. Stepanov,author
+715,https://openalex.org/W2021397052,"RDB Gidropress, Ordzhonikidze st. 7, Podolsk, Moscow Region, Russia",institution
+717,https://openalex.org/W2021397052,nuclear reactors,keyword
+718,https://openalex.org/W2021397052,lead-bismuth,keyword
+719,https://openalex.org/W2021397052,accelerator-driven,keyword
+720,https://openalex.org/W2914042980,Amani Al-Othman,author
+721,https://openalex.org/W2914042980,"Department of Chemical Engineering, American University of Sharjah, P.O. Box 26666, Sharjah, United Arab Emirates",institution
+722,https://openalex.org/W2914042980,AE,country
+723,https://openalex.org/W2914042980,Noora N. Darwish,author
+724,https://openalex.org/W2914042980,"The Research Institute of Science and Engineering (RISE), University of Sharjah, P.O. Box 27272, Sharjah, United Arab Emirates",institution
+726,https://openalex.org/W2914042980,Muhammad Qasim,author
+729,https://openalex.org/W2914042980,Mohammad Tawalbeh,author
+730,https://openalex.org/W2914042980,"Sustainable and Renewable Energy Engineering Department, College of Engineering, University of Sharjah, P.O. Box 27272, Sharjah, United Arab Emirates",institution
+732,https://openalex.org/W2914042980,Naif A. Darwish,author
+735,https://openalex.org/W2914042980,Nidal Hilal,author
+736,https://openalex.org/W2914042980,"Centre for Water Advanced Technologies and Environmental Research (CWATER), College of Engineering, Swansea University, Fabian Way, Swansea SA1 8EN, UK; NYUAD Water Research Center, New York University Abu Dhabi, Abu Dhabi, United Arab Emirates",institution
+738,https://openalex.org/W2914042980,GB,country
+739,https://openalex.org/W2914042980,nuclear desalination,keyword
+740,https://openalex.org/W2914042980,state-of-the-art,keyword
+741,https://openalex.org/W3023399089,V. V. Lemekhov,author
+742,https://openalex.org/W3023399089,,institution
+743,https://openalex.org/W3023399089,A. V. Petrenko,author
+745,https://openalex.org/W3023399089,A. V. Yashkin,author
+746,https://openalex.org/W3023399089,"JSC ATOMPROEKT, Saint-Petersburg, Russia",institution
+747,https://openalex.org/W3023399089,RU,country
+748,https://openalex.org/W3023399089,unit,keyword
+749,https://openalex.org/W3023399089,power,keyword
+750,https://openalex.org/W3023399089,rp,keyword
+751,https://openalex.org/W2789518162,Ehsan Boustani,author
+752,https://openalex.org/W2789518162,"Nuclear Science and Technology Research Institute (NSTRI), Reactor and Nuclear Safety School, Tehran 14399-51113, Iran",institution
+753,https://openalex.org/W2789518162,IR,country
+754,https://openalex.org/W2789518162,Samad Khakshournia,author
+757,https://openalex.org/W2789518162,second shutdown system,keyword
+758,https://openalex.org/W2789518162,liquid injection,keyword
+759,https://openalex.org/W4298853155,Nikolay S. Khlopkin,author
+760,https://openalex.org/W4298853155,"Russian Research Centre ""Kurchatov Institute""",institution
+761,https://openalex.org/W4298853155,RU,country
+762,https://openalex.org/W4298853155,Vyacheslav P. Kuznetsov,author
+765,https://openalex.org/W4298853155,Vladimir I. Makarov,author
+768,https://openalex.org/W4298853155,nuclear energy,keyword
+769,https://openalex.org/W106933389,A.J. Blekher,author
+770,https://openalex.org/W106933389,Research Institute of Industrial and Marine Medicine,institution
+771,https://openalex.org/W106933389,N.L. Kuchin,author
+772,https://openalex.org/W106933389,Krylov Institute,institution
+773,https://openalex.org/W106933389,RU,country
+774,https://openalex.org/W106933389,I.V. Sergeev,author
+777,https://openalex.org/W106933389,radiological consequences,keyword
+778,https://openalex.org/W106933389,afloat storage,keyword
+779,https://openalex.org/W106933389,water environment,keyword
+780,https://openalex.org/W106933389,discharge,keyword
+781,https://openalex.org/W3136097342,S M Dmitriev,author
+782,https://openalex.org/W3136097342,"Nizhny Novgorod State Technical University n.a. R.E. Alekseev, Russia, 603950 Nizhny Novgorod, Minin St., 24",institution
+783,https://openalex.org/W3136097342,RU,country
+784,https://openalex.org/W3136097342,AV Kurachenkov,author
+785,https://openalex.org/W3136097342,,institution
+786,https://openalex.org/W3136097342,V V Petrunin,author
+788,https://openalex.org/W3136097342,innovative reactor plants,keyword
+789,https://openalex.org/W3136097342,nuclear power plants,keyword
+790,https://openalex.org/W3136097342,economic aspects,keyword
+791,https://openalex.org/W3136097342,scientific-technical,keyword
+792,https://openalex.org/W2905133675,Y Bakhracheva,author
+793,https://openalex.org/W2905133675,"Department of Information Security, Priority Technologies Institute, Volgograd State University, 100, Prosp. Universitetsky, Volgograd 400062, Russia",institution
+794,https://openalex.org/W2905133675,RU,country
+795,https://openalex.org/W2905133675,reactor steels,keyword
+796,https://openalex.org/W2905133675,residual life,keyword
+797,https://openalex.org/W3175135725,D. A. Kosyakin,author
+798,https://openalex.org/W3175135725,"OINPE NRNU MEPhI, Studgorodok, 1, Obninsk, Kaluga region, 249040, Russia",institution
+799,https://openalex.org/W3175135725,RU,country
+800,https://openalex.org/W3175135725,V. Yu Stogov,author
+801,https://openalex.org/W3175135725,"IPPE JSC, Bondarenko sq. 1, Obninsk, Kaluga region, 249033, Russia",institution
+803,https://openalex.org/W3175135725,V. V. Korobeinikov,author
+806,https://openalex.org/W3175135725,mox fuel,keyword
+807,https://openalex.org/W3108198041,D N Litvinov,author
+808,https://openalex.org/W3108198041,"Department of Nuclear Power Plants and Renewable Energy Sources, Ural Federal University named after the first President of Russia B.N. Yeltsin, 620002, 19 Mira street, Ekaterinburg, Russia",institution
+809,https://openalex.org/W3108198041,RU,country
+810,https://openalex.org/W3108198041,V S Kostarev,author
+813,https://openalex.org/W3108198041,V A Klimova,author
+816,https://openalex.org/W3108198041,O L Tashlykov,author
+819,https://openalex.org/W3108198041,N M Aristov,author
+822,https://openalex.org/W3108198041,thermohydraulic simulation,keyword
+823,https://openalex.org/W3108198041,radioactive isotopes,keyword
+824,https://openalex.org/W3108198041,nuclear,keyword
+825,https://openalex.org/W3164561446,V.S. Okunev,author
+826,https://openalex.org/W3164561446,Bauman Moscow State Technical University,institution
+827,https://openalex.org/W3164561446,RU,country
+828,https://openalex.org/W3164561446,fast reactors,keyword
+829,https://openalex.org/W3164561446,new composite materials,keyword
+830,https://openalex.org/W3164561446,composite materials,keyword
+831,https://openalex.org/W3164561446,nanotechnology,keyword
+832,https://openalex.org/W3087433814,Mingjun Wang,author
+833,https://openalex.org/W3087433814,"School of Nuclear Science and Technology, State Key Laboratory of Multiphase Flow in Power Engineering, Shaanxi Key Laboratory of Advanced Nuclear Energy and Technology, Xi’an Jiaotong University, Xi’an 710049, China",institution
+834,https://openalex.org/W3087433814,CN,country
+835,https://openalex.org/W3087433814,Yingjie Wang,author
+838,https://openalex.org/W3087433814,Wenxi Tian,author
+841,https://openalex.org/W3087433814,Suizheng Qiu,author
+844,https://openalex.org/W3087433814,G.H. Su,author
+847,https://openalex.org/W3087433814,thermal hydraulics study,keyword
+848,https://openalex.org/W3087433814,cfd applications,keyword
+849,https://openalex.org/W3087433814,pwr,keyword
+850,https://openalex.org/W2899697774,Yulia S. Bakhracheva,author
+851,https://openalex.org/W2899697774,"Department of Information Security, Institute of priority technologies, Volgograd State University, 400062 Volgograd Prosp. Universitetsky 100, Russian Federation",institution
+852,https://openalex.org/W2899697774,RU,country
+853,https://openalex.org/W2899697774,irradiation,keyword
+854,https://openalex.org/W2899697774,mechanical properties,keyword
+855,https://openalex.org/W2899697774,dynamics,keyword
+856,https://openalex.org/W2981405785,Shilpa Singh,author
+857,https://openalex.org/W2981405785,"Computational Materials and Nanoscience Group, Department of Physics, St. Xavier’s College, Ahmedabad, India; Department of Physics, Gujarat University, Ahmedabad, India",institution
+858,https://openalex.org/W2981405785,IN,country
+859,https://openalex.org/W2981405785,Sanjeev K. Gupta,author
+860,https://openalex.org/W2981405785,"Computational Materials and Nanoscience Group, Department of Physics, St. Xavier’s College, Ahmedabad, India",institution
+862,https://openalex.org/W2981405785,Yogesh Sonvane,author
+863,https://openalex.org/W2981405785,"Advanced Materials Lab, Department of Applied Physics, S.V. National Institute of Technology, Surat, India",institution
+865,https://openalex.org/W2981405785,K. A. Nekrasov,author
+866,https://openalex.org/W2981405785,"Ural Federal University, Yekaterinburg, Russia",institution
+867,https://openalex.org/W2981405785,RU,country
+868,https://openalex.org/W2981405785,A. Y. Kupryazhkin,author
+871,https://openalex.org/W2981405785,P. N. Gajjar,author
+872,https://openalex.org/W2981405785,"Department of Physics, Gujarat University, Ahmedabad, India",institution
+874,https://openalex.org/W2981405785,ano2,keyword
+875,https://openalex.org/W2981405785,crystal structure,keyword
+876,https://openalex.org/W2981405785,phase transition,keyword
+877,https://openalex.org/W2981405785,higher pressure,keyword
+878,https://openalex.org/W326705715,Zrodnikov Anatoly,author
+879,https://openalex.org/W326705715,,institution
+880,https://openalex.org/W326705715,Toshinsky Georgy,author
+882,https://openalex.org/W326705715,Komlev Oleg,author
+884,https://openalex.org/W326705715,Melnikov Kirill,author
+885,https://openalex.org/W326705715,"FSUE SSC RF-IPPE, Obninsk (Russian Federation)",institution
+886,https://openalex.org/W326705715,RU,country
+887,https://openalex.org/W326705715,Novikova Nataliya,author
+889,https://openalex.org/W4385339515,Erfan Ghapanvari,author
+890,https://openalex.org/W4385339515,Malayer University,institution
+891,https://openalex.org/W4385339515,IR,country
+892,https://openalex.org/W4385339515,reactor,keyword
+893,https://openalex.org/W2982865061,V. S. Okunev,author
+894,https://openalex.org/W2982865061,"Bauman Moscow State Technical University, Moscow, Russia, 105005",institution
+895,https://openalex.org/W2982865061,RU,country
+896,https://openalex.org/W2982865061,nuclear power,keyword
+897,https://openalex.org/W2982865061,space,keyword
+898,https://openalex.org/W2982865061,future,keyword
+899,https://openalex.org/W1991291559,Vladislav Ya. Panchenko,author
+900,https://openalex.org/W1991291559,Institute on Laser and Information Technologies (Russia),institution
+901,https://openalex.org/W1991291559,RU,country
+902,https://openalex.org/W1991291559,Alexandre M. Zabelin,author
+903,https://openalex.org/W1991291559,Institute on Laser and Information Technologies and Technolaser Ltd. (Russia),institution
+905,https://openalex.org/W1991291559,Yu. I. Slepokon,author
+906,https://openalex.org/W1991291559,Kursk Nuclear Power Plant (Russia),institution
+908,https://openalex.org/W1991291559,V. M. Ryahin,author
+911,https://openalex.org/W1991291559,P. P. Kuznetsov,author
+912,https://openalex.org/W1991291559,Renovation Ltd. (Russia),institution
+914,https://openalex.org/W1991291559,V. F. Panasyuk,author
+917,https://openalex.org/W1991291559,A. V. Korotchenko,author
+920,https://openalex.org/W1991291559,V. S. Kislov,author
+923,https://openalex.org/W1991291559,S. V. Loktev,author
+926,https://openalex.org/W1991291559,nuclear reactor fuel channels,keyword
+927,https://openalex.org/W1991291559,decommissioning,keyword
+928,https://openalex.org/W1991291559,laser,keyword
+929,https://openalex.org/W4210296444,V Kagramanian,author
+930,https://openalex.org/W4210296444,A.I. Leypunsky Institute for Physics and Power Engineering,institution
+931,https://openalex.org/W4210296444,RU,country
+932,https://openalex.org/W4210296444,A Chebeskov,author
+935,https://openalex.org/W4210296444,V Decusar,author
+938,https://openalex.org/W4210296444,O Gurskaya,author
+941,https://openalex.org/W4210296444,thermal reactors,keyword
+942,https://openalex.org/W4210296444,atomic energy,keyword
+943,https://openalex.org/W4210296444,spent fuel,keyword
+944,https://openalex.org/W4210296444,two-component,keyword
+945,https://openalex.org/W2057342192,K. Hadad,author
+946,https://openalex.org/W2057342192,"Shiraz University, Nuclear Safety Research Center, Shiraz 7134851154, Iran",institution
+947,https://openalex.org/W2057342192,IR,country
+948,https://openalex.org/W2057342192,A. Piroozmand,author
+949,https://openalex.org/W2057342192,"Department of Nuclear Engineering, Shiraz University, Shiraz 7134851154, Iran",institution
+951,https://openalex.org/W2057342192,nuclear reactor dynamics equations,keyword
+952,https://openalex.org/W2057342192,cellular neural network,keyword
+953,https://openalex.org/W2057342192,neural network,keyword
+954,https://openalex.org/W2057342192,cnn,keyword
+955,https://openalex.org/W2757047744,Georgy Tikhomirov,author
+956,https://openalex.org/W2757047744,"National Research Nuclear University MEPhI (Moscow Engineering Physics Institute), Department of Theoretical and Experimental Physics of Nuclear Reactors, 31, Kashirskoye shosse, 115409, Moscow, Russia.",institution
+957,https://openalex.org/W2757047744,RU,country
+958,https://openalex.org/W2757047744,Mikhail Ternovykh,author
+961,https://openalex.org/W2757047744,Ivan Saldikov,author
+964,https://openalex.org/W2757047744,Peter Fomichenko,author
+965,https://openalex.org/W2757047744,"National Research Centre “Kurchatov Institute”, Kurchatov Nuclear Technology Complex, Division of Fast and High Temperature Reactors, 1, Kurchatov sq, Moscow, 123183, Russia",institution
+967,https://openalex.org/W2757047744,Alexander Gerasimov,author
+968,https://openalex.org/W2757047744,"Institute for Theoretical and Experimental Physics, Department of safe nuclear reactors, 25, Bolshaya Cheremushkinskaya ul., 117218, Moscow, Russia",institution
+970,https://openalex.org/W2757047744,fast reactor core,keyword
+971,https://openalex.org/W2757047744,isotopic composition,keyword
+972,https://openalex.org/W2757047744,nuclear fuel,keyword
+973,https://openalex.org/W198837492,Boris A. Gabaraev,author
+974,https://openalex.org/W198837492,N.A. Dollezhal Institute — NIKIET,institution
+975,https://openalex.org/W198837492,RU,country
+976,https://openalex.org/W198837492,Yuri S. Cherepnin,author
+979,https://openalex.org/W198837492,nuclear reactors,keyword
+980,https://openalex.org/W198837492,innovative designs,keyword
+981,https://openalex.org/W2186819265,N N Ponomarev-Stepnoi,author
+982,https://openalex.org/W2186819265,Kurchatov Inst.,institution
+983,https://openalex.org/W2186819265,RU,country
+984,https://openalex.org/W2186819265,L S Glushkov,author
+987,https://openalex.org/W2186819265,fast helium cooled reactors,keyword
+988,https://openalex.org/W2186819265,russia,keyword
+989,https://openalex.org/W2033186845,A.V. Zrodnikov,author
+990,https://openalex.org/W2033186845,"FSUE State Scientific Center of Russian Federation Institute of Physics and Power Engineering, 1 Bondarenko Square, 249033 Obninsk, Kaluga Region, Russia",institution
+991,https://openalex.org/W2033186845,RU,country
+992,https://openalex.org/W2033186845,G.I. Toshinsky,author
+995,https://openalex.org/W2033186845,O.G. Komlev,author
+998,https://openalex.org/W2033186845,Yu.G. Dragunov,author
+999,https://openalex.org/W2033186845,"FSUE Experimental Design Bureau “Gidropress”, 21 Ordzhonikidze Street, 142103 Podolsk, Moscow Region, Russia",institution
+1001,https://openalex.org/W2033186845,V.S. Stepanov,author
+1004,https://openalex.org/W2033186845,N.N. Klimov,author
+1007,https://openalex.org/W2033186845,V.N. Generalov,author
+1008,https://openalex.org/W2033186845,"FSUE “Atomenergoproekt” Building 1, 7 Bakuninskaya Street, Moscow B-5 107005, Russia",institution
+1010,https://openalex.org/W2033186845,I.I. Kopytov,author
+1013,https://openalex.org/W2033186845,V.N. Krushelnitsky,author
+1016,https://openalex.org/W2033186845,innovative nuclear technology,keyword
+1017,https://openalex.org/W2033186845,fast reactors,keyword
+1018,https://openalex.org/W2033186845,lead–bismuth,keyword
+1019,https://openalex.org/W2033186845,multi-purpose,keyword
+1020,https://openalex.org/W3129773030,Ahmad Ostovari Moghaddam,author
+1021,https://openalex.org/W3129773030,"South Ural State University (National Research University), 76 Lenin Ave, Chelyabinsk 454080, Russian Federation",institution
+1022,https://openalex.org/W3129773030,RU,country
+1023,https://openalex.org/W3129773030,Andreu Cabot,author
+1024,https://openalex.org/W3129773030,"Catalan Institution for Research and Advanced Studies - ICREA, Pg. Lluís Companys 23, 08010 Barcelona, Spain; Catalonia Institute for Energy Research – IREC, Sant Adrià de Besòs, 08930 Barcelona, Spain",institution
+1025,https://openalex.org/W3129773030,ES,country
+1026,https://openalex.org/W3129773030,Evgeny A. Trofimov,author
+1029,https://openalex.org/W3129773030,nuclear materials,keyword
+1030,https://openalex.org/W3129773030,high-entropy,keyword
+1031,https://openalex.org/W2550708246,M.H. Zahedi Ygane,author
+1032,https://openalex.org/W2550708246,"Department of Nuclear Engineering, Faculty of Advanced Sciences & Technologies, University of Isfahan, Isfahan 81746-73441, Iran",institution
+1033,https://openalex.org/W2550708246,IR,country
+1034,https://openalex.org/W2550708246,G.R. Ansarifar,author
+1037,https://openalex.org/W2550708246,reactors power measurement,keyword
+1038,https://openalex.org/W2550708246,kalman filter,keyword
+1039,https://openalex.org/W2550708246,extended kalman filter design,keyword
+1040,https://openalex.org/W2550708246,poisons concentrations,keyword
+1041,https://openalex.org/W2550708246,nuclear reactors,keyword
+1042,https://openalex.org/W3111303664,V.S. Okunev,author
+1043,https://openalex.org/W3111303664,"Bauman Moscow State Technical University, BMSTU, Moscow, Russia",institution
+1044,https://openalex.org/W3111303664,RU,country
+1045,https://openalex.org/W3111303664,generation,keyword
+1046,https://openalex.org/W3111303664,energy,keyword
+1047,https://openalex.org/W3111303664,technologies,keyword
+1048,https://openalex.org/W764172758,Kamal Hadad,author
+1049,https://openalex.org/W764172758,"Shiraz University, School of Mechanical Engineering, Mollasadra St., Shiraz, 71348-51154, Iran",institution
+1050,https://openalex.org/W764172758,IR,country
+1051,https://openalex.org/W764172758,Mohammadreza Nematolahi,author
+1054,https://openalex.org/W764172758,Amin Golestani,author
+1057,https://openalex.org/W764172758,mcnp calculations,keyword
+1058,https://openalex.org/W764172758,cross-section,keyword
+1059,https://openalex.org/W2162478573,M. Boroushaki,author
+1060,https://openalex.org/W2162478573,"Dept. of Mech. Eng., Sharif Univ. of Technol., Tehran, Iran",institution
+1061,https://openalex.org/W2162478573,IR,country
+1062,https://openalex.org/W2162478573,M.B. Ghofrani,author
+1065,https://openalex.org/W2162478573,C. Lucas,author
+1066,https://openalex.org/W2162478573,"[Department of Electrical and Computer Engineering and Control and Intelligent Processing Center of Excellence, University of Tehran, Tehran, Iran]",institution
+1068,https://openalex.org/W2162478573,M.J. Yazdanpanah,author
+1071,https://openalex.org/W2162478573,nuclear reactor core,keyword
+1072,https://openalex.org/W2162478573,recurrent neural networks,keyword
+1073,https://openalex.org/W2162478573,fuzzy,keyword
+1074,https://openalex.org/W2051938648,N.M. Sorokin,author
+1075,https://openalex.org/W2051938648,"Rosenergoatom Concern, 24/26 B.Ordynka St., 119017 Moscow, Russian Federation",institution
+1076,https://openalex.org/W2051938648,RU,country
+1077,https://openalex.org/W2051938648,B.A. Gabaraev,author
+1078,https://openalex.org/W2051938648,"N.A. Dollezhal Research and Development Institute of Power Engineering (NIKIET), Moscow, Russian Federation",institution
+1080,https://openalex.org/W2051938648,Yu.M. Cherkashov,author
+1083,https://openalex.org/W2051938648,plants,keyword
+1084,https://openalex.org/W2051938648,safe operation,keyword
+1085,https://openalex.org/W2051938648,life extension,keyword
+1086,https://openalex.org/W2806897538,Elena S. Starostina,author
+1087,https://openalex.org/W2806897538,ITMO University ( Russian Federation),institution
+1088,https://openalex.org/W2806897538,RU,country
+1089,https://openalex.org/W2806897538,Oleg A. Perezyabov,author
+1092,https://openalex.org/W2806897538,Nadezhda K. Maltseva,author
+1095,https://openalex.org/W2806897538,radiation-tolerant,keyword
+1096,https://openalex.org/W3120483275,Zhen Wang,author
+1097,https://openalex.org/W3120483275,Institute of Nuclear Energy Safety Technology Hefei Institutes of Physical Science Chinese Academy of Sciences Hefei China,institution
+1098,https://openalex.org/W3120483275,CN,country
+1099,https://openalex.org/W3120483275,Zhibin Chen,author
+1102,https://openalex.org/W3120483275,Chao Chen,author
+1105,https://openalex.org/W3120483275,Daochuan Ge,author
+1108,https://openalex.org/W3120483275,Didier Perrault,author
+1109,https://openalex.org/W3120483275,Institut de Radioprotection et Sûreté Nucléaire Villeneuve les Avignon France,institution
+1110,https://openalex.org/W3120483275,FR,country
+1111,https://openalex.org/W3120483275,Massimo Zucchetti,author
+1112,https://openalex.org/W3120483275," Politecnico di Torino, Torino, Italy.",institution
+1113,https://openalex.org/W3120483275,IT,country
+1114,https://openalex.org/W3120483275,Michail Subbotin,author
+1115,https://openalex.org/W3120483275,NRC Kurchatov Institute Moscow Russia,institution
+1116,https://openalex.org/W3120483275,RU,country
+1117,https://openalex.org/W3120483275,fusion power plants,keyword
+1118,https://openalex.org/W3120483275,quantitative safety goals,keyword
+1119,https://openalex.org/W4214505968,Roman Davydov,author
+1120,https://openalex.org/W4214505968,"Institute of Physics and Mechanics, Peter the Great St. Petersburg Polytechnic University, 195251 St. Petersburg, Russia",institution
+1121,https://openalex.org/W4214505968,RU,country
+1122,https://openalex.org/W4214505968,Vadim Davydov,author
+1123,https://openalex.org/W4214505968,"Institute of Electronics and Telecommunications, Peter the Great St. Petersburg Polytechnic University, 195251 St. Petersburg, Russia",institution
+1125,https://openalex.org/W4214505968,Nikita Myazin,author
+1126,https://openalex.org/W4214505968,"Department of Physics, The Bonch-Bruevich Saint Petersburg State University of Telecommunication, 193232 St. Petersburg, Russia; Institute of Electronics and Telecommunications, Peter the Great St. Petersburg Polytechnic University, 195251 St. Petersburg, Russia",institution
+1128,https://openalex.org/W4214505968,Valentin Dudkin,author
+1129,https://openalex.org/W4214505968,"Department of Photonics and Communication Lines, The Bonch-Bruevich Saint Petersburg State University of Telecommunication, 193232 St. Petersburg, Russia",institution
+1131,https://openalex.org/W4214505968,multifunctional nuclear magnetic flowmeter,keyword
+1132,https://openalex.org/W4214505968,nuclear reactors,keyword
+1133,https://openalex.org/W4214505968,coolant,keyword
+1134,https://openalex.org/W4206714013,Andrei A. Andrianov,author
+1135,https://openalex.org/W4206714013,"National Research Nuclear University MEPhI (Moscow Engineering Physics Institute), Moscow, Russian Federation",institution
+1136,https://openalex.org/W4206714013,RU,country
+1137,https://openalex.org/W4206714013,Olga N. Andrianova,author
+1140,https://openalex.org/W4206714013,Ilya S. Kuptsov,author
+1143,https://openalex.org/W4206714013,Leonid I. Svetlichny,author
+1146,https://openalex.org/W4206714013,Tatyana V. Utianskaya,author
+1149,https://openalex.org/W4206714013,closed nuclear fuel cycle,keyword
+1150,https://openalex.org/W3187869468,Evgeny Pavlovich Velikhov,author
+1151,https://openalex.org/W3187869468,NRC Kurchatov Institute,institution
+1152,https://openalex.org/W3187869468,RU,country
+1153,https://openalex.org/W3187869468,Vladimir Dmitrievich Davidenko,author
+1156,https://openalex.org/W3187869468,Viktor Filippovich Tsybulskiy,author
+1159,https://openalex.org/W3187869468,nuclear energy,keyword
+1160,https://openalex.org/W3187869468,21st century,keyword
+1161,https://openalex.org/W3187869468,climate,keyword
+1162,https://openalex.org/W2786753139,Saman Tashakor,author
+1163,https://openalex.org/W2786753139,"Department of Renewable Energy, Shiraz Branch, Islamic Azad University, Shiraz, Iran",institution
+1164,https://openalex.org/W2786753139,IR,country
+1165,https://openalex.org/W2786753139,hplwr emergency core,keyword
+1166,https://openalex.org/W2786753139,neutronic analysis,keyword
+1167,https://openalex.org/W2786753139,heavy water application,keyword
+1168,https://openalex.org/W2587303488,G. G. Kulikov,author
+1169,https://openalex.org/W2587303488,"National Research Nuclear University MEPhI (Moscow Engineering Physics Institute), Kashirskoe highway, 31, Moscow, Russia",institution
+1170,https://openalex.org/W2587303488,RU,country
+1171,https://openalex.org/W2587303488,A. N. Shmelev,author
+1174,https://openalex.org/W2587303488,V. A. Apse,author
+1177,https://openalex.org/W2587303488,E. G. Kulikov,author
+1180,https://openalex.org/W2587303488,fission chain reaction,keyword
+1181,https://openalex.org/W2587303488,reactors,keyword
+1182,https://openalex.org/W2587303488,rapid runaways,keyword
+1183,https://openalex.org/W2587303488,fundamental quality,keyword
+1184,https://openalex.org/W2041932234,R. B. Duffey,author
+1185,https://openalex.org/W2041932234,"Atomic Energy of Canada, Ltd., Chalk River, ON, Canada",institution
+1186,https://openalex.org/W2041932234,CA,country
+1187,https://openalex.org/W2041932234,I. L. Pioro,author
+1190,https://openalex.org/W2041932234,B. A. Gabaraev,author
+1191,https://openalex.org/W2041932234,"Research and Development Institute of Power Engineering, Moscow, Russia",institution
+1192,https://openalex.org/W2041932234,RU,country
+1193,https://openalex.org/W2041932234,Yu. N. Kuznetsov,author
+1196,https://openalex.org/W2041932234,pressure-channel,keyword
+1197,https://openalex.org/W3037722139,Yury A. Kazansky,author
+1198,https://openalex.org/W3037722139,"Nuclear Physics and Engineering Department, Institute for Nuclear Power Engineering, National Research Nuclear University MEPhI, Obninsk, Russia",institution
+1199,https://openalex.org/W3037722139,RU,country
+1200,https://openalex.org/W3037722139,nuclear power technology,keyword
+1201,https://openalex.org/W3037722139,introduction,keyword
+1202,https://openalex.org/W4210754049,G Manturov,author
+1203,https://openalex.org/W4210754049,A.I. Leypunsky Institute for Physics and Power Engineering,institution
+1204,https://openalex.org/W4210754049,RU,country
+1205,https://openalex.org/W4210754049,M Nikolaev,author
+1208,https://openalex.org/W4210754049,V Koshcheev,author
+1211,https://openalex.org/W4210754049,reactor neutronics calculations,keyword
+1212,https://openalex.org/W4210754049,rosfond data library,keyword
+1213,https://openalex.org/W2286813509,Ahmad Pirouzmand,author
+1214,https://openalex.org/W2286813509,"Department of Nuclear Engineering, School of Mechanical Engineering, Shiraz University, Shiraz, Iran.",institution
+1215,https://openalex.org/W2286813509,IR,country
+1216,https://openalex.org/W2286813509,Abolhasan Nabavi,author
+1219,https://openalex.org/W2286813509,nuclear reactor dynamics equations,keyword
+1220,https://openalex.org/W2286813509,reconfigurable computing,keyword
+1221,https://openalex.org/W2286813509,simulation,keyword
+1222,https://openalex.org/W4380343068,Mustapha Umar Adam,author
+1223,https://openalex.org/W4380343068,Tomsk Polytechnic University,institution
+1224,https://openalex.org/W4380343068,RU,country
+1225,https://openalex.org/W4380343068,Alexey Goryunov Germanovich,author
+1228,https://openalex.org/W4380343068,Bello Luqman Abdullahi,author
+1231,https://openalex.org/W4380343068,boron concentration measurement techniques,keyword
+1232,https://openalex.org/W3193024290,Yu. G. Dragunov,author
+1233,https://openalex.org/W3193024290,"Bauman Moscow State Technical University, Moscow, Russia; Dollezhal’ Research and Development Institute of Power Engineering, Moscow, Russia",institution
+1234,https://openalex.org/W3193024290,RU,country
+1235,https://openalex.org/W3193024290,nuclear,keyword
+1236,https://openalex.org/W3193024290,power,keyword
+1237,https://openalex.org/W3193024290,space,keyword
+1238,https://openalex.org/W2923846807,Andrey Alekseevich Andrianov,author
+1239,https://openalex.org/W2923846807,NRNU MEPhI#TAB#,institution
+1240,https://openalex.org/W2923846807,Ilya Sergeevich Kuptsov,author
+1242,https://openalex.org/W2923846807,Tatiana Andreevna Osipova,author
+1243,https://openalex.org/W2923846807,JSC «SSC RIAR»,institution
+1244,https://openalex.org/W2923846807,RU,country
+1245,https://openalex.org/W2923846807,Olga Nikolaevna Andrianova,author
+1246,https://openalex.org/W2923846807,JSC «SSC RF-IPPE»,institution
+1248,https://openalex.org/W2923846807,Tatyana Vladimirovna Utyanskaya,author
+1249,https://openalex.org/W2923846807,JSC «Engineering Center of Nuclear Containers»,institution
+1250,https://openalex.org/W2923846807,CN,country
+1251,https://openalex.org/W2923846807,closed nuclear fuel cycle,keyword
+1252,https://openalex.org/W2923846807,nuclear energy system,keyword
+1253,https://openalex.org/W2923846807,fast reactors,keyword
+1254,https://openalex.org/W2923846807,nuclear fuel,keyword
+1255,https://openalex.org/W2923846807,optimization models,keyword
+1256,https://openalex.org/W2923846807,two-component,keyword
+1257,https://openalex.org/W2765444628,M.H. Zahedi yeganeh,author
+1258,https://openalex.org/W2765444628,"Department of Nuclear Engineering, Faculty of Advanced Sciences and Technologies, University of Isfahan, Isfahan 81746-73441, Iran",institution
+1259,https://openalex.org/W2765444628,IR,country
+1260,https://openalex.org/W2765444628,G.R. Ansarifar,author
+1263,https://openalex.org/W2765444628,poisons reactivity,keyword
+1264,https://openalex.org/W2765444628,mode observer,keyword
+1265,https://openalex.org/W2765444628,multi-point,keyword
+1266,https://openalex.org/W3038105356,Dmitrii S. Samokhin,author
+1267,https://openalex.org/W3038105356,"Nuclear Physics and Engineering Department, Institute for Nuclear Power Engineering, National Research Nuclear University MEPhI, Obninsk, Russia",institution
+1268,https://openalex.org/W3038105356,RU,country
+1269,https://openalex.org/W3038105356,reactor,keyword
+1270,https://openalex.org/W3038105356,safety,keyword
+1271,https://openalex.org/W2957328225,R. Kianpour,author
+1272,https://openalex.org/W2957328225,"Department of Nuclear Engineering, Faculty of Advanced Sciences & Technologies, University of Isfahan, 81746-73441, Isfahan, Iran",institution
+1273,https://openalex.org/W2957328225,IR,country
+1274,https://openalex.org/W2957328225,G.R. Ansarifar,author
+1275,https://openalex.org/W2957328225,"Department of Nuclear Engineering, Faculty of Advanced Sciences and Technologies, University of Isfahan, 81746-73441 Isfahan, Iran",institution
+1277,https://openalex.org/W2957328225,thermal reactivity feedback coefficients,keyword
+1278,https://openalex.org/W2957328225,nano-fluid,keyword
+1280,https://openalex.org/W2953549737,Igor’ Vladimirovich Shamanin,author
+1281,https://openalex.org/W2953549737,"National Research Tomsk Polytechnic University, 30, Lenin Avenue, Tomsk 634050, Russia",institution
+1282,https://openalex.org/W2953549737,RU,country
+1283,https://openalex.org/W2953549737,Sergej Vladimirovich Bedenko,author
+1286,https://openalex.org/W2953549737,Yurij Borisovich Chertkov,author
+1289,https://openalex.org/W2953549737,Il’dar Mukharamovich Gubaydulin,author
+1290,https://openalex.org/W2953549737,"Russian Federal Nuclear Center, All-Russian Research Institute of Experimental Physics, 37, Prospekt Mira, Sarov 607188, Russia",institution
+1292,https://openalex.org/W2953549737,thorium reactor,keyword
+1293,https://openalex.org/W2953549737,fuel block,keyword
+1294,https://openalex.org/W2953549737,gas-cooled,keyword

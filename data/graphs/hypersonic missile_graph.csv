@@ -1,0 +1,794 @@
+,paper_id,target,type
+0,https://openalex.org/W3047636816,M. A. Smirnov,author
+1,https://openalex.org/W3047636816,Federal State Military Educational Institution of Higher Professional Education “Military Aerospace Defense Academy named after Marshal of the Soviet Union G.K. Zhukov” of the Russian Federation Department of Defense,institution
+2,https://openalex.org/W3047636816,RU,country
+3,https://openalex.org/W3047636816,hypersonic cruise missile,keyword
+4,https://openalex.org/W3047636816,air defense missile system,keyword
+5,https://openalex.org/W3047636816,dynamic target,keyword
+6,https://openalex.org/W3047636816,adms,keyword
+7,https://openalex.org/W3047636816,scattering,keyword
+8,https://openalex.org/W3011140436,Nikolai E. Gaiduchenko,author
+9,https://openalex.org/W3011140436,"Moscow Institute of Physics and Technology, Moscow, Russia",institution
+10,https://openalex.org/W3011140436,RU,country
+11,https://openalex.org/W3011140436,Pavel A. Gritsyk,author
+14,https://openalex.org/W3011140436,neural network,keyword
+15,https://openalex.org/W3011140436,vehicle,keyword
+16,https://openalex.org/W3011140436,classification,keyword
+17,https://openalex.org/W4365397980,A. Chekov,author
+18,https://openalex.org/W4365397980,"Moscow State Institute of International Relations, The Ministry of Foreign Affairs of Russian Federation (MGIMO University), 76, Vernadskogo Prosp., Moscow, 119454, Russian Federation",institution
+19,https://openalex.org/W4365397980,RU,country
+20,https://openalex.org/W4365397980,policy,keyword
+21,https://openalex.org/W4365397980,defense,keyword
+22,https://openalex.org/W2971000640,D. Allahverdy,author
+23,https://openalex.org/W2971000640,"§Science and Research Branch, Islamic Azad University, Tehran, Iran",institution
+24,https://openalex.org/W2971000640,IR,country
+25,https://openalex.org/W2971000640,A. Fakharian,author
+26,https://openalex.org/W2971000640,"Faculty of Electrical, Biomedical and Mechatronics Engineering , Qazvin Branch, Islamic Azad University , Qazvin , Iran",institution
+28,https://openalex.org/W2971000640,hypersonic missile,keyword
+29,https://openalex.org/W2971000640,altitude subsysytem,keyword
+30,https://openalex.org/W2971000640,controller,keyword
+31,https://openalex.org/W2971000640,back-stepping,keyword
+32,https://openalex.org/W2971000640,takagi-sugeno,keyword
+33,https://openalex.org/W2989851323,Davood Allahverdy,author
+34,https://openalex.org/W2989851323,"§Science and Research Branch, Islamic Azad University, Tehran, Iran",institution
+35,https://openalex.org/W2989851323,IR,country
+36,https://openalex.org/W2989851323,Ahmad Fakharian,author
+37,https://openalex.org/W2989851323,"Faculty of Electrical, Biomedical and Mechatronics Engineering , Qazvin Branch, Islamic Azad University , Qazvin , Iran",institution
+39,https://openalex.org/W2989851323,hypersonic missile,keyword
+40,https://openalex.org/W2989851323,altitude subsystem,keyword
+41,https://openalex.org/W2989851323,back-stepping,keyword
+42,https://openalex.org/W3208560931,O. O. Krivolapov,author
+43,https://openalex.org/W3208560931,"Institute for the U.S. and Canadian Studies, Russian Academy of Sciences (ISKRAN), 2/3, Khlebnyi Per., Moscow, 121069, Russian Federation",institution
+44,https://openalex.org/W3208560931,RU,country
+45,https://openalex.org/W3208560931,policy,keyword
+46,https://openalex.org/W3045352268,Oleg Krivolapov,author
+47,https://openalex.org/W3045352268,Institute for the U.S. and Canadian Studies of the Russian Academy of Sciences,institution
+48,https://openalex.org/W3045352268,RU,country
+49,https://openalex.org/W3045352268,missile defense review,keyword
+50,https://openalex.org/W3045352268,policy,keyword
+51,https://openalex.org/W3045352268,plan,keyword
+52,https://openalex.org/W2610923504,Michael V. Basin,author
+53,https://openalex.org/W2610923504,"Department of Physical and Mathematical Sciences, Autonomous University of Nuevo Leon, San Nicolas de los Garza, Mexico; International Science Laboratory on Integrated Systems of Orientation and Navigation, ITMO University, St. Petersburg, Russia",institution
+54,https://openalex.org/W2610923504,MX,country
+55,https://openalex.org/W2610923504,RU,country
+56,https://openalex.org/W2610923504,Polk Yu,author
+57,https://openalex.org/W2610923504,"Department of Electrical and Computer Engineering, University of Alabama in Huntsville , Huntsville, AL, USA",institution
+58,https://openalex.org/W2610923504,US,country
+59,https://openalex.org/W2610923504,Yuri B. Shtessel,author
+62,https://openalex.org/W2610923504,mode control,keyword
+63,https://openalex.org/W2610923504,fixed-time,keyword
+64,https://openalex.org/W3151807852,V. V. Yatsyshen,author
+65,https://openalex.org/W3151807852,Federal Autonomous Educational Institution of Higher Education “Volgograd State University”,institution
+66,https://openalex.org/W3151807852,RU,country
+67,https://openalex.org/W3151807852,A. Y. Gordeev,author
+68,https://openalex.org/W3151807852,Federal State Budget Educational Institution of Higher Education “Moscow Technological University”,institution
+69,https://openalex.org/W3151807852,bistatic radar,keyword
+70,https://openalex.org/W3151807852,electrodynamic method,keyword
+71,https://openalex.org/W3151807852,artificial targets,keyword
+72,https://openalex.org/W2998065536,S.V. Presnyakov,author
+73,https://openalex.org/W2998065536,Bauman Moscow State Technical University,institution
+74,https://openalex.org/W2998065536,RU,country
+75,https://openalex.org/W2998065536,V.A. Usachev,author
+78,https://openalex.org/W2998065536,V.V. Koryanov,author
+81,https://openalex.org/W2998065536,N.V. Kudryavtseva,author
+84,https://openalex.org/W2998065536,hypersonic flight vehicle,keyword
+85,https://openalex.org/W2998065536,range,keyword
+86,https://openalex.org/W2998065536,space limitations,keyword
+87,https://openalex.org/W2312577630,Alexander Roudakov,author
+88,https://openalex.org/W2312577630,"Central Inst. of Aviation Motors, Moscow, Russia",institution
+89,https://openalex.org/W2312577630,RU,country
+90,https://openalex.org/W2312577630,Vyacheslav Semenov,author
+93,https://openalex.org/W2312577630,Valeriy Kopchenov,author
+96,https://openalex.org/W2312577630,John Hicks,author
+97,https://openalex.org/W2312577630,"NASA, Flight Research Center, Edwards, CA",institution
+98,https://openalex.org/W2312577630,US,country
+99,https://openalex.org/W2312577630,scramjet engine,keyword
+100,https://openalex.org/W2312577630,hypersonic flying laboratory,keyword
+101,https://openalex.org/W2312577630,future flight test plans,keyword
+102,https://openalex.org/W2312577630,hydrogen-fueled,keyword
+103,https://openalex.org/W3144840006,O. O. Krivolapov,author
+104,https://openalex.org/W3144840006,"Institute for the US and Canadian Studies, Russian Academy of Sciences",institution
+105,https://openalex.org/W3144840006,RU,country
+106,https://openalex.org/W3144840006,us theatre missile defense,keyword
+107,https://openalex.org/W3144840006,regional deterrence,keyword
+108,https://openalex.org/W3144840006,russia,keyword
+109,https://openalex.org/W4379912790,Dmitry V. Streltsov,author
+110,https://openalex.org/W4379912790,"Institute of China and Contemporary Asia, RAS; Moscow State Institute of International Relations (MGIMO-University); Institute of China and Contemporary Asia, RAS",institution
+111,https://openalex.org/W4379912790,CN,country
+112,https://openalex.org/W4379912790,RU,country
+113,https://openalex.org/W4379912790,national security,keyword
+114,https://openalex.org/W4379912790,japan,keyword
+115,https://openalex.org/W4379912790,new concept,keyword
+116,https://openalex.org/W2906650205,А. Г. Арбатов,author
+117,https://openalex.org/W2906650205,Primakov National Research Institute of World Economy and International Relations of the Russian Academy of Sciences.,institution
+118,https://openalex.org/W2906650205,RU,country
+119,https://openalex.org/W2906650205,national,keyword
+120,https://openalex.org/W3045468127,Е. К. Зведре,author
+121,https://openalex.org/W3045468127,"Institute of International Studies, MGIMO-University",institution
+122,https://openalex.org/W3045468127,RU,country
+123,https://openalex.org/W3045468127,russian national security,keyword
+124,https://openalex.org/W3045468127,conventional prompt global strike,keyword
+125,https://openalex.org/W3045468127,us program,keyword
+126,https://openalex.org/W3171709164,Francois Falempin,author
+127,https://openalex.org/W3171709164,"EADS, Paris, France",institution
+128,https://openalex.org/W3171709164,FR,country
+129,https://openalex.org/W3171709164,Marc Bouchez,author
+132,https://openalex.org/W3171709164,Thierry Salmon,author
+135,https://openalex.org/W3171709164,Pierre Lespade,author
+138,https://openalex.org/W3171709164,Valery Avrashkov,author
+139,https://openalex.org/W3171709164,"MAI, Moscow, Russia",institution
+140,https://openalex.org/W3171709164,RU,country
+141,https://openalex.org/W3171709164,composite materials structure,keyword
+142,https://openalex.org/W3171709164,fuel-cooled,keyword
+143,https://openalex.org/W4226327042,A.O. Metelsky,author
+144,https://openalex.org/W4226327042,Bauman Moscow State Technical University,institution
+145,https://openalex.org/W4226327042,RU,country
+146,https://openalex.org/W4226327042,V.A. Markov,author
+149,https://openalex.org/W4226327042,V.I. Pusev,author
+152,https://openalex.org/W4226327042,missiles,keyword
+153,https://openalex.org/W4226327042,warheads,keyword
+154,https://openalex.org/W4226327042,anti-aircraft,keyword
+156,https://openalex.org/W2265003757,Saeed Saeedvand,author
+157,https://openalex.org/W2265003757,"Faculty of Computer Software Engineering, University of Tabriz, Tabriz",institution
+158,https://openalex.org/W2265003757,ES,country
+159,https://openalex.org/W2265003757,IR,country
+160,https://openalex.org/W2265003757,Seyed Naser Razavi,author
+164,https://openalex.org/W2265003757,Hadi S. Aghdasi,author
+168,https://openalex.org/W2265003757,localisation,keyword
+169,https://openalex.org/W2265003757,defence,keyword
+170,https://openalex.org/W2265003757,pre-calculation,keyword
+171,https://openalex.org/W2265003757,anti-missile,keyword
+172,https://openalex.org/W3134334463,П. А. Созинов,author
+173,https://openalex.org/W3134334463,JSC Almaz-Antey,institution
+174,https://openalex.org/W3134334463,RU,country
+175,https://openalex.org/W3134334463,Б. Н. Горевич,author
+178,https://openalex.org/W3134334463,onboard missile radar station,keyword
+179,https://openalex.org/W3134334463,missile coordinates,keyword
+180,https://openalex.org/W3134334463,ground radar system,keyword
+181,https://openalex.org/W3134334463,target designation,keyword
+182,https://openalex.org/W932731528,J. Yu. Parshkova,author
+183,https://openalex.org/W932731528,Moscow State Institute of International Relations (University),institution
+184,https://openalex.org/W932731528,RU,country
+185,https://openalex.org/W932731528,us national missile defense,keyword
+186,https://openalex.org/W932731528,security,keyword
+187,https://openalex.org/W932731528,development,keyword
+188,https://openalex.org/W83345341,Ali Khaji,author
+189,https://openalex.org/W83345341,"Sina Trauma and Surgery Research Center, Sina General Hospital, Tehran University of Medical Sciences, Tehran, Iran. akhaji@razi.tums.ac.ir",institution
+190,https://openalex.org/W83345341,IR,country
+191,https://openalex.org/W83345341,Shoaodin Fallahdoost,author
+192,https://openalex.org/W83345341,"Organization of Ground Force Devotees Holy Defense Research Center, Tehran, Iran",institution
+194,https://openalex.org/W83345341,Mohammad Reza Soroush,author
+195,https://openalex.org/W83345341,"Janbazan Medical and Engineering Research Center, Tehran, Iran",institution
+197,https://openalex.org/W83345341,civilian casualties,keyword
+198,https://openalex.org/W83345341,ballistic missile attacks,keyword
+199,https://openalex.org/W83345341,iranian cities,keyword
+200,https://openalex.org/W83345341,iraq-iran,keyword
+201,https://openalex.org/W1980535935,Alexander S. Roudakov,author
+202,https://openalex.org/W1980535935,"Central Inst. of Aviation Motors, Moscow, Russia",institution
+203,https://openalex.org/W1980535935,RU,country
+204,https://openalex.org/W1980535935,Vyacheslav L. Semenov,author
+207,https://openalex.org/W1980535935,John W. Hicks,author
+208,https://openalex.org/W1980535935,"NASA, Flight Research Center, Edwards, CA",institution
+209,https://openalex.org/W1980535935,US,country
+210,https://openalex.org/W1980535935,scramjet flight program,keyword
+211,https://openalex.org/W1980535935,recent flight test results,keyword
+212,https://openalex.org/W1980535935,mach,keyword
+213,https://openalex.org/W1980535935,ciam-nasa,keyword
+214,https://openalex.org/W2998844211,М. Н. Правидло,author
+215,https://openalex.org/W2998844211,Акционерное общество «Государственное машиностроительное конструкторское бюро «Вымпел» имени И.И. Торопова»,institution
+216,https://openalex.org/W2998844211,А. Ю. Королёв,author
+218,https://openalex.org/W2998844211,Л. В. Быков,author
+219,https://openalex.org/W2998844211,Moscow Aviation Institute (National Research University),institution
+220,https://openalex.org/W2998844211,RU,country
+221,https://openalex.org/W2998844211,ballistic characteristics,keyword
+222,https://openalex.org/W2998844211,rockets,keyword
+223,https://openalex.org/W2998844211,atmospheric,keyword
+224,https://openalex.org/W2998844211,parameters,keyword
+225,https://openalex.org/W3147730670,A. A. Dubrovina,author
+226,https://openalex.org/W3147730670,Joint Stock Company “Concern “Radio Technical and Information Systems”,institution
+227,https://openalex.org/W3147730670,GB,country
+228,https://openalex.org/W3147730670,RU,country
+229,https://openalex.org/W3147730670,US,country
+230,https://openalex.org/W3147730670,conditional multidimensional minimization,keyword
+231,https://openalex.org/W854224096,Wei Huang,author
+232,https://openalex.org/W854224096,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan 410073, People׳s Republic of China",institution
+233,https://openalex.org/W854224096,CN,country
+234,https://openalex.org/W854224096,Jun Liu,author
+237,https://openalex.org/W854224096,Zhi-xun Xia,author
+240,https://openalex.org/W854224096,spike concept,keyword
+241,https://openalex.org/W854224096,jet,keyword
+242,https://openalex.org/W854224096,flows,keyword
+243,https://openalex.org/W4210764682,A.O. Metelsky,author
+244,https://openalex.org/W4210764682,Bauman Moscow State Technical University,institution
+245,https://openalex.org/W4210764682,RU,country
+246,https://openalex.org/W4210764682,V.A. Markov,author
+249,https://openalex.org/W4210764682,V.I. Pusev,author
+252,https://openalex.org/W4210764682,system,keyword
+253,https://openalex.org/W4210764682,anti-aircraft,keyword
+254,https://openalex.org/W3168744411,A. I. Podberezkin,author
+255,https://openalex.org/W3168744411, Moscow State Institute of International Relations (University),institution
+256,https://openalex.org/W3168744411,RU,country
+257,https://openalex.org/W3168744411,J. Y. Parshkova,author
+260,https://openalex.org/W3168744411,european missile defence system,keyword
+261,https://openalex.org/W3168744411,russian national security,keyword
+262,https://openalex.org/W3168744411,threat,keyword
+263,https://openalex.org/W3123634309,V. V. Bychkov,author
+264,https://openalex.org/W3123634309,"Naval engineering institute (branch) of Military educational scientific center of Navy ""Naval academy of a name of the Admiral of Fleet of the Soviet Union N. G. Kuznetsov""",institution
+265,https://openalex.org/W3123634309,RU,country
+266,https://openalex.org/W3123634309,strategic concept,keyword
+267,https://openalex.org/W3123634309,non-strategic,keyword
+268,https://openalex.org/W3123634309,sea-based,keyword
+269,https://openalex.org/W2165610842,David C. Wright,author
+270,https://openalex.org/W2165610842,"Defense and Arms Control Studies Program , M.I.T. , Cambridge, Massachusetts; Union of Concerned Scientists , M.I.T. , Cambridge, Massachusetts",institution
+271,https://openalex.org/W2165610842,US,country
+272,https://openalex.org/W2165610842,Timur Kadyshev,author
+273,https://openalex.org/W2165610842,"Senior Researcher at the Center for Program Studies , Russian Academy of Sciences , Moscow; Center for Arms Control, Energy and Environmental Studies , Moscow Institute of Physics and Technology ,",institution
+274,https://openalex.org/W2165610842,RU,country
+275,https://openalex.org/W2165610842,korean,keyword
+276,https://openalex.org/W2262994757,Ali Khaji,author
+277,https://openalex.org/W2262994757,"Sina Trauma and Surgery Research Center, Medical Ethics and History of Medicine Research Centre, Tehran University of Medical Sciences, Tehran 11365/3876, Iran.",institution
+278,https://openalex.org/W2262994757,IR,country
+279,https://openalex.org/W2262994757,Shoaodin Fallahdoost,author
+280,https://openalex.org/W2262994757,"Colonel of Iranian Military Ground Forces, Organization of Ground Force Devotees Holy Defense Research Center, Tehran, Iran",institution
+282,https://openalex.org/W2262994757,Mohammad Reza Soroush,author
+283,https://openalex.org/W2262994757,"Janbazan Medical and Engineering Research Center,Tehran, Iran",institution
+285,https://openalex.org/W2262994757,Vafa Rahimi-Movaghar,author
+286,https://openalex.org/W2262994757,"Sina Trauma and Surgery Research Center, Sina General Hospital, Tehran University of Medical Sciences, Tehran, Iran",institution
+288,https://openalex.org/W2262994757,civilian casualties,keyword
+289,https://openalex.org/W2262994757,iraqi ballistic missile attack,keyword
+290,https://openalex.org/W2262994757,tehran,keyword
+291,https://openalex.org/W2262994757,iran,keyword
+292,https://openalex.org/W3091974119,Mariya Afshari Rad,author
+293,https://openalex.org/W3091974119,"PhD in Applied Mathematics, Assistant Professor of Faculty of Mathematics, Mazandaran University of Science and Technology",institution
+294,https://openalex.org/W3091974119,IR,country
+295,https://openalex.org/W3091974119,US,country
+296,https://openalex.org/W3091974119,Mohammad Salimi Khorshidi,author
+297,https://openalex.org/W3091974119,"Department of Master of Applied Mathematics, Mazandaran University of Science and Technology",institution
+299,https://openalex.org/W3091974119,ballistic missile defense,keyword
+300,https://openalex.org/W3091974119,mathematical modeling,keyword
+301,https://openalex.org/W3107814744,Е. А. Дегтерева,author
+302,https://openalex.org/W3107814744,"Moscow State Institute of International Relations (University), 76, Prospect Vernadskogo, Moscow, 119454, Russia.",institution
+303,https://openalex.org/W3107814744,RU,country
+304,https://openalex.org/W3107814744,international cooperation,keyword
+305,https://openalex.org/W3107814744,defense,keyword
+306,https://openalex.org/W3107814744,usa,keyword
+307,https://openalex.org/W2089617235,Pei Chao Zhang,author
+308,https://openalex.org/W2089617235,Ordnance Engineering College,institution
+309,https://openalex.org/W2089617235,CN,country
+310,https://openalex.org/W2089617235,Yuan Zeng Cheng,author
+313,https://openalex.org/W2089617235,Jie Wang,author
+314,https://openalex.org/W2089617235,"PLA 73,903 Troops",institution
+315,https://openalex.org/W2089617235,RU,country
+316,https://openalex.org/W2089617235,missile,keyword
+317,https://openalex.org/W2089617235,defense,keyword
+318,https://openalex.org/W3017669627,A. R. Pandie,author
+319,https://openalex.org/W3017669627,"Alumnus from Department of Aircraft Engineering, Sekolah Tinggi Teknologi Adisutjipto Yogyakarta; Master student at Department of Aircraft Engineering, Samara National Research University",institution
+320,https://openalex.org/W3017669627,ID,country
+321,https://openalex.org/W3017669627,RU,country
+322,https://openalex.org/W3017669627,P. L. Prabantara,author
+323,https://openalex.org/W3017669627,"Alumnus from Department of Aircraft Engineering, Sekolah Tinggi Teknologi Adisutjipto Yogyakarta; Lion Air Group, Soekarno-Hatta International Airport",institution
+325,https://openalex.org/W3017669627,missiles,keyword
+326,https://openalex.org/W3017669627,aerodynamics,keyword
+327,https://openalex.org/W3017669627,cfd,keyword
+328,https://openalex.org/W2611732205,Mehmet Cihan Şahıngıl,author
+329,https://openalex.org/W2611732205,TUBITAK BILGEM / ILTAREN (Turkey),institution
+330,https://openalex.org/W2611732205,TR,country
+331,https://openalex.org/W2611732205,estimation,keyword
+332,https://openalex.org/W2611732205,passive,keyword
+333,https://openalex.org/W2611732205,time-to-impact,keyword
+334,https://openalex.org/W4292730167,Oleg O. Krivolapov,author
+335,https://openalex.org/W4292730167,Institute for the U.S. and Canadian Studies of the Russian Academy of Sciences,institution
+336,https://openalex.org/W4292730167,RU,country
+337,https://openalex.org/W4292730167,missile defense review,keyword
+338,https://openalex.org/W4292730167,policy,keyword
+339,https://openalex.org/W4290838835,V. Klimov,author
+340,https://openalex.org/W4290838835,"Primakov National Research Institute of World Economy and International Relations, Russian Academy of Sciences (IMEMO), 23, Profsoyuznaya Str., Moscow, 117997, Russian Federation",institution
+341,https://openalex.org/W4290838835,RU,country
+342,https://openalex.org/W4290838835,missile defense systems,keyword
+343,https://openalex.org/W4290838835,war,keyword
+344,https://openalex.org/W4290838835,concepts,keyword
+345,https://openalex.org/W3205163000,V. Klimov,author
+346,https://openalex.org/W3205163000,"Primakov National Research Institute of World Economy and International Relations, Russian Academy of Sciences (IMEMO), 23, Profsoyuznaya Str., Moscow, 117997, Russian Federation",institution
+347,https://openalex.org/W3205163000,RU,country
+348,https://openalex.org/W3205163000,european missile defense factor,keyword
+349,https://openalex.org/W3205163000,russia–usa/nato relations,keyword
+350,https://openalex.org/W4296986105,O. O. Krivolapov,author
+351,https://openalex.org/W4296986105,"Institute for US and Canadian Studies, Russian Academy of Sciences, Moscow, Russia",institution
+352,https://openalex.org/W4296986105,RU,country
+353,https://openalex.org/W4296986105,nato regional missile defense,keyword
+354,https://openalex.org/W4296986105,european security,keyword
+355,https://openalex.org/W3001737191,Alexander Chekov,author
+356,https://openalex.org/W3001737191,Institute of Europe RAS; MGIMO University,institution
+357,https://openalex.org/W3001737191,RU,country
+358,https://openalex.org/W3001737191,missile,keyword
+359,https://openalex.org/W3001737191,star wars,keyword
+360,https://openalex.org/W3001737191,defense,keyword
+361,https://openalex.org/W3001737191,long american walk,keyword
+362,https://openalex.org/W2743156672,Amir Yaghoobi,author
+363,https://openalex.org/W2743156672,Malek Ashtar University of Technology,institution
+364,https://openalex.org/W2743156672,IR,country
+365,https://openalex.org/W2743156672,Hossein Rouzegar,author
+366,https://openalex.org/W2743156672,,institution
+367,https://openalex.org/W2743156672,Morteza Naderi,author
+369,https://openalex.org/W2743156672,Mohammad reza Arvan,author
+371,https://openalex.org/W2743156672,different errors,keyword
+372,https://openalex.org/W2743156672,tactical,keyword
+373,https://openalex.org/W2743156672,computer,keyword
+374,https://openalex.org/W2743156672,analyzing effects,keyword
+375,https://openalex.org/W2601418907,N. Henareh,author
+376,https://openalex.org/W2601418907,"Department of Electrical Engineering , Amirkabir university of Technology , Tehran , Iran",institution
+377,https://openalex.org/W2601418907,IR,country
+378,https://openalex.org/W2601418907,Y. Norouzi,author
+381,https://openalex.org/W2601418907,mimo radar,keyword
+382,https://openalex.org/W2601418907,missile,keyword
+383,https://openalex.org/W2601418907,game,keyword
+384,https://openalex.org/W4389831871,V. Klimov,author
+385,https://openalex.org/W4389831871,"Primakov National Research Institute of World Economy and International Relations, Russian Academy of Sciences (IMEMO), 23, Profsoyuznaya Str., Moscow, 117997, Russian Federation",institution
+386,https://openalex.org/W4389831871,RU,country
+387,https://openalex.org/W4389831871,S. Oznobishchev,author
+390,https://openalex.org/W2669340941,Qilun Zhao,author
+391,https://openalex.org/W2669340941,"Science and Technology on Aircraft Control Laboratory, School of Automation Science and Electronic Engineering, Beihang University, Beijing 100083, China",institution
+392,https://openalex.org/W2669340941,CN,country
+393,https://openalex.org/W2669340941,Xiwang Dong,author
+396,https://openalex.org/W2669340941,Zixuan Liang,author
+397,https://openalex.org/W2669340941,"School of Astronautics, Beihang University, Beijing 100083, China",institution
+399,https://openalex.org/W2669340941,Chen Bai,author
+400,https://openalex.org/W2669340941,"China Academy of Launch Vehicle Technology, Beijing 100076, China",institution
+402,https://openalex.org/W2669340941,Jian Chen,author
+403,https://openalex.org/W2669340941,"College of Engineering, China Agricultural University, Beijing 100083, China",institution
+405,https://openalex.org/W2669340941,Zhang Ren,author
+408,https://openalex.org/W2669340941,cooperative guidance,keyword
+409,https://openalex.org/W2669340941,multiple missiles,keyword
+410,https://openalex.org/W2669340941,communication,keyword
+411,https://openalex.org/W4389479609,A. Chekov,author
+412,https://openalex.org/W4389479609,MGIMO University,institution
+413,https://openalex.org/W4389479609,RU,country
+414,https://openalex.org/W4389479609,S. Babkina,author
+417,https://openalex.org/W1579723131,Sami A. Mostafa,author
+418,https://openalex.org/W1579723131,"Faculty of Industrial Education, Suez Canal University, Suez, Egypt; sami@usahotmail.com",institution
+419,https://openalex.org/W1579723131,EG,country
+420,https://openalex.org/W1579723131,Amir Nooraliei,author
+421,https://openalex.org/W1579723131,"Islamic Azad University-Hamedan Branch, Hamedan, IRAN; Amir.nooraliei@Gmail.com",institution
+422,https://openalex.org/W1579723131,IR,country
+423,https://openalex.org/W1579723131,ballistic,keyword
+424,https://openalex.org/W1579723131,boost-phase,keyword
+425,https://openalex.org/W2208125369,Mohammad Reza Gharib,author
+426,https://openalex.org/W2208125369,"Mechanical Engineering Dept, Ferdowsi University of Mashhad. IRAN‎",institution
+427,https://openalex.org/W2208125369,IR,country
+428,https://openalex.org/W2208125369,Majid Moavenian,author
+431,https://openalex.org/W2208125369,robust pid controller,keyword
+432,https://openalex.org/W2208125369,single output system,keyword
+433,https://openalex.org/W2208125369,single input,keyword
+434,https://openalex.org/W2734090605,Jamal Saeedi,author
+435,https://openalex.org/W2734090605,"Amirkabir University of Technology, Tehran, Iran",institution
+436,https://openalex.org/W2734090605,IR,country
+437,https://openalex.org/W2734090605,radar,keyword
+438,https://openalex.org/W2734090605,aperture,keyword
+439,https://openalex.org/W2734090605,conceptual design,keyword
+440,https://openalex.org/W2734090605,missile-borne,keyword
+441,https://openalex.org/W4297399326,Yuri Dobrov,author
+442,https://openalex.org/W4297399326,"St Petersburg State University, 199034, St Petersburg, Russia",institution
+443,https://openalex.org/W4297399326,RU,country
+444,https://openalex.org/W4297399326,Anton Karpenko,author
+447,https://openalex.org/W4297399326,Sergey Malkovsky,author
+448,https://openalex.org/W4297399326,"Computing Center of the Far Eastern Branch of the Russian Academy of Sciences, 680000, Khabarovsk, Russia",institution
+450,https://openalex.org/W4297399326,Aleksei Sorokin,author
+453,https://openalex.org/W4297399326,Konstantin Volkov,author
+454,https://openalex.org/W4297399326,"Institute of Hydrodynamics and Control Processes, St Petersburg State Marine Technical University, 190121 St Petersburg, Russia",institution
+456,https://openalex.org/W4297399326,hypersonic waverider,keyword
+457,https://openalex.org/W4297399326,graphics processor units,keyword
+458,https://openalex.org/W4297399326,simulation,keyword
+459,https://openalex.org/W4297399326,high-temperature,keyword
+460,https://openalex.org/W4281978097,O. O. Krivolapov,author
+461,https://openalex.org/W4281978097,"Institute for the US and Canadian Studies, Russian Academy of Sciences",institution
+462,https://openalex.org/W4281978097,RU,country
+463,https://openalex.org/W4281978097,north korea,keyword
+464,https://openalex.org/W4281978097,regional deterrence,keyword
+465,https://openalex.org/W4281978097,defense,keyword
+466,https://openalex.org/W3118662105,Alexander Dmitrievich Borovikov,author
+467,https://openalex.org/W3118662105,"Moscow Aviation Institute (MAI), Moscow, Russian Federation",institution
+468,https://openalex.org/W3118662105,RU,country
+469,https://openalex.org/W3118662105,Vyacheslav Afanasievich Vinogradov,author
+470,https://openalex.org/W3118662105,"Central Institute of Aviation Motors (CIAM), 2 Aviamotornaya Str.,#N#Moscow, 111116, Russian Federation",institution
+472,https://openalex.org/W3118662105,Vyacheslav Sergeevich Zakharov,author
+473,https://openalex.org/W3118662105,"Central Institute of Aviation Motors (CIAM), Moscow, Russian Federation",institution
+475,https://openalex.org/W3118662105,Vladimir Alekseevich Stepanov,author
+478,https://openalex.org/W3118662105,Nikolai Borisovich Ponomarev,author
+479,https://openalex.org/W3118662105,"Federal State Unitary Enterprise ""Research Center Named after M.V. Keldysh"",
+Moscow, Russian Federation",institution
+481,https://openalex.org/W3118662105,Alexander Nikolaevich Prokhorov,author
+484,https://openalex.org/W3118662105,inlet performance,keyword
+485,https://openalex.org/W3168834910,S. Oznobishchev,author
+486,https://openalex.org/W3168834910,"Institute of World Economy and International Relations, Russian Academy of Sciences (IMEMO RAN), 23, Profsoyuznaya Str., Moscow, 117997, Russian Federation",institution
+487,https://openalex.org/W3168834910,RU,country
+488,https://openalex.org/W3168834910,P. Topychkanov,author
+491,https://openalex.org/W3168834910,anti-missile,keyword
+492,https://openalex.org/W1981200163,Kamran Taremi,author
+493,https://openalex.org/W1981200163,"Center for Graduate International Studies, University of Tehran, Iran",institution
+494,https://openalex.org/W1981200163,IR,country
+495,https://openalex.org/W1981200163,ballistic missiles,keyword
+496,https://openalex.org/W1981200163,irans,keyword
+497,https://openalex.org/W1981200163,evil,keyword
+498,https://openalex.org/W1981200163,thinking,keyword
+499,https://openalex.org/W4226083453,A.O. Metelsky,author
+500,https://openalex.org/W4226083453,Bauman Moscow State Technical University,institution
+501,https://openalex.org/W4226083453,RU,country
+502,https://openalex.org/W4226083453,V.A. Markov,author
+505,https://openalex.org/W4226083453,V.I. Pusev,author
+508,https://openalex.org/W4226083453,missiles,keyword
+509,https://openalex.org/W4226083453,warheads,keyword
+510,https://openalex.org/W4226083453,anti-aircraft,keyword
+512,https://openalex.org/W3169894048,ُS. M. Javadpour,author
+513,https://openalex.org/W3169894048,University of Gonabad,institution
+514,https://openalex.org/W3169894048,IR,country
+515,https://openalex.org/W3169894048,B. Rahmati,author
+516,https://openalex.org/W3169894048,university of shahed,institution
+518,https://openalex.org/W3169894048,E. Khorasani Nezhad,author
+519,https://openalex.org/W3169894048,azad  University,institution
+520,https://openalex.org/W3169894048,R. Maryami,author
+521,https://openalex.org/W3169894048,Yazd University,institution
+523,https://openalex.org/W3169894048,radar cross section,keyword
+524,https://openalex.org/W3169894048,ogive nose,keyword
+525,https://openalex.org/W3169894048,cross section,keyword
+526,https://openalex.org/W1494770828,Yuri Ivanovich Khlopkov,author
+527,https://openalex.org/W1494770828,"Central Aerohydrodynamic Institute.#R##N#Department of Aeromechanics and Flight Engineering, Moscow Institute of Physics and Technology, Zhukovsky",institution
+528,https://openalex.org/W1494770828,RU,country
+529,https://openalex.org/W1494770828,Sergey Leonidovich Chernyshev,author
+532,https://openalex.org/W1494770828,Vladimir Alekseevich Zharov,author
+535,https://openalex.org/W1494770828,Zay Yar Myo Myint,author
+536,https://openalex.org/W1494770828,"Department of Aeromechanics and Flight Engineering, Moscow Institute of Physics and Technology, Zhukovsky",institution
+538,https://openalex.org/W1494770828,Anton Yurievich Khlopkov,author
+541,https://openalex.org/W1494770828,Mikhail Sergeevich Polyakov,author
+544,https://openalex.org/W1494770828,Kyaw Zin,author
+547,https://openalex.org/W3081466460,Evgeny Zvedre,author
+548,https://openalex.org/W3081466460,"Institute for International Studies, MGIMO-University",institution
+549,https://openalex.org/W3081466460,RU,country
+550,https://openalex.org/W3081466460,potential,keyword
+551,https://openalex.org/W3081466460,anti-missile,keyword
+552,https://openalex.org/W3081466460,asia-pacific,keyword
+553,https://openalex.org/W4296987252,K. V. Bogdanov,author
+554,https://openalex.org/W4296987252,"Primakov National Research Institute of World Economy and International Relations, Russian Academy of Sciences",institution
+555,https://openalex.org/W4296987252,RU,country
+556,https://openalex.org/W4296987252,D. V. Stefanovich,author
+557,https://openalex.org/W4296987252,"Primakov National Research Institute of World Economy and International Relations, Russian Academy of Sciences, Moscow, Russia",institution
+559,https://openalex.org/W4296987252,proliferation,keyword
+560,https://openalex.org/W4296987252,global,keyword
+561,https://openalex.org/W2370770762,Wang Ningning,author
+562,https://openalex.org/W2370770762,"Dalian Naval Academy,Dalian 116018)",institution
+563,https://openalex.org/W2370770762,TR,country
+564,https://openalex.org/W2370770762,route planning,keyword
+565,https://openalex.org/W2370770762,reefs,keyword
+566,https://openalex.org/W2370770762,island,keyword
+567,https://openalex.org/W2370770762,target,keyword
+568,https://openalex.org/W2370770762,anti-ship,keyword
+569,https://openalex.org/W4288685086,Ali Bagheri DOLATABADİ,author
+570,https://openalex.org/W4288685086,Yasouj University,institution
+571,https://openalex.org/W4288685086,IR,country
+572,https://openalex.org/W4288685086,ontological security,keyword
+573,https://openalex.org/W4288685086,missile program,keyword
+574,https://openalex.org/W4288685086,irans,keyword
+575,https://openalex.org/W2902781688,Leonid Ayzikovich Bilich,author
+576,https://openalex.org/W2902781688,"Central Aerohydrodynamic Institute (TsAGI), 1, Zhukovsky Str., Zhukovsky,#N#Moscow Region, 140180, Russian Federation",institution
+577,https://openalex.org/W2902781688,RU,country
+578,https://openalex.org/W2902781688,Sergey Alekseyevich Lyovin,author
+579,https://openalex.org/W2902781688,"Central Aerohydrodynamic Institute (TsAGI), 1, Zhukovsky Str., Zhukovsky,#N#Moscow Region, 140180, Russia",institution
+581,https://openalex.org/W2902781688,Vladlena Vladlenovna Ostapova,author
+584,https://openalex.org/W2902781688,nonmaneuverable target interception,keyword
+585,https://openalex.org/W2902781688,distance,keyword
+586,https://openalex.org/W2902781688,air-to-air,keyword
+587,https://openalex.org/W2065677643,Philip Nash,author
+588,https://openalex.org/W2065677643,"Gazi University, Ankara, Turkey.",institution
+589,https://openalex.org/W2065677643,TR,country
+590,https://openalex.org/W2065677643,other missiles,keyword
+591,https://openalex.org/W2065677643,jupiters,keyword
+592,https://openalex.org/W2065677643,eisenhower,keyword
+593,https://openalex.org/W2065677643,kennedy,keyword
+594,https://openalex.org/W2065677643,october,keyword
+595,https://openalex.org/W2296446277,Yury Dimitrienko,author
+596,https://openalex.org/W2296446277,"Bauman Moscow State Technical University, Russia, Moscow",institution
+597,https://openalex.org/W2296446277,RU,country
+598,https://openalex.org/W2296446277,Mikhail Koryakov,author
+601,https://openalex.org/W2296446277,Andrey Zakharov,author
+604,https://openalex.org/W2296446277,finite difference tvd methods,keyword
+605,https://openalex.org/W2296446277,hypersonic aerodynamics,keyword
+606,https://openalex.org/W2801717240,Glenn Diesen,author
+607,https://openalex.org/W2801717240,"Higher School of Economics, Moscow, Russia; School of Social Sciences and Psychology, Western Sydney University, Australia",institution
+608,https://openalex.org/W2801717240,AU,country
+609,https://openalex.org/W2801717240,RU,country
+610,https://openalex.org/W2801717240,Conor Keane,author
+611,https://openalex.org/W2801717240,"Department of Modern History, Politics and International Relations, Macquarie University, Sydney, Australia",institution
+613,https://openalex.org/W2801717240,missile defence system,keyword
+614,https://openalex.org/W2801717240,natos,keyword
+615,https://openalex.org/W2801717240,offensive posture,keyword
+616,https://openalex.org/W2126524512,L Hassan,author
+617,https://openalex.org/W2126524512,Maleke Ashtar University,institution
+618,https://openalex.org/W2126524512,IR,country
+619,https://openalex.org/W2126524512,S H Sadati,author
+622,https://openalex.org/W2126524512,J Karimi,author
+625,https://openalex.org/W2126524512,integrated fuzzy guidance law,keyword
+626,https://openalex.org/W2126524512,proportional navigation guidance,keyword
+627,https://openalex.org/W2126524512,high maneuvering targets,keyword
+628,https://openalex.org/W2129983604,N.M. Ushakov,author
+629,https://openalex.org/W2129983604,"Saratov Department, Institute of Radio-Engineering and Electronics RAS, Saratov, Russia",institution
+630,https://openalex.org/W2129983604,RU,country
+631,https://openalex.org/W2129983604,mw signals,keyword
+632,https://openalex.org/W2129983604,linbo/sub,keyword
+633,https://openalex.org/W2129983604,delay,keyword
+634,https://openalex.org/W2129983604,3/fe,keyword
+635,https://openalex.org/W2127791935,M. S. Ivanov,author
+636,https://openalex.org/W2127791935,"Computational Aerodynamics Laboratory, Institute of Theoretical and Applied Mechanics, Novosibirsk 630090, Russia;",institution
+637,https://openalex.org/W2127791935,RU,country
+638,https://openalex.org/W2127791935,S. F. Gimelshein,author
+641,https://openalex.org/W2127791935,flows,keyword
+642,https://openalex.org/W3038201348,Febry Hadiaty,author
+643,https://openalex.org/W3038201348,,institution
+644,https://openalex.org/W3038201348,Anak Agung Banyu Perwita,author
+645,https://openalex.org/W3038201348,"School of International Relations, President University",institution
+646,https://openalex.org/W3038201348,ID,country
+647,https://openalex.org/W3038201348,IR,country
+648,https://openalex.org/W3038201348,security consultative committee,keyword
+649,https://openalex.org/W3038201348,scc�,keyword
+650,https://openalex.org/W3038201348,korea�s,keyword
+651,https://openalex.org/W3038201348,japan,keyword
+652,https://openalex.org/W3038201348,defense,keyword
+653,https://openalex.org/W1982165116,Michael Ovchinnikov,author
+654,https://openalex.org/W1982165116,"Keldysh Institute of Applied Mathematics, Russian Academy of Sciences 4 Miusskaya Square, Moscow 125047 Russia",institution
+655,https://openalex.org/W1982165116,RU,country
+656,https://openalex.org/W1982165116,russian launch opportunities,keyword
+657,https://openalex.org/W1982165116,satellites,keyword
+658,https://openalex.org/W1982165116,small,keyword
+659,https://openalex.org/W4200580225,A.O. Metelsky,author
+660,https://openalex.org/W4200580225,Bauman Moscow State Technical University,institution
+661,https://openalex.org/W4200580225,RU,country
+662,https://openalex.org/W4200580225,V.A. Markov,author
+665,https://openalex.org/W4200580225,V.I. Pusev,author
+668,https://openalex.org/W4200580225,missile,keyword
+669,https://openalex.org/W4200580225,system,keyword
+670,https://openalex.org/W4200580225,anti-aircraft,keyword
+671,https://openalex.org/W2985995749,V. L. Balakin,author
+672,https://openalex.org/W2985995749,"Samara National Research University, Russian Federation",institution
+673,https://openalex.org/W2985995749,RU,country
+674,https://openalex.org/W2985995749,M. M. Krikunov,author
+677,https://openalex.org/W2985995749,hypersonic first stage,keyword
+678,https://openalex.org/W2985995749,disturbed motion,keyword
+679,https://openalex.org/W2985995749,aerospace system,keyword
+680,https://openalex.org/W2985995749,climb,keyword
+681,https://openalex.org/W2808508988,G. I. Zaytsev,author
+682,https://openalex.org/W2808508988,"Kuzbass State Technical University of T.F.Gorbachev, 650000, Russia, Kemerovo, Street Vesenny’a, 28",institution
+683,https://openalex.org/W2808508988,RU,country
+684,https://openalex.org/W2808508988,K. V. Kovalenko,author
+685,https://openalex.org/W2808508988,"P.N. Lebedev Physical Institute of the Russian Academy of Sciences, Leninskiy Prospekt 53, Moscow 119991, Russia",institution
+687,https://openalex.org/W2808508988,S. V. Krivokhizha,author
+690,https://openalex.org/W2808508988,hypersonic absorption,keyword
+691,https://openalex.org/W2483698020,Saeb AmirAhmadi Chomachar,author
+692,https://openalex.org/W2483698020,"Aerospace Eng., AmirKabir University of Technology, 424 Hafez Ave., Tehran, Iran",institution
+693,https://openalex.org/W2483698020,IR,country
+694,https://openalex.org/W2483698020,Alireza Mohammadi Fard,author
+695,https://openalex.org/W2483698020,"Aerospace Eng., AmirKabir University of Technology",institution
+697,https://openalex.org/W2483698020,control system,keyword
+698,https://openalex.org/W2483698020,rolling-airframe,keyword
+699,https://openalex.org/W2327324480,Mikhail Kotov,author
+700,https://openalex.org/W2327324480,Russian Academy of Sciences,institution
+701,https://openalex.org/W2327324480,RU,country
+702,https://openalex.org/W2327324480,Igor Kryukov,author
+705,https://openalex.org/W2327324480,Larisa Ruleva,author
+708,https://openalex.org/W2327324480,Sergey Solodovnikov,author
+711,https://openalex.org/W2327324480,Sergey Surzhikov,author
+714,https://openalex.org/W2327324480,shock tube,keyword
+715,https://openalex.org/W2327324480,incoming flow investigation,keyword
+716,https://openalex.org/W2997355519,K. O. Ushakova,author
+717,https://openalex.org/W2997355519,Joint Stock Company «Corporation «Tactical Missiles»,institution
+718,https://openalex.org/W2997355519,V. G. Isaev,author
+719,https://openalex.org/W2997355519,State Educational Institution of Higher Education Moscow Region «University of technology»,institution
+720,https://openalex.org/W2997355519,RU,country
+721,https://openalex.org/W2997355519,space industry,keyword
+722,https://openalex.org/W2997355519,import substitution issues,keyword
+723,https://openalex.org/W2997355519,aircraft,keyword
+724,https://openalex.org/W2997355519,risks,keyword
+725,https://openalex.org/W2997355519,military-industrial,keyword
+726,https://openalex.org/W3126309110,И. А. Истомин,author
+727,https://openalex.org/W3126309110,"MGIMO University
+
+Harvard University",institution
+728,https://openalex.org/W3126309110,RU,country
+729,https://openalex.org/W3126309110,US,country
+730,https://openalex.org/W3126309110,technological uncertainty,keyword
+731,https://openalex.org/W3126309110,innovation,keyword
+732,https://openalex.org/W3126309110,instability,keyword
+733,https://openalex.org/W3126309110,military,keyword
+734,https://openalex.org/W3205655975,Yury Dobrov,author
+735,https://openalex.org/W3205655975,"St.-Petersburg State University, 198504, St.-Petersburg, Russia",institution
+736,https://openalex.org/W3205655975,RU,country
+737,https://openalex.org/W3205655975,Vladislav Gimadiev,author
+738,https://openalex.org/W3205655975,"St Petersburg State University, 198504, St Petersburg, Russia",institution
+740,https://openalex.org/W3205655975,Anton Karpenko,author
+743,https://openalex.org/W3205655975,Konstantin Volkov,author
+744,https://openalex.org/W3205655975,"Kingston University, SW15 3DW, London, United Kingdom",institution
+745,https://openalex.org/W3205655975,GB,country
+746,https://openalex.org/W3205655975,hypersonic flow,keyword
+747,https://openalex.org/W3205655975,numerical simulation,keyword
+748,https://openalex.org/W3205655975,chemical reactions,keyword
+749,https://openalex.org/W3205655975,sphere,keyword
+750,https://openalex.org/W3205655975,non-equilibrium,keyword
+751,https://openalex.org/W2189171260,M. R. Mosavi,author
+752,https://openalex.org/W2189171260,Iran University of Science and Technology,institution
+753,https://openalex.org/W2189171260,IR,country
+754,https://openalex.org/W2189171260,M. Asadpour,author
+755,https://openalex.org/W2189171260,,institution
+756,https://openalex.org/W2189171260,H. A. Ameri,author
+758,https://openalex.org/W2189171260,infrared jammer source,keyword
+759,https://openalex.org/W3141079547,Е. С. Никулин,author
+760,https://openalex.org/W3141079547,V.P. Makeev State Rocket Centre JSC,institution
+761,https://openalex.org/W3141079547,RU,country
+762,https://openalex.org/W3141079547,В. И. Пегов,author
+763,https://openalex.org/W3141079547,"V.P. Makeev State Rocket Centre JSC; South Urals Federal Scientific Center of Mineralogy and Geoecology, Ural Branch of the Russian Academy of Sciences",institution
+765,https://openalex.org/W3141079547,А. Д. Чешко,author
+768,https://openalex.org/W3141079547,И. Ю. Мошкин,author
+771,https://openalex.org/W3141079547,underwater missile launch,keyword
+772,https://openalex.org/W3141079547,submarine,keyword
+773,https://openalex.org/W3141079547,thermal loads,keyword
+774,https://openalex.org/W3141079547,numerical simulation,keyword
+775,https://openalex.org/W2318873149,Hadi Vafadar Moradi,author
+776,https://openalex.org/W2318873149,Iran University of Science and Technology,institution
+777,https://openalex.org/W2318873149,IR,country
+778,https://openalex.org/W2318873149,S. Mostafa Hosseinalipour,author
+781,https://openalex.org/W2318873149,hypersonic flow,keyword
+782,https://openalex.org/W2332127463,A. Maslov,author
+783,https://openalex.org/W2332127463,"Russian Academy of Sciences, Inst. of Theoretical and Applied Mechanics, Novosibirsk, Russia",institution
+784,https://openalex.org/W2332127463,RU,country
+785,https://openalex.org/W2332127463,S. Mironov,author
+786,https://openalex.org/W2332127463,,institution
+787,https://openalex.org/W2332127463,A. Shiplyuk,author
+789,https://openalex.org/W2332127463,V. Aniskin,author
+791,https://openalex.org/W2332127463,D. Buntin,author
+793,https://openalex.org/W2332127463,A. Sidorenko,author
+795,https://openalex.org/W2332127463,hypersonic,keyword
+796,https://openalex.org/W2332127463,stability,keyword
+797,https://openalex.org/W2332127463,flow,keyword
+798,https://openalex.org/W4206058844,Yuriy V. Gromyko,author
+799,https://openalex.org/W4206058844,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS Novosibirsk, Russian Federation",institution
+800,https://openalex.org/W4206058844,RU,country
+801,https://openalex.org/W4206058844,Anatoliy A. Maslov,author
+802,https://openalex.org/W4206058844,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS Novosibirsk, Russian Federation, Novosibirsk State University Novosibirsk, Russian Federation",institution
+804,https://openalex.org/W4206058844,Andrey A. Sidorenko,author
+807,https://openalex.org/W4206058844,Pavel A. Polivanov,author
+810,https://openalex.org/W4206058844,Ivan S. Tsyryulnikov,author
+813,https://openalex.org/W4206058844,hypersonic wind tunnels,keyword
+814,https://openalex.org/W4206058844,flow parametrs,keyword
+815,https://openalex.org/W1993883298,S.H. Pourtakdoust,author
+816,https://openalex.org/W1993883298,"Department of Aerospace Engineering, Sharif University of Technology, Azadi Street, Tehran 11365 8639, Iran",institution
+817,https://openalex.org/W1993883298,IR,country
+818,https://openalex.org/W1993883298,N. Assadian,author
+821,https://openalex.org/W1993883298,vibrational characteristics,keyword
+822,https://openalex.org/W1993883298,thrust effect,keyword
+823,https://openalex.org/W2890430215,DoÇ§an UÇ§ur Sakarya,author
+824,https://openalex.org/W2890430215,Roketsan A.S. (Turkey),institution
+825,https://openalex.org/W2890430215,TR,country
+826,https://openalex.org/W2890430215,laser,keyword
+827,https://openalex.org/W2890430215,proximity,keyword
+828,https://openalex.org/W2890430215,sensor,keyword
+829,https://openalex.org/W3114290927,Hayk Grigoryan,author
+830,https://openalex.org/W3114290927,Investigative Committee of the RA,institution
+831,https://openalex.org/W3114290927,RU,country
+832,https://openalex.org/W3114290927,investigators,keyword
+833,https://openalex.org/W3114290927,crime,keyword
+834,https://openalex.org/W3114290927,training,keyword
+835,https://openalex.org/W3114290927,examination,keyword
+836,https://openalex.org/W3114290927,missile-artillery,keyword
+837,https://openalex.org/W3140092228,V. A. Pismennaya,author
+838,https://openalex.org/W3140092228,Public Joint-Stock Company Scientific and ProductionAssociation “ALMAZ R&P Corp.”,institution
+839,https://openalex.org/W3140092228,RU,country
+840,https://openalex.org/W3140092228,A. V. Yakutin,author
+843,https://openalex.org/W3140092228,target allocation problem,keyword
+844,https://openalex.org/W3140092228,defence,keyword
+845,https://openalex.org/W1974534458,Mingzhe Hou,author
+846,https://openalex.org/W1974534458,"Center for Control Theory and Guidance Technology, Harbin Institute of Technology, Harbin 150001, China",institution
+847,https://openalex.org/W1974534458,CN,country
+848,https://openalex.org/W1974534458,Xiaoling Liang,author
+851,https://openalex.org/W1974534458,Guangren Duan,author
+854,https://openalex.org/W1974534458,integrated missile guidance,keyword
+855,https://openalex.org/W1974534458,dynamic surface control,keyword
+856,https://openalex.org/W1974534458,adaptive block,keyword
+857,https://openalex.org/W1974534458,autopilot,keyword
+858,https://openalex.org/W2322383702,Marc Bouchez,author
+859,https://openalex.org/W2322383702,"Aerospatiale Matra Missiles, Bourges, France",institution
+860,https://openalex.org/W2322383702,FR,country
+861,https://openalex.org/W2322383702,Pascal Genevieve,author
+864,https://openalex.org/W2322383702,Vadim Levine,author
+865,https://openalex.org/W2322383702,"Moscow Aviation Inst., Russia",institution
+866,https://openalex.org/W2322383702,RU,country
+867,https://openalex.org/W2322383702,Dmitri Davidenko,author
+870,https://openalex.org/W2322383702,Valery Avrashkov,author
+873,https://openalex.org/W2322383702,variable geometry propulsion system,keyword
+874,https://openalex.org/W2322383702,space launcher interest,keyword
+875,https://openalex.org/W2322383702,french-russian,keyword
+876,https://openalex.org/W2977667982,S.H. Pourtakdoust,author
+877,https://openalex.org/W2977667982,"Aerospace Engineering,; Sharif University of Technology",institution
+878,https://openalex.org/W2977667982,IR,country
+879,https://openalex.org/W2977667982,cruciform missiles,keyword
+880,https://openalex.org/W2977667982,flow field,keyword
+881,https://openalex.org/W2977667982,simulation,keyword
+882,https://openalex.org/W1532346264,Suslov Dmitry,author
+883,https://openalex.org/W1532346264,National Research University Higher School of Economics,institution
+884,https://openalex.org/W1532346264,RU,country
+885,https://openalex.org/W1532346264,dialogue,keyword
+886,https://openalex.org/W1532346264,policy,keyword
+887,https://openalex.org/W1532346264,us-russia,keyword
+888,https://openalex.org/W2087672437,Andrei Kortunov,author
+889,https://openalex.org/W2087672437,"The Eurasian Science Foundation , Moscow, Russia",institution
+890,https://openalex.org/W2087672437,RU,country
+891,https://openalex.org/W2087672437,Andrei Shoumikhin,author
+892,https://openalex.org/W2087672437,,institution
+893,https://openalex.org/W2087672437,russia,keyword
+894,https://openalex.org/W2087672437,missiles,keyword
+895,https://openalex.org/W2087672437,mass destruction,keyword
+896,https://openalex.org/W2087672437,weapons,keyword
+897,https://openalex.org/W2087672437,proliferation,keyword
+898,https://openalex.org/W2995653391,Alexey E. Golubev,author
+899,https://openalex.org/W2995653391,"Bauman Moscow State Technical University, 2-ya Baumanskaya Str. 5, 105005, Moscow, Russia",institution
+900,https://openalex.org/W2995653391,RU,country
+901,https://openalex.org/W2995653391,Alexander P. Krishchenko,author
+904,https://openalex.org/W2995653391,Nadezhda V. Utkina,author
+907,https://openalex.org/W2995653391,missile angle,keyword
+908,https://openalex.org/W2995653391,attack tracking,keyword
+909,https://openalex.org/W2096842808,Shadi Mahjoob,author
+910,https://openalex.org/W2096842808,Aerospace Research Institute,institution
+911,https://openalex.org/W2096842808,IR,country
+912,https://openalex.org/W2096842808,Mahmoud Mani,author
+913,https://openalex.org/W2096842808,Amir-Kabir University of Technology,institution
+915,https://openalex.org/W2096842808,Mohammad Taeibi-Rahni,author
+916,https://openalex.org/W2096842808,Sharif University of Technology,institution
+918,https://openalex.org/W2096842808,performance analysis,keyword
+919,https://openalex.org/W2096842808,cross-sections,keyword
+920,https://openalex.org/W2408450179,hamid Razmjooei,author
+921,https://openalex.org/W2408450179,Shiraz University of  Technology,institution
+922,https://openalex.org/W2408450179,IR,country
+923,https://openalex.org/W2408450179,mohammad hossein shafiei,author
+924,https://openalex.org/W2408450179,,institution
+925,https://openalex.org/W2408450179,robust partial control law,keyword
+926,https://openalex.org/W2408450179,guidance,keyword
+927,https://openalex.org/W2768276274,Xiang Yu,author
+928,https://openalex.org/W2768276274,"Department of Mechanical, Industrial and Aerospace Engineering, Concordia University, Montreal, Canada",institution
+929,https://openalex.org/W2768276274,CA,country
+930,https://openalex.org/W2768276274,Peng Li,author
+931,https://openalex.org/W2768276274,"College of Mechatronics Engineering and Automation, and the State Key Laboratory of High Performance Computing, National University of Defense Technology, Changsha, China",institution
+932,https://openalex.org/W2768276274,CN,country
+933,https://openalex.org/W2768276274,Youmin Zhang,author
+936,https://openalex.org/W2768276274,hypersonic gliding vehicles,keyword
+937,https://openalex.org/W2768276274,fixed-time,keyword
+938,https://openalex.org/W2768276274,finite-time,keyword
+939,https://openalex.org/W2768276274,fault-tolerant,keyword
+940,https://openalex.org/W2543117346,Mohiyeddin Mozaffari,author
+941,https://openalex.org/W2543117346,"Ph.D. Student, Dept. of Electrical Engineering, Shiraz Univ. of Technology, Shiraz, 71555313 Fars, Iran. E-mail:",institution
+942,https://openalex.org/W2543117346,IR,country
+943,https://openalex.org/W2543117346,Behrouz Safarinejadian,author
+944,https://openalex.org/W2543117346,"Associated Professor, Dept. of Electrical Engineering, Shiraz Univ. of Technology, Shiraz, 71555313 Fars, Iran (corresponding author).",institution
+946,https://openalex.org/W2543117346,Tahereh Binazadeh,author
+947,https://openalex.org/W2543117346,"Assistant Professor, Dept. of Electrical Engineering, Shiraz Univ. of Technology, Shiraz, 71555313 Fars, Iran. E-mail:",institution
+949,https://openalex.org/W2320109376,Antti Pankkonen,author
+950,https://openalex.org/W2320109376,(Helsinki University of Technology),institution
+951,https://openalex.org/W2320109376,RU,country
+952,https://openalex.org/W2320109376,aerodynamic modeling,keyword
+953,https://openalex.org/W2320109376,missiles,keyword
+954,https://openalex.org/W2320109376,panel method,keyword
+955,https://openalex.org/W2169946131,Reşat Özgür Doruk,author
+956,https://openalex.org/W2169946131,Middle East Technical University,institution
+957,https://openalex.org/W2169946131,TR,country
+958,https://openalex.org/W2169946131,Erol Kocaoğlan,author
+959,https://openalex.org/W2169946131,,institution
+960,https://openalex.org/W2169946131,robustness analysis procedure,keyword
+961,https://openalex.org/W2019625328,N. Rahbar,author
+962,https://openalex.org/W2019625328,"Mechanical Engineering Department, Amir Kabir University of Technology, 424, Hafez Avenue, Tehran, 15875-4413, I.R. Iran",institution
+963,https://openalex.org/W2019625328,IR,country
+964,https://openalex.org/W2019625328,M. Bahrami,author
+967,https://openalex.org/W2019625328,optimal feedback guidance law,keyword
+968,https://openalex.org/W2019625328,missiles,keyword
+969,https://openalex.org/W2019625328,neural networks,keyword
+970,https://openalex.org/W848325209,Jiang Zhao,author
+971,https://openalex.org/W848325209,"School of Automation Science and Electrical Engineering, Beihang University, Beijing 100191, China",institution
+972,https://openalex.org/W848325209,CN,country
+973,https://openalex.org/W848325209,Rui Zhou,author
+976,https://openalex.org/W848325209,Zhuoning Dong,author
+979,https://openalex.org/W848325209,targets,keyword
+980,https://openalex.org/W848325209,guidance,keyword
+981,https://openalex.org/W848325209,three-dimensional,keyword

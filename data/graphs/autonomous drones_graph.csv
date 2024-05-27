@@ -1,0 +1,1053 @@
+,paper_id,target,type
+0,https://openalex.org/W2792301682,Anton A. Zhilenkov,author
+1,https://openalex.org/W2792301682,"Faculty of Control Systems and Robotics, Department of Control Systems and Informatics, ITMO University, Saint Petersburg, Russia",institution
+2,https://openalex.org/W2792301682,RU,country
+3,https://openalex.org/W2792301682,Ignat R. Epifantsev,author
+6,https://openalex.org/W2792301682,autonomous navigation systems,keyword
+7,https://openalex.org/W2792301682,trajectory planning,keyword
+8,https://openalex.org/W2792301682,technical vision,keyword
+9,https://openalex.org/W2964536243,Chunxue Wu,author
+10,https://openalex.org/W2964536243,School of Optical‐Electrical and Computer Engineering University of Shanghai for Science and Technology  Shanghai China,institution
+11,https://openalex.org/W2964536243,CN,country
+12,https://openalex.org/W2964536243,Bobo Ju,author
+15,https://openalex.org/W2964536243,Yan Wu,author
+16,https://openalex.org/W2964536243,"[School of Public and Environmental Affairs, Indiana University, Bloomington, CO, USA]",institution
+17,https://openalex.org/W2964536243,US,country
+18,https://openalex.org/W2964536243,Xiao Lin,author
+19,https://openalex.org/W2964536243,"Dept. of Comput. Sci., Shanghai Normal Univ., Shanghai, China",institution
+21,https://openalex.org/W2964536243,Naixue Xiong,author
+22,https://openalex.org/W2964536243,"College of Intelligence and Computing Tianjin University Tianjin, China",institution
+24,https://openalex.org/W2964536243,Guangquan Xu,author
+27,https://openalex.org/W2964536243,Hongyan Li,author
+28,https://openalex.org/W2964536243,"School of Information and Communication Engineering, Hubei University of Economics, Wuhan, China; State Key Laboratory for Information Engineering in Surveying, Mapping, and Remote Sensing, Wuhan University, Wuhan, China",institution
+30,https://openalex.org/W2964536243,Xuefeng Liang,author
+31,https://openalex.org/W2964536243,"School of Information, Kyoto University, Kyoto, CO, Japan",institution
+32,https://openalex.org/W2964536243,JP,country
+33,https://openalex.org/W2964536243,uav autonomous target search,keyword
+34,https://openalex.org/W2964536243,deep reinforcement learning,keyword
+35,https://openalex.org/W2791057578,Anton A. Zhilenkov,author
+36,https://openalex.org/W2791057578,"Faculty of Control Systems and Robotics, Department of Control Systems and Informatics, ITMO University, Saint Petersburg, Russia",institution
+37,https://openalex.org/W2791057578,RU,country
+38,https://openalex.org/W2791057578,Ignat R. Epifantsev,author
+41,https://openalex.org/W2791057578,autonomous navigation,keyword
+42,https://openalex.org/W2791057578,drone,keyword
+43,https://openalex.org/W2791057578,forest trails,keyword
+44,https://openalex.org/W4386431128,Tagir Muslimov,author
+45,https://openalex.org/W4386431128,"Ufa University of Science and Technology, Ufa, Russia",institution
+46,https://openalex.org/W4386431128,RU,country
+47,https://openalex.org/W4386431128,drones,keyword
+48,https://openalex.org/W4386431128,collision avoidance,keyword
+49,https://openalex.org/W4386431128,swarm,keyword
+50,https://openalex.org/W4386431128,vector,keyword
+51,https://openalex.org/W4386431128,curl-free,keyword
+52,https://openalex.org/W3020112479,Hamid Didari Khamseh Motlagh,author
+53,https://openalex.org/W3020112479,"Advanced Robotics and Automated Systems (ARAS), Faculty of Electrical Engineering, K. N. Toosi University of Technology",institution
+54,https://openalex.org/W3020112479,IR,country
+55,https://openalex.org/W3020112479,Faraz Lotfi,author
+58,https://openalex.org/W3020112479,Hamid D. Taghirad,author
+61,https://openalex.org/W3020112479,Saeed Bakhshi Germi,author
+62,https://openalex.org/W3020112479,"Machine Learning Research Group, Tampere University,Tampere,Finland",institution
+63,https://openalex.org/W3020112479,FI,country
+64,https://openalex.org/W3020112479,visual slam,keyword
+65,https://openalex.org/W3020112479,position estimation,keyword
+66,https://openalex.org/W3020112479,drones,keyword
+67,https://openalex.org/W3020112479,imu,keyword
+68,https://openalex.org/W3020112479,gps-denied,keyword
+69,https://openalex.org/W3013167434,Wu Chen,author
+70,https://openalex.org/W3013167434,"Northwestern Polytechnical University, Xi’an  China",institution
+71,https://openalex.org/W3013167434,CN,country
+72,https://openalex.org/W3013167434,Jiajia Liu,author
+75,https://openalex.org/W3013167434,Hongzhi Guo,author
+78,https://openalex.org/W3013167434,Nei Kato,author
+79,https://openalex.org/W3013167434,"[Tohoku University, Sendai, Japan]",institution
+80,https://openalex.org/W3013167434,JP,country
+81,https://openalex.org/W3013167434,intelligent drone swarm,keyword
+82,https://openalex.org/W3013167434,robust,keyword
+83,https://openalex.org/W4384834237,Sergey Berkovich,author
+84,https://openalex.org/W4384834237,"Department of Navigation and Geodetic Systems, Institute of Engineering Physics, Serpukhov, Russian",institution
+85,https://openalex.org/W4384834237,RU,country
+86,https://openalex.org/W4384834237,Nikolay Kotov,author
+89,https://openalex.org/W4384834237,Ramil Bikmaev,author
+92,https://openalex.org/W4384834237,Alexey Sholohov,author
+95,https://openalex.org/W4384834237,place recognition,keyword
+96,https://openalex.org/W4384834237,simultaneous localization,keyword
+97,https://openalex.org/W4384834237,siamese neural network,keyword
+98,https://openalex.org/W4384834237,sparse sensing,keyword
+99,https://openalex.org/W3217338208,Anton Filatov,author
+100,https://openalex.org/W3217338208,"Faculty of Computer Science and Technology, Saint Petersburg Electrotechnical University “LETI”, 197022 Saint Petersburg, Russia",institution
+101,https://openalex.org/W3217338208,RU,country
+102,https://openalex.org/W3217338208,Mark Zaslavskiy,author
+105,https://openalex.org/W3217338208,Kirill Krinkin,author
+108,https://openalex.org/W3217338208,building,keyword
+109,https://openalex.org/W3217338208,3d,keyword
+110,https://openalex.org/W3217338208,reconstruction,keyword
+111,https://openalex.org/W3217338208,multi-drone,keyword
+112,https://openalex.org/W4382050690,Zhanibek Darush,author
+113,https://openalex.org/W4382050690,"Intelligent Space Robotics Laboratory, Space CREI, Skolkovo Institute of Science and Technology, Moscow, Russian Federation",institution
+114,https://openalex.org/W4382050690,RU,country
+115,https://openalex.org/W4382050690,Mikhail Martynov,author
+118,https://openalex.org/W4382050690,Aleksey Fedoseev,author
+121,https://openalex.org/W4382050690,Aleksei Shcherbak,author
+124,https://openalex.org/W4382050690,Dzmitry Tsetserukou,author
+127,https://openalex.org/W4382050690,morphogenetic leader drones,keyword
+128,https://openalex.org/W4382050690,heterogeneous swarmgear,keyword
+129,https://openalex.org/W4382050690,virtual impedance links,keyword
+130,https://openalex.org/W4382050690,inspection,keyword
+131,https://openalex.org/W4382050690,multi-agent,keyword
+132,https://openalex.org/W4293057563,Ayush Gupta,author
+133,https://openalex.org/W4293057563,"Skoltech,Moscow,Russia",institution
+134,https://openalex.org/W4293057563,RU,country
+135,https://openalex.org/W4293057563,Ahmed Baza,author
+138,https://openalex.org/W4293057563,Ekaterina Dorzhieva,author
+141,https://openalex.org/W4293057563,Mert Alper,author
+144,https://openalex.org/W4293057563,Mariia Makarova,author
+147,https://openalex.org/W4293057563,Stepan Perminov,author
+150,https://openalex.org/W4293057563,Aleksey Fedoseev,author
+153,https://openalex.org/W4293057563,Dzmitry Tsetserukou,author
+156,https://openalex.org/W4293057563,robust autonomous landing,keyword
+157,https://openalex.org/W4293057563,drones,keyword
+158,https://openalex.org/W4293057563,heterogeneous swarmhive,keyword
+159,https://openalex.org/W4293057563,robot,keyword
+160,https://openalex.org/W3138599840,N A Uvarov,author
+161,https://openalex.org/W3138599840,"Department of Innovative Technologies, National Research Tomsk State University, Tomsk, Russia",institution
+162,https://openalex.org/W3138599840,RU,country
+163,https://openalex.org/W3138599840,V I Syryamkin,author
+166,https://openalex.org/W3181803073,A. S. Kostin,author
+167,https://openalex.org/W3181803073,"Saint-Petersburg State University of Aerospace Instrumentation, Saint-Petersburg, Russia",institution
+168,https://openalex.org/W3181803073,RU,country
+169,https://openalex.org/W3181803073,automous performance,keyword
+170,https://openalex.org/W3181803073,drone,keyword
+171,https://openalex.org/W3181803073,transportation tasks,keyword
+172,https://openalex.org/W3136669527,N. E. Bodunkov,author
+173,https://openalex.org/W3136669527,"Moscow Aviation Institute, 125993, Moscow, Russia",institution
+174,https://openalex.org/W3136669527,RU,country
+175,https://openalex.org/W3136669527,N. V. Kim,author
+178,https://openalex.org/W3136669527,small drone,keyword
+179,https://openalex.org/W3136669527,selection,keyword
+180,https://openalex.org/W3136669527,landing-site,keyword
+181,https://openalex.org/W4220810237,Merve Yilmazer,author
+182,https://openalex.org/W4220810237,"Computer Engineering, Firat University, Elazig, Turkey",institution
+183,https://openalex.org/W4220810237,TR,country
+184,https://openalex.org/W4220810237,Mehmet Karakose,author
+187,https://openalex.org/W4220810237,Ilhan Aydin,author
+190,https://openalex.org/W4220810237,Erhan Akin,author
+193,https://openalex.org/W4220810237,rail components,keyword
+194,https://openalex.org/W4220810237,fault,keyword
+195,https://openalex.org/W4366541759,Mohammad Sadra Rajabi,author
+196,https://openalex.org/W4366541759,"School of Civil Engineering, Faculty of Engineering, University of Tehran, Tehran, Iran",institution
+197,https://openalex.org/W4366541759,IR,country
+198,https://openalex.org/W4366541759,Pedram Beigi,author
+199,https://openalex.org/W4366541759,"Department of Civil Engineering, Sharif University of Technology, Tehran, Iran",institution
+201,https://openalex.org/W4366541759,Sina Aghakhani,author
+202,https://openalex.org/W4366541759,"Department of Industrial Engineering, Sharif University of Technology, Tehran, Iran",institution
+204,https://openalex.org/W4366541759,delivery,keyword
+205,https://openalex.org/W4366541759,energy management,keyword
+206,https://openalex.org/W4385588012,Mohammad Sadra Rajabi,author
+207,https://openalex.org/W4385588012,"School of Civil Engineering, Faculty of Engineering, University of Tehran, Tehran, Iran",institution
+208,https://openalex.org/W4385588012,IR,country
+209,https://openalex.org/W4385588012,Pedram Beigi,author
+210,https://openalex.org/W4385588012,"Department of Civil Engineering, Sharif University of Technology, Tehran, Iran",institution
+212,https://openalex.org/W4385588012,Sina Aghakhani,author
+213,https://openalex.org/W4385588012,"Department of Industrial Engineering, Sharif University of Technology, Tehran, Iran",institution
+215,https://openalex.org/W4385588012,delivery,keyword
+216,https://openalex.org/W4385588012,energy management,keyword
+217,https://openalex.org/W2964315056,Anastasia Uryasheva,author
+218,https://openalex.org/W2964315056,Institute of Science and Technology,institution
+219,https://openalex.org/W2964315056,CN,country
+220,https://openalex.org/W2964315056,RU,country
+221,https://openalex.org/W2964315056,Mikhail Kulbeda,author
+222,https://openalex.org/W2964315056,Skolkovo Institute of Science and Technology#TAB#,institution
+224,https://openalex.org/W2964315056,Nikita Rodichenko,author
+225,https://openalex.org/W2964315056,Tsuru Robotics,institution
+226,https://openalex.org/W2964315056,JP,country
+227,https://openalex.org/W2964315056,Dzmitry Tsetserukou,author
+230,https://openalex.org/W4285102328,Dario Albani,author
+231,https://openalex.org/W4285102328,"Autonomous Robotics Research Centre, Technology Innovation Institute, Abu Dhabi, United Arab Emirates",institution
+232,https://openalex.org/W4285102328,AE,country
+233,https://openalex.org/W4285102328,Tiziano Manoni,author
+234,https://openalex.org/W4285102328,"Autonomous Robotics Research Centre, Technology Innovation Institute, Abu Dhabi, United Arab Emirates; Department of Computer Science, Vrije Universiteit, Amsterdam, The Netherlands",institution
+236,https://openalex.org/W4285102328,NL,country
+237,https://openalex.org/W4285102328,Martin Saska,author
+238,https://openalex.org/W4285102328,"Department of Cybernetics, Czech Technical University in Prague, Prague, Czech Republic",institution
+239,https://openalex.org/W4285102328,CZ,country
+240,https://openalex.org/W4285102328,Eliseo Ferrante,author
+244,https://openalex.org/W4285102328,three dimensional flocking,keyword
+245,https://openalex.org/W4285102328,distributed,keyword
+246,https://openalex.org/W4320084258,Anton Smirnov,author
+247,https://openalex.org/W4320084258,"Admiral Makarov State University of Maritime and Inland Shipping, 198035, 5/7, Dvinskaya str, Saint-Petersburg, Russia",institution
+248,https://openalex.org/W4320084258,RU,country
+249,https://openalex.org/W4320084258,Evgeniy Smolokurov,author
+252,https://openalex.org/W4320084258,Eva Timofeeva,author
+255,https://openalex.org/W4320084258,Muslim Osmanov,author
+258,https://openalex.org/W4320084258,unmanned aerial vehicles,keyword
+259,https://openalex.org/W4320084258,russia,keyword
+260,https://openalex.org/W4308036518,Atefeh Hemmati,author
+261,https://openalex.org/W4308036518,"Department of Computer engineering, Science and Research Branch, Islamic Azad University, Tehran, Iran",institution
+262,https://openalex.org/W4308036518,IR,country
+263,https://openalex.org/W4308036518,Amir Masoud Rahmani,author
+264,https://openalex.org/W4308036518,"Future Technology Research Center, National Yunlin University of Science and Technology, 123 University Road, Section 3, 64002, Douliou, Yunlin, Taiwan",institution
+265,https://openalex.org/W4308036518,TW,country
+266,https://openalex.org/W4308036518,autonomous things applications,keyword
+267,https://openalex.org/W4308036518,taxonomy,keyword
+268,https://openalex.org/W4308036518,internet,keyword
+269,https://openalex.org/W4308036518,technologies,keyword
+270,https://openalex.org/W3207359788,Akilya Galimova,author
+271,https://openalex.org/W3207359788,"Samara State Technical University,faculty of Electrical Engineering,Samara,Russia",institution
+272,https://openalex.org/W3207359788,RU,country
+273,https://openalex.org/W3207359788,Anna Novikova,author
+276,https://openalex.org/W3207359788,Elena Strizhakova,author
+279,https://openalex.org/W3207359788,power supply buses,keyword
+280,https://openalex.org/W3207359788,insulation resistance,keyword
+281,https://openalex.org/W2950397189,Azza Allouch,author
+282,https://openalex.org/W2950397189,"[School of Intelligent Systems Science and Engineering, Jinan University (Zhuhai Campus), Zhuhai, China]",institution
+283,https://openalex.org/W2950397189,CN,country
+284,https://openalex.org/W2950397189,Anis Koubaa,author
+285,https://openalex.org/W2950397189,Robotics and Internet‐of‐Things Lab Prince Sultan University Riyadh Saudi Arabia,institution
+286,https://openalex.org/W2950397189,SA,country
+287,https://openalex.org/W2950397189,Mohamed Khalgui,author
+290,https://openalex.org/W2950397189,Tarek Abbes,author
+291,https://openalex.org/W2950397189,"Digital Security Research Unit, ENETCOM, University of Sfax, Sfax, Tunisia",institution
+292,https://openalex.org/W2950397189,TN,country
+293,https://openalex.org/W2950397189,unmanned aerial vehicles missions,keyword
+294,https://openalex.org/W2950397189,quantitative risk analysis,keyword
+295,https://openalex.org/W2950397189,safety assessment,keyword
+296,https://openalex.org/W2997542111,Pietro Tedeschi,author
+297,https://openalex.org/W2997542111,"Information and Computing Technology Division, College of Science and Engineering, Hamad Bin Khalifa University, Doha, Qatar",institution
+298,https://openalex.org/W2997542111,QA,country
+299,https://openalex.org/W2997542111,Gabriele Oligeri,author
+302,https://openalex.org/W2997542111,Roberto Di Pietro,author
+305,https://openalex.org/W2997542111,jamming,keyword
+306,https://openalex.org/W2997542111,drones complete,keyword
+307,https://openalex.org/W2997542111,mission,keyword
+308,https://openalex.org/W4387444587,Tagir Muslimov,author
+309,https://openalex.org/W4387444587,"Department of Process Automation Engineering, Ufa University of Science and Technology, Ufa, Russia",institution
+310,https://openalex.org/W4387444587,RU,country
+311,https://openalex.org/W4387444587,Evgeny Kozlov,author
+314,https://openalex.org/W4387444587,Rustem Munasypov,author
+317,https://openalex.org/W4387444587,fixed obstacles,keyword
+318,https://openalex.org/W4387444587,hybrid algorithm,keyword
+319,https://openalex.org/W2798840864,Vishal Sharma,author
+320,https://openalex.org/W2798840864,Soonchunhyang University,institution
+321,https://openalex.org/W2798840864,KR,country
+322,https://openalex.org/W2798840864,Dushantha Nalin K. Jayakody,author
+323,https://openalex.org/W2798840864,National Research Tomsk Polytechnic University,institution
+324,https://openalex.org/W2798840864,RU,country
+325,https://openalex.org/W2798840864,Ilsun You,author
+328,https://openalex.org/W2798840864,Ravinder Kumar,author
+329,https://openalex.org/W2798840864,"Thapar University,",institution
+330,https://openalex.org/W2798840864,IN,country
+331,https://openalex.org/W2798840864,Jun Li,author
+332,https://openalex.org/W2798840864,Nanjing University of Science and Technology,institution
+333,https://openalex.org/W2798840864,CN,country
+334,https://openalex.org/W2798840864,drones,keyword
+335,https://openalex.org/W2798840864,localization,keyword
+336,https://openalex.org/W2798840864,urban,keyword
+337,https://openalex.org/W2798840864,context-aware,keyword
+338,https://openalex.org/W4200043133,Zarrar Haider,author
+339,https://openalex.org/W4200043133,"NUST EME College, Islamabad, Pakistan",institution
+340,https://openalex.org/W4200043133,PK,country
+341,https://openalex.org/W4200043133,Malik Muhammad Zohaib,author
+342,https://openalex.org/W4200043133,"Air University, Islamabad, Pakistan",institution
+344,https://openalex.org/W4200043133,Furqan Haider,author
+345,https://openalex.org/W4200043133,"Innopolis University, Innoplis City, Tatrstan Russia",institution
+346,https://openalex.org/W4200043133,RU,country
+347,https://openalex.org/W4200043133,Ehsan Shaghaei,author
+348,https://openalex.org/W4200043133,"Institute of Data Science and Artificial Intelligence, Innopolis University, Innoplis City, Tatrstan Russia",institution
+350,https://openalex.org/W4200043133,control system design,keyword
+351,https://openalex.org/W4200043133,control system,keyword
+352,https://openalex.org/W4288047725,Ayush Gupta,author
+353,https://openalex.org/W4288047725,"Moscow, Russian Federation,Intelligent Space Robotics Laboratory, Space CREI, Skolkovo Institute of Science and Technology",institution
+354,https://openalex.org/W4288047725,RU,country
+355,https://openalex.org/W4288047725,Ekaterina Dorzhieva,author
+358,https://openalex.org/W4288047725,Ahmed Baza,author
+361,https://openalex.org/W4288047725,Mert Alper,author
+364,https://openalex.org/W4288047725,Aleksey Fedoseev,author
+367,https://openalex.org/W4288047725,Dzmitry Tsetserukou,author
+370,https://openalex.org/W4288047725,moving platform,keyword
+371,https://openalex.org/W4288047725,supervision,keyword
+372,https://openalex.org/W4288047725,self-sustaining,keyword
+373,https://openalex.org/W4288047725,multi-agent,keyword
+374,https://openalex.org/W2791228294,Anton A. Zhilenkov,author
+375,https://openalex.org/W2791228294,"Faculty of Control Systems and Robotics, Department of Control Systems and Informatics, ITMO University, Saint Petersburg, Russia",institution
+376,https://openalex.org/W2791228294,RU,country
+377,https://openalex.org/W2791228294,Ignat R. Epifantsev,author
+380,https://openalex.org/W2791228294,drones,keyword
+381,https://openalex.org/W2791228294,autonomous trajectory planning,keyword
+382,https://openalex.org/W2791228294,neural networks,keyword
+383,https://openalex.org/W2791228294,artificial neural networks,keyword
+384,https://openalex.org/W2794061921,Artem Ivanov,author
+385,https://openalex.org/W2794061921,"Faculty of Control Systems and Robotics, Department of Control Systems and Informatics, ITMO University, Saint Petersburg, Russia",institution
+386,https://openalex.org/W2794061921,RU,country
+387,https://openalex.org/W2794061921,Anton Zhilenkov,author
+390,https://openalex.org/W2794061921,dynamic images recognition,keyword
+391,https://openalex.org/W2794061921,deep learning,keyword
+392,https://openalex.org/W2794061921,neural networks,keyword
+393,https://openalex.org/W3027940156,Dyutimoy Nirupam Das,author
+394,https://openalex.org/W3027940156,"Department of Industrial and Systems Engineering, IIT Kharagpur, Kharagpur, India",institution
+395,https://openalex.org/W3027940156,IN,country
+396,https://openalex.org/W3027940156,Rohan Sewani,author
+399,https://openalex.org/W3027940156,Junwei Wang,author
+400,https://openalex.org/W3027940156,"The University of Hong~Kong, Hong Kong",institution
+401,https://openalex.org/W3027940156,CN,country
+402,https://openalex.org/W3027940156,Manoj Kumar Tiwari,author
+403,https://openalex.org/W3027940156,"Shenzhen Institute of Research and Innovation, The University of Hong Kong, Hong Kong; The University of Hong~Kong, Hong Kong",institution
+405,https://openalex.org/W3027940156,HK,country
+406,https://openalex.org/W3027940156,drone routing,keyword
+407,https://openalex.org/W3027940156,package delivery logistics,keyword
+408,https://openalex.org/W3027940156,truck,keyword
+409,https://openalex.org/W3154927784,Oleg Bukin,author
+410,https://openalex.org/W3154927784,"Laboratory of Analytical Laser Spectroscopy, Far Eastern Federal University, 690091 Vladivostok, Russia; Maritime State University Named after Adm. G.I. Nevelskoy, Maritime Techno Park 1, 690003 Vladivostok, Russia",institution
+411,https://openalex.org/W3154927784,RU,country
+412,https://openalex.org/W3154927784,Dmitry Proschenko,author
+415,https://openalex.org/W3154927784,Denis Korovetskiy,author
+416,https://openalex.org/W3154927784,"Maritime State University Named after Adm. G.I. Nevelskoy, Maritime Techno Park 1, 690003 Vladivostok, Russia",institution
+418,https://openalex.org/W3154927784,Alexey Chekhlenok,author
+421,https://openalex.org/W3154927784,Viktoria Yurchik,author
+424,https://openalex.org/W3154927784,Ilya Bukin,author
+427,https://openalex.org/W3154927784,oil pollution monitoring,keyword
+428,https://openalex.org/W3154927784,optical sensing methods,keyword
+429,https://openalex.org/W3154927784,drones,keyword
+430,https://openalex.org/W3154927784,artificial intelligence,keyword
+431,https://openalex.org/W3154927784,sea,keyword
+432,https://openalex.org/W2908906819,M. G. Wattimena,author
+433,https://openalex.org/W2908906819,"St.-Petersburg State University of Aerospace Instrumentation, Saint-Petersburg, Russia",institution
+434,https://openalex.org/W2908906819,RU,country
+435,https://openalex.org/W2908906819,V. A. Nenashev,author
+438,https://openalex.org/W2908906819,A. A. Sentsov,author
+441,https://openalex.org/W2908906819,A. P. Shepeta,author
+444,https://openalex.org/W2908906819,aircraft,keyword
+445,https://openalex.org/W2908906819,monitoring,keyword
+446,https://openalex.org/W2908906819,on-board,keyword
+447,https://openalex.org/W4224216307,Vasily Yu. Meltsov,author
+448,https://openalex.org/W4224216307,"Vyatka State University, Kirov, Russia",institution
+449,https://openalex.org/W4224216307,RU,country
+450,https://openalex.org/W4224216307,Alexey A. Lapitsky,author
+453,https://openalex.org/W4224216307,uav intelligent control system,keyword
+454,https://openalex.org/W4224216307,precedent knowledge based,keyword
+455,https://openalex.org/W4224216307,simulation,keyword
+456,https://openalex.org/W3132591312,S. Darvishpoor,author
+457,https://openalex.org/W3132591312,"Department of Aerospace Engineering, K.N. Toosi University of Technology, Tehran, Iran",institution
+458,https://openalex.org/W3132591312,IR,country
+459,https://openalex.org/W3132591312,J. Roshanian,author
+462,https://openalex.org/W3132591312,A. Raissi,author
+463,https://openalex.org/W3132591312,"Chief Technology Officer, Advanced Technologies-Renewables (AT-R), Melbourne, FL, 32903, USA",institution
+464,https://openalex.org/W3132591312,US,country
+465,https://openalex.org/W3132591312,M. Hassanalian,author
+466,https://openalex.org/W3132591312,"Department of Mechanical Engineering, New Mexico Tech, Socorro, NM, 87801, USA",institution
+468,https://openalex.org/W3132591312,unmanned aerial systems,keyword
+469,https://openalex.org/W3132591312,flight mechanisms,keyword
+470,https://openalex.org/W2615511539,Majid Khonji,author
+471,https://openalex.org/W2615511539,"Masdar Institute of Science and Technology, Abu Dhabi, UAE.",institution
+472,https://openalex.org/W2615511539,Mohammed Alshehhi,author
+473,https://openalex.org/W2615511539,"Mohammed Bin Rashid Space Centre, Dubai, UAE",institution
+474,https://openalex.org/W2615511539,AE,country
+475,https://openalex.org/W2615511539,Chien-Ming Tseng,author
+477,https://openalex.org/W2615511539,Chi-Kin Chau,author
+479,https://openalex.org/W2615511539,autonomous inductive charging system,keyword
+480,https://openalex.org/W2615511539,drones,keyword
+481,https://openalex.org/W2615511539,electric,keyword
+482,https://openalex.org/W2615511539,battery-operated,keyword
+483,https://openalex.org/W4312133580,Vasily N. Lednev,author
+484,https://openalex.org/W4312133580,"Prokhorov General Physics Institute of the Russian Academy of Sciences, 38 Vavilova Street, 119991 Moscow, Russia",institution
+485,https://openalex.org/W4312133580,RU,country
+486,https://openalex.org/W4312133580,Mikhail Ya. Grishin,author
+489,https://openalex.org/W4312133580,Pavel A. Sdvizhenskii,author
+492,https://openalex.org/W4312133580,Rashid K. Kurbanov,author
+493,https://openalex.org/W4312133580,"FSBSI “Federal Scientific Agroengineering Center VIM”, 109428 Moscow, Russia",institution
+495,https://openalex.org/W4312133580,Maksim A. Litvinov,author
+498,https://openalex.org/W4312133580,Sergey V. Gudkov,author
+501,https://openalex.org/W4312133580,Sergey M. Pershin,author
+504,https://openalex.org/W4312133580,fluorescence mapping,keyword
+505,https://openalex.org/W4312133580,lidar,keyword
+506,https://openalex.org/W4312133580,drone-based,keyword
+507,https://openalex.org/W4293151699,V.N. Lednev,author
+508,https://openalex.org/W4293151699,"Prokhorov General Physics Institute of the Russian Academy of Sciences,Moscow,Russia",institution
+509,https://openalex.org/W4293151699,RU,country
+510,https://openalex.org/W4293151699,M. Ya. Grishin,author
+513,https://openalex.org/W4293151699,P.A. Sdvizhenskii,author
+516,https://openalex.org/W4293151699,S. M. Pershin,author
+519,https://openalex.org/W4293151699,V. A. Zavozin,author
+522,https://openalex.org/W4293151699,R.K. Kurbanov,author
+523,https://openalex.org/W4293151699,"Federal Scientific Agroengineering Center VIM,Moscow,Russia",institution
+525,https://openalex.org/W4293151699,M.A. Litvinov,author
+528,https://openalex.org/W4293151699,ultracompact fluorescence lidar,keyword
+529,https://openalex.org/W4293151699,drone,keyword
+530,https://openalex.org/W4293151699,autonomous monitoring,keyword
+531,https://openalex.org/W4306154806,A. A. Gogolev,author
+532,https://openalex.org/W4306154806,Moscow Aviation Institute,institution
+533,https://openalex.org/W4306154806,RU,country
+534,https://openalex.org/W4306154806,P. G. Ermakov,author
+535,https://openalex.org/W4306154806,,institution
+536,https://openalex.org/W4306154806,autonomous inertial navigation systems,keyword
+537,https://openalex.org/W4306154806,integrating data,keyword
+538,https://openalex.org/W4388784246,Satyo Nuryadi,author
+539,https://openalex.org/W4388784246,University of Technology Yogyakarta,institution
+540,https://openalex.org/W4388784246,ID,country
+541,https://openalex.org/W4388784246,RU,country
+542,https://openalex.org/W4388784246,Rodhiyah Mardhiyyah,author
+543,https://openalex.org/W4388784246,Universitas Teknologi Yogyakarta,institution
+545,https://openalex.org/W4388784246,None Bayu Ari Pratama,author
+549,https://openalex.org/W4388784246,None Zulkhairi,author
+550,https://openalex.org/W4388784246,University of Nahdlatul Ulama Yogyakarta,institution
+551,https://openalex.org/W4229007520,Xin Zhou,author
+552,https://openalex.org/W4229007520,"Huzhou Institute of Zhejiang University, Huzhou, China.; State Key Laboratory of Industrial Control and Technology, Zhejiang University, Hangzhou, China.",institution
+553,https://openalex.org/W4229007520,CN,country
+554,https://openalex.org/W4229007520,Xiangyong Wen,author
+557,https://openalex.org/W4229007520,Zhepei Wang,author
+560,https://openalex.org/W4229007520,Yuman Gao,author
+563,https://openalex.org/W4229007520,Haojia Li,author
+564,https://openalex.org/W4229007520,"Department of Electronic and Computer Engineering, Hong Kong University of Science and Technology, Hongkong, China.",institution
+566,https://openalex.org/W4229007520,HK,country
+567,https://openalex.org/W4229007520,Qianhao Wang,author
+570,https://openalex.org/W4229007520,Tiankai Yang,author
+573,https://openalex.org/W4229007520,Haojian Lu,author
+574,https://openalex.org/W4229007520,"State Key Laboratory of Industrial Control and Technology, Zhejiang University, Hangzhou, China.",institution
+576,https://openalex.org/W4229007520,Yanjun Cao,author
+577,https://openalex.org/W4229007520,"Huzhou Institute of Zhejiang University, Huzhou, China.",institution
+579,https://openalex.org/W4229007520,Chao Xu,author
+582,https://openalex.org/W4229007520,Fei Gao,author
+585,https://openalex.org/W4229007520,robots,keyword
+586,https://openalex.org/W4229007520,micro,keyword
+587,https://openalex.org/W4229007520,wild,keyword
+588,https://openalex.org/W2970502977,Martin Pavec,author
+589,https://openalex.org/W2970502977,"Faculty of Electrical Engineering, University of West Bohemia, Pilsen (Czech Republic)",institution
+590,https://openalex.org/W2970502977,CZ,country
+591,https://openalex.org/W2970502977,Jiri Navratil,author
+594,https://openalex.org/W2970502977,Radek Soukup,author
+597,https://openalex.org/W2970502977,Vaclav Smitka,author
+600,https://openalex.org/W2970502977,Ales Hamacek,author
+603,https://openalex.org/W2970502977,iot antenna,keyword
+604,https://openalex.org/W2970502977,printed,keyword
+605,https://openalex.org/W2970502977,drone-deployed,keyword
+606,https://openalex.org/W4389233059,S. Abolfazl Mokhtari,author
+607,https://openalex.org/W4389233059,Amirkabir University of Technology,institution
+608,https://openalex.org/W4389233059,IR,country
+609,https://openalex.org/W3136740682,G V Komlatsky,author
+610,https://openalex.org/W3136740682,"Kuban State Agrarian University, Kalinina street, 13, Krasnodar, Krasnodar Territory, 350044, Russian Federation",institution
+611,https://openalex.org/W3136740682,RU,country
+612,https://openalex.org/W3136740682,T A Usenko,author
+615,https://openalex.org/W3136740682,I F Gorlov,author
+616,https://openalex.org/W3136740682,"Volga Region Research Institute of Manafacture and Processing of Meat-and-Milk Production, 6, Rokossovskogo street, Volgograd, 400131, Russian Federation",institution
+618,https://openalex.org/W3136740682,A A Mosolov,author
+621,https://openalex.org/W3136740682,E Yu Anisimova,author
+624,https://openalex.org/W3136740682,N I Mosolova,author
+627,https://openalex.org/W3136740682,bee queens,keyword
+628,https://openalex.org/W3136740682,electric ejaculator,keyword
+629,https://openalex.org/W4389240546,Javad Keighobadi,author
+630,https://openalex.org/W4389240546,Shahrood University of Technology,institution
+631,https://openalex.org/W4389240546,IR,country
+632,https://openalex.org/W4388571860,Rasoul Sabetahd,author
+633,https://openalex.org/W4388571860,"Islamic Azad University, Tabriz",institution
+634,https://openalex.org/W4388571860,IR,country
+635,https://openalex.org/W4388571860,autonomous drone flight,keyword
+636,https://openalex.org/W4388571860,adaptive control,keyword
+637,https://openalex.org/W4388571860,neuro-fuzzy-based,keyword
+638,https://openalex.org/W3029808435,Fei Gao,author
+639,https://openalex.org/W3029808435,"State Key Laboratory of Industrial Control and Technology, Zhejiang University, Hangzhou, China",institution
+640,https://openalex.org/W3029808435,CN,country
+641,https://openalex.org/W3029808435,Luqi Wang,author
+642,https://openalex.org/W3029808435,"Department of Electronic and Computer Engineering, Hong Kong University of Science and Technology, Hong Kong",institution
+644,https://openalex.org/W3029808435,HK,country
+645,https://openalex.org/W3029808435,Boyu Zhou,author
+649,https://openalex.org/W3029808435,Xin Zhou,author
+652,https://openalex.org/W3029808435,Jie Pan,author
+656,https://openalex.org/W3029808435,Shaojie Shen,author
+660,https://openalex.org/W3029808435,aggressive flight,keyword
+661,https://openalex.org/W3029808435,robust system,keyword
+662,https://openalex.org/W3029808435,teach-repeat-replan,keyword
+663,https://openalex.org/W3118386824,Y. Alborzi,author
+664,https://openalex.org/W3118386824,K. N. Toosi University of Technology Faculty of Mechanical Engineering Tehran Iran,institution
+665,https://openalex.org/W3118386824,IR,country
+666,https://openalex.org/W3118386824,B. Safari Jalal,author
+669,https://openalex.org/W3118386824,E. Najafi,author
+670,https://openalex.org/W3118386824,"Fontys University of Applied Sciences,Mechatronics Department,Eindhoven,The Netherlands",institution
+671,https://openalex.org/W3118386824,NL,country
+672,https://openalex.org/W3118386824,slam,keyword
+673,https://openalex.org/W3118386824,navigation,keyword
+674,https://openalex.org/W3118386824,ros-based,keyword
+675,https://openalex.org/W3118386824,gazebo-simulated,keyword
+676,https://openalex.org/W4388969279,Saeed Khorashadizadeh,author
+677,https://openalex.org/W4388969279,Birjand University,institution
+678,https://openalex.org/W4388969279,IR,country
+679,https://openalex.org/W4360831390,Seyed Hojat Mirtajadini,author
+680,https://openalex.org/W4360831390,"Faculty of New Sciences and Technologies, University of Tehran, Tehran, Iran",institution
+681,https://openalex.org/W4360831390,IR,country
+682,https://openalex.org/W4360831390,Hamidreza Fahimi,author
+683,https://openalex.org/W4360831390,"Department of Aerospace Engineering, Amirkabir University of Technology, Tehran, Iran",institution
+685,https://openalex.org/W4360831390,Mohammad Shahbazi,author
+686,https://openalex.org/W4360831390,"School of Mechanical Engineering, Iran University of Science and Technology, Tehran, Iran",institution
+688,https://openalex.org/W4360831390,building detection,keyword
+689,https://openalex.org/W4360831390,autonomous delivery drones,keyword
+690,https://openalex.org/W4360831390,vision-based,keyword
+691,https://openalex.org/W4389232985,S. Abolfazl Mokhtari,author
+692,https://openalex.org/W4389232985,Amirkabir University of Technology,institution
+693,https://openalex.org/W4389232985,IR,country
+694,https://openalex.org/W2763008529,Peng Chen,author
+695,https://openalex.org/W2763008529,"College of Information & Engineering, Zhejiang University of Technology, Hangzhou, China",institution
+696,https://openalex.org/W2763008529,CN,country
+697,https://openalex.org/W2763008529,Yuanjie Dang,author
+700,https://openalex.org/W2763008529,Ronghua Liang,author
+703,https://openalex.org/W2763008529,Wei Zhu,author
+706,https://openalex.org/W2763008529,Xiaofei He,author
+707,https://openalex.org/W2763008529,State Key Laboratory of CAD & CG; Zhejiang University; Hangzhou China,institution
+709,https://openalex.org/W2763008529,drone,keyword
+710,https://openalex.org/W2763008529,tracking,keyword
+711,https://openalex.org/W2763008529,real-time,keyword
+712,https://openalex.org/W2763008529,multi-inertial,keyword
+713,https://openalex.org/W2998106608,Amir Mirzaeinia,author
+714,https://openalex.org/W2998106608,New Mexico Institute of Mining and Technology,institution
+715,https://openalex.org/W2998106608,US,country
+716,https://openalex.org/W2998106608,Mehdi Mirzaeinia,author
+717,https://openalex.org/W2998106608,Amirkabir University of Technology,institution
+718,https://openalex.org/W2998106608,IR,country
+719,https://openalex.org/W2998106608,Mohammad Shekaramiz,author
+720,https://openalex.org/W2998106608,Utah Valley University,institution
+722,https://openalex.org/W2998106608,Mostafa Hassanalian,author
+725,https://openalex.org/W2998106608,drones,keyword
+726,https://openalex.org/W2998106608,tail switching,keyword
+727,https://openalex.org/W2998106608,full shuffle,keyword
+728,https://openalex.org/W2998106608,leader,keyword
+729,https://openalex.org/W2998106608,v-shaped,keyword
+730,https://openalex.org/W4391342370,Hamed Ghasemi,author
+731,https://openalex.org/W4391342370,"University of Tehran,Human and Robot Interaction Laboratory School of Electrical and Computer engineering,Tehran,Iran",institution
+732,https://openalex.org/W4391342370,IR,country
+733,https://openalex.org/W4391342370,Elnaz Balazadeh,author
+734,https://openalex.org/W4391342370,"University of Tehran,Human and Robot Interaction Laboratory,Tehran,Iran",institution
+736,https://openalex.org/W4391342370,Shayan Malekpour,author
+737,https://openalex.org/W4391342370,"University of Tehran,School of Electrical and Computer engineering,Department of electrical and computer engineering,Tehran,Iran",institution
+739,https://openalex.org/W4391342370,Ahmad Kalhor,author
+742,https://openalex.org/W4391342370,Mehdi Tale Masouleh,author
+745,https://openalex.org/W3186729138,Christopher Doer,author
+746,https://openalex.org/W3186729138,"Institute of Control Systems (IRS), Karlsruhe Institute of Technology (KIT),Karlsruhe,Germany",institution
+747,https://openalex.org/W3186729138,DE,country
+748,https://openalex.org/W3186729138,Gert F. Trommer,author
+749,https://openalex.org/W3186729138,"Institute of Control Systems (IRS) Karlsruhe Institute of Technology (KIT) Karlsruhe, Germany ITMO University,Russia",institution
+751,https://openalex.org/W3186729138,RU,country
+752,https://openalex.org/W3186729138,radar inertial odometry,keyword
+753,https://openalex.org/W3186729138,manhattan world assumptions,keyword
+754,https://openalex.org/W4290716241,Saeed Hamood Alsamhi,author
+755,https://openalex.org/W4290716241,"faculty of engineering IBB University, Ibb, Yemen",institution
+756,https://openalex.org/W4290716241,YE,country
+757,https://openalex.org/W4290716241,Alexey V. Shvetsor,author
+758,https://openalex.org/W4290716241,"Department of Operation of Road Transport and Car Service, North-Eastern Federal University, Yakutsk, Russia; Department of Transport and Technological Processes, Vladivostok State University of Economics and Service, Vladivostok, Russia",institution
+759,https://openalex.org/W4290716241,RU,country
+760,https://openalex.org/W4290716241,Svetlana V. Shvetsova,author
+761,https://openalex.org/W4290716241,"Far Eastern Federal University, Vladivostok, Russia",institution
+763,https://openalex.org/W4290716241,Ammar Hawbani,author
+764,https://openalex.org/W4290716241,"School of Computer Science and Technology, University of Science and Technology of China, Hefei, China",institution
+765,https://openalex.org/W4290716241,CN,country
+766,https://openalex.org/W4290716241,Mohsen Guizan,author
+767,https://openalex.org/W4290716241,"Machine Learning Department, Mohamed Bin Zayed University of Artificial Intelligence (MBZUAI), Abu Dhabi, UAE",institution
+768,https://openalex.org/W4290716241,AE,country
+769,https://openalex.org/W4290716241,Mohammed A. Alhartomi,author
+770,https://openalex.org/W4290716241,"department of electrical engineering, University of Tabuk, Saudi Arabia",institution
+771,https://openalex.org/W4290716241,SA,country
+772,https://openalex.org/W4290716241,Ou Ma,author
+773,https://openalex.org/W4290716241,"College of Engineering and Applied Science, University of Cincinnati, Cincinnati, OH, USA",institution
+774,https://openalex.org/W4290716241,US,country
+775,https://openalex.org/W4290716241,drone swarm consensus,keyword
+776,https://openalex.org/W4290716241,environment exploration,keyword
+777,https://openalex.org/W4290716241,blockchain-empowered,keyword
+778,https://openalex.org/W2897492746,Alexander Kuzmin,author
+779,https://openalex.org/W2897492746,"ITMO University, St.Petersburg Russia#TAB#",institution
+780,https://openalex.org/W2897492746,RU,country
+781,https://openalex.org/W2897492746,Evgeny Znak,author
+782,https://openalex.org/W2897492746,"Mikhailovskaya Academy, St.-Petersburg, Russia",institution
+784,https://openalex.org/W2897492746,unmanned aerial vehicles,keyword
+785,https://openalex.org/W2897492746,blockchain-base,keyword
+786,https://openalex.org/W2897492746,semi-autonomous,keyword
+787,https://openalex.org/W2792238983,Weisen Shi,author
+788,https://openalex.org/W2792238983,"Department of Electrical and Computer Engineering, University of Waterloo, Waterloo, ON, Canada.",institution
+789,https://openalex.org/W2792238983,CA,country
+790,https://openalex.org/W2792238983,Junling Li,author
+793,https://openalex.org/W2792238983,Wenchao Xu,author
+796,https://openalex.org/W2792238983,Haibo Zhou,author
+797,https://openalex.org/W2792238983,", School of Electronic Science and Engineering, Nanjing University, Nanjing, China",institution
+798,https://openalex.org/W2792238983,CN,country
+799,https://openalex.org/W2792238983,Ning Zhang,author
+800,https://openalex.org/W2792238983,"Department of Computing Science, Texas A&M University-Corpus Christi, Corpus Christi, TX, USA",institution
+801,https://openalex.org/W2792238983,US,country
+802,https://openalex.org/W2792238983,Shan Zhang,author
+803,https://openalex.org/W2792238983,"School of Computer Science and Engineering, Beihang University, Beijing, China.",institution
+805,https://openalex.org/W2792238983,Xuemin Shen,author
+808,https://openalex.org/W2792238983,optimization,keyword
+809,https://openalex.org/W2792238983,drone-cell,keyword
+810,https://openalex.org/W3003469077,Ali Ghofrani,author
+811,https://openalex.org/W3003469077,Iran Broadcasting Univ. (Canada),institution
+812,https://openalex.org/W3003469077,IR,country
+813,https://openalex.org/W3003469077,Rahil Mahdian Toroghi,author
+814,https://openalex.org/W3003469077,"Iran Broadcasting Univ. (Iran, Islamic Republic of)",institution
+816,https://openalex.org/W3003469077,Seyed Mojtaba Tabatabaie,author
+817,https://openalex.org/W3003469077,AlphaReality (Canada),institution
+818,https://openalex.org/W3003469077,CA,country
+819,https://openalex.org/W3003469077,indoor camera positioning system,keyword
+820,https://openalex.org/W3003469077,deep convolutional neural networks,keyword
+821,https://openalex.org/W3003469077,convolutional neural networks,keyword
+822,https://openalex.org/W3003469077,icps-net,keyword
+823,https://openalex.org/W3003469077,end-to-end,keyword
+824,https://openalex.org/W3003469077,rgb-based,keyword
+825,https://openalex.org/W4285809760,M S Tovarnov,author
+826,https://openalex.org/W4285809760,"Bauman Moscow State Technical University, 5/1, 2nd Baumanskaya st., Moscow, 105005, Russia",institution
+827,https://openalex.org/W4285809760,RU,country
+828,https://openalex.org/W4285809760,N V Bykov,author
+829,https://openalex.org/W4285809760,"Bauman Moscow State Technical University, 5/1, 2nd Baumanskaya st., Moscow, 105005, Russia; Russian University of Transport (RUT–MIIT), 9b8, Obraztsova st., Moscow, 127994, Russia",institution
+831,https://openalex.org/W4285809760,N S Vlasova,author
+834,https://openalex.org/W4285809760,V A Fedulov,author
+837,https://openalex.org/W4285809760,A A Pozharsky,author
+840,https://openalex.org/W4285809760,drones,keyword
+841,https://openalex.org/W4285809760,physical neutralization,keyword
+842,https://openalex.org/W4285809760,smart city,keyword
+843,https://openalex.org/W4285809760,computer simulation,keyword
+844,https://openalex.org/W3031046221,Pawel Burdziakowski,author
+845,https://openalex.org/W3031046221,"Faculty of Civil and Environmental Engineering, Gdansk University of Technology, Gdansk, Poland",institution
+846,https://openalex.org/W3031046221,PL,country
+847,https://openalex.org/W3031046221,Navid Razmjooy,author
+848,https://openalex.org/W3031046221,"Department of Electrical Engineering, Tafresh University, Tafresh, Iran",institution
+849,https://openalex.org/W3031046221,IR,country
+850,https://openalex.org/W3031046221,Vania V. Estrela,author
+851,https://openalex.org/W3031046221,"Telecommunications Department, Universidade Federal Fluminense, Niteroi, Brazil",institution
+852,https://openalex.org/W3031046221,BR,country
+853,https://openalex.org/W3031046221,Jude Hemanth,author
+854,https://openalex.org/W3031046221,"ECE Department, Karunya University, Coimbatore, India",institution
+855,https://openalex.org/W3031046221,IN,country
+856,https://openalex.org/W3031046221,uavs,keyword
+857,https://openalex.org/W3031046221,oss,keyword
+858,https://openalex.org/W3031046221,software,keyword
+859,https://openalex.org/W3031046221,osh,keyword
+860,https://openalex.org/W3031046221,open-source,keyword
+861,https://openalex.org/W2979646545,Ali Ghofrani,author
+862,https://openalex.org/W2979646545,Iran Broadcasting Univ. (Canada),institution
+863,https://openalex.org/W2979646545,IR,country
+864,https://openalex.org/W2979646545,Rahil Mahdian Toroghi,author
+865,https://openalex.org/W2979646545,"Iran Broadcasting Univ. (Iran, Islamic Republic of)",institution
+867,https://openalex.org/W2979646545,Sayed Mojtaba Tabatabaie,author
+868,https://openalex.org/W2979646545,AlphaReality (Canada),institution
+869,https://openalex.org/W2979646545,CA,country
+870,https://openalex.org/W2979646545,indoor camera positioning system,keyword
+871,https://openalex.org/W2979646545,deep convolutional neural networks,keyword
+872,https://openalex.org/W2979646545,convolutional neural networks,keyword
+873,https://openalex.org/W2979646545,icps-net,keyword
+874,https://openalex.org/W2979646545,end-to-end,keyword
+875,https://openalex.org/W2979646545,rgb-based,keyword
+876,https://openalex.org/W4295832272,Khosro Rezaee,author
+877,https://openalex.org/W4295832272,"Meybod University, Iran",institution
+878,https://openalex.org/W4295832272,IR,country
+879,https://openalex.org/W4295832272,Mohammad R. Khosravi,author
+880,https://openalex.org/W4295832272,"Persian Gulf University,Iran",institution
+882,https://openalex.org/W4295832272,Maryam Saberi Anari,author
+883,https://openalex.org/W4295832272,"Technical and Vocational University,Iran",institution
+885,https://openalex.org/W4295832272,abnormal behavior recognition,keyword
+886,https://openalex.org/W4295832272,drones,keyword
+887,https://openalex.org/W4295832272,deep-transfer-learning-based,keyword
+888,https://openalex.org/W3144497966,Hussein Al-kabi,author
+889,https://openalex.org/W3144497966,"Computer Engineering Department, Imam Reza International University, Mashhad, Iran.",institution
+890,https://openalex.org/W3144497966,IR,country
+891,https://openalex.org/W3144497966,Sayyed Majid Mazinani,author
+892,https://openalex.org/W3144497966,"Computer Engineering Department, Imam Reza International University, Mashhad, Iran",institution
+894,https://openalex.org/W3144497966,new uav navigation,keyword
+895,https://openalex.org/W3144497966,no-fly,keyword
+896,https://openalex.org/W4225322325,Merve Yilmazer,author
+897,https://openalex.org/W4225322325,"Firat University,Computer Engineering Departmentept,Elazig,Turkey",institution
+898,https://openalex.org/W4225322325,TR,country
+899,https://openalex.org/W4225322325,Mehmet Karakose,author
+902,https://openalex.org/W4225322325,fault detection,keyword
+903,https://openalex.org/W4225322325,r-cnn,keyword
+904,https://openalex.org/W2796789676,Xiufang Shi,author
+905,https://openalex.org/W2796789676,(Zhejiang University),institution
+906,https://openalex.org/W2796789676,CN,country
+907,https://openalex.org/W2796789676,Chaoqun Yang,author
+910,https://openalex.org/W2796789676,Weige Xie,author
+913,https://openalex.org/W2796789676,Chao Liang,author
+916,https://openalex.org/W2796789676,Zhiguo Shi,author
+919,https://openalex.org/W2796789676,Jiming Chen,author
+922,https://openalex.org/W2796789676,multiple surveillance technologies,keyword
+923,https://openalex.org/W2796789676,anti-drone,keyword
+924,https://openalex.org/W2972055356,Desheng Wang,author
+925,https://openalex.org/W2972055356,"[School of Electronic Information and Communications, Huazhong Univ. of Science & Technology, Wuhan, China]",institution
+926,https://openalex.org/W2972055356,CN,country
+927,https://openalex.org/W2972055356,Peng Hu,author
+930,https://openalex.org/W2972055356,Jingxuan Du,author
+933,https://openalex.org/W2972055356,Pan Zhou,author
+936,https://openalex.org/W2972055356,Tianping Deng,author
+939,https://openalex.org/W2972055356,Menglan Hu,author
+942,https://openalex.org/W2972055356,delivery,keyword
+943,https://openalex.org/W2972055356,routing,keyword
+944,https://openalex.org/W2972055356,truck-drone,keyword
+945,https://openalex.org/W2972055356,truck-carried,keyword
+946,https://openalex.org/W4310813657,Anna Platonova,author
+947,https://openalex.org/W4310813657,"Peoples&#x0027; Friendship University of Russia (RUDN University),Applied Probability and Informatics Department,Moscow,Russian Federation,117198",institution
+948,https://openalex.org/W4310813657,RU,country
+949,https://openalex.org/W4310813657,Ekaterina Medvedeva,author
+952,https://openalex.org/W4310813657,Yuliya Gaidamaka,author
+955,https://openalex.org/W4310813657,uavs,keyword
+956,https://openalex.org/W4310813657,coverage efficiency,keyword
+957,https://openalex.org/W4310813657,flight,keyword
+958,https://openalex.org/W3205085146,Ivan Kalinov,author
+959,https://openalex.org/W3205085146,"Skolkovo Institute of Science and Technology, Moscow, Russia",institution
+960,https://openalex.org/W3205085146,RU,country
+961,https://openalex.org/W3205085146,Daria Trinitatova,author
+964,https://openalex.org/W3205085146,Dzmitry Tsetserukou,author
+967,https://openalex.org/W3205085146,virtual reality interface,keyword
+968,https://openalex.org/W3205085146,virtual reality,keyword
+969,https://openalex.org/W3205085146,warehouse stocktaking,keyword
+970,https://openalex.org/W3205085146,robotic,keyword
+971,https://openalex.org/W3205085146,warevr,keyword
+972,https://openalex.org/W3033245358,Songtao He,author
+973,https://openalex.org/W3033245358,MIT - CSAIL,institution
+974,https://openalex.org/W3033245358,Favyen Bastani,author
+976,https://openalex.org/W3033245358,Arjun Balasingam,author
+978,https://openalex.org/W3033245358,Karthik Gopalakrishna,author
+979,https://openalex.org/W3033245358,MIT,institution
+980,https://openalex.org/W3033245358,RU,country
+981,https://openalex.org/W3033245358,Ziwen Jiang,author
+983,https://openalex.org/W3033245358,Mohammad Alizadeh,author
+985,https://openalex.org/W3033245358,Hari Balakrishnan,author
+987,https://openalex.org/W3033245358,Michael Cafarella,author
+989,https://openalex.org/W3033245358,Tim Kraska,author
+991,https://openalex.org/W3033245358,Sam Madden,author
+993,https://openalex.org/W4304191298,Emanuele Adorni,author
+994,https://openalex.org/W4304191298,"Università degli Studi di Genova, Genova, Italy",institution
+995,https://openalex.org/W4304191298,IT,country
+996,https://openalex.org/W4304191298,Anastasiia Rozhok,author
+997,https://openalex.org/W4304191298,"Bauman Moscow State Technical University, Moscow, Russia; Università degli Studi di Genova, Genova, Italy",institution
+999,https://openalex.org/W4304191298,RU,country
+1000,https://openalex.org/W4304191298,Roberto Revetria,author
+1003,https://openalex.org/W4304191298,airships,keyword
+1004,https://openalex.org/W4304191298,surveillance,keyword
+1005,https://openalex.org/W3001418085,Taha H. Rashidi,author
+1006,https://openalex.org/W3001418085,"Research Center for Integrated Transport Innovation, School of Civil and Environmental Engineering, The University of New South Wales, Sydney, Australia",institution
+1007,https://openalex.org/W3001418085,AU,country
+1008,https://openalex.org/W3001418085,Ali Najmi,author
+1011,https://openalex.org/W3001418085,Ahsan Haider,author
+1014,https://openalex.org/W3001418085,Charlotte Wang,author
+1017,https://openalex.org/W3001418085,Fatemeh Hosseinzadeh,author
+1018,https://openalex.org/W3001418085,"Department of Civil Engineering, Sharif University of Technology, Tehran, Iran",institution
+1019,https://openalex.org/W3001418085,IR,country
+1020,https://openalex.org/W3043170448,Khouloud Eledlebi,author
+1021,https://openalex.org/W3043170448,"Department of Electrical Engineering, Khalifa University, Abu Dhabi 127788, UAE",institution
+1022,https://openalex.org/W3043170448,AE,country
+1023,https://openalex.org/W3043170448,Hanno Hildmann,author
+1024,https://openalex.org/W3043170448,"Intelligent Autonomous Systems Group, Netherlands Organization for Applied Scientific Research (TNO), Oude Waalsdorperweg 63, 2597 AK The Hague, The Netherlands",institution
+1025,https://openalex.org/W3043170448,NL,country
+1026,https://openalex.org/W3043170448,Dymitr Ruta,author
+1027,https://openalex.org/W3043170448,"Data Science Group, Emirates ICT Innovation Centre (EBTIC), Abu Dhabi 127788, UAE",institution
+1029,https://openalex.org/W3043170448,A. F. Isakovic,author
+1030,https://openalex.org/W3043170448,"CNF, Cornell University, Ithaca, NY 14853, USA; Physics and Astronomy Department, Colgate University, Oak Dr. 13, Hamilton, NY 13346, USA",institution
+1031,https://openalex.org/W3043170448,US,country
+1032,https://openalex.org/W3043170448,hybrid voronoi tessellation/genetic,keyword
+1033,https://openalex.org/W3043170448,wireless sensor network,keyword
+1034,https://openalex.org/W3043170448,gps,keyword
+1035,https://openalex.org/W3043170448,tessellation/genetic algorithm,keyword
+1036,https://openalex.org/W3043170448,drone-based,keyword
+1037,https://openalex.org/W3043170448,self-organizing,keyword
+1038,https://openalex.org/W2603800188,Omid Esrafilian,author
+1039,https://openalex.org/W2603800188,"Advanced Robotics and Automated Systems (ARAS), Industrial Control Center of Excellence (ICCE), Faculty of Electrical Engineering, K. N. Toosi University of Technology",institution
+1040,https://openalex.org/W2603800188,IR,country
+1041,https://openalex.org/W2603800188,Hamid D. Taghirad,author
+1044,https://openalex.org/W2603800188,monocular slam,keyword
+1045,https://openalex.org/W2603800188,quadrotor,keyword
+1046,https://openalex.org/W2603800188,autonomous flight,keyword
+1047,https://openalex.org/W2603800188,obstacle avoidance,keyword
+1048,https://openalex.org/W4226474208,Muhammad Asif Khan,author
+1049,https://openalex.org/W4226474208,"Qatar Mobility Innovations Center (QMIC), Qatar University, Doha, Qatar.",institution
+1050,https://openalex.org/W4226474208,QA,country
+1051,https://openalex.org/W4226474208,Hamid Menouar,author
+1054,https://openalex.org/W4226474208,Aisha Eldeeb,author
+1057,https://openalex.org/W4226474208,Adnan Abu-Dayya,author
+1060,https://openalex.org/W4226474208,Flora D. Salim,author
+1061,https://openalex.org/W4226474208,"School of Computer Science and Engineering, University of New South Wales (UNSW), Sydney.",institution
+1062,https://openalex.org/W4226474208,AU,country
+1063,https://openalex.org/W4226474208,unauthorized drones—techniques,keyword
+1064,https://openalex.org/W4226474208,detection,keyword
+1065,https://openalex.org/W4387090545,Jennifer Simonjan,author
+1066,https://openalex.org/W4387090545,"Technology Innovation Institute, Abu Dhabi, UAE",institution
+1067,https://openalex.org/W4387090545,AE,country
+1068,https://openalex.org/W4387090545,Kseniia Harshina,author
+1069,https://openalex.org/W4387090545,"Lakeside Labs, Klagenfurt, Austria",institution
+1070,https://openalex.org/W4387090545,AT,country
+1071,https://openalex.org/W4387090545,Melanie Schranz,author
+1074,https://openalex.org/W4387090545,reinforcement,keyword
+1075,https://openalex.org/W4387090545,countermeasures,keyword
+1076,https://openalex.org/W4387090545,learning-based,keyword
+1077,https://openalex.org/W2773228868,Xueping Liang,author
+1078,https://openalex.org/W2773228868,"College of Engineering, Tennessee State University, Nashville, TN; University of Chinese Academy of Sciences, Beijing, China",institution
+1079,https://openalex.org/W2773228868,CN,country
+1080,https://openalex.org/W2773228868,US,country
+1081,https://openalex.org/W2773228868,Juan Zhao,author
+1082,https://openalex.org/W2773228868,"State Key Laboratory of Information Security, Chinese Academy of Sciences, Beijing, China",institution
+1084,https://openalex.org/W2773228868,Sachin Shetty,author
+1085,https://openalex.org/W2773228868,"Virginia Modeling, Analysis & Simulation Center Old Dominion University Norfolk, VA 23529",institution
+1087,https://openalex.org/W2773228868,Danyi Li,author
+1090,https://openalex.org/W2773228868,data assurance,keyword
+1091,https://openalex.org/W2773228868,iot,keyword
+1092,https://openalex.org/W2773228868,blockchain,keyword
+1093,https://openalex.org/W2773228868,resilience,keyword
+1094,https://openalex.org/W4319864377,S.V. Arinchev,author
+1095,https://openalex.org/W4319864377,Bauman Moscow State Technical University,institution
+1096,https://openalex.org/W4319864377,RU,country
+1097,https://openalex.org/W4319864377,drones salvo,keyword
+1098,https://openalex.org/W4319864377,interaction,keyword
+1099,https://openalex.org/W4319864377,2d,keyword
+1100,https://openalex.org/W4319864377,anti-aircraft,keyword
+1101,https://openalex.org/W4319864377,non-newtonian,keyword
+1102,https://openalex.org/W4225797003,Junayed Pasha,author
+1103,https://openalex.org/W4225797003,"Department of Civil and Environmental Engineering, Florida A&M University--Florida State University (FAMU-FSU) College of Engineering, Tallahassee, FL 32310 USA.",institution
+1104,https://openalex.org/W4225797003,US,country
+1105,https://openalex.org/W4225797003,Zeinab Elmi,author
+1108,https://openalex.org/W4225797003,Sumit Purkayastha,author
+1111,https://openalex.org/W4225797003,Amir M. Fathollahi-Fard,author
+1112,https://openalex.org/W4225797003,"Department of Electrical Engineering, &#x00C9;cole de Technologie Sup&#x00E9;rieure, University of Quebec, Montreal, QC, Canada",institution
+1113,https://openalex.org/W4225797003,CA,country
+1114,https://openalex.org/W4225797003,Ying-En Ge,author
+1115,https://openalex.org/W4225797003,"College of Transportation Engineering, Chang'an University, Xi'an, Shaanxi 710064, China.",institution
+1116,https://openalex.org/W4225797003,CN,country
+1117,https://openalex.org/W4225797003,Yui-Yip Lau,author
+1118,https://openalex.org/W4225797003,"Division of Business and Hospitality Management, College of Professional and Continuing Education, The Hong Kong Polytechnic University, Hong Kong.",institution
+1119,https://openalex.org/W4225797003,HK,country
+1120,https://openalex.org/W4225797003,Maxim A. Dulebenets,author
+1123,https://openalex.org/W4225797003,drone scheduling problem,keyword
+1124,https://openalex.org/W4225797003,state-of-the-art,keyword
+1125,https://openalex.org/W4312261951,Milind Fernandes,author
+1126,https://openalex.org/W4312261951,"Indian Institute of Technology Kanpur,Department of Electrical Engineering,Kanpur,India",institution
+1127,https://openalex.org/W4312261951,IN,country
+1128,https://openalex.org/W4312261951,Soumya Ranjan Sahoo,author
+1131,https://openalex.org/W4312261951,Mangal Kothari,author
+1132,https://openalex.org/W4312261951,"Indian Institute of Technology Kanpur,Department of Aerospace Engineering,Kanpur,India",institution
+1134,https://openalex.org/W4312261951,3d printed thruster,keyword
+1135,https://openalex.org/W4312261951,autonomous underwater,keyword
+1136,https://openalex.org/W4312261951,surface vehicles,keyword
+1137,https://openalex.org/W4312261951,low cost,keyword
+1138,https://openalex.org/W4312059606,Shanshan Meng,author
+1139,https://openalex.org/W4312059606,"School of Economics and Management, Southwest Jiaotong University, Chengdu, China",institution
+1140,https://openalex.org/W4312059606,CN,country
+1141,https://openalex.org/W4312059606,Xiuping Guo,author
+1142,https://openalex.org/W4312059606,"School of Economics and Management, Beijing University of Posts and Telecommunications, Beijing, China; Service Science and Innovation Key Laboratory of Sichuan Province, Chengdu, China",institution
+1144,https://openalex.org/W4312059606,Dong Li,author
+1145,https://openalex.org/W4312059606,"School of Business and Economics, Loughborough University, Loughborough LE11 3TU, UK",institution
+1146,https://openalex.org/W4312059606,GB,country
+1147,https://openalex.org/W4312059606,Guoquan Liu,author
+1148,https://openalex.org/W4312059606,"International Business School Suzhou, Xi’an Jiaotong-Liverpool University, Suzhou, China",institution
+1150,https://openalex.org/W4312059606,delivery,keyword
+1151,https://openalex.org/W4312059606,pickup,keyword
+1152,https://openalex.org/W4312059606,multi-visit,keyword
+1153,https://openalex.org/W2896957870,Yu. G. Kabaldin,author
+1154,https://openalex.org/W2896957870,"Alekseev Nizhny Novgorod State Technical University, Nizhny Novgorod, Russia",institution
+1155,https://openalex.org/W2896957870,RU,country
+1156,https://openalex.org/W2896957870,D. A. Shatagin,author
+1159,https://openalex.org/W2896957870,A. V. Kiselev,author
+1162,https://openalex.org/W2896957870,M. V. Zhelonkin,author
+1165,https://openalex.org/W2896957870,A. A. Golovin,author
+1168,https://openalex.org/W2896957870,autonomous robot diagnostic system,keyword
+1169,https://openalex.org/W2896957870,oil pipelines,keyword
+1170,https://openalex.org/W2896957870,drone-based,keyword
+1171,https://openalex.org/W4390511906,Jamileh Aliloo,author
+1172,https://openalex.org/W4390511906,"Department of Agricultural Extension and Education, College of Agriculture, Tarbiat Modares University (TMU), Tehran, Iran",institution
+1173,https://openalex.org/W4390511906,IR,country
+1174,https://openalex.org/W4390511906,Enayat Abbasi,author
+1177,https://openalex.org/W4390511906,Esmaeil Karamidehkordi,author
+1180,https://openalex.org/W4390511906,Ebadat Ghanbari Parmehr,author
+1181,https://openalex.org/W4390511906,"Department of Geomatics, Faculty of Civil Engineering, Babol Noshirvani University of Technology, Babol, Iran",institution
+1183,https://openalex.org/W4390511906,Maurizio Canavari,author
+1184,https://openalex.org/W4390511906,"Department of Agricultural and Food Sciences, Alma Mater Studiorum University of Bologna, Bologna, Italy",institution
+1185,https://openalex.org/W4390511906,IT,country
+1186,https://openalex.org/W3197187755,Muhammad Salman Kabir,author
+1187,https://openalex.org/W3197187755,"Innopolis University,Dept. of Robotics & Computer Vision,Innopolis,Russia",institution
+1188,https://openalex.org/W3197187755,RU,country
+1189,https://openalex.org/W3197187755,Ikechi Kalu Ndukwe,author
+1192,https://openalex.org/W3197187755,Engr. Zainab Shahid Awan,author
+1193,https://openalex.org/W3197187755,"UET, Taxila,Dept. of Electrical Engineering,Taxila,Pakistan",institution
+1194,https://openalex.org/W3197187755,PK,country
+1195,https://openalex.org/W3197187755,deep learning,keyword
+1196,https://openalex.org/W3197187755,vision,keyword
+1197,https://openalex.org/W3197187755,detection,keyword
+1198,https://openalex.org/W4283740103,N. Yu. Barkova,author
+1199,https://openalex.org/W4283740103,State University of Management; Financial University,institution
+1200,https://openalex.org/W4283740103,RU,country
+1201,https://openalex.org/W4283740103,E. D. Deulina,author
+1202,https://openalex.org/W4283740103,State University of Management,institution
+1204,https://openalex.org/W4283740103,M. A. Malysheva,author
+1207,https://openalex.org/W4283740103,D. P. Kirsanova,author
+1210,https://openalex.org/W4283740103,O. A. Borodina,author
+1211,https://openalex.org/W4283740103,Financial University,institution
+1213,https://openalex.org/W4283740103,unmanned aerial vehicles,keyword
+1214,https://openalex.org/W4283740103,storage systems,keyword
+1215,https://openalex.org/W2792914000,Maximilian Hell,author
+1216,https://openalex.org/W2792914000,"School of Applied Science Computing and Engineering, Glyndwr University, Plas Coch, Mold Road, Wrexham, LL11 2AW, UK",institution
+1217,https://openalex.org/W2792914000,GB,country
+1218,https://openalex.org/W2792914000,Robert C. Bolam,author
+1221,https://openalex.org/W2792914000,Yuriy Vagapov,author
+1224,https://openalex.org/W2792914000,Alecksey Anuchin,author
+1225,https://openalex.org/W2792914000,"Department of Electric Drives, Moscow Power Engineering Institute, 14 Krasnokazarmennaya Street, 111250, Moscow, Russia",institution
+1226,https://openalex.org/W2792914000,RU,country
+1227,https://openalex.org/W2792914000,portable drone,keyword
+1228,https://openalex.org/W2792914000,educational purposes,keyword
+1229,https://openalex.org/W3217609801,Ehsan Rashidzadeh,author
+1230,https://openalex.org/W3217609801,"Department of Industrial  Engineering, Science and Research Branch, Islamic Azad University, Tehran, Iran",institution
+1231,https://openalex.org/W3217609801,IR,country
+1232,https://openalex.org/W3217609801,Seyyed Mohammad Hadji Molana,author
+1235,https://openalex.org/W3217609801,Roya Soltani,author
+1236,https://openalex.org/W3217609801,"Department of Industrial Engineering, KHATAM University, Tehran, Iran.",institution
+1238,https://openalex.org/W3217609801,Ashkan Hafezalkotob,author
+1239,https://openalex.org/W3217609801,"Department of Industrial Engineering , Islamic Azad University (South-Tehran Branch) , Tehran , Iran",institution
+1241,https://openalex.org/W3217609801,drone,keyword
+1242,https://openalex.org/W3217609801,emergency medical services,keyword
+1243,https://openalex.org/W3217609801,greenhouse gas,keyword
+1244,https://openalex.org/W3217609801,ems,keyword
+1245,https://openalex.org/W3217609801,co2,keyword
+1246,https://openalex.org/W2729225510,Linghe Kong,author
+1247,https://openalex.org/W2729225510,"[Shanghai Key Laboratory of Scalable Computing and Systems, Shanghai Jiao Tong University, Shanghai, China]",institution
+1248,https://openalex.org/W2729225510,CN,country
+1249,https://openalex.org/W2729225510,Linsheng Ye,author
+1252,https://openalex.org/W2729225510,Fan Wu,author
+1255,https://openalex.org/W2729225510,Meixia Tao,author
+1258,https://openalex.org/W2729225510,Guihai Chen,author
+1261,https://openalex.org/W2729225510,Athanasios V. Vasilakos,author
+1262,https://openalex.org/W2729225510,Luleå University of Technology Luleå Sweden,institution
+1263,https://openalex.org/W2729225510,SE,country
+1264,https://openalex.org/W2729225510,autonomous relay,keyword
+1265,https://openalex.org/W2729225510,millimeter-wave,keyword
+1266,https://openalex.org/W3201451997,Mehran Shahrooz,author
+1267,https://openalex.org/W3201451997,SharifAgRobot Agricultural Robotics Company,institution
+1268,https://openalex.org/W3201451997,Amin Talaeizadeh,author
+1269,https://openalex.org/W3201451997,"Sharif University of Technology,Sharif AgroLab Agricultural Robotics Lab,Tehran,Iran",institution
+1270,https://openalex.org/W3201451997,IR,country
+1271,https://openalex.org/W3201451997,Aria Alasty,author
+1274,https://openalex.org/W4312107375,Amer Al-Badr,author
+1275,https://openalex.org/W4312107375,Innopolis University,institution
+1276,https://openalex.org/W4312107375,RU,country
+1277,https://openalex.org/W4312107375,S.I. Savin,author
+1280,https://openalex.org/W4312107375,L.Yu. Vorochaeva,author
+1281,https://openalex.org/W4312107375,Southwest State University,institution
+1282,https://openalex.org/W4312107375,US,country
+1283,https://openalex.org/W4312107375,tensegrity drone,keyword
+1284,https://openalex.org/W4312107375,simultaneous planning,keyword
+1285,https://openalex.org/W4312107375,sequential deformations,keyword
+1286,https://openalex.org/W4361987733,Igor Yu. Grishin,author
+1287,https://openalex.org/W4361987733,"Lomonosov Moscow State University, GSP-1, Leninskie Gory, 119991, Moscow, Russian Federation",institution
+1288,https://openalex.org/W4361987733,RU,country
+1289,https://openalex.org/W4361987733,Rena R. Timirgaleeva,author
+1290,https://openalex.org/W4361987733,"V.I. Vernadsky Crimean Federal University, Prospekt Vernadskogo 4, 295007, Simferopol, Republic of Crimea, Russian Federation",institution
+1292,https://openalex.org/W4361987733,Victor V. Selivanov,author
+1295,https://openalex.org/W4361987733,Anatoliy N. Kazak,author
+1298,https://openalex.org/W4361987733,unmanned aerial vehicles,keyword
+1299,https://openalex.org/W4361987733,creation,keyword
+1300,https://openalex.org/W4361987733,development,keyword
+1301,https://openalex.org/W4308123911,S. Rehman,author
+1302,https://openalex.org/W4308123911,"Interdisciplinary Research Center for Renewable Energy and Power Systems (IRC-REPS), The Research Institute, KFUPM, Dhahran 31261, Saudi Arabia",institution
+1303,https://openalex.org/W4308123911,SA,country
+1304,https://openalex.org/W4308123911,M. A. Mohandes,author
+1305,https://openalex.org/W4308123911,"Electrical Engineering Department, KFUPM, Dhahran 31261, Saudi Arabia",institution
+1307,https://openalex.org/W4308123911,A. E. Hussein,author
+1310,https://openalex.org/W4308123911,L. M. Alhems,author
+1311,https://openalex.org/W4308123911,"Applied Research Center for Metrology, Standards, and Testing (ARC-MST), The Research Institute, KFUPM, Dhahran 31261, Saudi Arabia",institution
+1313,https://openalex.org/W4308123911,A. Al-Shaikhi,author
+1316,https://openalex.org/W4308123911,photovoltaic panels,keyword
+1317,https://openalex.org/W4308123911,drone,keyword
+1318,https://openalex.org/W4308123911,downward thrust,keyword
+1319,https://openalex.org/W4389041449,Mohammad Mehdi Samimi,author
+1320,https://openalex.org/W4389041449,"Isfahan University of Technology,Department of Electrical and Computer Engineering,Isfahan,Iran,84156-83111",institution
+1321,https://openalex.org/W4389041449,IR,country
+1322,https://openalex.org/W4389041449,Alireza Basiri,author
+1325,https://openalex.org/W3198672146,Shirin Ghasemi,author
+1326,https://openalex.org/W3198672146,"School of Industrial Engineering, #N#College of Engineering, University of Tehran, Tehran, Iran",institution
+1327,https://openalex.org/W3198672146,IR,country
+1328,https://openalex.org/W3198672146,Reza Tavakkoli-Moghaddam,author
+1331,https://openalex.org/W3198672146,Mahdi Hamid,author
+1334,https://openalex.org/W3198672146,Meysam Hosseinzadeh,author
+1337,https://openalex.org/W3198672146,blood package delivery,keyword
+1338,https://openalex.org/W3198672146,facility,keyword
+1339,https://openalex.org/W3198672146,drones,keyword
+1340,https://openalex.org/W3198672146,location-routing,keyword
+1341,https://openalex.org/W2995408216,Hamisha M. Senov,author
+1342,https://openalex.org/W2995408216,"Kabardino-Balkarian State University “KBSU”,Department of Mechatronics and Robotics,Nalchik,Russia",institution
+1343,https://openalex.org/W2995408216,RU,country
+1344,https://openalex.org/W2995408216,Yuriy V. Bolgov,author
+1347,https://openalex.org/W2995408216,combined mechatronic system,keyword
+1348,https://openalex.org/W2995408216,drone,keyword
+1349,https://openalex.org/W2995408216,natural hazards,keyword
+1350,https://openalex.org/W2995408216,mobile platform,keyword
+1351,https://openalex.org/W2995408216,monitoring,keyword
+1352,https://openalex.org/W4292567141,Jan Lansky,author
+1353,https://openalex.org/W4292567141,"Department of Computer Science and Mathematics, Faculty of Economic Studies, University of Finance and Administration, 101 00 Prague, Czech Republic",institution
+1354,https://openalex.org/W4292567141,CZ,country
+1355,https://openalex.org/W4292567141,Saqib Ali,author
+1356,https://openalex.org/W4292567141,"Department of Information Systems, College of Economics and Political Science, Sultan Qaboos University, Al Khoudh, Muscat P.C.123, Oman",institution
+1357,https://openalex.org/W4292567141,OM,country
+1358,https://openalex.org/W4292567141,Amir Masoud Rahmani,author
+1359,https://openalex.org/W4292567141,"Future Technology Research Center, National Yunlin University of Science and Technology, Yunlin, Douliou 64002, Taiwan",institution
+1360,https://openalex.org/W4292567141,TW,country
+1361,https://openalex.org/W4292567141,Mohammad Sadegh Yousefpoor,author
+1362,https://openalex.org/W4292567141,"Department of Computer Engineering, Dezful Branch, Islamic Azad University, Dezful 5716963896, Iran",institution
+1363,https://openalex.org/W4292567141,IR,country
+1364,https://openalex.org/W4292567141,Efat Yousefpoor,author
+1367,https://openalex.org/W4292567141,Faheem Khan,author
+1368,https://openalex.org/W4292567141,"Department of Computer Engineering, Gachon University, Seongnam 13120, Korea",institution
+1369,https://openalex.org/W4292567141,KR,country
+1370,https://openalex.org/W4292567141,Mehdi Hosseinzadeh,author
+1371,https://openalex.org/W4292567141,"Computer Science, University of Human Development, Sulaymaniyah 0778-6, Iraq; Mental Health Research Center, Psychosocial Health Research Institute, Iran University of Medical Sciences, Tehran 1449614535, Iran",institution
+1372,https://openalex.org/W4292567141,IQ,country
+1374,https://openalex.org/W4292567141,flying ad hoc networks,keyword
+1375,https://openalex.org/W4292567141,routing protocols,keyword
+1376,https://openalex.org/W4292567141,reinforcement,keyword
+1377,https://openalex.org/W4292567141,learning-based,keyword
+1378,https://openalex.org/W2471389158,Max I. Kanovich,author
+1379,https://openalex.org/W2471389158,"National Research University Higher School of Economics, Moscow, Russia; University of London and University College, London, UK",institution
+1380,https://openalex.org/W2471389158,GB,country
+1381,https://openalex.org/W2471389158,RU,country
+1382,https://openalex.org/W2471389158,Tajana Ban Kirigin,author
+1383,https://openalex.org/W2471389158,"University of Rijeka, Rijeka, Croatia",institution
+1384,https://openalex.org/W2471389158,HR,country
+1385,https://openalex.org/W2471389158,Vivek Nigam,author
+1386,https://openalex.org/W2471389158,"Federal University of Paraíba, João Pessoa, Brazil",institution
+1387,https://openalex.org/W2471389158,BR,country
+1388,https://openalex.org/W2471389158,Andre Scedrov,author
+1389,https://openalex.org/W2471389158,"National Research University Higher School of Economics, Moscow, Russia; University of Pennsylvania, Philadelphia, USA",institution
+1391,https://openalex.org/W2471389158,US,country
+1392,https://openalex.org/W2471389158,Carolyn L. Talcott,author
+1393,https://openalex.org/W2471389158,"SRI International, Menlo Park, USA",institution
+1395,https://openalex.org/W2471389158,timed multiset rewriting,keyword
+1396,https://openalex.org/W2471389158,systems,keyword
+1397,https://openalex.org/W2471389158,time-sensitive,keyword
+1398,https://openalex.org/W2972898983,A. Mirzaeinia,author
+1399,https://openalex.org/W2972898983,"Department of Computer Science and Engineering, New Mexico Tech, Socorro, NM 87801, USA",institution
+1400,https://openalex.org/W2972898983,US,country
+1401,https://openalex.org/W2972898983,M. Hassanalian,author
+1402,https://openalex.org/W2972898983,"Department of Mechanical Engineering, New Mexico Tech, Socorro, NM 87801, USA",institution
+1404,https://openalex.org/W2972898983,K. Lee,author
+1407,https://openalex.org/W2972898983,M. Mirzaeinia,author
+1408,https://openalex.org/W2972898983,"Department of Electrical Engineering, Amirkabir University of Technology, Tehran, Iran",institution
+1409,https://openalex.org/W2972898983,IR,country
+1410,https://openalex.org/W2972898983,position reconfiguration,keyword
+1411,https://openalex.org/W2972898983,energy conservation,keyword
+1412,https://openalex.org/W2972898983,v-shaped,keyword
+1413,https://openalex.org/W2972898983,fixed-wing,keyword
+1414,https://openalex.org/W4386258391,Fatemeh Zandieh,author
+1415,https://openalex.org/W4386258391,"Department of Industrial Engineering, Iran University of Science and Technology, Iran, 16846-13114",institution
+1416,https://openalex.org/W4386258391,IR,country
+1417,https://openalex.org/W4386258391,Seyed Farid Ghannadpour,author
+1420,https://openalex.org/W4386258391,Mohammad Mahdavi Mazdeh,author
+1423,https://openalex.org/W4386258391,drones,keyword
+1424,https://openalex.org/W4386258391,new integrated routing,keyword
+1425,https://openalex.org/W4386258391,surveillance model,keyword
+1426,https://openalex.org/W2999811696,Zhiguo Shi,author
+1427,https://openalex.org/W2999811696,"Joint Institute of Frontier Technologies, Alibaba-Zhejiang University, Hangzhou, China",institution
+1428,https://openalex.org/W2999811696,CN,country
+1429,https://openalex.org/W2999811696,Xianyu Chang,author
+1430,https://openalex.org/W2999811696,"State Key Laboratory of Industrial Control Technology, Zhejiang University, Hangzhou, China",institution
+1432,https://openalex.org/W2999811696,Chaoqun Yang,author
+1433,https://openalex.org/W2999811696,"[College of Information Science and Electronic Engineering, Zhejiang University, Hangzhou, China.]",institution
+1435,https://openalex.org/W2999811696,Zexian Wu,author
+1438,https://openalex.org/W2999811696,Junfeng Wu,author
+1441,https://openalex.org/W2999811696,amateur drones detection,keyword
+1442,https://openalex.org/W2999811696,surveillance system,keyword
+1443,https://openalex.org/W2999811696,acoustic-based,keyword
+1444,https://openalex.org/W3005074512,Alexander P. Sukhodolov,author
+1445,https://openalex.org/W3005074512,Baikal State University,institution
+1446,https://openalex.org/W3005074512,RU,country
+1447,https://openalex.org/W3005074512,"Artur V. Bychkov,",author
+1448,https://openalex.org/W3005074512,Irkutsk Institute (branch) of The All-Russian State University of Justice (RPA of the Ministry of Justice of Russia),institution
+1450,https://openalex.org/W3005074512,Anna M. Bychkova,author
+1453,https://openalex.org/W3005074512,criminal policy,keyword
+1454,https://openalex.org/W3005074512,artificial intelligence technologies,keyword
+1455,https://openalex.org/W3005074512,crimes committed,keyword
+1456,https://openalex.org/W3005074512,artificial intelligence,keyword

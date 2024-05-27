@@ -1,0 +1,936 @@
+,paper_id,target,type
+0,https://openalex.org/W2286178401,Ahmad Atieh,author
+1,https://openalex.org/W2286178401,"Electrical Engineering Department, The University of Jordan, Amman, Jordan",institution
+2,https://openalex.org/W2286178401,JO,country
+3,https://openalex.org/W2286178401,Samir Al Shariff,author
+4,https://openalex.org/W2286178401,"Electrical Engineering Department, Taibah University, Medina, Saudi Arabia",institution
+5,https://openalex.org/W2286178401,SA,country
+6,https://openalex.org/W2286178401,Naseer Ahmed,author
+7,https://openalex.org/W2286178401,"Mechanical Engineering Department, CECOS University, Peshawar, Pakistan",institution
+8,https://openalex.org/W2286178401,PK,country
+9,https://openalex.org/W2286178401,tunnel,keyword
+10,https://openalex.org/W2286178401,wind,keyword
+11,https://openalex.org/W2286178401,novel,keyword
+12,https://openalex.org/W3000533390,M. Anbarsooz,author
+13,https://openalex.org/W3000533390,"Department of Mechanical Engineering, Quchan University of Technology, Quchan, Iran",institution
+14,https://openalex.org/W3000533390,IR,country
+15,https://openalex.org/W3000533390,wind dams,keyword
+16,https://openalex.org/W3000533390,wind potential,keyword
+17,https://openalex.org/W3000533390,numerical study,keyword
+18,https://openalex.org/W4362483735,Haziq Idraki Shahidin,author
+19,https://openalex.org/W4362483735,,institution
+20,https://openalex.org/W4362483735,Mohd Rosdzimin Abdul Rahman,author
+22,https://openalex.org/W4362483735,Azam Che Idris,author
+24,https://openalex.org/W4362483735,Mohd Rashdan Saad,author
+26,https://openalex.org/W4362483735,wind tunnel experiments,keyword
+27,https://openalex.org/W4362483735,3d printed models,keyword
+28,https://openalex.org/W4362483735,aerodynamic performance,keyword
+29,https://openalex.org/W2062477095,M. Abbaspour,author
+30,https://openalex.org/W2062477095,"Department of Mechanical Engineering, Sharif University of Technology and Graduate School of the Environment and Energy, Tehran, Iran",institution
+31,https://openalex.org/W2062477095,IR,country
+32,https://openalex.org/W2062477095,M. N. Shojaee,author
+33,https://openalex.org/W2062477095,"Department of Environmental Engineering, Graduate School of the Environment and Energy, Tehran, Iran",institution
+35,https://openalex.org/W2062477095,wind tunnel,keyword
+36,https://openalex.org/W3049644507,Abbas Miri,author
+37,https://openalex.org/W3049644507,"Department of Watershed and Range Management, Faculty of Water and Soil, University of Zabol, Zabol, Iran",institution
+38,https://openalex.org/W3049644507,IR,country
+39,https://openalex.org/W3049644507,Deirdre Dragovich,author
+40,https://openalex.org/W3049644507,"School of Geosciences F09, University of Sydney, Sydney, NSW 2006, Australia",institution
+41,https://openalex.org/W3049644507,AU,country
+42,https://openalex.org/W3049644507,Zhibao Dong,author
+43,https://openalex.org/W3049644507,"School of Geography and Tourism, Shaanxi Normal University 620, Shaanxi Province 710119, China",institution
+44,https://openalex.org/W3049644507,CN,country
+45,https://openalex.org/W3049644507,wind tunnel,keyword
+46,https://openalex.org/W3049644507,wind flow,keyword
+47,https://openalex.org/W3049644507,sediment flux profiles,keyword
+48,https://openalex.org/W3049644507,field-scale,keyword
+49,https://openalex.org/W3154117456,A. Raza,author
+50,https://openalex.org/W3154117456,"Air University, Aerospace & Aviation Campus,Department of Aerospace Engineering,Kamra,Pakistan",institution
+51,https://openalex.org/W3154117456,PK,country
+52,https://openalex.org/W3154117456,S. Farhan,author
+55,https://openalex.org/W3154117456,S. Nasir,author
+58,https://openalex.org/W3154117456,S. Salamat,author
+61,https://openalex.org/W2072331171,Ahmad Atieh,author
+62,https://openalex.org/W2072331171,"Electrical Engineering Department, Faculty of Engineering, Taibah University, Medina, Kingdom of Saudi Arabia",institution
+63,https://openalex.org/W2072331171,SA,country
+64,https://openalex.org/W2072331171,Samir Al Shariff,author
+67,https://openalex.org/W2072331171,Ali Tammas,author
+70,https://openalex.org/W2072331171,Muhannad Alharbi,author
+73,https://openalex.org/W2072331171,novel wind tunnel,keyword
+74,https://openalex.org/W2072331171,wind tunnel,keyword
+75,https://openalex.org/W2072331171,power generation,keyword
+76,https://openalex.org/W2130313143,Ali Vardar,author
+77,https://openalex.org/W2130313143,"Uludag University, Faculty of Agriculture, Department of Agricultural Machinery, 16059 Bursa, Turkey",institution
+78,https://openalex.org/W2130313143,TR,country
+79,https://openalex.org/W2130313143,Bülent Eker,author
+80,https://openalex.org/W2130313143,"Namık Kemal University, Faculty of Agriculture, Department of Agricultural Machinery, 59030 Tekirdag, Turkey",institution
+82,https://openalex.org/W2130313143,wind turbine working,keyword
+83,https://openalex.org/W2130313143,continuity principal,keyword
+84,https://openalex.org/W2285388779,Xiaohan Zhou,author
+85,https://openalex.org/W2285388779,"Key Laboratory of Transportation Tunnel Engineering, Ministry of Education, Southwest Jiaotong University, Chengdu, China",institution
+86,https://openalex.org/W2285388779,CN,country
+87,https://openalex.org/W2285388779,Yanhua Zeng,author
+90,https://openalex.org/W2285388779,Lei Fan,author
+91,https://openalex.org/W2285388779,"China Railway Eeyuan Engineering Group Co. Ltd, Chengdu, China",institution
+93,https://openalex.org/W2285388779,temperature,keyword
+94,https://openalex.org/W2285388779,tunnel,keyword
+95,https://openalex.org/W2285388779,ventilation,keyword
+96,https://openalex.org/W2285388779,cold-region,keyword
+97,https://openalex.org/W2285388779,train-induced,keyword
+98,https://openalex.org/W1966306790,Volf Yakovlevich Borovoy,author
+99,https://openalex.org/W1966306790,"Central Aerohydrodynamic Institute (TsAGI), 1 Zhukovsky Str., Zhukovsky, Moscow Region, 140180 Russian Federation",institution
+100,https://openalex.org/W1966306790,RU,country
+101,https://openalex.org/W1966306790,Vladimir Nikolaevich Brazhko,author
+102,https://openalex.org/W1966306790,"Central Aerohydrodynamic Institute (TsAGI) 1, Zhukovsky str., Zhukovsky, 140180, Moscow region, Russia",institution
+104,https://openalex.org/W1966306790,Ivan Vladimirovich Egorov,author
+105,https://openalex.org/W1966306790,"Central Aerohydrodynamic Institute (TsAGI), 1, Zhukovsky Str., Zhukovsky,
+Moscow Region, 140180, Russia",institution
+107,https://openalex.org/W1966306790,Evgenii Gennadievich Zaitsev,author
+108,https://openalex.org/W1966306790,"Central Aerohydrodynamic Institute (TsAGI), 1 Zhukovsky Str., Zhukovsky 140180, Russia",institution
+110,https://openalex.org/W1966306790,Arkadii Sergeyevich Skuratov,author
+113,https://openalex.org/W1966306790,numerical simulation,keyword
+114,https://openalex.org/W1966306790,wind,keyword
+115,https://openalex.org/W1966306790,flows,keyword
+116,https://openalex.org/W1966306790,short-duration,keyword
+117,https://openalex.org/W2135467387,S. Daneshmand,author
+118,https://openalex.org/W2135467387,"Department of Mechanical Engineering, Science and Research Branch, Islamic Azad University, Tehran, Iran",institution
+119,https://openalex.org/W2135467387,IR,country
+120,https://openalex.org/W2135467387,C. Aghanajafi,author
+121,https://openalex.org/W2135467387,"Department of Mechanical Engineering, K. N. T. University of Technology, Tehran, Iran",institution
+123,https://openalex.org/W2135467387,A. Ahmadi Nadooshan,author
+124,https://openalex.org/W2135467387,"Majlesi Branch, Islamic Azad Universities, Isfahan, Iran",institution
+126,https://openalex.org/W2135467387,chromium coating,keyword
+127,https://openalex.org/W2135467387,airfoil,keyword
+128,https://openalex.org/W2135467387,rp technology,keyword
+129,https://openalex.org/W2335453769,Kevin Mejia,author
+130,https://openalex.org/W2335453769,The Boeing Company,institution
+131,https://openalex.org/W2335453769,AU,country
+132,https://openalex.org/W2335453769,Jeffrey D. Crouch,author
+135,https://openalex.org/W2335453769,Kazu Kusunose,author
+138,https://openalex.org/W2335453769,Robin Melvin,author
+141,https://openalex.org/W2335453769,Vladimir S. Kosorygin,author
+142,https://openalex.org/W2335453769,Institute of Theoretical and Applied Mechanics,institution
+143,https://openalex.org/W2335453769,RU,country
+144,https://openalex.org/W2335453769,Alexander D. Kosinov,author
+147,https://openalex.org/W2335453769,trip disks,keyword
+148,https://openalex.org/W2335453769,wind,keyword
+149,https://openalex.org/W2131872380,Saeed Daneshmand,author
+150,https://openalex.org/W2131872380,"Department of Mechanical Engineering,#N#Islamic Azad University, Majlesi Branch, Isfahan, Iran",institution
+151,https://openalex.org/W2131872380,IR,country
+152,https://openalex.org/W2131872380,A. Ahmadi,author
+155,https://openalex.org/W2131872380,C. Aghanajafi,author
+156,https://openalex.org/W2131872380,Department of Mechanical Engineering K. N. Toosi University of Technology  Tehran Iran,institution
+158,https://openalex.org/W2131872380,wind tunnel testing models,keyword
+159,https://openalex.org/W2131872380,fdm technology,keyword
+160,https://openalex.org/W1514222590,Kaveh Amiri,author
+161,https://openalex.org/W1514222590,"[Dept. of Aerospace, Sharif Univ. of Technology, Tehran, Iran]",institution
+162,https://openalex.org/W1514222590,IR,country
+163,https://openalex.org/W1514222590,Mohammad Reza Soltani,author
+166,https://openalex.org/W1514222590,Ali Haghiri,author
+167,https://openalex.org/W1514222590,"Amir-Kabir University of Technology, Tehran, Iran",institution
+169,https://openalex.org/W1514222590,steady flow quality assessment,keyword
+170,https://openalex.org/W1514222590,wind tunnel,keyword
+171,https://openalex.org/W4386037084,Murat Ayar,author
+172,https://openalex.org/W4386037084,"Department of Airframe and Powerplant Maintenance, Eskisehir Technical University, Eskişehir, Turkey",institution
+173,https://openalex.org/W4386037084,TR,country
+174,https://openalex.org/W4386037084,Ali Haydar Ercan,author
+175,https://openalex.org/W4386037084,"Department of Electronics and Automation, Porsuk Vocational School, Eskisehir Technical University, Eskişehir, Turkey",institution
+177,https://openalex.org/W4386037084,T Hikmet Karakoc,author
+178,https://openalex.org/W4386037084,"Faculty of Aeronautics and Astronautics, Eskisehir Technical University, Eskisehir, Turkey; Information Technology Research and Application Center, Istanbul Ticaret University, Istanbul, Turkey",institution
+180,https://openalex.org/W4386037084,particle image velocimetry measurement,keyword
+181,https://openalex.org/W4386037084,aircraft models,keyword
+182,https://openalex.org/W4386037084,scaled-down,keyword
+183,https://openalex.org/W2978998387,Solovev Sergei,author
+184,https://openalex.org/W2978998387,"Krylov State Research Centre, St. Petersburg, Russia",institution
+185,https://openalex.org/W2978998387,RU,country
+186,https://openalex.org/W2978998387,Khrapunov Evgenii,author
+189,https://openalex.org/W2978998387,wind tunnel tests,keyword
+190,https://openalex.org/W2978998387,aerodynamic stability,keyword
+191,https://openalex.org/W2978998387,bridges,keyword
+192,https://openalex.org/W3035553173,Ali Khanjari,author
+193,https://openalex.org/W3035553173,"Faculty of Mechanical Engineering, Shahrood University of Technology, Shahrood, Iran",institution
+194,https://openalex.org/W3035553173,IR,country
+195,https://openalex.org/W3035553173,Esmail Mahmoodi,author
+196,https://openalex.org/W3035553173,"Department of Mechanical Engineering of Biosystems, Shahrood University of Technology, Shahrood, Iran",institution
+198,https://openalex.org/W3035553173,Mohammad Hossien Ahmadi,author
+201,https://openalex.org/W3035553173,wind turbine,keyword
+202,https://openalex.org/W3035553173,wind tunnel,keyword
+203,https://openalex.org/W3035553173,cfd domain,keyword
+204,https://openalex.org/W2254496085,M Khayat,author
+205,https://openalex.org/W2254496085,"Department of Mechanical Engineering,Sharif University of Technology",institution
+206,https://openalex.org/W2254496085,IR,country
+207,https://openalex.org/W2254496085,M Rad,author
+210,https://openalex.org/W2254496085,vpp,keyword
+211,https://openalex.org/W1515399248,Said Farahat,author
+212,https://openalex.org/W1515399248,"Department of Mechanical Engineering, University of Sistan and Baluchestan, Zahedan, Iran",institution
+213,https://openalex.org/W1515399248,IR,country
+214,https://openalex.org/W1515399248,Seyyed Morteza Javadpour,author
+217,https://openalex.org/W1515399248,Hesamodin Ebnodin Hamidi,author
+218,https://openalex.org/W1515399248,"Department of Aerospace Engineering, Science & Research Branch, Islamic Azad University, Tehran (Iran)",institution
+220,https://openalex.org/W1515399248,Ebrahim Kadivar,author
+221,https://openalex.org/W1515399248,"(Technical University of Clausthal, Clausthal-Zellerfeld, Germany)",institution
+222,https://openalex.org/W1515399248,DE,country
+223,https://openalex.org/W1515399248,supersonic wind tunnel diffuser,keyword
+224,https://openalex.org/W1515399248,genetic algorithm,keyword
+225,https://openalex.org/W1515399248,optimization,keyword
+226,https://openalex.org/W2531038094,S. M. Bosnyakov,author
+227,https://openalex.org/W2531038094,"Central Aerohydrodynamic institute named after professor N.E.Zhukovsky (TsAGI), 140180, Russian Federation, Zhukovsky, Moscow region, Zhukovsky str. 1",institution
+228,https://openalex.org/W2531038094,RU,country
+229,https://openalex.org/W2531038094,A. F. Chevagin,author
+232,https://openalex.org/W2531038094,V. V. Vlasenko,author
+235,https://openalex.org/W2531038094,cryogenic wind tunnel,keyword
+236,https://openalex.org/W2531038094,numerical simulation,keyword
+237,https://openalex.org/W2531038094,tsagis,keyword
+238,https://openalex.org/W2245453631,M R Hasani Ahangar,author
+239,https://openalex.org/W2245453631,Iran University of Science and Technology,institution
+240,https://openalex.org/W2245453631,IR,country
+241,https://openalex.org/W2245453631,N Mozayani,author
+242,https://openalex.org/W2245453631,,institution
+243,https://openalex.org/W2245453631,Hamidi H.A.D.E.D.,author
+245,https://openalex.org/W2245453631,fuzzy control system,keyword
+246,https://openalex.org/W3129521254,E. Deng,author
+247,https://openalex.org/W3129521254,"School of Civil Engineering, Central South University, Changsha, 410075, China",institution
+248,https://openalex.org/W3129521254,CN,country
+249,https://openalex.org/W3129521254,Weichao Yang,author
+250,https://openalex.org/W3129521254,"National Engineering Laboratory for High Speed Railway Construction, Changsha, 410075, Hunan, China; School of Civil Engineering, Central South University, Changsha, 410075, China",institution
+252,https://openalex.org/W3129521254,Xuhui He,author
+255,https://openalex.org/W3129521254,Zhihui Zhu,author
+258,https://openalex.org/W3129521254,Hanfeng Wang,author
+261,https://openalex.org/W3129521254,Youwu Wang,author
+262,https://openalex.org/W3129521254,"Department of Civil and Environmental Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong",institution
+263,https://openalex.org/W3129521254,HK,country
+264,https://openalex.org/W3129521254,Ang Wang,author
+267,https://openalex.org/W3129521254,Lei Zhou,author
+268,https://openalex.org/W3129521254,"Department of Civil and Environmental Engineering, The Hong Kong University of Science and Technology, Clear Water Bay, Kowloon, Hong Kong, China",institution
+271,https://openalex.org/W3129521254,crosswind barrier,keyword
+272,https://openalex.org/W3129521254,aerodynamic response,keyword
+273,https://openalex.org/W3129521254,high-speed,keyword
+274,https://openalex.org/W3129521254,bridge-tunnel,keyword
+275,https://openalex.org/W2747951257,Huang Dongmei,author
+276,https://openalex.org/W2747951257,"School of Civil Engineering, Central South University, Changsha, Hunan, 410075, China",institution
+277,https://openalex.org/W2747951257,CN,country
+278,https://openalex.org/W2747951257,He Shiqing,author
+281,https://openalex.org/W2747951257,He Xuhui,author
+284,https://openalex.org/W2747951257,Zhu Xue,author
+287,https://openalex.org/W2747951257,wind loads,keyword
+288,https://openalex.org/W2747951257,neural network,keyword
+289,https://openalex.org/W2747951257,high-rise,keyword
+290,https://openalex.org/W4235322033,Yu. V. Polezhaev,author
+291,https://openalex.org/W4235322033,"Department of Heat Transfer, Institute for High Temperatures, Russian Academy of Sciences, Izhorskaya 13/19, Moscow 127412, Russia",institution
+292,https://openalex.org/W4235322033,RU,country
+293,https://openalex.org/W4235322033,wind,keyword
+294,https://openalex.org/W2906295914,N P Savishenko,author
+295,https://openalex.org/W2906295914,"Mozhaisky Military Space Academy, St.Petersburg, Russia",institution
+296,https://openalex.org/W2906295914,RU,country
+297,https://openalex.org/W2906295914,A V Shevchenko,author
+300,https://openalex.org/W2906295914,S A Poniaev,author
+301,https://openalex.org/W2906295914,"Ioffe Institute, St.Petersburg, Russia; Mozhaisky Military Space Academy, St.Petersburg, Russia",institution
+303,https://openalex.org/W2906295914,K V Tverdohlebov,author
+304,https://openalex.org/W2906295914,"Ioffe Institute, St.Petersburg, Russia",institution
+306,https://openalex.org/W2906295914,E A Prokopenko,author
+309,https://openalex.org/W2906295914,S A Yashkov,author
+312,https://openalex.org/W2906295914,vacuum,keyword
+313,https://openalex.org/W2906295914,processes,keyword
+314,https://openalex.org/W3082203774,Junaid Ullah,author
+315,https://openalex.org/W3082203774,"Faculty 6: Aerospace Engineering and Geodesy (F06), Institute of Aerodynamics and Gas Dynamics, University of Stuttgart, Pfaffenwaldring 21, 70569, Stuttgart, Germany",institution
+316,https://openalex.org/W3082203774,DE,country
+317,https://openalex.org/W3082203774,Aleš Prachař,author
+318,https://openalex.org/W3082203774,"VZLU-Czech Aerospace Research Centre, Beranovych 130, 199 05, Prague, Czech Republic",institution
+319,https://openalex.org/W3082203774,CZ,country
+320,https://openalex.org/W3082203774,Miroslav Šmíd,author
+323,https://openalex.org/W3082203774,Avraham Seifert,author
+324,https://openalex.org/W3082203774,"School of Mechanical Engineering, Tel Aviv University, 69978, Tel Aviv, Israel",institution
+325,https://openalex.org/W3082203774,IL,country
+326,https://openalex.org/W3082203774,Vitaly Soudakov,author
+327,https://openalex.org/W3082203774,"Central Aerohydrodynamic Institute (TsAGI), 140180, Zhukovsky, Moscow Region, Russia",institution
+328,https://openalex.org/W3082203774,RU,country
+329,https://openalex.org/W3082203774,Thorsten Lutz,author
+332,https://openalex.org/W3082203774,Ewald Krämer,author
+335,https://openalex.org/W3082203774,generic uhbr engine,keyword
+336,https://openalex.org/W3082203774,wind tunnel wall effects,keyword
+337,https://openalex.org/W3082203774,reynolds number,keyword
+338,https://openalex.org/W3082203774,flow field,keyword
+339,https://openalex.org/W3082203774,high-lift,keyword
+340,https://openalex.org/W2182609328,S. M. Nima Shojaee,author
+341,https://openalex.org/W2182609328,"Islamic Azad Univ. Sci. & Res. branch, Tehran",institution
+342,https://openalex.org/W2182609328,IR,country
+343,https://openalex.org/W2182609328,long wind tunnel,keyword
+344,https://openalex.org/W2182609328,velocity boundary layer,keyword
+345,https://openalex.org/W2182609328,boundary layer,keyword
+346,https://openalex.org/W2182609328,atmospheric thermal,keyword
+347,https://openalex.org/W2356166214,Yin Chengshu,author
+348,https://openalex.org/W2356166214,AVIC The First Aircraft Institute,institution
+349,https://openalex.org/W2356166214,RU,country
+350,https://openalex.org/W2356166214,flight correlation research ideas,keyword
+351,https://openalex.org/W2356166214,wind tunnel,keyword
+352,https://openalex.org/W2356166214,external-store,keyword
+353,https://openalex.org/W2318707047,Russell M Cummings,author
+354,https://openalex.org/W2318707047,Military School of Air and Space,institution
+355,https://openalex.org/W2318707047,RU,country
+356,https://openalex.org/W2318707047,Brice Aghababian,author
+359,https://openalex.org/W2318707047,Benoit Reymond,author
+360,https://openalex.org/W2318707047,U.S. Air Force Academy,institution
+361,https://openalex.org/W2318707047,US,country
+362,https://openalex.org/W2318707047,ludwieg tube,keyword
+363,https://openalex.org/W2318707047,nozzle,keyword
+364,https://openalex.org/W2318707047,numerical simulation,keyword
+365,https://openalex.org/W2318707047,mach,keyword
+366,https://openalex.org/W3013387648,Gang Hu,author
+367,https://openalex.org/W3013387648,"School of Civil and Environmental Engineering, Harbin Institute of Technology, Shenzhen, 518055, China",institution
+368,https://openalex.org/W3013387648,CN,country
+369,https://openalex.org/W3013387648,Lingbo Liu,author
+370,https://openalex.org/W3013387648,"School of Data and Computer Science, Sun Yat-sen University, Guangzhou, 510006, China; UBTECH Sydney Artificial Intelligence Centre, School of Computer Science, The University of Sydney, NSW, 2006, Australia",institution
+371,https://openalex.org/W3013387648,AU,country
+373,https://openalex.org/W3013387648,Dacheng Tao,author
+374,https://openalex.org/W3013387648,"UBTECH Sydney Artificial Intelligence Centre, School of Computer Science, The University of Sydney, NSW, 2006, Australia",institution
+376,https://openalex.org/W3013387648,Jie Song,author
+377,https://openalex.org/W3013387648,"School of Civil Engineering, Wuhan University, Wuhan, 430072, China",institution
+379,https://openalex.org/W3013387648,Kam Tim Tse,author
+380,https://openalex.org/W3013387648,"Department of Civil and Environmental Engineering, The Hong Kong University of Science and Technology, Hong Kong, China",institution
+382,https://openalex.org/W3013387648,HK,country
+383,https://openalex.org/W3013387648,K.C.S. Kwok,author
+384,https://openalex.org/W3013387648,"Centre for Wind, Waves and Water, School of Civil Engineering, The University of Sydney, NSW, 2006, Australia",institution
+386,https://openalex.org/W3013387648,wind pressures,keyword
+387,https://openalex.org/W3013387648,tall building,keyword
+388,https://openalex.org/W3013387648,learning-based,keyword
+389,https://openalex.org/W2766703057,A.R. Gorbushin,author
+390,https://openalex.org/W2766703057,"Central Aerohydrodynamic Institute (TsAGI), 1, Zhukovsky st., Zhukovsky, Moscow reg., 140180, Russia; Moscow Institute of Physics and Technology (MIPT), 9, Institutskiy per., Dolgoprudny, Moscow Region, 141701, Russia",institution
+391,https://openalex.org/W2766703057,RU,country
+392,https://openalex.org/W2766703057,russian wind tunnels,keyword
+393,https://openalex.org/W2766703057,first experimental investigations,keyword
+394,https://openalex.org/W2515127318,Anatolyi Petrovich Kurshin,author
+395,https://openalex.org/W2515127318,"Central Aerohydrodynamic Institute (TsAGI), 1 Zhukovsky Str., Zhukovsky, 140180, Moscow Region, Russia",institution
+396,https://openalex.org/W2515127318,RU,country
+397,https://openalex.org/W2515127318,hypersonic technologies,keyword
+398,https://openalex.org/W2515127318,aerodynamic research at,keyword
+399,https://openalex.org/W2123360367,Tamer Ucar,author
+400,https://openalex.org/W2123360367,"Yuzuncu Yil University, Faculty of Agriculture, Department of Agricultural Machinery, Van 65080, Turkey",institution
+401,https://openalex.org/W2123360367,TR,country
+402,https://openalex.org/W2123360367,Franklin R Hall,author
+403,https://openalex.org/W2123360367,"The Ohio State University, Laboratory for Pest Control Application Technology, OARDC Entomology Department, Wooster, OH 44691, USA",institution
+404,https://openalex.org/W2123360367,US,country
+405,https://openalex.org/W2123360367,James E Tew,author
+406,https://openalex.org/W2123360367,"OARDC Entomology Department, Wooster, OH 44691, USA; The Ohio State University, Honey Bee Laboratory",institution
+408,https://openalex.org/W2123360367,James K Hacker,author
+411,https://openalex.org/W2123360367,honey bees,keyword
+412,https://openalex.org/W2123360367,wind tunnel studies,keyword
+413,https://openalex.org/W2123360367,spray deposition,keyword
+414,https://openalex.org/W2123360367,leaves,keyword
+415,https://openalex.org/W2094888691,Saeed Daneshmand,author
+416,https://openalex.org/W2094888691,"Department of Mechanical and Aerospace Engineering, Science and Research Branch, Islamic Azad University, Tehran, Iran",institution
+417,https://openalex.org/W2094888691,IR,country
+418,https://openalex.org/W2094888691,Cyrus Aghanajafi,author
+419,https://openalex.org/W2094888691,"K.N.Toosi University of Technology, Tehran, Iran",institution
+421,https://openalex.org/W2094888691,Hossein Shahverdi,author
+424,https://openalex.org/W2094888691,rapid manufacturing technology,keyword
+425,https://openalex.org/W2094888691,wind tunnel models,keyword
+426,https://openalex.org/W2094888691,abs material,keyword
+427,https://openalex.org/W2094888691,fabrication,keyword
+428,https://openalex.org/W2052607545,E. Orlik,author
+429,https://openalex.org/W2052607545,"ICARE – CNRS, 1C Av. de la Recherche Scientifique, 45071 Orléans cedex 2, France; ITAM Russian Academy of Sciences, Institutskaya Str. 4/1, Novosibirsk 630090, Russia",institution
+430,https://openalex.org/W2052607545,FR,country
+431,https://openalex.org/W2052607545,RU,country
+432,https://openalex.org/W2052607545,V. Kornilov,author
+433,https://openalex.org/W2052607545,"ITAM Russian Academy of Sciences, Institutskaya Str. 4/1, Novosibirsk 630090, Russia",institution
+435,https://openalex.org/W2052607545,M. Ferrier,author
+436,https://openalex.org/W2052607545,"ICARE – CNRS, 1C Av. de la Recherche Scientifique, 45071 Orléans cedex 2, France",institution
+438,https://openalex.org/W2052607545,I. Fedioun,author
+441,https://openalex.org/W2052607545,D. Davidenko,author
+444,https://openalex.org/W2052607545,hypersonic laminar/turbulent,keyword
+445,https://openalex.org/W2052607545,laminar/turbulent transition,keyword
+446,https://openalex.org/W2961177200,Hongye Pan,author
+447,https://openalex.org/W2961177200,"School of Mechanical Engineering, Southwest Jiaotong University, Chengdu 610031, PR China",institution
+448,https://openalex.org/W2961177200,CN,country
+449,https://openalex.org/W2961177200,Hai Li,author
+452,https://openalex.org/W2961177200,Tingsheng Zhang,author
+455,https://openalex.org/W2961177200,Asif Ali Laghari,author
+458,https://openalex.org/W2961177200,Zutao Zhang,author
+461,https://openalex.org/W2961177200,Yanping Yuan,author
+464,https://openalex.org/W2961177200,Bin Qian,author
+467,https://openalex.org/W2961177200,s-rotor,keyword
+468,https://openalex.org/W2961177200,h-rotor,keyword
+469,https://openalex.org/W2961177200,self-powered,keyword
+470,https://openalex.org/W2961177200,high-speed,keyword
+471,https://openalex.org/W1965585963,Kaveh Ghorbanian,author
+472,https://openalex.org/W1965585963,"Department of Aerospace Engineering, Sharif University of Technology, PO Box 11365-9567, Tehran, Iran",institution
+473,https://openalex.org/W1965585963,IR,country
+474,https://openalex.org/W1965585963,Mohammad Reza Soltani,author
+477,https://openalex.org/W1965585963,Mojtaba Dehghan Manshadi,author
+480,https://openalex.org/W1965585963,subsonic wind tunnels,keyword
+481,https://openalex.org/W1965585963,turbulence intensity reduction,keyword
+482,https://openalex.org/W2431200263,S V Kirilovskiy,author
+483,https://openalex.org/W2431200263,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS, 630090 Novosibirsk, Russia; Novosibirsk State University, 630090, Novosibirsk, Russia",institution
+484,https://openalex.org/W2431200263,RU,country
+485,https://openalex.org/W2431200263,T V Poplavskaya,author
+488,https://openalex.org/W2431200263,I S Tsyryulnikov,author
+491,https://openalex.org/W2431200263,wave processes,keyword
+492,https://openalex.org/W2431200263,mode composition disturbances,keyword
+493,https://openalex.org/W2431200263,wind,keyword
+494,https://openalex.org/W2431200263,high-enthalpy,keyword
+495,https://openalex.org/W2988973732,Petr Vladimirovich Savin,author
+496,https://openalex.org/W2988973732,"Central Aerohydrodynamic Institute (TsAGI), Zhukovsky str. 1, Zhukovsky, 140180, Russia",institution
+497,https://openalex.org/W2988973732,RU,country
+498,https://openalex.org/W2988973732,transonic wind tunnel,keyword
+499,https://openalex.org/W2988973732,interference effect,keyword
+500,https://openalex.org/W3181027240,Javad Taghinezhad,author
+501,https://openalex.org/W3181027240,"University of Tehran,Faculty of Engineering & Technology,Department of Biosystem Engineering,Tehran,Iran",institution
+502,https://openalex.org/W3181027240,IR,country
+503,https://openalex.org/W3181027240,Esmail Mahmoodi,author
+504,https://openalex.org/W3181027240,"Shahrood University of Technology,Department of Mechanical Engineering of Biosystems,Shahrood,Iran",institution
+506,https://openalex.org/W3181027240,Mehran Masdari,author
+507,https://openalex.org/W3181027240,University of Tehran Faculty of New Sciences and Technologies Tehran Iran,institution
+509,https://openalex.org/W3181027240,Reza Alimardani,author
+512,https://openalex.org/W3181027240,optimized ducted wind turbine,keyword
+513,https://openalex.org/W3181027240,hot-wire,keyword
+514,https://openalex.org/W2898665779,A S Rtishcheva,author
+515,https://openalex.org/W2898665779,"Central Aerohydrodynamic Institute named after prof. N.E. Zhukovsky (TsAGI), 140180, Zhukovsky, Russia",institution
+516,https://openalex.org/W2898665779,RU,country
+517,https://openalex.org/W2898665779,subsonic wind tunnel duct,keyword
+518,https://openalex.org/W2898665779,air exchange,keyword
+519,https://openalex.org/W2097924593,V.I. Alfyorov,author
+520,https://openalex.org/W2097924593,"Central of Aerohydrodynamic Inst., Zhukovsky, Russia",institution
+521,https://openalex.org/W2097924593,RU,country
+522,https://openalex.org/W2097924593,G.I. Shcherbakov,author
+525,https://openalex.org/W2097924593,A.P. Rudakova,author
+528,https://openalex.org/W2097924593,I.V. Yegorov,author
+531,https://openalex.org/W2097924593,V.N. Skirda,author
+534,https://openalex.org/W2097924593,A.S. Bushmin,author
+537,https://openalex.org/W2097924593,L.M. Dmitriyev,author
+540,https://openalex.org/W2097924593,B.V. Yegorov,author
+543,https://openalex.org/W2097924593,Yu.Ye. Markachev,author
+546,https://openalex.org/W2097924593,A.N. Morozov,author
+549,https://openalex.org/W2097924593,A.A. Orlov,author
+552,https://openalex.org/W2097924593,hypersonic wind tunnels,keyword
+553,https://openalex.org/W2097924593,relaxation processes,keyword
+554,https://openalex.org/W2097924593,flow,keyword
+555,https://openalex.org/W2754862202,Narumi Ougiya,author
+556,https://openalex.org/W2754862202,"Haseko Co. Ltd. Research Institute of Technology, Ms. Eng.",institution
+557,https://openalex.org/W2754862202,RU,country
+558,https://openalex.org/W2754862202,Makoto Kanda,author
+559,https://openalex.org/W2754862202,"Prof., Department of Architecture and Architectural Engineering, College of Industrial Technology, Nihon University",institution
+560,https://openalex.org/W2754862202,JP,country
+561,https://openalex.org/W2754862202,typhoon,keyword
+562,https://openalex.org/W2754862202,wind force,keyword
+563,https://openalex.org/W2754862202,simulation,keyword
+564,https://openalex.org/W2754862202,super-high-rise,keyword
+565,https://openalex.org/W2356633439,Wang Haining,author
+566,https://openalex.org/W2356633439,"Southern Institute of Metallurgy, Ganzhou 341000, Jiangxi, China)",institution
+567,https://openalex.org/W2356633439,RU,country
+568,https://openalex.org/W2356633439,gas curtain,keyword
+569,https://openalex.org/W2356633439,mining,keyword
+570,https://openalex.org/W2531552953,M. A. Goldfeld,author
+571,https://openalex.org/W2531552953,"Khristianovich Institute of Theoretical and Applied Mechanics, Siberian Branch, Russian Academy of Sciences, 630090, Novosibirsk, Russia",institution
+572,https://openalex.org/W2531552953,RU,country
+573,https://openalex.org/W2531552953,A. A. Maslov,author
+574,https://openalex.org/W2531552953,"Khristianovich Institute of Theoretical and Applied Mechanics, Siberian Branch, Russian Academy of Sciences, 630090, Novosibirsk, Russia; Novosibirsk State Technical University, 630073, Novosibirsk, Russia; Novosibirsk State University, 630090, Novosibirsk, Russia",institution
+576,https://openalex.org/W2531552953,A. V. Starov,author
+579,https://openalex.org/W2531552953,V. V. Shumskii,author
+582,https://openalex.org/W2531552953,M. I. Yaroslavtsev,author
+583,https://openalex.org/W2531552953,"Khristianovich Institute of Theoretical and Applied Mechanics, Siberian Branch, Russian Academy of Sciences, 630090, Novosibirsk, Russia; Novosibirsk State University, 630090, Novosibirsk, Russia",institution
+585,https://openalex.org/W2531552953,hypersonic technologies,keyword
+586,https://openalex.org/W4294874332,Ar.A. Dekterev,author
+587,https://openalex.org/W4294874332,Kutateladze Institute of Thermophysics SB RAS; Siberian Federal University,institution
+588,https://openalex.org/W4294874332,RU,country
+589,https://openalex.org/W4294874332,A.A. Dekterev,author
+592,https://openalex.org/W4294874332,D.A. Dekterev,author
+595,https://openalex.org/W4294874332,pixel,keyword
+596,https://openalex.org/W4294874332,wind,keyword
+597,https://openalex.org/W2056390618,Pavel Lvovich Sverkanov,author
+598,https://openalex.org/W2056390618,"Central Aerohydrodynamic Institute (TsAGI), Zhukovsky str. 1, Zhukovsky, 140180, Russia",institution
+599,https://openalex.org/W2056390618,RU,country
+600,https://openalex.org/W2056390618,lateral aerodynamic coefficients,keyword
+601,https://openalex.org/W2056390618,unsteady derivatives,keyword
+602,https://openalex.org/W2056390618,rotational,keyword
+603,https://openalex.org/W2056390618,forced-oscillation,keyword
+604,https://openalex.org/W2738622458,Anastasia Fedosova,author
+605,https://openalex.org/W2738622458,"Moscow state university of civil engineering, Yaroslavskoye shosse, 26, Moscow, Russia, 129337",institution
+606,https://openalex.org/W2738622458,RU,country
+607,https://openalex.org/W2738622458,Pavel Churin,author
+610,https://openalex.org/W2738622458,Nikita Ageev,author
+613,https://openalex.org/W2738622458,torsional divergence,keyword
+614,https://openalex.org/W2738622458,span,keyword
+615,https://openalex.org/W4360973241,A. A. Sheikh Aleslami,author
+616,https://openalex.org/W4360973241,"Department of Civil Engineering, Damghan Branch, Islamic Azad University, Damghan, Iran",institution
+617,https://openalex.org/W4360973241,IR,country
+618,https://openalex.org/W4360973241,H. Sadeghi,author
+621,https://openalex.org/W4360973241,milad tower,keyword
+622,https://openalex.org/W4360973241,wind load,keyword
+623,https://openalex.org/W4360973241,adjacent buildings case study,keyword
+624,https://openalex.org/W4360973241,shed adjacent,keyword
+625,https://openalex.org/W2045103613,Behnam Ghadimi,author
+626,https://openalex.org/W2045103613,University of TEHRAN,institution
+627,https://openalex.org/W2045103613,IR,country
+628,https://openalex.org/W2045103613,Mojtaba Dehghan Manshadi,author
+629,https://openalex.org/W2045103613,Malek Ashtar University of Technology,institution
+631,https://openalex.org/W2045103613,Mehrdad Bazazzadeh,author
+634,https://openalex.org/W2045103613,transient shock wave,keyword
+635,https://openalex.org/W2045103613,wind tunnel,keyword
+636,https://openalex.org/W2802105768,Mohammad Saeedi,author
+637,https://openalex.org/W2802105768,"Aerospace Engineering Department, Amirkabir University of Technology, Tehran, Iran; Mechanical Engineering Department, University of Manitoba, Winnipeg, MB, Canada",institution
+638,https://openalex.org/W2802105768,CA,country
+639,https://openalex.org/W2802105768,IR,country
+640,https://openalex.org/W2802105768,Mahmoud Mani,author
+641,https://openalex.org/W2802105768,"Aerospace Engineering Department, Amirkabir University of Technology, Tehran, Iran",institution
+643,https://openalex.org/W2802105768,Armin Hamta,author
+644,https://openalex.org/W2802105768,"Mechanical Engineering Department, University of Manitoba, Winnipeg, MB, Canada",institution
+646,https://openalex.org/W2802105768,wall-interference,keyword
+647,https://openalex.org/W2802105768,surface-pressure,keyword
+648,https://openalex.org/W181940752,M. Goman,author
+649,https://openalex.org/W181940752,"ISS, SERC, Hawthorn Building, De Montfort University, Leicester LE1 9BH",institution
+650,https://openalex.org/W181940752,GB,country
+651,https://openalex.org/W181940752,A. N. Khrabrov,author
+652,https://openalex.org/W181940752,"Central Aerohydrodynamic Institute (TsAGI), Zhukovsky, Russia",institution
+653,https://openalex.org/W181940752,RU,country
+654,https://openalex.org/W181940752,A.N Khramtsovsky,author
+657,https://openalex.org/W181940752,dynamics,keyword
+658,https://openalex.org/W2950503817,Sergei Mikhailovich Drozdov,author
+659,https://openalex.org/W2950503817,"Central Aerohydrodynamic Institute (TsAGI) 1, Zhukovsky str., Zhukovsky, 140180, Moscow region, Russia",institution
+660,https://openalex.org/W2950503817,RU,country
+661,https://openalex.org/W2950503817,Rashid Anvarovich Davletkil'deev,author
+662,https://openalex.org/W2950503817,"Central Aerohydrodynamic Institute (TsAGI), 1, Zhukovsky Str., Zhukovsky,
+Moscow Region, 140180, Russian Federation",institution
+664,https://openalex.org/W2950503817,Alena Sergeevna Rtishcheva,author
+667,https://openalex.org/W2950503817,hypersonic wind tunnel,keyword
+668,https://openalex.org/W2950503817,air flow,keyword
+669,https://openalex.org/W2950503817,heat transfer,keyword
+670,https://openalex.org/W2950503817,entire duct,keyword
+671,https://openalex.org/W2945824085,N. Keramat Siavash,author
+672,https://openalex.org/W2945824085,"Mechanic of Biosystems Department, Agricultural Faculty, Tarbiat Modares University, Tehran Iran",institution
+673,https://openalex.org/W2945824085,IR,country
+674,https://openalex.org/W2945824085,Gh.H. Najafi,author
+677,https://openalex.org/W2945824085,T. Tavakoli,author
+680,https://openalex.org/W2945824085,B. Ghobadian,author
+683,https://openalex.org/W2945824085,E. Mahmoodi,author
+684,https://openalex.org/W2945824085,"Mechanic of biosystems Department, Agriculture Faculty, Shahrood University of Technology, Shahrood, Iran",institution
+686,https://openalex.org/W2945824085,wind turbine investigation,keyword
+687,https://openalex.org/W2899178676,D. Yu. Fedrushkov,author
+688,https://openalex.org/W2899178676,"Central Aerohydrodynamic Institute named after N.E. Zhukovsky (TsAGI), 1 Zhukovsky Street, Zhukovsky, Moscow Region, 140180, Russian Federation",institution
+689,https://openalex.org/W2899178676,RU,country
+690,https://openalex.org/W2899178676,A. S. Ponomaryov,author
+693,https://openalex.org/W2899178676,A. G. Yereza,author
+696,https://openalex.org/W2899178676,Ye. A. Myasnikov,author
+699,https://openalex.org/W2899178676,O. V. Shevchenko,author
+702,https://openalex.org/W2899178676,periodic wind tunnel,keyword
+703,https://openalex.org/W2899178676,new adaptive control system,keyword
+704,https://openalex.org/W2899178676,control system,keyword
+705,https://openalex.org/W2981202628,Siroos Karimzadeh,author
+706,https://openalex.org/W2981202628,"Environmental Engineering Department, Islamic Azad University, Estahban Branch, Estahban, Iran",institution
+707,https://openalex.org/W2981202628,IR,country
+708,https://openalex.org/W2981202628,Mohammad Mehdi Taghizadeh,author
+711,https://openalex.org/W2981202628,dust emission resources,keyword
+712,https://openalex.org/W2981202628,small wind tunnel,keyword
+713,https://openalex.org/W2981202628,bakhtegan playa,keyword
+714,https://openalex.org/W817940095,A. V. Kuzin,author
+715,https://openalex.org/W817940095,"Moscow Inst. of Aviation Technology (USSR). USSR, Moscow , United States",institution
+716,https://openalex.org/W817940095,RU,country
+717,https://openalex.org/W817940095,Y. D. Vyshkov,author
+718,https://openalex.org/W817940095,Moscow Inst. of Aviation Technology (USSR).,institution
+720,https://openalex.org/W817940095,G. K. Shapovalov,author
+721,https://openalex.org/W817940095,,institution
+722,https://openalex.org/W817940095,wind tunnels,keyword
+723,https://openalex.org/W817940095,magnetic suspension,keyword
+724,https://openalex.org/W817940095,balance systems,keyword
+725,https://openalex.org/W2558849353,Mustafa Basaran,author
+726,https://openalex.org/W2558849353,"Erciyes University, Faculty of Agriculture Department of Soil Science and Plant Nutrition, Kayseri, Turkey",institution
+727,https://openalex.org/W2558849353,TR,country
+728,https://openalex.org/W2558849353,Oguzhan Uzun,author
+731,https://openalex.org/W2558849353,Wim Cornelis,author
+732,https://openalex.org/W2558849353,"Ghent University, Department of Soil Management, International Centre of Eremology (ICE), Ghent, Belgium",institution
+733,https://openalex.org/W2558849353,BE,country
+734,https://openalex.org/W2558849353,Donald Gabriels,author
+737,https://openalex.org/W2558849353,Gunay Erpul,author
+738,https://openalex.org/W2558849353,"Ankara University, Faculty of Agriculture Department of Soil Science and Plant Nutrition, Ankara, Turkey",institution
+740,https://openalex.org/W2558849353,saltation transport process,keyword
+741,https://openalex.org/W2558849353,sediment,keyword
+742,https://openalex.org/W2558849353,splash,keyword
+743,https://openalex.org/W2558849353,trap,keyword
+744,https://openalex.org/W2558849353,rain,keyword
+745,https://openalex.org/W2062920286,Ning Lin,author
+746,https://openalex.org/W2062920286,"Civil Engineering, Texas Tech University, PO Box 41023, Lubbock 79409, Texas, USA",institution
+747,https://openalex.org/W2062920286,US,country
+748,https://openalex.org/W2062920286,Chris Letchford,author
+751,https://openalex.org/W2062920286,Yukio Tamura,author
+752,https://openalex.org/W2062920286,"Tokyo Polytechnic University, Atsugi, Kanagawa, Japan",institution
+753,https://openalex.org/W2062920286,JP,country
+754,https://openalex.org/W2062920286,Bo Liang,author
+755,https://openalex.org/W2062920286,"Huazhong University of Science and Technology, Wuhan, Hubei, PR China",institution
+756,https://openalex.org/W2062920286,CN,country
+757,https://openalex.org/W2062920286,Osamu Nakamura,author
+758,https://openalex.org/W2062920286,"Wind Engineering Institute, Tokyo, Japan",institution
+760,https://openalex.org/W2062920286,wind forces,keyword
+761,https://openalex.org/W4200520077,A. Volkhonsky,author
+762,https://openalex.org/W4200520077,"Moscow Aviation Institute (National Research University), Moscow, Russian Federation",institution
+763,https://openalex.org/W4200520077,RU,country
+764,https://openalex.org/W4200520077,additive fdm process,keyword
+765,https://openalex.org/W4200520077,abs plastic,keyword
+766,https://openalex.org/W4200520077,wind tunnels,keyword
+767,https://openalex.org/W4200520077,mechanical properties,keyword
+768,https://openalex.org/W2024327162,H Hamid Montazeri,author
+769,https://openalex.org/W2024327162,"Department of Mechanical Engineering, School of Engineering, Yazd University, Yazd, Iran",institution
+770,https://openalex.org/W2024327162,IR,country
+771,https://openalex.org/W2024327162,natural ventilation performance,keyword
+772,https://openalex.org/W2024327162,natural ventilation,keyword
+773,https://openalex.org/W2024327162,wind,keyword
+774,https://openalex.org/W2024327162,multi-opening,keyword
+775,https://openalex.org/W2767287417,S M Drozdov,author
+776,https://openalex.org/W2767287417,"Central Aero Hydrodynamic Institute named after Professor N. E. Zhukovsky (TsAGI) Russia, 140180 Zhukovsky, Zhykovsky st., 1",institution
+777,https://openalex.org/W2767287417,RU,country
+778,https://openalex.org/W2767287417,A S Rtishcheva,author
+781,https://openalex.org/W2767287417,air flow,keyword
+782,https://openalex.org/W2767287417,numerical investigation,keyword
+783,https://openalex.org/W2949900733,Ю. С. Михайлов,author
+784,https://openalex.org/W2949900733,Central Aerohydrodynamic Institute,institution
+785,https://openalex.org/W2949900733,RU,country
+786,https://openalex.org/W2949900733,Ю. Г. Степанов,author
+789,https://openalex.org/W2949900733,airfoils simulation,keyword
+790,https://openalex.org/W2949900733,2d flow,keyword
+791,https://openalex.org/W2949900733,wind,keyword
+792,https://openalex.org/W2949900733,low-speed,keyword
+793,https://openalex.org/W2949900733,test-section,keyword
+794,https://openalex.org/W4206058844,Yuriy V. Gromyko,author
+795,https://openalex.org/W4206058844,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS Novosibirsk, Russian Federation",institution
+796,https://openalex.org/W4206058844,RU,country
+797,https://openalex.org/W4206058844,Anatoliy A. Maslov,author
+798,https://openalex.org/W4206058844,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS Novosibirsk, Russian Federation, Novosibirsk State University Novosibirsk, Russian Federation",institution
+800,https://openalex.org/W4206058844,Andrey A. Sidorenko,author
+803,https://openalex.org/W4206058844,Pavel A. Polivanov,author
+806,https://openalex.org/W4206058844,Ivan S. Tsyryulnikov,author
+809,https://openalex.org/W4206058844,hypersonic wind tunnels,keyword
+810,https://openalex.org/W4206058844,flow parametrs,keyword
+811,https://openalex.org/W4225999944,I. I. Starostin,author
+812,https://openalex.org/W4225999944,Bauman Moscow State Technical University,institution
+813,https://openalex.org/W4225999944,RU,country
+814,https://openalex.org/W4225999944,A. V. Bondarenko,author
+817,https://openalex.org/W4225999944,N. A. Gaponuk,author
+820,https://openalex.org/W4225999944,quarries,keyword
+821,https://openalex.org/W4225999944,modelling,keyword
+822,https://openalex.org/W2320460269,I. Yegorov,author
+823,https://openalex.org/W2320460269,"TsAGI, Zhukovsky, Russia",institution
+824,https://openalex.org/W2320460269,RU,country
+825,https://openalex.org/W2320460269,numerical simulation,keyword
+826,https://openalex.org/W2320460269,vibration-dissociation,keyword
+827,https://openalex.org/W2883016189,Siamak Nazemi,author
+828,https://openalex.org/W2883016189,"Department of Textile Engineering, Islamic Azad University of Yazd, Yazd, Iran",institution
+829,https://openalex.org/W2883016189,IR,country
+830,https://openalex.org/W2883016189,Ramin Khajavi,author
+831,https://openalex.org/W2883016189,"Department of Mechanical Engineering, Islamic Azad University South Tehran Branch, Tehran, Iran",institution
+833,https://openalex.org/W2883016189,Hamidreza Rabie Far,author
+836,https://openalex.org/W2883016189,Mohammad Esmail Yazdanshenas,author
+839,https://openalex.org/W2883016189,Manouchehr Raad,author
+842,https://openalex.org/W2883016189,coated pet fabric,keyword
+843,https://openalex.org/W2883016189,drag force,keyword
+844,https://openalex.org/W2883016189,silica,keyword
+845,https://openalex.org/W2883016189,particles,keyword
+846,https://openalex.org/W2883016189,nano,keyword
+847,https://openalex.org/W2913657192,mahbobeh Soleimanian,author
+848,https://openalex.org/W2913657192,"Faculty of Engineering and, Technology, Imam Khomeini, International University, Qazvin, Iran",institution
+849,https://openalex.org/W2913657192,IR,country
+850,https://openalex.org/W2913657192,Fouad Kilanehei,author
+853,https://openalex.org/W2913657192,Mohammad Mahdi Memarpour,author
+856,https://openalex.org/W2913657192,escarpments,keyword
+857,https://openalex.org/W2913657192,numerical modeling,keyword
+858,https://openalex.org/W2913657192,wind-loading,keyword
+859,https://openalex.org/W2516134136,V. I. Biryukov,author
+860,https://openalex.org/W2516134136,"Central Aerohydrodynamic Institute, TsAGI, Zhukovsky, Russia",institution
+861,https://openalex.org/W2516134136,RU,country
+862,https://openalex.org/W2516134136,S. A. Glazkov,author
+865,https://openalex.org/W2516134136,A. R. Gorbushin,author
+868,https://openalex.org/W2516134136,A. I. Ivanov,author
+871,https://openalex.org/W2516134136,A. V. Semenov,author
+874,https://openalex.org/W2516134136,flow field,keyword
+875,https://openalex.org/W2516134136,nozzle shape,keyword
+876,https://openalex.org/W2516134136,non-stationary,keyword
+877,https://openalex.org/W2991733893,L. V. Afanasev,author
+878,https://openalex.org/W2991733893,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS, 4/1, Institutskaya str., Novosibirsk, 630090, Russia; Novosibirsk State University, 1, Pirogova str., Novosibirsk, 630090, Russia",institution
+879,https://openalex.org/W2991733893,RU,country
+880,https://openalex.org/W2991733893,V. L. Kocharin,author
+881,https://openalex.org/W2991733893,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS, 4/1, Institutskaya str., Novosibirsk, 630090, Russia",institution
+883,https://openalex.org/W2991733893,A. A. Yatskikh,author
+886,https://openalex.org/W2991733893,A. D. Kosinov,author
+889,https://openalex.org/W2991733893,N. V. Semionov,author
+892,https://openalex.org/W2991733893,Yu G. Yermolaev,author
+895,https://openalex.org/W2991733893,G. L. Kolosov,author
+898,https://openalex.org/W2991733893,pulsations,keyword
+899,https://openalex.org/W2991733893,flow,keyword
+900,https://openalex.org/W2991733893,chamber,keyword
+901,https://openalex.org/W2009185908,I. Troyanovsky,author
+902,https://openalex.org/W2009185908,"Chemical Faculty, Moscow Lomonosov University, Moscow 117234 Russian Federation",institution
+903,https://openalex.org/W2009185908,RU,country
+904,https://openalex.org/W2009185908,N. Sadovskii,author
+907,https://openalex.org/W2009185908,M. Kuzmin,author
+910,https://openalex.org/W2009185908,V. Mosharov,author
+911,https://openalex.org/W2009185908,"TsAGI (Central Aerohydrodynamic Institute), Zukovsky 140160 Russian Federation",institution
+913,https://openalex.org/W2009185908,A. Orlov,author
+916,https://openalex.org/W2009185908,V. Radchenko,author
+919,https://openalex.org/W2009185908,S. Phonov,author
+922,https://openalex.org/W2009185908,luminescence pressure sensors,keyword
+923,https://openalex.org/W2009185908,pressure sensors,keyword
+924,https://openalex.org/W2009185908,aerospace research,keyword
+925,https://openalex.org/W2886299735,Chuangang Fan,author
+926,https://openalex.org/W2886299735,"Key Laboratory of Building Fire Protection Engineering and Technology of MPS, Tianjin, China; School of Automotive and Transportation Engineering, Hefei University of Technology, Hefei, China; School of Civil Engineering, Central South University, Changsha, China",institution
+927,https://openalex.org/W2886299735,CN,country
+928,https://openalex.org/W2886299735,Li Zhang,author
+929,https://openalex.org/W2886299735,"School of Automotive and Transportation Engineering, Hefei University of Technology, Hefei, China",institution
+931,https://openalex.org/W2886299735,Shucheng Jiao,author
+934,https://openalex.org/W2886299735,Zhiwei Yang,author
+937,https://openalex.org/W2886299735,Manhou Li,author
+938,https://openalex.org/W2886299735,"School of Civil Engineering, Hefei University of Technology, Hefei, China",institution
+940,https://openalex.org/W2886299735,Xiaoping Liu,author
+943,https://openalex.org/W2886299735,natural ventilation,keyword
+944,https://openalex.org/W2886299735,tunnel,keyword
+945,https://openalex.org/W2886299735,strong environmental wind,keyword
+946,https://openalex.org/W2096174388,T.V. Korneeva,author
+947,https://openalex.org/W2096174388,Moscow Aviation Institute USSR,institution
+948,https://openalex.org/W2096174388,RU,country
+949,https://openalex.org/W2096174388,V.A. Dobrovolsky,author
+952,https://openalex.org/W2096174388,Y.A. Ryzhov,author
+955,https://openalex.org/W2096174388,wind tunnel testing,keyword
+956,https://openalex.org/W2096174388,intelligence,keyword
+957,https://openalex.org/W2902313852,Evgenii Khrapunov,author
+958,https://openalex.org/W2902313852,"Peter the Great St. Petersburg Polytechnic University, Polytechnicheskaya 29, St. Petersburg, 195251, Russian Federation",institution
+959,https://openalex.org/W2902313852,RU,country
+960,https://openalex.org/W2902313852,Sergei Solovev,author
+961,https://openalex.org/W2902313852,"Krylov State Research Centre, Laboratory of Aerodynamics, Moskovskoe Shosse 44, St. Petersburg, 196158, Russian Federation",institution
+963,https://openalex.org/W2902313852,wind loads,keyword
+964,https://openalex.org/W2902313852,abl properties,keyword
+965,https://openalex.org/W2902313852,modeling,keyword
+966,https://openalex.org/W2902313852,structures,keyword
+967,https://openalex.org/W4362472179,E V Pankratov,author
+968,https://openalex.org/W4362472179,"Northern (Arctic) Federal University named after M.V. Lomonosov, 17, Severnaya Dvina Emb., Arkhangelsk, 163002, Russia",institution
+969,https://openalex.org/W4362472179,RU,country
+970,https://openalex.org/W4362472179,A I Kangash,author
+971,https://openalex.org/W4362472179,,institution
+972,https://openalex.org/W4362472179,I A Kosarev,author
+974,https://openalex.org/W4362472179,P A Maryandyshev,author
+976,https://openalex.org/W4362472179,wind turbine,keyword
+977,https://openalex.org/W4362472179,small-scale,keyword
+978,https://openalex.org/W4362472179,horizontal-axis,keyword
+979,https://openalex.org/W2899154077,A. I. Kutepova,author
+980,https://openalex.org/W2899154077,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS, Institutskaya str., 4/1, Novosibirsk, 630090, Russia",institution
+981,https://openalex.org/W2899154077,RU,country
+982,https://openalex.org/W2899154077,A. A. Sidorenko,author
+985,https://openalex.org/W2899154077,Yu. V. Gromyko,author
+988,https://openalex.org/W2899154077,flow,keyword
+989,https://openalex.org/W2899154077,hot-shot,keyword
+990,https://openalex.org/W2039819740,Hamid Montazeri,author
+991,https://openalex.org/W2039819740,"Department of Mechanical Engineering, School of Engineering, Yazd University, Yazd, Iran",institution
+992,https://openalex.org/W2039819740,IR,country
+993,https://openalex.org/W2039819740,Fatemeh Montazeri,author
+996,https://openalex.org/W2039819740,Ruhollah Azizian,author
+999,https://openalex.org/W2039819740,Shima Mostafavi,author
+1002,https://openalex.org/W2039819740,wind,keyword
+1003,https://openalex.org/W2039819740,performance evaluation,keyword
+1004,https://openalex.org/W2039819740,two-sided,keyword
+1005,https://openalex.org/W1999140076,M. A. Arkhangelskaya,author
+1006,https://openalex.org/W1999140076,"Central Aerohydrodynamic Institute (TsAGI), 1 Zhukovsky St., Zhukovsky, Moscow Region, 140180, Russia",institution
+1007,https://openalex.org/W1999140076,RU,country
+1008,https://openalex.org/W1999140076,Vladimir Dmitrievich Vermel,author
+1009,https://openalex.org/W1999140076,"Central Aerohydrodynamic Institute (TsAGI) Zhukovsky str. 1, Zhukovsky, 140180 Russia",institution
+1011,https://openalex.org/W1999140076,V. F. Zabaluev,author
+1014,https://openalex.org/W1999140076,P. M. Nikolaev,author
+1017,https://openalex.org/W1999140076,Leonid Leonidovich Chernyshev,author
+1020,https://openalex.org/W1999140076,wind tunnel models,keyword
+1021,https://openalex.org/W1999140076,accuracy evaluation,keyword
+1022,https://openalex.org/W1999140076,coordinate-measuring,keyword
+1023,https://openalex.org/W2791658062,Lei Zhang,author
+1024,https://openalex.org/W2791658062,"Center for Life Science Automation (CELISCA), University of Rostock, Germany; Key Laboratory of Traffic Safety on Track of Ministry of Education, School of Traffic &Transportation Engineering, Central South University, Changsha, 410075, China",institution
+1025,https://openalex.org/W2791658062,CN,country
+1026,https://openalex.org/W2791658062,DE,country
+1027,https://openalex.org/W2791658062,Ming-zhi Yang,author
+1028,https://openalex.org/W2791658062,"Key Laboratory of Traffic Safety on Track of Ministry of Education, School of Traffic &Transportation Engineering, Central South University, Changsha, 410075, China",institution
+1030,https://openalex.org/W2791658062,Xi-feng Liang,author
+1033,https://openalex.org/W2791658062,aerodynamic forces,keyword
+1034,https://openalex.org/W2791658062,streamlined zone,keyword
+1035,https://openalex.org/W2791658062,wind,keyword
+1036,https://openalex.org/W2791658062,train,keyword
+1037,https://openalex.org/W2150979264,V. Borovoy,author
+1038,https://openalex.org/W2150979264,"Central Aerohydrodynamic Institute (TsAGI) Zhukovsky, Str. 1 Zhukovsky, Moscow region 140180, Russia",institution
+1039,https://openalex.org/W2150979264,RU,country
+1040,https://openalex.org/W2150979264,V. Mosharov,author
+1043,https://openalex.org/W2150979264,A. Noev,author
+1046,https://openalex.org/W2150979264,V. Radchenko,author
+1049,https://openalex.org/W2150979264,boundary layer transition,keyword
+1050,https://openalex.org/W2150979264,sensitive paint application,keyword
+1051,https://openalex.org/W2150979264,short-duration,keyword
+1052,https://openalex.org/W3137920172,S V Gribkov,author
+1053,https://openalex.org/W3137920172,"Moscow complex of Federal State Unitary Enterprise Central Aerohydrodynamic Institutenamed after Professor N.Ye. Zhukovsky, Moscow, Russia",institution
+1054,https://openalex.org/W3137920172,RU,country
+1055,https://openalex.org/W3137920172,S N Chizhma,author
+1056,https://openalex.org/W3137920172,"Immanuel Kant Baltic Federal University, Kaliningrad, Russia; Institute of Physical and Mathematical Sciences and Information Technologies, Kaliningrad, Russia",institution
+1058,https://openalex.org/W3137920172,wind,keyword
+1059,https://openalex.org/W3137920172,vertical-axis,keyword
+1060,https://openalex.org/W3087876076,P. S. Churin,author
+1061,https://openalex.org/W3087876076,"Moscow State University of Civil Engineering, Moscow, Yaroslavskoe sh., 26, Russia",institution
+1062,https://openalex.org/W3087876076,RU,country
+1063,https://openalex.org/W3087876076,A. N. Fedosova,author
+1066,https://openalex.org/W3087876076,J. S. Gribach,author
+1069,https://openalex.org/W3087876076,wind impact,keyword
+1070,https://openalex.org/W3087876076,buildings,keyword
+1071,https://openalex.org/W3087876076,high-rise,keyword
+1072,https://openalex.org/W1966627554,Yevgenii Ustinovich Repik,author
+1073,https://openalex.org/W1966627554,"Central Aerohydrodynamic Institute (TsAGI), Zhukovsky str. 1, Zhukovsky, 140180 Russia",institution
+1074,https://openalex.org/W1966627554,RU,country
+1075,https://openalex.org/W1966627554,Yurii Pavlovich Sosedko,author
+1078,https://openalex.org/W1966627554,equalizing grids,keyword
+1079,https://openalex.org/W1966627554,low drag coefficiencts,keyword
+1080,https://openalex.org/W1966627554,wind,keyword
+1081,https://openalex.org/W2038398438,K. Mazaheri,author
+1082,https://openalex.org/W2038398438,"Aerospace Systems Center of Excellence, Sharif University of Technology, Tehran, Iran",institution
+1083,https://openalex.org/W2038398438,IR,country
+1084,https://openalex.org/W2038398438,A. Ebrahimi,author
+1087,https://openalex.org/W2038398438,aerodynamic performance,keyword
+1088,https://openalex.org/W2038398438,wing vehicle,keyword
+1089,https://openalex.org/W2038398438,forward flight,keyword
+1090,https://openalex.org/W1994816831,I. I. Dukhopel,author
+1091,https://openalex.org/W1994816831,S.I. Vavilov State Optical Institute (Russia),institution
+1092,https://openalex.org/W1994816831,RU,country
+1093,https://openalex.org/W1994816831,V. A. Yakovlev,author
+1094,https://openalex.org/W1994816831,Central Aerohydrodynamics Institute (Russia),institution
+1096,https://openalex.org/W1994816831,optical research equipment,keyword
+1097,https://openalex.org/W1994816831,wind,keyword
+1098,https://openalex.org/W1994816831,experiments,keyword
+1099,https://openalex.org/W2029843723,Esmaeel Eftekharian,author
+1100,https://openalex.org/W2029843723,"School of Mechanical Engineering, Shiraz University, Shiraz, Iran",institution
+1101,https://openalex.org/W2029843723,IR,country
+1102,https://openalex.org/W2029843723,Alireza Dastan,author
+1103,https://openalex.org/W2029843723,"Mechanical Engineering Department, Fasa Branch, Islamic Azad University, Fasa, Iran",institution
+1105,https://openalex.org/W2029843723,Omid Abouali,author
+1108,https://openalex.org/W2029843723,Javad Meigolinedjad,author
+1109,https://openalex.org/W2029843723,"Research & Development Deputyship, Shiraz Municipality, Shiraz, Iran",institution
+1111,https://openalex.org/W2029843723,Goodarz Ahmadi,author
+1112,https://openalex.org/W2029843723,"Aeronautical & Mechanical Engineering Department, Clarkson University, Potsdam, NY, USA",institution
+1113,https://openalex.org/W2029843723,US,country
+1114,https://openalex.org/W2029843723,jet fans,keyword
+1115,https://openalex.org/W2029843723,ventilation,keyword
+1116,https://openalex.org/W2029843723,urban tunnel,keyword
+1117,https://openalex.org/W2029843723,traffic jam condition,keyword
+1118,https://openalex.org/W2029843723,numerical investigation,keyword
+1119,https://openalex.org/W1986635546,Olga I. Poddaeva,author
+1120,https://openalex.org/W1986635546,Moscow State University of Civil Engineering (MGSU),institution
+1121,https://openalex.org/W1986635546,RU,country
+1122,https://openalex.org/W1986635546,July S. Buslaeva,author
+1125,https://openalex.org/W1986635546,Dmitry S. Gribach,author
+1128,https://openalex.org/W1986635546,wind effect,keyword
+1129,https://openalex.org/W1986635546,physical model,keyword
+1130,https://openalex.org/W1986635546,high-rise,keyword
+1131,https://openalex.org/W2097155009,A.M. Horr,author
+1132,https://openalex.org/W2097155009,"1 Faculty of Engineering, IK International University, Tehran, Iran",institution
+1133,https://openalex.org/W2097155009,IR,country
+1134,https://openalex.org/W2097155009,M. Safi,author
+1135,https://openalex.org/W2097155009,"2 Power and Water Institute of Technology, Tehran, Iran",institution
+1137,https://openalex.org/W2097155009,S.A. Alavinasab,author
+1138,https://openalex.org/W2097155009,"3 Faculty of Engineering, Tarbiat Moddares University, Tehran, Iran",institution
+1140,https://openalex.org/W2097155009,cfd theory,keyword
+1141,https://openalex.org/W2097155009,large domes,keyword
+1142,https://openalex.org/W3098567749,Yuriy S. Legovich,author
+1143,https://openalex.org/W3098567749,"V. A. Trapeznikov Institute of Control,Sciences of Russian Academy of Sciences,Moscow,Russia",institution
+1144,https://openalex.org/W3098567749,RU,country
+1145,https://openalex.org/W3098567749,Pavel V. Miodushevsky,author
+1148,https://openalex.org/W3098567749,Alexander P. Miodushevsky,author
+1151,https://openalex.org/W3098567749,Vladimir I. Goncharenko,author
+1152,https://openalex.org/W3098567749,"V. A. Trapeznikov Institute of Control Sciences of Russian Academy of Sciences, Moscow Aviation Institute (National Research University), Moscow, Russia",institution
+1154,https://openalex.org/W3098567749,Sekou A.K. Diane,author
+1157,https://openalex.org/W3098567749,uav aeromechanics,keyword
+1158,https://openalex.org/W3098567749,laboratory stand,keyword
+1159,https://openalex.org/W3098567749,flight,keyword
+1160,https://openalex.org/W3098567749,dynamics,keyword
+1161,https://openalex.org/W3022478901,Mohammad Reza Talaee,author
+1162,https://openalex.org/W3022478901,"School of Railway Engineering, Iran University of Science and Technology (IUST), Tehran, Iran",institution
+1163,https://openalex.org/W3022478901,IR,country
+1164,https://openalex.org/W3022478901,Behtash Hakimzadeh,author
+1167,https://openalex.org/W3022478901,high speed railway,keyword
+1168,https://openalex.org/W3022478901,ballast,keyword
+1169,https://openalex.org/W3022478901,vibration,keyword
+1170,https://openalex.org/W4317584321,Marc Shaw-Lecerf,author
+1171,https://openalex.org/W4317584321,NASA Ames Research Center,institution
+1172,https://openalex.org/W4317584321,US,country
+1173,https://openalex.org/W4317584321,E. Lara Lash,author
+1176,https://openalex.org/W4317584321,David D. Murakami,author
+1179,https://openalex.org/W4317584321,Nettie Roozeboom,author
+1182,https://openalex.org/W4317584321,Jie Li,author
+1183,https://openalex.org/W4317584321,"Metis Technology Solutions, Inc.",institution
+1184,https://openalex.org/W4317584321,Paul G. Bremner,author
+1185,https://openalex.org/W4317584321,aerohydroPLUS,institution
+1186,https://openalex.org/W4317584321,RU,country
+1187,https://openalex.org/W4317584321,paint,keyword
+1188,https://openalex.org/W4317584321,unsteady,keyword
+1189,https://openalex.org/W4317584321,pressure-sensitive,keyword
+1190,https://openalex.org/W3211343071,A S Rtishcheva,author
+1191,https://openalex.org/W3211343071,"Central Aerohydrodynamic Institute named after Professor N. E. Zhukovsky (TsAGI) Russia, 140180, Zhukovsky, 1 Zhykovsky Street",institution
+1192,https://openalex.org/W3211343071,RU,country
+1193,https://openalex.org/W3211343071,prototype heater,keyword
+1194,https://openalex.org/W2946704674,D A Vnuchkov,author
+1195,https://openalex.org/W2946704674,"Khristianovich Institute of Theoretical and Applied Mechanics, Siberian Branch of Russian Academy of Sciences",institution
+1196,https://openalex.org/W2946704674,RU,country
+1197,https://openalex.org/W2946704674,V I Zvegintsev,author
+1200,https://openalex.org/W2946704674,D G Nalivaychenko,author
+1203,https://openalex.org/W2946704674,supersonic polyclinic inlet,keyword
+1204,https://openalex.org/W2946704674,throttling characteristics,keyword
+1205,https://openalex.org/W3125628303,А. Н. Корякин,author
+1206,https://openalex.org/W3125628303,Central Aerohydrodynamic Institute (TsAGI),institution
+1207,https://openalex.org/W3125628303,RU,country
+1208,https://openalex.org/W3125628303,dynamic vibration damper,keyword
+1209,https://openalex.org/W3125628303,aircraft models,keyword
+1210,https://openalex.org/W3125628303,wind,keyword
+1211,https://openalex.org/W2582430223,Eduard Borisovich Vasilevskii,author
+1212,https://openalex.org/W2582430223,"Central Aerohydrodynamic Institute, Zhukovsky Moscow region, Russia",institution
+1213,https://openalex.org/W2582430223,RU,country
+1214,https://openalex.org/W2582430223,Boris Evgen'evich Zhestkov,author
+1215,https://openalex.org/W2582430223,"Central Aerohydrodynamic Institute (TsAGI), 1 Zhukovsky Str., Zhukovsky, Moscow Region 140180, Russia",institution
+1217,https://openalex.org/W2582430223,Vladimir Igorevich Sakharov,author
+1218,https://openalex.org/W2582430223,"Moscow State University, Institute of Mechanics, 1, Michurinskii prospect, Moscow, 119192, Russia",institution
+1220,https://openalex.org/W2582430223,induction plasmatron,keyword
+1221,https://openalex.org/W2582430223,tunnel,keyword
+1222,https://openalex.org/W2077070931,Igor Victorovic Ershov,author
+1223,https://openalex.org/W2077070931,Central Research Institute of Machine Building (Russia),institution
+1224,https://openalex.org/W2077070931,RU,country
+1225,https://openalex.org/W2077070931,Vladimir N. Otmennikov,author
+1228,https://openalex.org/W2077070931,gas flow</title>,keyword
+1229,https://openalex.org/W2077070931,tv,keyword
+1230,https://openalex.org/W2077070931,color-shadow,keyword
+1231,https://openalex.org/W3082482962,Piotr Górski,author
+1232,https://openalex.org/W3082482962,Department of Structural Mechanics; Faculty of Civil Engineering; Opole University of Technology,institution
+1233,https://openalex.org/W3082482962,GB,country
+1234,https://openalex.org/W3082482962,PL,country
+1235,https://openalex.org/W3082482962,Stanislav Pospišil,author
+1236,https://openalex.org/W3082482962,Academy of Sciences of the Czech Republik; Institute of Theoretical and Applied Mechanics,institution
+1237,https://openalex.org/W3082482962,RU,country
+1238,https://openalex.org/W3082482962,Sergej Kuznetsov,author
+1241,https://openalex.org/W3082482962,Marcin Tatara,author
+1242,https://openalex.org/W3082482962,Department of Road and Bridges; Faculty of Civil Engineering; Opole University of Technology,institution
+1245,https://openalex.org/W3082482962,Ante Marušić,author
+1248,https://openalex.org/W3082482962,iced cable,keyword
+1249,https://openalex.org/W3082482962,bridge,keyword
+1250,https://openalex.org/W3082482962,strouhal number,keyword
+1251,https://openalex.org/W3082482962,cable-stayed,keyword
+1252,https://openalex.org/W2968390667,G N Shmelev,author
+1253,https://openalex.org/W2968390667,"Kazan State University of Architecture and Engineering, 1 Zelenaya street, Kazan, 420043, Russian Federation",institution
+1254,https://openalex.org/W2968390667,RU,country
+1255,https://openalex.org/W2968390667,L S Sabitov,author
+1256,https://openalex.org/W2968390667,"Kazan (Volga region) Federal University, 18 Kremlevskaya street, Kazan, 420008, Russian Federation; Kazan State Power Engineering University, 51 Krasnoselskaya street, Kazan, 420066, Russian Federation",institution
+1258,https://openalex.org/W2968390667,I A Galimullin,author
+1261,https://openalex.org/W2968390667,L I Khaidarov,author
+1264,https://openalex.org/W2968390667,A S Antonov,author
+1267,https://openalex.org/W2968390667,wind impact,keyword
+1268,https://openalex.org/W2968390667,stands,keyword
+1269,https://openalex.org/W2968390667,numerical study,keyword
+1270,https://openalex.org/W2968390667,canopies,keyword
+1271,https://openalex.org/W802125580,S. Bosnyakov,author
+1272,https://openalex.org/W802125580,"Central Aerohydrodynamic Institute (TsAGI) 1 Zhukovsky Str., Zhukovsky, Moscow Region 140180, Russia",institution
+1273,https://openalex.org/W802125580,RU,country
+1274,https://openalex.org/W802125580,E. Kazhan,author
+1277,https://openalex.org/W802125580,I. Kursakov,author
+1280,https://openalex.org/W802125580,S. Matyash,author
+1283,https://openalex.org/W802125580,S. Mikhaylov,author
+1286,https://openalex.org/W802125580,A. Lysenkov,author
+1289,https://openalex.org/W802125580,aerodynamic performance,keyword
+1290,https://openalex.org/W802125580,free flight,keyword
+1291,https://openalex.org/W802125580,high-lift,keyword
+1292,https://openalex.org/W802125580,in-tunnel,keyword
+1293,https://openalex.org/W2113968971,Hamid Montazeri,author
+1294,https://openalex.org/W2113968971,"Department of Mechanical Engineering, School of Engineering, Yazd University, Yazd, Iran",institution
+1295,https://openalex.org/W2113968971,IR,country
+1296,https://openalex.org/W2113968971,Ruhollah Azizian,author
+1299,https://openalex.org/W2113968971,natural ventilation performance,keyword
+1300,https://openalex.org/W2113968971,wind,keyword
+1301,https://openalex.org/W2113968971,two-sided,keyword

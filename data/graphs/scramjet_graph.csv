@@ -1,0 +1,1031 @@
+,paper_id,target,type
+0,https://openalex.org/W2942446037,Gautam Choubey,author
+1,https://openalex.org/W2942446037,"Department of Mechanical Engineering, MITS-UGC Autonomous Institute, Andhra Pradesh, 517325, India",institution
+2,https://openalex.org/W2942446037,IN,country
+3,https://openalex.org/W2942446037,Yuvarajan Devarajan,author
+6,https://openalex.org/W2942446037,Wei Huang,author
+7,https://openalex.org/W2942446037,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan 410073, PR China",institution
+8,https://openalex.org/W2942446037,CN,country
+9,https://openalex.org/W2942446037,Kulmani Mehar,author
+12,https://openalex.org/W2942446037,Manvendra Tiwari,author
+15,https://openalex.org/W2942446037,K.M. Pandey,author
+16,https://openalex.org/W2942446037,"Department of Mechanical Engineering, National Institute of Technology Silchar, Assam, India",institution
+18,https://openalex.org/W2942446037,scramjet,keyword
+19,https://openalex.org/W2942446037,cavity-based,keyword
+20,https://openalex.org/W4252497720,Mostafa Barzegar Gerdroodbary,author
+21,https://openalex.org/W4252497720,"Department of Mechanical Engineering, Babol Noshirvani University of Technology, Babol, Iran",institution
+22,https://openalex.org/W4252497720,IR,country
+23,https://openalex.org/W4252497720,introduction,keyword
+24,https://openalex.org/W2115561360,V. Semenov,author
+25,https://openalex.org/W2115561360,"CIAMB, Moscow, Russia",institution
+26,https://openalex.org/W2115561360,RU,country
+27,https://openalex.org/W2115561360,V. Kislykh,author
+28,https://openalex.org/W2115561360,"TsNIIMASh, Korolev, Russia",institution
+30,https://openalex.org/W2115561360,A. Kondratov,author
+31,https://openalex.org/W2115561360,"LII, Zhukovsky, Russia",institution
+33,https://openalex.org/W2115561360,hypersonic flight laboratory,keyword
+34,https://openalex.org/W2115561360,igla,keyword
+35,https://openalex.org/W2115561360,complex investigation,keyword
+36,https://openalex.org/W4205735414,Pourya Seyedmatin,author
+37,https://openalex.org/W4205735414,"Tarbiat Modares University of Tehran, Tehran, Iran",institution
+38,https://openalex.org/W4205735414,IR,country
+39,https://openalex.org/W4205735414,Mohammad Ebadollahi,author
+40,https://openalex.org/W4205735414,"Khajeh Nasir Toosi University of Technology, Tehran, Iran",institution
+42,https://openalex.org/W4205735414,Mojtaba Bezaatpour,author
+43,https://openalex.org/W4205735414,"Sahand University of Technology, Tabriz, Iran",institution
+45,https://openalex.org/W4205735414,Majid Amidpour,author
+48,https://openalex.org/W4205735414,hydrogen,keyword
+49,https://openalex.org/W4205735414,multi-stage,keyword
+50,https://openalex.org/W2810573212,Wei Huang,author
+51,https://openalex.org/W2810573212,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan, 410073, People's Republic of China",institution
+52,https://openalex.org/W2810573212,CN,country
+53,https://openalex.org/W2810573212,Zhao-bo Du,author
+56,https://openalex.org/W2810573212,Li Yan,author
+59,https://openalex.org/W2810573212,R. Moradi,author
+60,https://openalex.org/W2810573212,"Department of Chemical Engineering, School of Engineering & Applied Science, Khazar University, Baku, Azerbaijan",institution
+61,https://openalex.org/W2810573212,AZ,country
+62,https://openalex.org/W2810573212,flame propagation,keyword
+63,https://openalex.org/W2810573212,dual-mode,keyword
+64,https://openalex.org/W2947743645,Wei Huang,author
+65,https://openalex.org/W2947743645,"College of Aerospace Science and Engineering, National University of Defense Technology, Changsha, Hunan, 410073, People's Republic of China",institution
+66,https://openalex.org/W2947743645,CN,country
+67,https://openalex.org/W2947743645,Zhao-bo Du,author
+70,https://openalex.org/W2947743645,Li Yan,author
+73,https://openalex.org/W2947743645,Zhi-xun Xia,author
+76,https://openalex.org/W2947743645,supersonic mixing,keyword
+77,https://openalex.org/W2947743645,hypersonic flights,keyword
+78,https://openalex.org/W2947743645,propulsion systems,keyword
+79,https://openalex.org/W2330453430,Joseph Shang,author
+80,https://openalex.org/W2330453430,Wright State University,institution
+81,https://openalex.org/W2330453430,US,country
+82,https://openalex.org/W2330453430,Sergey Surzhikov,author
+83,https://openalex.org/W2330453430,Russian Academy of Sciences,institution
+84,https://openalex.org/W2330453430,RU,country
+85,https://openalex.org/W2330453430,scramjet combustion chamber,keyword
+86,https://openalex.org/W2330453430,radiative heating,keyword
+87,https://openalex.org/W2330453430,hydrocarbon fuels,keyword
+88,https://openalex.org/W2330453430,convective,keyword
+89,https://openalex.org/W2772830642,Vladimir A. Sabelnikov,author
+90,https://openalex.org/W2772830642,"Department of Multi-Physics for Energetics, ONERA-The French Aerospace Laboratory - Palaiseau Center, Palaiseau, France; TsAGI, Moscow Region, Russia",institution
+91,https://openalex.org/W2772830642,FR,country
+92,https://openalex.org/W2772830642,Vladimir V. Vlasenko,author
+93,https://openalex.org/W2772830642,"TsAGI, Zhukovsky, 140180, Moscow Region, Russia",institution
+94,https://openalex.org/W2772830642,RU,country
+95,https://openalex.org/W2772830642,supersonic flows,keyword
+96,https://openalex.org/W2772830642,simulation,keyword
+97,https://openalex.org/W2060791897,Wei Huang,author
+98,https://openalex.org/W2060791897,"Center of Hypersonic Propulsion, College of Aerospace and Materials Engineering, National University of Defense Technology, Changsha, Hunan 410073, People's Republic of China; Centre for CFD, School of Process, Environmental and Materials Engineering, University of Leeds, LS2 9JT, United Kingdom",institution
+99,https://openalex.org/W2060791897,CN,country
+100,https://openalex.org/W2060791897,GB,country
+101,https://openalex.org/W2060791897,Zhen-guo Wang,author
+102,https://openalex.org/W2060791897,"Center of Hypersonic Propulsion, College of Aerospace and Materials Engineering, National University of Defense Technology, Changsha, Hunan 410073, People's Republic of China",institution
+104,https://openalex.org/W2060791897,Mohamed Pourkashanian,author
+105,https://openalex.org/W2060791897,"Centre for CFD, School of Process, Environmental and Materials Engineering, University of Leeds, LS2 9JT, United Kingdom",institution
+107,https://openalex.org/W2060791897,Lin Ma,author
+110,https://openalex.org/W2060791897,Derek B. Ingham,author
+113,https://openalex.org/W2060791897,Shi-bin Luo,author
+116,https://openalex.org/W2060791897,Jing Lei,author
+119,https://openalex.org/W2060791897,Jun Liu,author
+122,https://openalex.org/W2060791897,shock wave transition,keyword
+123,https://openalex.org/W2060791897,shock wave,keyword
+124,https://openalex.org/W2060791897,numerical investigation,keyword
+125,https://openalex.org/W2060791897,three-dimensional,keyword
+126,https://openalex.org/W2955009106,S E Yakush,author
+127,https://openalex.org/W2955009106,"Bauman Moscow State Technical University, Baumanskaya 2-ya, 5, Moscow, 105005, Russia; Ishlinsky Institute for Problems in Mechanics RAS, Ave. Vernadskogo 101 Bldg 1, Moscow, 119526, Russia",institution
+128,https://openalex.org/W2955009106,RU,country
+129,https://openalex.org/W2955009106,S A Rashkovskiy,author
+132,https://openalex.org/W2955009106,A I Bryzgalov,author
+133,https://openalex.org/W2955009106,"Ishlinsky Institute for Problems in Mechanics RAS, Ave. Vernadskogo 101 Bldg 1, Moscow, 119526, Russia",institution
+135,https://openalex.org/W2955009106,solid fuel scramjet,keyword
+136,https://openalex.org/W2955009106,combustion,keyword
+137,https://openalex.org/W2955009106,solid fuel,keyword
+138,https://openalex.org/W2955009106,burnout,keyword
+139,https://openalex.org/W2955009106,channel geometry variation,keyword
+140,https://openalex.org/W3155938030,Abdulla Khamis Alhassani,author
+141,https://openalex.org/W3155938030,"Department of Mechanical Engineering, Abu Dhabi University, Abu Dhabi, United Arab Emirates",institution
+142,https://openalex.org/W3155938030,AE,country
+143,https://openalex.org/W3155938030,Mohanad Tarek Mohamed,author
+146,https://openalex.org/W3155938030,Mohammed Fares,author
+149,https://openalex.org/W3155938030,Sharul Sham Dol,author
+152,https://openalex.org/W3155938030,novel intake design system,keyword
+153,https://openalex.org/W3155938030,propulsion,keyword
+154,https://openalex.org/W3155938030,shock,keyword
+155,https://openalex.org/W2907186097,R. Rouzbar,author
+156,https://openalex.org/W2907186097,Middle East Technical UniversityAnkaraTurkey,institution
+157,https://openalex.org/W2907186097,TR,country
+158,https://openalex.org/W2907186097,Sinan Eyi,author
+161,https://openalex.org/W2907186097,scramjet combustor,keyword
+162,https://openalex.org/W2907186097,newton–krylov method,keyword
+163,https://openalex.org/W2907186097,cavity-based,keyword
+164,https://openalex.org/W2907186097,jacobian-free,keyword
+165,https://openalex.org/W2799379648,R K Seleznev,author
+166,https://openalex.org/W2799379648,"Dukhov Research Institute of Automatics (VNIIA), Suschevskaya Street 22, Moscow 127055, Russia; Ishlinsky Institute for Problems in Mechanics RAS, Vernadsky Street 101(1), Moscow, 119526, Russia; Moscow Institute of Physics and Technology (State University), 9 Institutskiy per., Dolgoprudny, Moscow Region, 141701, Russia",institution
+167,https://openalex.org/W2799379648,RU,country
+168,https://openalex.org/W4380841258,Gautam Choubey,author
+169,https://openalex.org/W4380841258,"Department of Mechanical & Aerospace Engineering, Institute of Infrastructure Technology Research and Management (IITRAM) Gujarat 380026, India",institution
+170,https://openalex.org/W4380841258,IN,country
+171,https://openalex.org/W4380841258,Malhar Solanki,author
+174,https://openalex.org/W4380841258,Om Patel,author
+177,https://openalex.org/W4380841258,Yuvarajan Devarajan,author
+178,https://openalex.org/W4380841258,"Department of Automobile Engineering, Saveetha School of Engineering, SIMATS, Chennai, Tamilnadu 602105, India",institution
+180,https://openalex.org/W4380841258,Wei Huang,author
+181,https://openalex.org/W4380841258,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan 410073, People's Republic of China",institution
+182,https://openalex.org/W4380841258,CN,country
+183,https://openalex.org/W4380841258,scramjet combustor,keyword
+184,https://openalex.org/W4380841258,different strut design,keyword
+185,https://openalex.org/W4380841258,h2,keyword
+186,https://openalex.org/W4380841258,two-strut,keyword
+187,https://openalex.org/W2511063717,Ye Tian,author
+188,https://openalex.org/W2511063717,"Science and Technology on Scramjet Laboratory of Hypervelocity Aerodynamics Institute, CARDC, Mianyang, China",institution
+189,https://openalex.org/W2511063717,CN,country
+190,https://openalex.org/W2511063717,Shunhua Yang,author
+193,https://openalex.org/W2511063717,Jialing Le,author
+196,https://openalex.org/W2511063717,Tie Su,author
+197,https://openalex.org/W2511063717,"Facility Design and Instrumentation Institute of CARDC, Mianyang, China",institution
+199,https://openalex.org/W2511063717,Maoxiong Yue,author
+202,https://openalex.org/W2511063717,Fuyu Zhong,author
+205,https://openalex.org/W2511063717,Xiaoqiang Tian,author
+208,https://openalex.org/W2511063717,scramjet combustor,keyword
+209,https://openalex.org/W2511063717,flame stabilization modes,keyword
+210,https://openalex.org/W2511063717,combustion,keyword
+211,https://openalex.org/W2511063717,hydrogen,keyword
+212,https://openalex.org/W3135143354,Chen Kong,author
+213,https://openalex.org/W3135143354,"Harbin Institute of Technology, Harbin, Heilongjiang 150001, China",institution
+214,https://openalex.org/W3135143354,CN,country
+215,https://openalex.org/W3135143354,Juntao Chang,author
+218,https://openalex.org/W3135143354,Yunfei Li,author
+221,https://openalex.org/W3135143354,Ziao Wang,author
+224,https://openalex.org/W3135143354,velocity field prediction,keyword
+225,https://openalex.org/W3135143354,scramjet isolator,keyword
+226,https://openalex.org/W3135143354,deep learning,keyword
+227,https://openalex.org/W3135143354,deep learning approach,keyword
+228,https://openalex.org/W4312181656,Afşin Kılıçarslan ÖZBEK,author
+229,https://openalex.org/W4312181656,"GAZİ ÜNİVERSİTESİ, FEN BİLİMLERİ ENSTİTÜSÜ",institution
+230,https://openalex.org/W4312181656,TR,country
+231,https://openalex.org/W4312181656,Serhat KARYEYEN,author
+232,https://openalex.org/W4312181656,GAZİ ÜNİVERSİTESİ,institution
+234,https://openalex.org/W4312181656,combustion,keyword
+235,https://openalex.org/W4312181656,oxygen,keyword
+236,https://openalex.org/W4283522318,Guangwei Ma,author
+237,https://openalex.org/W4283522318,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha 410073, China",institution
+238,https://openalex.org/W4283522318,CN,country
+239,https://openalex.org/W4283522318,Mingbo Sun,author
+242,https://openalex.org/W4283522318,Guoyan Zhao,author
+245,https://openalex.org/W4283522318,Changhai Liang,author
+248,https://openalex.org/W4283522318,Hongbo Wang,author
+251,https://openalex.org/W4283522318,Jiangfei Yu,author
+254,https://openalex.org/W4283522318,injection scheme,keyword
+255,https://openalex.org/W2908605412,K Yu Arefyev,author
+256,https://openalex.org/W2908605412,"Bauman Moscow State Technical University, 2nd Baumanskaya Street 5, Moscow 105005, Russia; Central Institute of Aviation Motors, Aviamotornaya Street 2, Moscow 111116, Russia; Moscow Institute of Physics and Technology, Institutskiy Pereulok 9, Dolgoprudny, Moscow Region 141700, Russia",institution
+257,https://openalex.org/W2908605412,RU,country
+258,https://openalex.org/W2908605412,N V Kukshinov,author
+259,https://openalex.org/W2908605412,"Bauman Moscow State Technical University, 2nd Baumanskaya Street 5, Moscow 105005, Russia; Central Institute of Aviation Motors, Aviamotornaya Street 2, Moscow 111116, Russia",institution
+261,https://openalex.org/W2908605412,A N Prokhorov,author
+262,https://openalex.org/W2908605412,"Central Institute of Aviation Motors, Aviamotornaya Street 2, Moscow 111116, Russia; Moscow Institute of Physics and Technology, Institutskiy Pereulok 9, Dolgoprudny, Moscow Region 141700, Russia",institution
+264,https://openalex.org/W2908605412,power-units power-units,keyword
+265,https://openalex.org/W2908605412,vehicles,keyword
+266,https://openalex.org/W2908605412,high-speed,keyword
+267,https://openalex.org/W3135443526,Shibin Luo,author
+268,https://openalex.org/W3135443526,School of Automation Central South University  Changsha 410083 China,institution
+269,https://openalex.org/W3135443526,CN,country
+270,https://openalex.org/W3135443526,Dequan Xu,author
+271,https://openalex.org/W3135443526,"School of Automation, Central South University, Changsha 410083, China",institution
+273,https://openalex.org/W3135443526,Jiawen Song,author
+274,https://openalex.org/W3135443526,"School of Aeronautics and Astronautics, Central South University, Changsha 410083, China",institution
+276,https://openalex.org/W3135443526,Jian Liu,author
+279,https://openalex.org/W3135443526,regenerative cooling technologies,keyword
+280,https://openalex.org/W2312577630,Alexander Roudakov,author
+281,https://openalex.org/W2312577630,"Central Inst. of Aviation Motors, Moscow, Russia",institution
+282,https://openalex.org/W2312577630,RU,country
+283,https://openalex.org/W2312577630,Vyacheslav Semenov,author
+286,https://openalex.org/W2312577630,Valeriy Kopchenov,author
+289,https://openalex.org/W2312577630,John Hicks,author
+290,https://openalex.org/W2312577630,"NASA, Flight Research Center, Edwards, CA",institution
+291,https://openalex.org/W2312577630,US,country
+292,https://openalex.org/W2312577630,scramjet engine,keyword
+293,https://openalex.org/W2312577630,hypersonic flying laboratory,keyword
+294,https://openalex.org/W2312577630,future flight test plans,keyword
+295,https://openalex.org/W2312577630,hydrogen-fueled,keyword
+296,https://openalex.org/W2591711495,Vadim Volokhov,author
+297,https://openalex.org/W2591711495,"Institute of Problems of Chemical Physics, Chernogolovka, Russia",institution
+298,https://openalex.org/W2591711495,RU,country
+299,https://openalex.org/W2591711495,Pavel Toktaliev,author
+302,https://openalex.org/W2591711495,Sergei Martynenko,author
+305,https://openalex.org/W2591711495,Leonid Yanovskiy,author
+308,https://openalex.org/W2591711495,Aleksandr Volokhov,author
+311,https://openalex.org/W2591711495,Dmitry Varlamov,author
+314,https://openalex.org/W2591711495,hypersonic flying vehicle,keyword
+315,https://openalex.org/W2591711495,physicochemical processes,keyword
+316,https://openalex.org/W2591711495,simulation,keyword
+317,https://openalex.org/W2591711495,fuel,keyword
+318,https://openalex.org/W2074886477,C. McClinton,author
+319,https://openalex.org/W2074886477,"NASA, Langley Research Center, Hampton, VA",institution
+320,https://openalex.org/W2074886477,US,country
+321,https://openalex.org/W2074886477,A. Rondakov,author
+322,https://openalex.org/W2074886477,"Central Institute of Aviation Motors, Moscow, Russia",institution
+323,https://openalex.org/W2074886477,RU,country
+324,https://openalex.org/W2074886477,V. Semenov,author
+327,https://openalex.org/W2074886477,V. Kopehenov,author
+330,https://openalex.org/W2074886477,scramjet flight test engine,keyword
+331,https://openalex.org/W2074886477,comparative flow path analysis,keyword
+332,https://openalex.org/W2074886477,axisymmetric hydrogen,keyword
+333,https://openalex.org/W2074886477,design assessment,keyword
+334,https://openalex.org/W1993199891,R. T. Voland,author
+335,https://openalex.org/W1993199891,"NASA, Langley Research Center, Hampton, VA",institution
+336,https://openalex.org/W1993199891,US,country
+337,https://openalex.org/W1993199891,A. H. Auslender,author
+340,https://openalex.org/W1993199891,M. K. Smart,author
+341,https://openalex.org/W1993199891,"Lockheed Martin Engineering Sciences, Hampton, VA",institution
+343,https://openalex.org/W1993199891,A. S. Roudakov,author
+344,https://openalex.org/W1993199891,"Central Inst. of Aviation Motors, Moscow, Russia",institution
+345,https://openalex.org/W1993199891,RU,country
+346,https://openalex.org/W1993199891,V. L. Semenov,author
+349,https://openalex.org/W1993199891,V. Kopchenov,author
+352,https://openalex.org/W1993199891,scramjet flight,keyword
+353,https://openalex.org/W1993199891,ciam/nasa mach,keyword
+354,https://openalex.org/W1993199891,ground,keyword
+355,https://openalex.org/W1993199891,test,keyword
+356,https://openalex.org/W2000874959,A M Starik,author
+357,https://openalex.org/W2000874959,"Central Institute of Aviation Motors, Scientific-Educational Center ‘Physical and Chemical Kinetics and Combustion’, Aviamotornaya st. 2, Moscow 111116, Russia",institution
+358,https://openalex.org/W2000874959,RU,country
+359,https://openalex.org/W2000874959,L V Bezgin,author
+362,https://openalex.org/W2000874959,V I Kopchenov,author
+365,https://openalex.org/W2000874959,B I Loukhovitski,author
+368,https://openalex.org/W2000874959,A S Sharipov,author
+371,https://openalex.org/W2000874959,N S Titova,author
+374,https://openalex.org/W2000874959,scramjet combustor,keyword
+375,https://openalex.org/W2000874959,combustion performance,keyword
+376,https://openalex.org/W2000874959,oxygen molecules,keyword
+377,https://openalex.org/W2000874959,electric-discharge-activated,keyword
+378,https://openalex.org/W4205324936,Igor Bedarev,author
+379,https://openalex.org/W4205324936,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS Novosibirsk, Russian Federation",institution
+380,https://openalex.org/W4205324936,RU,country
+381,https://openalex.org/W4205324936,Valentin Temerbekov,author
+382,https://openalex.org/W4205324936,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS Novosibirsk, Russian Federation Novosibirsk State Technical University Novosibirsk, Russian Federation",institution
+384,https://openalex.org/W4205324936,Aleksandr Fedorov,author
+385,https://openalex.org/W4205324936,"Khristianovich Institute of Theoretical and Applied Mechanics SB RAS Novosibirsk, Russian Federation, Novosibirsk State University Novosibirsk, Russian Federation Novosibirsk State Technical University Novosibirsk, Russian Federation",institution
+387,https://openalex.org/W4205324936,Kristina Rylova,author
+390,https://openalex.org/W4205324936,ignition initiation,keyword
+391,https://openalex.org/W2268654036,Wei Huang,author
+392,https://openalex.org/W2268654036,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan 410073, People's Republic of China",institution
+393,https://openalex.org/W2268654036,CN,country
+394,https://openalex.org/W2268654036,Li Yan,author
+397,https://openalex.org/W2268654036,ram–scram transition mechanism,keyword
+398,https://openalex.org/W2268654036,strut-based,keyword
+399,https://openalex.org/W2268654036,dual-mode,keyword
+400,https://openalex.org/W3023575922,Gautam Choubey,author
+401,https://openalex.org/W3023575922,"Department of Mechanical Engineering, Institute of Infrastructure Technology Research and Management (IITRAM), Gujarat, 380026, India",institution
+402,https://openalex.org/W3023575922,IN,country
+403,https://openalex.org/W3023575922,Yuvarajan D,author
+404,https://openalex.org/W3023575922,"Department of Mechanical Engineering, Madanapalle Institute of Technology and Science, Andhra Pradesh, 517325, India",institution
+406,https://openalex.org/W3023575922,Wei Huang,author
+407,https://openalex.org/W3023575922,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, 410073, Hunan, PR China",institution
+408,https://openalex.org/W3023575922,CN,country
+409,https://openalex.org/W3023575922,Li Yan,author
+412,https://openalex.org/W3023575922,Houman Babazadeh,author
+413,https://openalex.org/W3023575922,"Faculty of Environment and Labour Safety, Ton Duc Thang University, Ho Chi Minh City, Viet Nam",institution
+414,https://openalex.org/W3023575922,VN,country
+415,https://openalex.org/W3023575922,K.M. Pandey,author
+416,https://openalex.org/W3023575922,"Department of Mechanical Engineering, National Institute of Technology Silchar, Assam, India",institution
+418,https://openalex.org/W3023575922,scramjet engines,keyword
+419,https://openalex.org/W3023575922,hydrogen,keyword
+420,https://openalex.org/W3023575922,fuel,keyword
+421,https://openalex.org/W3047542899,Gautam Choubey,author
+422,https://openalex.org/W3047542899,"Department of Mechanical Engineering, Institute of Infrastructure Technology Research and Management (IITRAM), Gujarat, 380026, India",institution
+423,https://openalex.org/W3047542899,IN,country
+424,https://openalex.org/W3047542899,Devarajan Yuvarajan,author
+425,https://openalex.org/W3047542899,"Department of Mechanical Engineering, Madanapalle Institute of Technology and Science, Andhra Pradesh, 517325, India",institution
+427,https://openalex.org/W3047542899,Wei Huang,author
+428,https://openalex.org/W3047542899,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan, 410073, China",institution
+429,https://openalex.org/W3047542899,CN,country
+430,https://openalex.org/W3047542899,Ahmad Shafee,author
+431,https://openalex.org/W3047542899,"Division of Computational Physics, Institute for Computational Science, Ton Duc Thang University, Ho Chi Minh City, Viet Nam",institution
+432,https://openalex.org/W3047542899,VN,country
+433,https://openalex.org/W3047542899,K.M. Pandey,author
+434,https://openalex.org/W3047542899,"Department of Mechanical Engineering, National Institute of Technology Silchar, Assam, India",institution
+436,https://openalex.org/W3047542899,transverse injection technique,keyword
+437,https://openalex.org/W2342830206,Evgeniy Aleksandrovich Meshcheryakov,author
+438,https://openalex.org/W2342830206,"Central Aerohydrodynamic Institute (TsAGI), 1 Zhukovsky Str., Zhukovsky 140180, Russia",institution
+439,https://openalex.org/W2342830206,RU,country
+440,https://openalex.org/W2342830206,Violetta Vasilievna Yashina,author
+443,https://openalex.org/W2342830206,thermodynamic analysis,keyword
+444,https://openalex.org/W2342830206,dual-mode,keyword
+445,https://openalex.org/W2604878140,R K Seleznev,author
+446,https://openalex.org/W2604878140,"A. Ishlinsky Institute for Problems in Mechanics, RAS Vernadsky Street 101(1), Moscow, 119526, Russia; Dukhov Research Institute of Automatics (VNIIA), Suschevskaya Street 22, Moscow 127055, Russia; Moscow Institute of Physics and Technology (State University), 9 Institutskiy per., Dolgoprudny, Moscow Region, 141701, Russia",institution
+447,https://openalex.org/W2604878140,RU,country
+448,https://openalex.org/W2604878140,vag experiment,keyword
+449,https://openalex.org/W2604878140,two-dimensional,keyword
+450,https://openalex.org/W2604878140,quasi-one-dimensional,keyword
+451,https://openalex.org/W1980535935,Alexander S. Roudakov,author
+452,https://openalex.org/W1980535935,"Central Inst. of Aviation Motors, Moscow, Russia",institution
+453,https://openalex.org/W1980535935,RU,country
+454,https://openalex.org/W1980535935,Vyacheslav L. Semenov,author
+457,https://openalex.org/W1980535935,John W. Hicks,author
+458,https://openalex.org/W1980535935,"NASA, Flight Research Center, Edwards, CA",institution
+459,https://openalex.org/W1980535935,US,country
+460,https://openalex.org/W1980535935,scramjet flight program,keyword
+461,https://openalex.org/W1980535935,recent flight test results,keyword
+462,https://openalex.org/W1980535935,mach,keyword
+463,https://openalex.org/W1980535935,ciam-nasa,keyword
+464,https://openalex.org/W2013816779,Ming-Bo Sun,author
+465,https://openalex.org/W2013816779,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, 410073 Changsha, People’s Republic of China",institution
+466,https://openalex.org/W2013816779,CN,country
+467,https://openalex.org/W2013816779,Xing-Da Cui,author
+470,https://openalex.org/W2013816779,Hong-Bo Wang,author
+473,https://openalex.org/W2013816779,Vitaly Bychkov,author
+474,https://openalex.org/W2013816779,"Department of Physics, Umeå University,SE-90187 Umeå,Sweden",institution
+475,https://openalex.org/W2013816779,SE,country
+476,https://openalex.org/W2013816779,supersonic combustor,keyword
+477,https://openalex.org/W2013816779,flame,keyword
+478,https://openalex.org/W2013816779,ethylene,keyword
+479,https://openalex.org/W3150642989,Jeyakumar Suppandipillai,author
+480,https://openalex.org/W3150642989,"Department of Aeronautical Engineering, Kalasalingam Academy of Research and Education, Krishnankoil, India",institution
+481,https://openalex.org/W3150642989,IN,country
+482,https://openalex.org/W3150642989,Jayaraman Kandasamy,author
+483,https://openalex.org/W3150642989,"Department of Mechanical Engineering, Middle East Technical University, Ankara, Turkey",institution
+484,https://openalex.org/W3150642989,TR,country
+485,https://openalex.org/W3150642989,R. Sivakumar,author
+486,https://openalex.org/W3150642989,"School of Mechanical Engineering, Vellore Institute of Technology, Chennai Campus, Chennai, India",institution
+488,https://openalex.org/W3150642989,Mehmet Karaca,author
+489,https://openalex.org/W3150642989,"Department of Aerospace Engineering, Middle East Technical University, Ankara, Turkey",institution
+491,https://openalex.org/W3150642989,K Karthik,author
+494,https://openalex.org/W3150642989,scramjet combustor,keyword
+495,https://openalex.org/W3150642989,hydrogen jet pressure variations,keyword
+496,https://openalex.org/W3150642989,strut,keyword
+497,https://openalex.org/W2906114566,Zhaoxin Ren,author
+498,https://openalex.org/W2906114566,"School of Power and Energy, Northwestern Polytechnical University, Xi'an, 710072, China",institution
+499,https://openalex.org/W2906114566,CN,country
+500,https://openalex.org/W2906114566,Bing Wang,author
+501,https://openalex.org/W2906114566,"School of Aerospace Engineering, Tsinghua University, Beijing, 100084, China",institution
+503,https://openalex.org/W2906114566,Gaoming Xiang,author
+506,https://openalex.org/W2906114566,Dan Zhao,author
+507,https://openalex.org/W2906114566,"Department of Mechanical Engineering, College of Engineering, University of Canterbury, Private Bag 4800, Christchurch, 8140, New Zealand",institution
+508,https://openalex.org/W2906114566,NZ,country
+509,https://openalex.org/W2906114566,Longxi Zheng,author
+512,https://openalex.org/W2906114566,scramjets,keyword
+513,https://openalex.org/W2906114566,combustion,keyword
+514,https://openalex.org/W1448122488,Ye Tian,author
+515,https://openalex.org/W1448122488,"Science and Technology on Scramjet Laboratory, China Aerodynamics Research and Development Center, Hypersonic Institute, Mianyang 621000, China",institution
+516,https://openalex.org/W1448122488,CN,country
+517,https://openalex.org/W1448122488,Baoguo Xiao,author
+520,https://openalex.org/W1448122488,Shunping Zhang,author
+523,https://openalex.org/W1448122488,Jianwen Xing,author
+526,https://openalex.org/W1448122488,combustion performance,keyword
+527,https://openalex.org/W1448122488,kerosene,keyword
+528,https://openalex.org/W1448122488,dual-mode,keyword
+529,https://openalex.org/W1996020985,Vyacheslav A. Vinogradov,author
+530,https://openalex.org/W1996020985,"Central Institute of Aviation Motors, 111250  Moscow,   Russia",institution
+531,https://openalex.org/W1996020985,RU,country
+532,https://openalex.org/W1996020985,Sergey A. Kobigsky,author
+535,https://openalex.org/W1996020985,Michael D. Petrov,author
+538,https://openalex.org/W1996020985,kerosene fuel combustion,keyword
+539,https://openalex.org/W1996020985,supersonic flow,keyword
+540,https://openalex.org/W2915920801,R.K. Seleznev,author
+541,https://openalex.org/W2915920801,"Dukhov Research Institute of Automatics (VNIIA), Moscow, Russian Federation; Institute for Problem in Mechanics Russian Academy of Science (IPMech RAS), Moscow, Russian Federation; Moscow Institute for Physics and Technology (MIPT), Moscow, Russian Federation",institution
+542,https://openalex.org/W2915920801,RU,country
+543,https://openalex.org/W2915920801,S.T. Surzhikov,author
+544,https://openalex.org/W2915920801,"Dukhov Research Institute of Automatics (VNIIA), Moscow, Russian Federation; Institute for Problem in Mechanics Russian Academy of Science (IPMech RAS), Moscow, Russian Federation",institution
+546,https://openalex.org/W2915920801,J.S. Shang,author
+547,https://openalex.org/W2915920801,"Wright State University, Dayton, OH, USA",institution
+548,https://openalex.org/W2915920801,US,country
+549,https://openalex.org/W2915920801,scramjet,keyword
+550,https://openalex.org/W2998824842,Zhixiong Li,author
+551,https://openalex.org/W2998824842,"Engineering Research Center of Fujian University for Marine Intelligent Ship Equipment, Minjiang University, Fuzhou 350108, China; School of Mechanical, Materials, Mechatronic and Biomedical Engineering, University of Wollongong, NSW 2522, Australia",institution
+552,https://openalex.org/W2998824842,AU,country
+553,https://openalex.org/W2998824842,CN,country
+554,https://openalex.org/W2998824842,Tran Dinh Manh,author
+555,https://openalex.org/W2998824842,"Institute of Research and Development, Duy Tan University, Da Nang 550000, Vietnam",institution
+556,https://openalex.org/W2998824842,VN,country
+557,https://openalex.org/W2998824842,M. Barzegar Gerdroodbary,author
+558,https://openalex.org/W2998824842,"Department of Mechanical Engineering, Babol Noshirvani University of Technology, Babol, Iran",institution
+559,https://openalex.org/W2998824842,IR,country
+560,https://openalex.org/W2998824842,Nguyen Dang Nam,author
+563,https://openalex.org/W2998824842,R. Moradi,author
+564,https://openalex.org/W2998824842,"Department of Chemical Engineering, School of Engineering & Applied Science, Khazar University, Baku, Azerbaijan",institution
+565,https://openalex.org/W2998824842,AZ,country
+566,https://openalex.org/W2998824842,Houman Babazadeh,author
+567,https://openalex.org/W2998824842,"Department for Management of Science and Technology Development, Ton Duc Thang University, Ho Chi Minh City, Vietnam",institution
+569,https://openalex.org/W2998824842,vortex structure,keyword
+570,https://openalex.org/W2998824842,wedge shock generator,keyword
+571,https://openalex.org/W2998824842,trapezoidal cavity,keyword
+572,https://openalex.org/W3186899786,Senthilkumar Paramasivam,author
+573,https://openalex.org/W3186899786,Vellore Institute of Technology,institution
+574,https://openalex.org/W3186899786,IN,country
+575,https://openalex.org/W3186899786,Yuvraj Sarout,author
+576,https://openalex.org/W3186899786,Khalifa University,institution
+577,https://openalex.org/W3186899786,AE,country
+578,https://openalex.org/W3186899786,Didarul Islam,author
+581,https://openalex.org/W3186899786,Thundil Karuppa Raj R,author
+584,https://openalex.org/W3186899786,mach4 scramjet,keyword
+585,https://openalex.org/W3186899786,leading-edge,keyword
+586,https://openalex.org/W2314707340,Ramin Rouzbar,author
+587,https://openalex.org/W2314707340,Middle East Technical University,institution
+588,https://openalex.org/W2314707340,TR,country
+589,https://openalex.org/W2314707340,Sinan Eyi,author
+592,https://openalex.org/W2314707340,scramjet combustor,keyword
+593,https://openalex.org/W2314707340,dimensional flow analysis,keyword
+594,https://openalex.org/W2314707340,cavity-based,keyword
+595,https://openalex.org/W2001164873,B. M. Burakhanov,author
+596,https://openalex.org/W2001164873,"Institute for High Energy Densities, Associated Institute for High Temperatures, Russian Academy of Sciences, 127412, Moscow, Russia",institution
+597,https://openalex.org/W2001164873,RU,country
+598,https://openalex.org/W2001164873,A. P. Likhachev,author
+601,https://openalex.org/W2001164873,S. A. Medin,author
+604,https://openalex.org/W2001164873,V. A. Novikov,author
+607,https://openalex.org/W2001164873,V. I. Okunev,author
+610,https://openalex.org/W2001164873,V. Yu. Rickman,author
+613,https://openalex.org/W2001164873,V. A. Zeigarnik,author
+616,https://openalex.org/W3003440249,Pouria Seyed Matin,author
+617,https://openalex.org/W3003440249,"Tarbiat Modares University of Tehran, Teahran,Iran",institution
+618,https://openalex.org/W3003440249,IR,country
+619,https://openalex.org/W3003440249,Hadi Ghaebi,author
+620,https://openalex.org/W3003440249,"Department of Mechanical Engineering, Faculty of Engineering University of Mohaghegh Ardabili  Ardabil Iran",institution
+622,https://openalex.org/W3003440249,scramjet,keyword
+623,https://openalex.org/W3003440249,exergy analysis,keyword
+624,https://openalex.org/W3003440249,hydrogen,keyword
+625,https://openalex.org/W3003440249,multi-stage,keyword
+626,https://openalex.org/W2321491403,B. Burakhanov,author
+627,https://openalex.org/W2321491403,"Russian Academy of Sciences, Associated Inst. of High Temperatures, Moscow, Russia",institution
+628,https://openalex.org/W2321491403,RU,country
+629,https://openalex.org/W2321491403,A. Likhachev,author
+632,https://openalex.org/W2321491403,S. Medin,author
+635,https://openalex.org/W2321491403,V. Novikov,author
+638,https://openalex.org/W2321491403,V. Okunev,author
+641,https://openalex.org/W2321491403,V. Rickman,author
+644,https://openalex.org/W2321491403,scramjet mhd concept,keyword
+645,https://openalex.org/W2073994566,Wei Huang,author
+646,https://openalex.org/W2073994566,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan 410073, People's Republic of China",institution
+647,https://openalex.org/W2073994566,CN,country
+648,https://openalex.org/W2073994566,Li Yan,author
+651,https://openalex.org/W2073994566,Jian-guo Tan,author
+654,https://openalex.org/W2073994566,cycle propulsion systems,keyword
+655,https://openalex.org/W2073994566,mode transition technique,keyword
+656,https://openalex.org/W2074368208,Wei Huang,author
+657,https://openalex.org/W2074368208,"Centre for CFD, School of Process, Environmental and Materials Engineering, University of Leeds, LS2 9JT, UK; College of Aerospace and Materials Engineering, National University of Defense Technology, Changsha, Hunan 410073, China",institution
+658,https://openalex.org/W2074368208,CN,country
+659,https://openalex.org/W2074368208,GB,country
+660,https://openalex.org/W2074368208,Mohamed Pourkashanian,author
+661,https://openalex.org/W2074368208,"Centre for CFD, School of Process, Environmental and Materials Engineering, University of Leeds, LS2 9JT, UK",institution
+663,https://openalex.org/W2074368208,Lin Ma,author
+666,https://openalex.org/W2074368208,Derek B. Ingham,author
+669,https://openalex.org/W2074368208,Shi-bin Luo,author
+670,https://openalex.org/W2074368208,"College of Aerospace and Materials Engineering, National University of Defense Technology, Changsha, Hunan 410073, China",institution
+672,https://openalex.org/W2074368208,Zhen-guo Wang,author
+675,https://openalex.org/W2074368208,cavity flameholder,keyword
+676,https://openalex.org/W4388033999,Seyyed Amirreza Abdollahi,author
+677,https://openalex.org/W4388033999,"Faculty of Mechanical Engineering, University of Tabriz, Tabriz, Iran",institution
+678,https://openalex.org/W4388033999,IR,country
+679,https://openalex.org/W4388033999,Moharram Jafari,author
+682,https://openalex.org/W4388033999,Saman Aminian,author
+683,https://openalex.org/W4388033999,"Department of Civil Engineering, College of Engineering, Cihan University-Erbil, Erbil, Iraq",institution
+684,https://openalex.org/W4388033999,IQ,country
+685,https://openalex.org/W4388033999,M Fattahi,author
+686,https://openalex.org/W4388033999,"School of Engineering and Technology, Duy Tan University, Da Nang, Vietnam",institution
+687,https://openalex.org/W4388033999,VN,country
+688,https://openalex.org/W4388033999,P D Uyen,author
+691,https://openalex.org/W4388033999,scramjet engines,keyword
+692,https://openalex.org/W4388033999,upstream shock wave,keyword
+693,https://openalex.org/W4388033999,transverse coaxial air,keyword
+694,https://openalex.org/W4388033999,fuel jet,keyword
+695,https://openalex.org/W4388033999,mixing,keyword
+696,https://openalex.org/W4317474315,Zhanguo Su,author
+697,https://openalex.org/W4317474315,"Faculty of Physical Education, Huainan Normal University, Huainan 232038, Anhui, China",institution
+698,https://openalex.org/W4317474315,CN,country
+699,https://openalex.org/W4317474315,Yiping Su,author
+700,https://openalex.org/W4317474315,"Faculty of Mathematics and Science, University Pendidikan Sultan Idris, Indonesia",institution
+701,https://openalex.org/W4317474315,ID,country
+702,https://openalex.org/W4317474315,Hasan Sh. Majdi,author
+703,https://openalex.org/W4317474315,"Department of Chemical Engineering and Petroleum Industries, Al-Mustaqbal University College, Babylon 51001, Iraq",institution
+704,https://openalex.org/W4317474315,IQ,country
+705,https://openalex.org/W4317474315,Ali Shawabkeh,author
+706,https://openalex.org/W4317474315,"College of Engineering and Technology, American University of the Middle East, Kuwait",institution
+707,https://openalex.org/W4317474315,KW,country
+708,https://openalex.org/W4317474315,Syed Zaheer Abbas,author
+709,https://openalex.org/W4317474315,"Department of Mathematics & Statistics, Hazara University, Mansehra, Pakistan",institution
+710,https://openalex.org/W4317474315,PK,country
+711,https://openalex.org/W4317474315,Sayed M Eldin,author
+712,https://openalex.org/W4317474315,"Center of Research, Faculty of Engineering, Future University in Egypt New Cairo 11835, Egypt",institution
+713,https://openalex.org/W4317474315,EG,country
+714,https://openalex.org/W4317474315,Ahmed Deif,author
+715,https://openalex.org/W4317474315,"Research Center, Faculty of Engineering, Future University in Egypt New Cairo 11835, Egypt",institution
+717,https://openalex.org/W4317474315,Hadi Ghaebi,author
+718,https://openalex.org/W4317474315,"Department of Mechanical Engineering, University of Mohaghegh Ardabili, P.O. Box 179, Ardabil, the Islamic Republic of Iran",institution
+719,https://openalex.org/W4317474315,IR,country
+720,https://openalex.org/W4317474315,scramjet multi-generation,keyword
+721,https://openalex.org/W4317474315,methanol-steam,keyword
+722,https://openalex.org/W4388141660,Seyyed Amirreza Abdollahi,author
+723,https://openalex.org/W4388141660,"Faculty of Mechanical Engineering, University of Tabriz, Tabriz, Iran",institution
+724,https://openalex.org/W4388141660,IR,country
+725,https://openalex.org/W4388141660,Seyyed Faramarz Ranjbar,author
+728,https://openalex.org/W4388141660,Saman Aminian,author
+729,https://openalex.org/W4388141660,"Department of Civil Engineering, College of Engineering, Cihan University-Erbil, Erbil, Iraq",institution
+730,https://openalex.org/W4388141660,IQ,country
+731,https://openalex.org/W4388141660,M. Fattahi,author
+732,https://openalex.org/W4388141660,"Institute of Research and Development, Duy Tan University, Da Nang, Vietnam",institution
+733,https://openalex.org/W4388141660,VN,country
+734,https://openalex.org/W4388141660,P. D. Uyen,author
+737,https://openalex.org/W4388141660,scramjet engine,keyword
+738,https://openalex.org/W4388141660,hydrogen gas,keyword
+739,https://openalex.org/W4388141660,fuel,keyword
+740,https://openalex.org/W4388141660,multi-extruded,keyword
+741,https://openalex.org/W4291824930,Xiaonan Liu,author
+742,https://openalex.org/W4291824930,"National Key Laboratory of Science and Technology on Tunable Laser, Harbin Institute of Technology, Harbin 150001, China",institution
+743,https://openalex.org/W4291824930,CN,country
+744,https://openalex.org/W4291824930,Yufei Ma,author
+747,https://openalex.org/W4291824930,single diode laser near,keyword
+748,https://openalex.org/W4291824930,temperature,keyword
+749,https://openalex.org/W3133846634,Chuan Sun,author
+750,https://openalex.org/W3133846634,"School of Electromechanical and Automobile Engineering, Huanggang Normal University, Huanggang, China",institution
+751,https://openalex.org/W3133846634,CN,country
+752,https://openalex.org/W3133846634,M. Barzegar Gerdroodbary,author
+753,https://openalex.org/W3133846634,"Department of Mechanical Engineering, Babol Noshirvani University of Technology, Babol, Iran",institution
+754,https://openalex.org/W3133846634,IR,country
+755,https://openalex.org/W3133846634,A.M. Abazari,author
+756,https://openalex.org/W3133846634,"Department of Mechanical Engineering, Faculty of Engineering, Urmia University, Urmia, Iran",institution
+758,https://openalex.org/W3133846634,Saleh Hosseini,author
+759,https://openalex.org/W3133846634,"Department of Chemical Engineering, University of Larestan, Larestan, Iran",institution
+761,https://openalex.org/W3133846634,Zhixiong Li,author
+762,https://openalex.org/W3133846634,"Yonsei Frontier Lab, Yonsei University, 50 Yonsei-ro, Seodaemun-gu, Seoul 03722, Republic of Korea",institution
+763,https://openalex.org/W3133846634,KR,country
+764,https://openalex.org/W3133846634,hydrogen multijet,keyword
+765,https://openalex.org/W3133846634,backward-facing,keyword
+766,https://openalex.org/W1973206329,I. M. Vasenin,author
+767,https://openalex.org/W1973206329,"National Research Tomsk State University, Tomsk, Russia",institution
+768,https://openalex.org/W1973206329,RU,country
+769,https://openalex.org/W1973206329,É. R. Shrager,author
+772,https://openalex.org/W1973206329,A. A. Glazunov,author
+773,https://openalex.org/W1973206329,"Scientific-Research Institute of Applied Mathematics and Mechanics at Tomsk State University, Tomsk, Russia",institution
+775,https://openalex.org/W1973206329,A. Yu. Krainov,author
+778,https://openalex.org/W1973206329,D. A. Krainov,author
+781,https://openalex.org/W1973206329,scramjet,keyword
+782,https://openalex.org/W1973206329,motion,keyword
+783,https://openalex.org/W3209478464,Radouan Boukharfane,author
+784,https://openalex.org/W3209478464,"Mohammed VI Polytechnic University (UM6P), MSDA Group, 43150, Benguerir, Morocco",institution
+785,https://openalex.org/W3209478464,MA,country
+786,https://openalex.org/W3209478464,Anthony Techer,author
+787,https://openalex.org/W3209478464,"Institut Pprime, ENSMA and University of Poitiers, Futuroscope, France",institution
+788,https://openalex.org/W3209478464,FR,country
+789,https://openalex.org/W3209478464,Aimad Er-raiy,author
+790,https://openalex.org/W3209478464,"King Abdullah University of Science and Technology (KAUST), ECRC, Thuwal, Saudi Arabia",institution
+791,https://openalex.org/W3209478464,SA,country
+792,https://openalex.org/W3209478464,supersonic crossflow combustor,keyword
+793,https://openalex.org/W3209478464,new turbulent combustion model,keyword
+794,https://openalex.org/W3209478464,hydrogen jet,keyword
+795,https://openalex.org/W2995409665,AM Tahsini,author
+796,https://openalex.org/W2995409665,"School of Mechanical Engineering, Iran University of Science and Technology, Tehran, Iran",institution
+797,https://openalex.org/W2995409665,IR,country
+798,https://openalex.org/W2995409665,supersonic combustor,keyword
+799,https://openalex.org/W2995409665,combustion,keyword
+800,https://openalex.org/W2995409665,pressure loss balance,keyword
+801,https://openalex.org/W2029633866,Marat A. Goldfeld,author
+802,https://openalex.org/W2029633866,"Russian Academy of Sciences, 630090, Novosibirsk, Russia",institution
+803,https://openalex.org/W2029633866,RU,country
+804,https://openalex.org/W2029633866,Alexey V. Starov,author
+807,https://openalex.org/W2029633866,Viacheslav V. Vinogradov,author
+808,https://openalex.org/W2029633866,"Central Institute of Aviation Motors, 111250, Moscow, Russia",institution
+810,https://openalex.org/W2029633866,scramjet module,keyword
+811,https://openalex.org/W2224018748,A.S. Rudakov,author
+812,https://openalex.org/W2224018748,Central Institute of Aviation Motors,institution
+813,https://openalex.org/W2224018748,RU,country
+814,https://openalex.org/W2224018748,V.V. Krjutchenko,author
+817,https://openalex.org/W2224018748,A.I. Lanshin,author
+820,https://openalex.org/W2224018748,hydrogen,keyword
+821,https://openalex.org/W2224018748,plane,keyword
+822,https://openalex.org/W4309598964,Z. Li,author
+823,https://openalex.org/W4309598964,"Donghai Laboratory, Zhoushan 316021, China; Faculty of Mechanical Engineering, Opole University of Technology, 45-758 Opole, Poland",institution
+824,https://openalex.org/W4309598964,PL,country
+825,https://openalex.org/W4309598964,Jiaxuan Leng,author
+826,https://openalex.org/W4309598964,"Ocean University of China, School of Engineering, Qingdao 266110, China",institution
+827,https://openalex.org/W4309598964,CN,country
+828,https://openalex.org/W4309598964,Nidal H. Abu-Hamdeh,author
+829,https://openalex.org/W4309598964,"Center of Research Excellence in Renewable Energy and Power Systems/Energy Efficiency Group, King Abdulaziz University, Jeddah, Saudi Arabia",institution
+830,https://openalex.org/W4309598964,SA,country
+831,https://openalex.org/W4309598964,Mohammed N. Ajour,author
+832,https://openalex.org/W4309598964,"Center of Research Excellence in Renewable Energy and Power Systems/Energy Efficiency Group/Department of Electrical and Computer Engineering, Faculty of Engineering, King Abdulaziz University, Jeddah, Saudi Arabia",institution
+834,https://openalex.org/W4309598964,Awad Musa,author
+835,https://openalex.org/W4309598964,"Department of Physics, College of Science and Humanities in Al-Aflaj, Prince Sattam bin Abdulaziz university, Al-Aflaj 11912, Saudi Arabia",institution
+837,https://openalex.org/W4309598964,Randa I. Hatamleh,author
+838,https://openalex.org/W4309598964,"Hijjawi Faculty for Engineering Technology, Yarmouk University, Irbid, Jordan",institution
+839,https://openalex.org/W4309598964,JO,country
+840,https://openalex.org/W4309598964,scramjet combustor,keyword
+841,https://openalex.org/W4309598964,cross fuel jet,keyword
+842,https://openalex.org/W4309598964,inner strut,keyword
+843,https://openalex.org/W2054061064,P. K. Tretyakov,author
+844,https://openalex.org/W2054061064,"Khristianovich Institute of Theoretical and Applied Mechanics, Siberian Branch, Russian Academy of Sciences, Novosibirsk, Russia",institution
+845,https://openalex.org/W2054061064,RU,country
+846,https://openalex.org/W2054061064,combustion,keyword
+847,https://openalex.org/W2277930979,Alexander M. Starik,author
+848,https://openalex.org/W2277930979,"Central Institute of Aviation Motors, Scientific Educational Center “Physical and Chemical Kinetics and Combustion”, Moscow, Russia",institution
+849,https://openalex.org/W2277930979,RU,country
+850,https://openalex.org/W2277930979,Leonid V. Bezgin,author
+853,https://openalex.org/W2277930979,Valery I. Kopchenov,author
+856,https://openalex.org/W2277930979,Nataliya S. Titova,author
+859,https://openalex.org/W2277930979,Sergey A. Torokhov,author
+862,https://openalex.org/W2277930979,n-decane–hydrogen blend combustion,keyword
+863,https://openalex.org/W2277930979,kinetic analysis,keyword
+864,https://openalex.org/W2277930979,non-premixed,keyword
+865,https://openalex.org/W2144470760,V. G. Alexandrov,author
+866,https://openalex.org/W2144470760,"Central Inst. of Aviation Motors, Moscow, Russia",institution
+867,https://openalex.org/W2144470760,RU,country
+868,https://openalex.org/W2144470760,A. N. Kraiko,author
+871,https://openalex.org/W2144470760,K. S. Reent,author
+874,https://openalex.org/W2144470760,detonation ramjet engine,keyword
+875,https://openalex.org/W4307906978,Gautam Choubey,author
+876,https://openalex.org/W4307906978,"Department of Mechanical & Aerospace Engineering, Institute of Infrastructure Technology Research and Management (IITRAM) Gujarat, 380026, India",institution
+877,https://openalex.org/W4307906978,IN,country
+878,https://openalex.org/W4307906978,Malhar Solanki,author
+881,https://openalex.org/W4307906978,Tathya Bhatt,author
+884,https://openalex.org/W4307906978,G. Kshitij,author
+887,https://openalex.org/W4307906978,D. Yuvarajan,author
+888,https://openalex.org/W4307906978,"Department of Automobile Engineering, Saveetha School of Engineering, SIMATS, Chennai, Tamilnadu, 602105, India",institution
+890,https://openalex.org/W4307906978,Wei Huang,author
+891,https://openalex.org/W4307906978,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan, 410073, China",institution
+892,https://openalex.org/W4307906978,CN,country
+893,https://openalex.org/W4307906978,scramjet combustor,keyword
+894,https://openalex.org/W4307906978,typical scramjet combustor,keyword
+895,https://openalex.org/W2025728523,Konstantin A Vereschagin,author
+896,https://openalex.org/W2025728523,"General Physics Institute, Academy of sciences of Russia, 117942 Moscow, Vavilov str. 38, Russia",institution
+897,https://openalex.org/W2025728523,RU,country
+898,https://openalex.org/W2025728523,Valery V Smirnov,author
+901,https://openalex.org/W2025728523,Oleg M Stelmakh,author
+904,https://openalex.org/W2025728523,Victor I Fabelinsky,author
+907,https://openalex.org/W2025728523,Vladimir A Sabelnikov,author
+908,https://openalex.org/W2025728523,"Central Aero-Hydrodynamic Institute (TsAGI), 140160 Zhukovsky, Moscow Region, Russia",institution
+910,https://openalex.org/W2025728523,Vladimir V Ivanov,author
+913,https://openalex.org/W2025728523,Walter Clauss,author
+914,https://openalex.org/W2025728523,"German Airspace Research Establishment (DLR), Institute of Chemical Propulsion and Engineering, 74239 Lampoldshausen, Germany",institution
+915,https://openalex.org/W2025728523,DE,country
+916,https://openalex.org/W2025728523,Michael Oschwald,author
+919,https://openalex.org/W2025728523,scramjet combustor,keyword
+920,https://openalex.org/W2025728523,raman spectroscopy,keyword
+921,https://openalex.org/W2025728523,anti-stokes,keyword
+922,https://openalex.org/W2025728523,hydrogen-fuelled,keyword
+923,https://openalex.org/W2945910356,V. T. Zhukov,author
+924,https://openalex.org/W2945910356,"Keldysh Institute of Applied Mathematics, Russian Academy of Sciences, Moscow, Russia",institution
+925,https://openalex.org/W2945910356,RU,country
+926,https://openalex.org/W2945910356,N. D. Novikova,author
+929,https://openalex.org/W2945910356,O. B. Feodoritova,author
+932,https://openalex.org/W2945910356,scramjet combustor,keyword
+933,https://openalex.org/W2945910356,combustion,keyword
+934,https://openalex.org/W2945910356,openfoam,keyword
+935,https://openalex.org/W2945910356,numerical simulation,keyword
+936,https://openalex.org/W1434669458,Wei Huang,author
+937,https://openalex.org/W1434669458,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan 410073, People’s Republic of China",institution
+938,https://openalex.org/W1434669458,CN,country
+939,https://openalex.org/W1434669458,Jian-guo Tan,author
+942,https://openalex.org/W1434669458,Jun Liu,author
+945,https://openalex.org/W1434669458,Li Yan,author
+948,https://openalex.org/W1434669458,sonic hydrogen jet,keyword
+949,https://openalex.org/W1434669458,supersonic flows,keyword
+950,https://openalex.org/W1434669458,oblique shock wave,keyword
+951,https://openalex.org/W2889931966,Gustavo J. da Costa,author
+952,https://openalex.org/W2889931966,São Paulo State Faculty of Technology (FATEC),institution
+953,https://openalex.org/W2889931966,BR,country
+954,https://openalex.org/W2889931966,Dercy Felix da Silva,author
+957,https://openalex.org/W2889931966,Felipe Jean da Costa,author
+958,https://openalex.org/W2889931966,Technological Institute of Aeronautics (ITA),institution
+960,https://openalex.org/W2889931966,Bruno C. Lima,author
+963,https://openalex.org/W2889931966,David R. Pinto,author
+966,https://openalex.org/W2889931966,Ronaldo d. Cardoso,author
+969,https://openalex.org/W2889931966,Paulo G. Toro,author
+970,https://openalex.org/W2889931966,Federal University of Rio Grande do Norte,institution
+972,https://openalex.org/W2889931966,Marco A. Minucci,author
+973,https://openalex.org/W2889931966,Institute of Advanced Studies (IEAv),institution
+974,https://openalex.org/W2889931966,RU,country
+975,https://openalex.org/W2889931966,Antonio Carlos Oliveira,author
+978,https://openalex.org/W2889931966,Israel d. Rêgo,author
+981,https://openalex.org/W2889931966,scramjet engine inlet,keyword
+982,https://openalex.org/W2889931966,brazilian technological demonstrator scramjet,keyword
+983,https://openalex.org/W2889931966,aerodynamic protection,keyword
+984,https://openalex.org/W4313367262,Guangming Du,author
+985,https://openalex.org/W4313367262,"China Aerodynamic Research and Development Center, Mianyang 621000, China",institution
+986,https://openalex.org/W4313367262,CN,country
+987,https://openalex.org/W4313367262,Ye Tian,author
+990,https://openalex.org/W4313367262,Jialing Le,author
+993,https://openalex.org/W4313367262,Fuyu Zhong,author
+996,https://openalex.org/W4313367262,Yi Zhang,author
+999,https://openalex.org/W4313367262,supersonic combustor,keyword
+1000,https://openalex.org/W4313367262,flame stabilization,keyword
+1001,https://openalex.org/W4313367262,ignition,keyword
+1002,https://openalex.org/W4313367262,dual-cavity,keyword
+1003,https://openalex.org/W4313367262,kerosene-fueled,keyword
+1004,https://openalex.org/W2332828361,V. Sabel'nikov,author
+1005,https://openalex.org/W2332828361,"TsAGI, Zhukovski, Russia",institution
+1006,https://openalex.org/W2332828361,RU,country
+1007,https://openalex.org/W2332828361,O. Voloshenko,author
+1010,https://openalex.org/W2332828361,V. Ostras,author
+1013,https://openalex.org/W2332828361,V. Sermanov,author
+1016,https://openalex.org/W2332828361,R. Walther,author
+1017,https://openalex.org/W2332828361,"MTU Motoren- und Turbinen-Union Muenchen GmbH, Munich, Germany",institution
+1018,https://openalex.org/W2332828361,DE,country
+1019,https://openalex.org/W2332828361,scramjet combustors,keyword
+1020,https://openalex.org/W2332828361,gasdynamics,keyword
+1021,https://openalex.org/W2332828361,hydrogen-fueled,keyword
+1022,https://openalex.org/W2897241140,Juntao Chang,author
+1023,https://openalex.org/W2897241140,"Harbin Institute of Technology, 150001, Heilongjiang, People's Republic of China",institution
+1024,https://openalex.org/W2897241140,CN,country
+1025,https://openalex.org/W2897241140,Junlong Zhang,author
+1028,https://openalex.org/W2897241140,Wen Bao,author
+1031,https://openalex.org/W2897241140,Daren Yu,author
+1034,https://openalex.org/W2897241140,supersonic combustors,keyword
+1035,https://openalex.org/W2897241140,strut-equipped,keyword
+1036,https://openalex.org/W1795161418,Silong Zhang,author
+1037,https://openalex.org/W1795161418,"School of Energy Science and Engineering, Harbin Institute of Technology, 150001 Harbin, People's Republic of China",institution
+1038,https://openalex.org/W1795161418,CN,country
+1039,https://openalex.org/W1795161418,Kaili Xie,author
+1042,https://openalex.org/W1795161418,Yu Feng,author
+1045,https://openalex.org/W1795161418,Wen Bao,author
+1048,https://openalex.org/W1795161418,scramjet,keyword
+1049,https://openalex.org/W1795161418,thermal behavior,keyword
+1050,https://openalex.org/W3164219418,S. Jeyakumar,author
+1051,https://openalex.org/W3164219418,"CFD Center, Aeronautical Engineering, Kalasalingam Academy of Research and Education, Krishnankoil, India",institution
+1052,https://openalex.org/W3164219418,IN,country
+1053,https://openalex.org/W3164219418,Jayaraman Kandasamy,author
+1054,https://openalex.org/W3164219418,"Mechanical Engineering, Middle East Technical University, Ankara, Turkey",institution
+1055,https://openalex.org/W3164219418,TR,country
+1056,https://openalex.org/W3164219418,Mehmet Karaca,author
+1057,https://openalex.org/W3164219418,"Aerospace Engineering, Middle East Technical University, Ankara, Turkey",institution
+1059,https://openalex.org/W3164219418,K. Karthik,author
+1062,https://openalex.org/W3164219418,R. Sivakumar,author
+1063,https://openalex.org/W3164219418,"School of Mechanical Engineering, VIT University, Chennai, India",institution
+1065,https://openalex.org/W3164219418,supersonic mixing,keyword
+1066,https://openalex.org/W3164219418,hydrogen jets,keyword
+1067,https://openalex.org/W3164219418,strut injection schemes,keyword
+1068,https://openalex.org/W3012378018,Pourya Seyedmatin,author
+1069,https://openalex.org/W3012378018,"Faculty of Mechanical Eng., Tarbiat Modares University, Iran",institution
+1070,https://openalex.org/W3012378018,IR,country
+1071,https://openalex.org/W3012378018,Saeed Karimian,author
+1074,https://openalex.org/W3012378018,Hadi Rostamzadeh,author
+1075,https://openalex.org/W3012378018,"Energy & Environment Research Center, Niroo Research Institute (NRI), Shahrak Ghods, Tehran, Iran",institution
+1077,https://openalex.org/W3012378018,Majid Amidpour,author
+1078,https://openalex.org/W3012378018,"Faculty of Mechanical Engineering, Department of Energy System Engineering, K.N. Toosi University of Technology, Pardis Ave., Tehran, Iran",institution
+1080,https://openalex.org/W3012378018,hydrogen,keyword
+1081,https://openalex.org/W3012378018,co-production,keyword
+1082,https://openalex.org/W3012378018,multi-expansion,keyword
+1083,https://openalex.org/W2396022672,Silong Zhang,author
+1084,https://openalex.org/W2396022672,"Harbin Institute of Technology, Harbin, 150001 PR China",institution
+1085,https://openalex.org/W2396022672,CN,country
+1086,https://openalex.org/W2396022672,Yu Feng,author
+1089,https://openalex.org/W2396022672,Yuguang Jiang,author
+1092,https://openalex.org/W2396022672,Wen Bao,author
+1095,https://openalex.org/W2396022672,Jiecai Han,author
+1098,https://openalex.org/W2396022672,Oskar J. Haidn,author
+1099,https://openalex.org/W2396022672,"Institute of Flight Propulsion, Technische Universität München, Germany",institution
+1100,https://openalex.org/W2396022672,DE,country
+1101,https://openalex.org/W2396022672,scramjet,keyword
+1102,https://openalex.org/W2396022672,thermal behavior,keyword
+1103,https://openalex.org/W2396022672,different channels aspect ratios,keyword
+1104,https://openalex.org/W2396022672,cooling,keyword
+1105,https://openalex.org/W2802900342,R K Seleznev,author
+1106,https://openalex.org/W2802900342,"Dukhov Research Institute of Automatics (VNIIA), Suschevskaya Street 22, Moscow 127055, Russia; Ishlinsky Institute for Problems in Mechanics RAS, Vernadsky Street 101(1), Moscow, 119526, Russia; Moscow Institute of Physics and Technology (State University), 9 Institutskiy per., Dolgoprudny, Moscow Region, 141701, Russia",institution
+1107,https://openalex.org/W2802900342,RU,country
+1108,https://openalex.org/W2802900342,two-dimensional,keyword
+1109,https://openalex.org/W2802900342,inlet-isolator,keyword
+1110,https://openalex.org/W2929745473,Victor Zhukov,author
+1111,https://openalex.org/W2929745473,"Keldysh Institute of Applied Mathematics RAS, Moscow, Russia",institution
+1112,https://openalex.org/W2929745473,RU,country
+1113,https://openalex.org/W2929745473,Nataliya Novikova,author
+1116,https://openalex.org/W2929745473,Olga Feodoritova,author
+1119,https://openalex.org/W2929745473,scramjet combustor,keyword
+1120,https://openalex.org/W2929745473,numerical simulation,keyword
+1121,https://openalex.org/W3084289916,Rong Feng,author
+1122,https://openalex.org/W3084289916,"Science and Technology on Scramjet Laboratory, College of Aerospace Science and Engineering, National University of Defense Technology, Hunan 410073, China",institution
+1123,https://openalex.org/W3084289916,CN,country
+1124,https://openalex.org/W3084289916,Yuhui Huang,author
+1125,https://openalex.org/W3084289916,"Equipment Project Management Center, Equipment Development Department, Beijing 100089, China",institution
+1127,https://openalex.org/W3084289916,Jiajian Zhu,author
+1130,https://openalex.org/W3084289916,Zhenguo Wang,author
+1133,https://openalex.org/W3084289916,Mingbo Sun,author
+1136,https://openalex.org/W3084289916,Hongbo Wang,author
+1139,https://openalex.org/W3084289916,Zun Cai,author
+1142,https://openalex.org/W3084289916,supersonic combustor,keyword
+1143,https://openalex.org/W3084289916,combustion enhancement,keyword
+1144,https://openalex.org/W3084289916,plasma,keyword
+1145,https://openalex.org/W3084289916,arc,keyword
+1146,https://openalex.org/W3084289916,cavity-based,keyword
+1147,https://openalex.org/W3084289916,multi-channel,keyword
+1148,https://openalex.org/W3007047484,K.V. Savelkin,author
+1149,https://openalex.org/W3007047484,Russian Academy of Sciences [Moscow],institution
+1150,https://openalex.org/W3007047484,RU,country
+1151,https://openalex.org/W3007047484,D.A. Yarantsev,author
+1154,https://openalex.org/W3007047484,S.B. Leonov,author
+1157,https://openalex.org/W3007047484,supersonic flow,keyword
+1158,https://openalex.org/W3007047484,plasma-assisted position,keyword
+1159,https://openalex.org/W3007047484,combustion,keyword
+1160,https://openalex.org/W2318080408,V. Kopchenov,author
+1161,https://openalex.org/W2318080408,"Central Inst. of Aviation Motors, Moscow, Russia",institution
+1162,https://openalex.org/W2318080408,RU,country
+1163,https://openalex.org/W2318080408,A. Vatazhin,author
+1166,https://openalex.org/W2318080408,O. Gouskov,author
+1169,https://openalex.org/W2318080408,scramjet,keyword
+1170,https://openalex.org/W2318080408,mhd control,keyword
+1171,https://openalex.org/W3087593672,Mostafa Barzegar Gerdroodbary,author
+1172,https://openalex.org/W3087593672,"Department of Mechanical Engineering, Babol Noshirvani University of Technology, Babol, Iran",institution
+1173,https://openalex.org/W3087593672,IR,country
+1174,https://openalex.org/W3087593672,combustion,keyword
+1175,https://openalex.org/W3087593672,chamber,keyword
+1176,https://openalex.org/W3087593672,basic principle,keyword
+1177,https://openalex.org/W3104085545,J. Schetz,author
+1178,https://openalex.org/W3104085545,"Virginia Polytechnic Inst. and State Univ., Blacksburg",institution
+1179,https://openalex.org/W3104085545,US,country
+1180,https://openalex.org/W3104085545,V. Vinogradov,author
+1181,https://openalex.org/W3104085545,"Central Inst. of Aviation Motors, Moscow, Russia",institution
+1182,https://openalex.org/W3104085545,RU,country
+1183,https://openalex.org/W3104085545,A. Marshakov.,author
+1186,https://openalex.org/W3104085545,M. Petrov,author
+1189,https://openalex.org/W3104085545,scramjet combustor,keyword
+1190,https://openalex.org/W3104085545,skin friction,keyword
+1191,https://openalex.org/W1970786039,Zhenguo Wang,author
+1192,https://openalex.org/W1970786039,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, China",institution
+1193,https://openalex.org/W1970786039,CN,country
+1194,https://openalex.org/W1970786039,Hongbo Wang,author
+1197,https://openalex.org/W1970786039,Mingbo Sun,author
+1200,https://openalex.org/W1970786039,combustion,keyword
+1201,https://openalex.org/W1970786039,cavity-stabilized,keyword
+1202,https://openalex.org/W2006479313,Ming Bo Sun,author
+1203,https://openalex.org/W2006479313,"Science and Technology on Scramjet Lab, National University of Defense Technology, Changsha City 410073, Hunan Province, PR China",institution
+1204,https://openalex.org/W2006479313,CN,country
+1205,https://openalex.org/W2006479313,Cheng Gong,author
+1208,https://openalex.org/W2006479313,Shun Ping Zhang,author
+1211,https://openalex.org/W2006479313,Jian Han Liang,author
+1214,https://openalex.org/W2006479313,Wei Dong Liu,author
+1217,https://openalex.org/W2006479313,Zhen Guo Wang,author
+1220,https://openalex.org/W2006479313,scramjet combustor,keyword
+1221,https://openalex.org/W2006479313,hydrogen,keyword
+1222,https://openalex.org/W2006479313,multi-cavities,keyword
+1223,https://openalex.org/W2900823351,Lang-quan Li,author
+1224,https://openalex.org/W2900823351,"Hypervelocity Aerodynamics Institute, Chinese Aerodynamics Research and Development Center, Mianyang 621000, People's Republic of China; Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan 410073, People's Republic of China",institution
+1225,https://openalex.org/W2900823351,CN,country
+1226,https://openalex.org/W2900823351,Wei Huang,author
+1227,https://openalex.org/W2900823351,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan 410073, People's Republic of China",institution
+1229,https://openalex.org/W2900823351,Li Yan,author
+1232,https://openalex.org/W2900823351,Zhao-bo Du,author
+1235,https://openalex.org/W2900823351,Ming Fang,author
+1236,https://openalex.org/W2900823351,"Hypervelocity Aerodynamics Institute, Chinese Aerodynamics Research and Development Center, Mianyang 621000, People's Republic of China",institution
+1238,https://openalex.org/W2900823351,scramjet combustors,keyword
+1239,https://openalex.org/W2900823351,transverse hydrogen scramjet,keyword
+1240,https://openalex.org/W2900823351,vortex,keyword
+1241,https://openalex.org/W2900823351,micro-ramp,keyword
+1242,https://openalex.org/W2915969906,Guoyan Zhao,author
+1243,https://openalex.org/W2915969906,"Science and Technology on Scramjet Lab, National University of Defense Technology, Changsha, 410073, China",institution
+1244,https://openalex.org/W2915969906,CN,country
+1245,https://openalex.org/W2915969906,Mingbo Sun,author
+1248,https://openalex.org/W2915969906,Jinshui Wu,author
+1249,https://openalex.org/W2915969906,"China Aerodynamics Research and Development Center, Mianyang, Sichuan, 621000, China",institution
+1251,https://openalex.org/W2915969906,Xingda Cui,author
+1254,https://openalex.org/W2915969906,Hongbo Wang,author
+1257,https://openalex.org/W2915969906,flame flashback phenomenon,keyword
+1258,https://openalex.org/W2915969906,supersonic crossflow,keyword
+1259,https://openalex.org/W2915969906,ethylene injection,keyword
+1260,https://openalex.org/W1985286583,Hongbo Wang,author
+1261,https://openalex.org/W1985286583,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha 410073, China",institution
+1262,https://openalex.org/W1985286583,CN,country
+1263,https://openalex.org/W1985286583,Zhenguo Wang,author
+1266,https://openalex.org/W1985286583,Mingbo Sun,author
+1269,https://openalex.org/W1985286583,scramjet combustor,keyword
+1270,https://openalex.org/W1985286583,oscillations,keyword
+1271,https://openalex.org/W2027164952,Tobias Sander,author
+1272,https://openalex.org/W2027164952,"Technical University of Munich, 85747, Garching, Germany",institution
+1273,https://openalex.org/W2027164952,DE,country
+1274,https://openalex.org/W2027164952,Anatoliy Lyubar,author
+1277,https://openalex.org/W2027164952,Thomas Sattelmayer,author
+1280,https://openalex.org/W2027164952,Eduard A. Shafranovsky,author
+1281,https://openalex.org/W2027164952,"Russian Academy of Sciences, 119991, Moscow, Russia",institution
+1282,https://openalex.org/W2027164952,RU,country
+1283,https://openalex.org/W2027164952,ignition limits,keyword
+1284,https://openalex.org/W2027164952,burnout,keyword
+1285,https://openalex.org/W2333206317,Joseph Shang,author
+1286,https://openalex.org/W2333206317,Wright State University,institution
+1287,https://openalex.org/W2333206317,US,country
+1288,https://openalex.org/W2333206317,Sergey Surzhikov,author
+1289,https://openalex.org/W2333206317,Russian Academy of Sciences,institution
+1290,https://openalex.org/W2333206317,RU,country
+1291,https://openalex.org/W2333206317,heat exchange,keyword
+1292,https://openalex.org/W2333206317,combustion,keyword
+1293,https://openalex.org/W2333206317,hydrogen-fueled,keyword
+1294,https://openalex.org/W3169685718,Amjad A. Pasha,author
+1295,https://openalex.org/W3169685718,"Aerospace Engineering Department , King Abdulaziz University , Jeddah 21589 , Saudi Arabia",institution
+1296,https://openalex.org/W3169685718,SA,country
+1297,https://openalex.org/W3169685718,Khalid A. Juhany,author
+1300,https://openalex.org/W3169685718,Subramania N. Pillai,author
+1301,https://openalex.org/W3169685718,"Turbulence and Flow Control Lab , School of Mechanical Engineering, SASTRA Deemed University , Thanjavur 613401 , Tamil Nadu , India",institution
+1302,https://openalex.org/W3169685718,IN,country
+1303,https://openalex.org/W3169685718,practical scramjet inlet,keyword
+1304,https://openalex.org/W3169685718,one-equation,keyword
+1305,https://openalex.org/W2011129497,Evgeniy Aleksandrovich Meshcheryakov,author
+1306,https://openalex.org/W2011129497,"Central Aerohydrodynamic Institute (TsAGI), 1 Zhukovsky Str., Zhukovsky 140180, Russia",institution
+1307,https://openalex.org/W2011129497,RU,country
+1308,https://openalex.org/W2011129497,Violetta Vasilievna Yashina,author
+1311,https://openalex.org/W2011129497,separation,keyword
+1312,https://openalex.org/W2011129497,quasi-one-dimensional,keyword
+1313,https://openalex.org/W2011129497,pseudo-shock,keyword
+1314,https://openalex.org/W4200229338,A A Firsov,author
+1315,https://openalex.org/W4200229338,"Joint Institute for High Temperatures of the Russian Academy of Sciences, Izhorskaya 13, Bd 2, Moscow 125412, Russian Federation",institution
+1316,https://openalex.org/W4200229338,RU,country
+1317,https://openalex.org/W4200229338,N S Kolosov,author
+1320,https://openalex.org/W4200229338,supersonic flow,keyword
+1321,https://openalex.org/W4200229338,combustion,keyword
+1322,https://openalex.org/W4200229338,pylon,keyword
+1323,https://openalex.org/W4200229338,plasma,keyword
+1324,https://openalex.org/W4386802092,Hossein Seraj,author
+1325,https://openalex.org/W4386802092,"Department of Mechanical Engineering, Sari Branch, Islamic Azad University, Sari, Iran",institution
+1326,https://openalex.org/W4386802092,IR,country
+1327,https://openalex.org/W4386802092,Farhad Hosseinnejad,author
+1330,https://openalex.org/W4386802092,Yasser Rostamiyan,author
+1333,https://openalex.org/W4386802092,Keivan Fallah,author
+1336,https://openalex.org/W4386802092,supersonic combustion chamber,keyword
+1337,https://openalex.org/W4386802092,fuel mixing,keyword
+1338,https://openalex.org/W4386802092,multi-injectors,keyword
+1339,https://openalex.org/W2070578246,I. B. Kozlovskaya,author
+1340,https://openalex.org/W2070578246,"RF SSC-Institute of Biomedical Problems, Sensory-motor physiology Department, 76A Khoroshevskoe shosse, 123007 Moscow, Russia",institution
+1341,https://openalex.org/W2070578246,RU,country
+1342,https://openalex.org/W2070578246,E. S. Tomilovskaya,author
+1345,https://openalex.org/W2070578246,R. Gerzer,author
+1346,https://openalex.org/W2070578246,"Cologne, Germany",institution
+1347,https://openalex.org/W2070578246,DE,country
+1348,https://openalex.org/W2070578246,space symposium,keyword
+1349,https://openalex.org/W2070578246,17th iaa humans,keyword
+1350,https://openalex.org/W2070578246,moscow,keyword
+1351,https://openalex.org/W2604667719,Ya V Khankhasaeva,author
+1352,https://openalex.org/W2604667719,"Keldysh Institute of Applied Mathematics, Moscow, Russia",institution
+1353,https://openalex.org/W2604667719,RU,country
+1354,https://openalex.org/W2604667719,V E Borisov,author
+1357,https://openalex.org/W2604667719,A E Lutsky,author
+1360,https://openalex.org/W2604667719,energy input,keyword
+1361,https://openalex.org/W2604667719,aircraft,keyword
+1362,https://openalex.org/W2604667719,flow,keyword
+1363,https://openalex.org/W2312617601,Stanislav Kolosenok,author
+1364,https://openalex.org/W2312617601,Saint Petersburg State University,institution
+1365,https://openalex.org/W2312617601,RU,country
+1366,https://openalex.org/W2312617601,Alexander Kuranov,author
+1367,https://openalex.org/W2312617601,Hypersonic Systems Research Institute,institution
+1368,https://openalex.org/W2312617601,PL,country
+1369,https://openalex.org/W2312617601,Aleksander Savarovsky,author
+1372,https://openalex.org/W2312617601,Vladimir Soukhomlinov,author
+1375,https://openalex.org/W2312617601,atmospheric plasma jet,keyword
+1376,https://openalex.org/W2312617601,radio frequency energy coupling,keyword
+1377,https://openalex.org/W2312617601,plasma-assisted,keyword
+1378,https://openalex.org/W1967652135,J. L. Le,author
+1379,https://openalex.org/W1967652135,"Centre of Aerodynamics Research and Development of China, Mianyang, China",institution
+1380,https://openalex.org/W1967652135,CN,country
+1381,https://openalex.org/W1967652135,Z. C. Zhang,author
+1384,https://openalex.org/W1967652135,H. C. Bai,author
+1387,https://openalex.org/W1967652135,M. A. Goldfeld,author
+1388,https://openalex.org/W1967652135,"Institute of Theoretical and Applied Mechanics, Novosibirsk, Russia",institution
+1389,https://openalex.org/W1967652135,RU,country
+1390,https://openalex.org/W1967652135,R. V. Nestoulia,author
+1393,https://openalex.org/W1967652135,A. V. Starov,author
+1396,https://openalex.org/W1967652135,two-mode,keyword
+1397,https://openalex.org/W2800271239,D S Yatsukhno,author
+1398,https://openalex.org/W2800271239,"Ishlinsky Institute for Problems in Mechanics of the Russian academy of sciences, Vernadsky prospect 101(1), Moscow, 119526, Russia",institution
+1399,https://openalex.org/W2800271239,RU,country
+1400,https://openalex.org/W2800271239,waverider aerothermodynamics,keyword
+1401,https://openalex.org/W2800271239,ust3d computer code,keyword
+1402,https://openalex.org/W4253203957,Mostafa Barzegar Gerdroodbary,author
+1403,https://openalex.org/W4253203957,"Department of Mechanical Engineering, Babol Noshirvani University of Technology, Babol, Iran",institution
+1404,https://openalex.org/W4253203957,IR,country
+1405,https://openalex.org/W4253203957,single fuel jet,keyword
+1406,https://openalex.org/W4253203957,mixing,keyword
+1407,https://openalex.org/W4253203957,injection,keyword
+1408,https://openalex.org/W4253203957,engine,keyword
+1409,https://openalex.org/W3007729617,Marat Goldfeld,author
+1410,https://openalex.org/W3007729617,Institute of Theoretical and Applied Mechanics,institution
+1411,https://openalex.org/W3007729617,RU,country
+1412,https://openalex.org/W3007729617,ramjet/scramjet inlets,keyword
+1413,https://openalex.org/W3007729617,compressible boundary layer investigation,keyword
+1414,https://openalex.org/W3196729144,Gautam Choubey,author
+1415,https://openalex.org/W3196729144,"Department of Mechanical& Aerospace Engineering, Institute of Infrastructure Technology Research and Management (IITRAM), Gujarat, 380026, India",institution
+1416,https://openalex.org/W3196729144,IN,country
+1417,https://openalex.org/W3196729144,Pabbala Monish Yadav,author
+1420,https://openalex.org/W3196729144,Yuvarajan Devarajan,author
+1421,https://openalex.org/W3196729144,"Department of Automobile Engineering, Saveetha School of Engineering, SIMATS, Chennai, Tamilnadu, 602105, India",institution
+1423,https://openalex.org/W3196729144,Wei Huang,author
+1424,https://openalex.org/W3196729144,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha, Hunan, 410073, People's Republic of China",institution
+1425,https://openalex.org/W3196729144,CN,country
+1426,https://openalex.org/W3196729144,transverse injection,keyword
+1427,https://openalex.org/W2408184302,Zun Cai,author
+1428,https://openalex.org/W2408184302,"Division of Fluid Mechanics, Lund University, P.O. Box 118, S-221 00 Lund, Sweden; Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha 410073, China",institution
+1429,https://openalex.org/W2408184302,CN,country
+1430,https://openalex.org/W2408184302,SE,country
+1431,https://openalex.org/W2408184302,Xiao Liu,author
+1432,https://openalex.org/W2408184302,"College of Power and Energy Engineering, Harbin Engineering University, Harbin 150001, China; Division of Fluid Mechanics, Lund University, P.O. Box 118, S-221 00 Lund, Sweden",institution
+1435,https://openalex.org/W2408184302,Cheng Gong,author
+1436,https://openalex.org/W2408184302,"Division of Fluid Mechanics, Lund University, P.O. Box 118, S-221 00 Lund, Sweden",institution
+1438,https://openalex.org/W2408184302,Mingbo Sun,author
+1439,https://openalex.org/W2408184302,"Science and Technology on Scramjet Laboratory, National University of Defense Technology, Changsha 410073, China",institution
+1441,https://openalex.org/W2408184302,Zhenguo Wang,author
+1444,https://openalex.org/W2408184302,Xue Song Bai,author
+1447,https://openalex.org/W2408184302,scramjet combustor,keyword
+1448,https://openalex.org/W2408184302,large eddy simulation,keyword
+1449,https://openalex.org/W2408184302,fuel transport,keyword
+1450,https://openalex.org/W2408184302,mixing process,keyword
+1451,https://openalex.org/W2408184302,rearwall-expansion,keyword
+1452,https://openalex.org/W2281436150,Alexander Firsov,author
+1453,https://openalex.org/W2281436150,"Joint Institute for High Temperatures, Russian Academy of Sciences, 125412 Moscow, Russia",institution
+1454,https://openalex.org/W2281436150,RU,country
+1455,https://openalex.org/W2281436150,Konstantin V. Savelkin,author
+1458,https://openalex.org/W2281436150,Dmitry A. Yarantsev,author
+1461,https://openalex.org/W2281436150,Sergey B. Leonov,author
+1462,https://openalex.org/W2281436150,"Department of Aerospace and Mechanical Engineering, University of Notre Dame, Notre Dame, IN 46556, USA; Joint Institute for High Temperatures, Russian Academy of Sciences, 125412 Moscow, Russia",institution
+1464,https://openalex.org/W2281436150,US,country
+1465,https://openalex.org/W2281436150,mixing,keyword
+1466,https://openalex.org/W2281436150,plasma-enhanced,keyword

@@ -1,0 +1,945 @@
+,paper_id,target,type
+0,https://openalex.org/W2034477669,A. N. Oraevsky,author
+1,https://openalex.org/W2034477669,"Lebedev Physics Institute, Russian Academy of Sciences, Moscow, Russia",institution
+2,https://openalex.org/W2034477669,RU,country
+3,https://openalex.org/W2034477669,coherent computers,keyword
+4,https://openalex.org/W2034477669,quantum,keyword
+5,https://openalex.org/W4253984955,P.K. Amiri,author
+6,https://openalex.org/W4253984955,Sharif University of Technology in Tehran,institution
+7,https://openalex.org/W4253984955,IR,country
+8,https://openalex.org/W4253984955,quantum,keyword
+9,https://openalex.org/W2294265358,P.K. Amiri,author
+10,https://openalex.org/W2294265358,"Dept. Of Electr. Eng., Sharif Univ. of Technol., Tehran, Iran",institution
+11,https://openalex.org/W2294265358,IR,country
+12,https://openalex.org/W2294265358,quantum,keyword
+13,https://openalex.org/W2128130806,Anatolii N Oraevsky,author
+14,https://openalex.org/W2128130806,"P.N. Lebedev Physics Institute, Russian Academy of Sciences, Moscow, Russian Federation",institution
+15,https://openalex.org/W2128130806,RU,country
+16,https://openalex.org/W2128130806,quantum computers,keyword
+17,https://openalex.org/W3129672612,Sergei Kurgalin,author
+18,https://openalex.org/W3129672612,"Digital Technologies, Voronezh State University, Voronezh, Russia",institution
+19,https://openalex.org/W3129672612,RU,country
+20,https://openalex.org/W3129672612,Sergei Borzunov,author
+23,https://openalex.org/W3129672612,quantum,keyword
+24,https://openalex.org/W3129672612,model,keyword
+25,https://openalex.org/W2084019889,A. Yu. Kitaev,author
+26,https://openalex.org/W2084019889,"California Institute of Technology, Pasadena, CA",institution
+27,https://openalex.org/W2084019889,US,country
+28,https://openalex.org/W2084019889,A. H. Shen,author
+29,https://openalex.org/W2084019889,"Independent University of Moscow, Moscow, Russia",institution
+30,https://openalex.org/W2084019889,RU,country
+31,https://openalex.org/W2084019889,M. N. Vyalyi,author
+34,https://openalex.org/W2084019889,quantum,keyword
+35,https://openalex.org/W2084019889,computation,keyword
+36,https://openalex.org/W1480434469,S Lloyd,author
+37,https://openalex.org/W1480434469,MIT; Mechanical Engineering,institution
+38,https://openalex.org/W1480434469,RU,country
+39,https://openalex.org/W1480434469,quantum,keyword
+40,https://openalex.org/W1480434469,devices,keyword
+41,https://openalex.org/W3104397897,Xin Zhang,author
+42,https://openalex.org/W3104397897,"Synergetic Innovation Center of Quantum Information & Quantum Physics, University of Science and Technology of China, Hefei, 230026, China.",institution
+43,https://openalex.org/W3104397897,CN,country
+44,https://openalex.org/W3104397897,Hai Ou Li,author
+47,https://openalex.org/W3104397897,Gang Cao,author
+50,https://openalex.org/W3104397897,Ming Xiao,author
+53,https://openalex.org/W3104397897,Guang Can Guo,author
+56,https://openalex.org/W3104397897,semiconductor,keyword
+57,https://openalex.org/W3104397897,quantum,keyword
+58,https://openalex.org/W3104397897,computation,keyword
+59,https://openalex.org/W2949778930,Seth Lloyd,author
+60,https://openalex.org/W2949778930,-MIT,institution
+61,https://openalex.org/W2949778930,RU,country
+62,https://openalex.org/W2949778930,quantum,keyword
+63,https://openalex.org/W2949778930,computer,keyword
+64,https://openalex.org/W2949110438,Michael H. Freedman,author
+65,https://openalex.org/W2949110438,"(M. H. Freedman) Microsoft Research, One Microsoft Way, Redmond, Washington 98052",institution
+66,https://openalex.org/W2949110438,US,country
+67,https://openalex.org/W2949110438,Alexei Kitaev,author
+68,https://openalex.org/W2949110438,"(A. Kitaev) On leave from L.D. Landau Institute for Theoretical Physics, Kosygina St. 2, Moscow, 117940, Russia; Microsoft Research, One Microsoft Way, Redmond, Washington 98052",institution
+69,https://openalex.org/W2949110438,RU,country
+71,https://openalex.org/W2949110438,Michael J. Larsen,author
+72,https://openalex.org/W2949110438,"(M. J. Larsen and Z. Wang) Indiana University, Department of Mathematics, Bloomington, Indiana 47405",institution
+74,https://openalex.org/W2949110438,Zhenghan Wang,author
+75,https://openalex.org/W2949110438,,institution
+76,https://openalex.org/W2949110438,quantum,keyword
+77,https://openalex.org/W2949110438,computation,keyword
+78,https://openalex.org/W3210651104,Mykhaylo Balynsky,author
+79,https://openalex.org/W3210651104,"Department of Electrical and Computer Engineering, University of California-Riverside, Riverside, California 92521, USA",institution
+80,https://openalex.org/W3210651104,US,country
+81,https://openalex.org/W3210651104,Howard Chiang,author
+84,https://openalex.org/W3210651104,David Gutierrez,author
+85,https://openalex.org/W3210651104,"Department of Electrical and Computer Engineering, University of California-Riverside 1 , Riverside, California 92521, USA",institution
+87,https://openalex.org/W3210651104,Alexander Kozhevnikov,author
+88,https://openalex.org/W3210651104,"Kotelnikov Institute of Radioengineering and Electronics of the Russian Academy of Sciences, Saratov 410019, Russia",institution
+89,https://openalex.org/W3210651104,RU,country
+90,https://openalex.org/W3210651104,Yuri Filimonov,author
+91,https://openalex.org/W3210651104,"Department of Physical and Mathematical Sciences, Saratov State Technical University, Saratov State University, Saratov 410012, Russia; Kotelnikov Institute of Radioengineering and Electronics of the Russian Academy of Sciences, Saratov 410019, Russia",institution
+93,https://openalex.org/W3210651104,Alexander Khitun,author
+96,https://openalex.org/W3210651104,quantum computers,keyword
+97,https://openalex.org/W3210651104,wave,keyword
+98,https://openalex.org/W3210651104,database search,keyword
+99,https://openalex.org/W3210651104,database processing,keyword
+100,https://openalex.org/W4280501588,Alexander Sigov,author
+101,https://openalex.org/W4280501588,"Russian Technological University, Moscow, Russian Federation",institution
+102,https://openalex.org/W4280501588,RU,country
+103,https://openalex.org/W4280501588,Leonid Ratkin,author
+104,https://openalex.org/W4280501588,"Russian Academy of Sciences, Moscow, Russian Federation",institution
+106,https://openalex.org/W4280501588,Leonid A. Ivanov,author
+107,https://openalex.org/W4280501588,"Russian Academy of Engineering, Moscow, Russian Federation",institution
+109,https://openalex.org/W4280501588,quantum,keyword
+110,https://openalex.org/W4280501588,technology,keyword
+111,https://openalex.org/W4280501588,information,keyword
+112,https://openalex.org/W3036484014,Farid M. Ablayev,author
+113,https://openalex.org/W3036484014,"Kazan Federal University, Kazan, Russian Federation",institution
+114,https://openalex.org/W3036484014,RU,country
+115,https://openalex.org/W3036484014,Marat Ablayev,author
+116,https://openalex.org/W3036484014,"Kazan Federal University, Kazan, Russian Federation; Kazan Scientific Center of the Russian Academy of Sciences, Kazan, Russian Federation",institution
+118,https://openalex.org/W3036484014,Alexander Vasiliev,author
+121,https://openalex.org/W3036484014,quantum hashing,keyword
+122,https://openalex.org/W3036484014,quantum cryptography,keyword
+123,https://openalex.org/W3036484014,fingerprinting,keyword
+124,https://openalex.org/W2034539720,Jiangfeng Du,author
+125,https://openalex.org/W2034539720,"Department of Modern Physics, University of Science and Technology of China, Hefei, 230027, People's Republic of China",institution
+126,https://openalex.org/W2034539720,CN,country
+127,https://openalex.org/W2034539720,Hui Li,author
+130,https://openalex.org/W2034539720,Xiaodong Xu,author
+133,https://openalex.org/W2034539720,Mingjun Shi,author
+136,https://openalex.org/W2034539720,Jihui Wu,author
+137,https://openalex.org/W2034539720,"Laboratory of Structure of Biology, University of Science and Technology of China, Hefei 230027, People’s Republic of China",institution
+139,https://openalex.org/W2034539720,Xianyi Zhou,author
+142,https://openalex.org/W2034539720,Rongdian Han,author
+145,https://openalex.org/W2034539720,quantum games,keyword
+146,https://openalex.org/W3131420525,Sergey Ulyanov,author
+147,https://openalex.org/W3131420525,"Dubna State University, Dubna, Russian Federation",institution
+148,https://openalex.org/W3131420525,RU,country
+149,https://openalex.org/W3131420525,Andrey Reshetnikov,author
+152,https://openalex.org/W3131420525,Olga Tyatyushkina,author
+155,https://openalex.org/W3131420525,Vladimir Korenkov,author
+158,https://openalex.org/W3131420525,quantum software engineering,keyword
+159,https://openalex.org/W3131420525,quantum circuit,keyword
+160,https://openalex.org/W3131420525,computing,keyword
+161,https://openalex.org/W3047959114,Sergey Gushanskiy,author
+162,https://openalex.org/W3047959114,"Department of Computer Engineering, Southern Federal University, Taganrog, Russia",institution
+163,https://openalex.org/W3047959114,RU,country
+164,https://openalex.org/W3047959114,Maxim Polenov,author
+167,https://openalex.org/W3047959114,Viktor Potapov,author
+170,https://openalex.org/W3047959114,quantum state,keyword
+171,https://openalex.org/W3047959114,image recognition,keyword
+172,https://openalex.org/W3047959114,boundaries selection,keyword
+173,https://openalex.org/W4226470290,Abdelrahman Abuarqoub,author
+174,https://openalex.org/W4226470290,"Cardiff School of Technologies, Cardiff Metropolitan University, UK",institution
+175,https://openalex.org/W4226470290,GB,country
+176,https://openalex.org/W4226470290,Simak Abuarqoub,author
+177,https://openalex.org/W4226470290,"Faculty of Engineering and Technology, Liverpool John Moores University, United Kingdom",institution
+179,https://openalex.org/W4226470290,Ahmad Alzu'bi,author
+180,https://openalex.org/W4226470290,"Department of Computer Science, Jordan University of Science and Technology, Jordan",institution
+181,https://openalex.org/W4226470290,JO,country
+182,https://openalex.org/W4226470290,Ammar Muthanna,author
+183,https://openalex.org/W4226470290,"Department of Telecommunication Networks and Data Transmission, The Bonch-Bruevich Saint-Petersburg State University of Telecommunications, Russian Federation",institution
+184,https://openalex.org/W4226470290,RU,country
+185,https://openalex.org/W4226470290,quantum computing,keyword
+186,https://openalex.org/W4226470290,security,keyword
+187,https://openalex.org/W3112953322,Sergey Gushanskiy,author
+188,https://openalex.org/W3112953322,"Department of Computer Engineering, Southern Federal University, Taganrog, Russia",institution
+189,https://openalex.org/W3112953322,RU,country
+190,https://openalex.org/W3112953322,Valery Pukhovskiy,author
+193,https://openalex.org/W3112953322,Viktor Potapov,author
+196,https://openalex.org/W3112953322,Alexander Kozlovskiy,author
+199,https://openalex.org/W3112953322,quantum computing,keyword
+200,https://openalex.org/W3112953322,correction quantum types,keyword
+201,https://openalex.org/W3112953322,hardware accelerator,keyword
+202,https://openalex.org/W1668308174,Vasily E. Tarasov,author
+203,https://openalex.org/W1668308174,Moscow State University,institution
+204,https://openalex.org/W1668308174,RU,country
+205,https://openalex.org/W1668308174,quantum computation,keyword
+206,https://openalex.org/W1668308174,quantum operations,keyword
+207,https://openalex.org/W1668308174,mixed states,keyword
+208,https://openalex.org/W2946158922,Chu Guo,author
+209,https://openalex.org/W2946158922,"Henan Key Laboratory of Quantum Information and Cryptography, IEU, Zhengzhou 450001, China.",institution
+210,https://openalex.org/W2946158922,CN,country
+211,https://openalex.org/W2946158922,Yong Liu,author
+212,https://openalex.org/W2946158922,"Institute for Quantum Information & State Key Laboratory of High Performance Computing, College of Computer, National University of Defense Technology, Changsha 410073, China.",institution
+214,https://openalex.org/W2946158922,Min Xiong,author
+217,https://openalex.org/W2946158922,Shichuan Xue,author
+220,https://openalex.org/W2946158922,Xiang Fu,author
+223,https://openalex.org/W2946158922,Anqi Huang,author
+226,https://openalex.org/W2946158922,Xiaogang Qiang,author
+229,https://openalex.org/W2946158922,Ping Xu,author
+232,https://openalex.org/W2946158922,Junhua Liu,author
+233,https://openalex.org/W2946158922,"Information Systems Technology and Design, Singapore University of Technology and Design, 8 Somapah Road, 487372 Singapore; Quantum Intelligence Lab (QI-Lab), Supremacy Future Technologies (SFT), Guangzhou 511340, China",institution
+235,https://openalex.org/W2946158922,SG,country
+236,https://openalex.org/W2946158922,Shenggen Zheng,author
+237,https://openalex.org/W2946158922,"Center for Quantum Computing, Peng Cheng Laboratory, Shenzhen 518055, China",institution
+239,https://openalex.org/W2946158922,He-Liang Huang,author
+240,https://openalex.org/W2946158922,"CAS Centre for Excellence and Synergetic Innovation Centre in Quantum Information and Quantum Physics, University of Science and Technology of China, Hefei, Anhui 230026, China; Henan Key Laboratory of Quantum Information and Cryptography, IEU, Zhengzhou 450001, China",institution
+242,https://openalex.org/W2946158922,Mingtang Deng,author
+245,https://openalex.org/W2946158922,Dario Poletti,author
+246,https://openalex.org/W2946158922,"Science and Math Cluster and EPD Pillar, Singapore University of Technology and Design, 8 Somapah Road, 487372 Singapore.",institution
+248,https://openalex.org/W2946158922,Wan-Su Bao,author
+251,https://openalex.org/W2946158922,Junjie Wu,author
+254,https://openalex.org/W2946158922,quantum,keyword
+255,https://openalex.org/W2946158922,simulator,keyword
+256,https://openalex.org/W2946158922,general-purpose,keyword
+257,https://openalex.org/W2946158922,entangled-pair,keyword
+258,https://openalex.org/W4213379151,Valery Pukhovsky,author
+259,https://openalex.org/W4213379151,"Computer Engineering, Southern Federal University, Russia",institution
+260,https://openalex.org/W4213379151,RU,country
+261,https://openalex.org/W4213379151,Sergey Gushanskiy,author
+264,https://openalex.org/W4213379151,Viktor Potapov,author
+267,https://openalex.org/W4213379151,quantum computing,keyword
+268,https://openalex.org/W4213379151,hardware approach,keyword
+269,https://openalex.org/W4213379151,algorithm,keyword
+270,https://openalex.org/W4386101203,Yang Lu,author
+271,https://openalex.org/W4386101203,"National Engineering Research Centre for Agri-Product Quality Traceability, Beijing Technology and Business University",institution
+272,https://openalex.org/W4386101203,CN,country
+273,https://openalex.org/W4386101203,Alexander Sigov,author
+274,https://openalex.org/W4386101203,"MIREA - Russian Technological University, Moscow, Russia",institution
+275,https://openalex.org/W4386101203,RU,country
+276,https://openalex.org/W4386101203,Leonid Ratkin,author
+277,https://openalex.org/W4386101203,"Russian Academy of Sciences, Moscow, Russia",institution
+279,https://openalex.org/W4386101203,Leonid A. Ivanov,author
+280,https://openalex.org/W4386101203,"Russian Academy of Engineering, Moscow, Russia",institution
+282,https://openalex.org/W4386101203,Min Zuo,author
+285,https://openalex.org/W4386101203,industrial information integration,keyword
+286,https://openalex.org/W4386101203,quantum,keyword
+287,https://openalex.org/W4386101203,computing,keyword
+288,https://openalex.org/W2027128346,Elena V. Melnitchenko,author
+289,https://openalex.org/W2027128346,"Moscow Engineering-Physics Institute (state university), Moscow, 115409, Russia",institution
+290,https://openalex.org/W2027128346,RU,country
+291,https://openalex.org/W2027128346,Edward A. Manykin,author
+294,https://openalex.org/W2027128346,photon,keyword
+295,https://openalex.org/W2041200556,V. N. Dumachev,author
+296,https://openalex.org/W2041200556,"Voronezh Militia Institute, Ministry of Internal Affairs of the Russian Federation, Voronezh, Russia",institution
+297,https://openalex.org/W2041200556,RU,country
+298,https://openalex.org/W2041200556,S. V. Orlov,author
+301,https://openalex.org/W2041200556,qubits,keyword
+302,https://openalex.org/W2041200556,cloning,keyword
+303,https://openalex.org/W2041200556,quantum,keyword
+304,https://openalex.org/W3112714582,Alexander S. Novikov,author
+305,https://openalex.org/W3112714582,"ITMO University, Kronverksky Pr., 49, bldg. A, 197101 Saint Petersburg, Russia; Saint Petersburg State University, Universitetskaya Nab., 7/9, 199034 Saint Petersburg, Russia",institution
+306,https://openalex.org/W3112714582,RU,country
+307,https://openalex.org/W3112714582,quantum,keyword
+308,https://openalex.org/W3112714582,chemistry,keyword
+309,https://openalex.org/W2592366332,D. Melnikov,author
+310,https://openalex.org/W2592366332,"ITEP, Moscow 117218, Russia; International Institute of Physics – UFRN, Campus Universitario, Lagoa Nova, CP: 1613, Natal, RN 59078-970, Brazil",institution
+311,https://openalex.org/W2592366332,BR,country
+312,https://openalex.org/W2592366332,A. Mironov,author
+313,https://openalex.org/W2592366332,"ITEP, Moscow 117218, Russia; Institute for Information Transmission Problems, Moscow 127994, Russia; Lebedev Physics Institute, Moscow 119991, Russia",institution
+314,https://openalex.org/W2592366332,RU,country
+315,https://openalex.org/W2592366332,S. Mironov,author
+316,https://openalex.org/W2592366332,"ITEP, Moscow 117218, Russia; Institute of Nuclear Research, Moscow 117312, Russia",institution
+318,https://openalex.org/W2592366332,A. Morozov,author
+319,https://openalex.org/W2592366332,"ITEP, Moscow 117218, Russia",institution
+321,https://openalex.org/W2592366332,An. Morozov,author
+322,https://openalex.org/W2592366332,"ITEP, Moscow 117218, Russia; Institute for Information Transmission Problems, Moscow 127994, Russia; Laboratory of Quantum Topology, Chelyabinsk State University, Chelyabinsk 454001, Russia",institution
+324,https://openalex.org/W2592366332,topological quantum computer,keyword
+325,https://openalex.org/W4296100178,Mohammad Reza Habibi,author
+326,https://openalex.org/W4296100178,"The Faculty of Engineering and Science, Aalborg University, 9220 Aalborg, Denmark",institution
+327,https://openalex.org/W4296100178,DK,country
+328,https://openalex.org/W4296100178,Saeed Golestan,author
+331,https://openalex.org/W4296100178,Ali Soltanmanesh,author
+332,https://openalex.org/W4296100178,"Department of Chemistry, Sharif University of Technology, Tehran 1458889694, Iran",institution
+333,https://openalex.org/W4296100178,IR,country
+334,https://openalex.org/W4296100178,Josep M. Guerrero,author
+337,https://openalex.org/W4296100178,Juan C. Vasquez,author
+340,https://openalex.org/W4296100178,quantum computing,keyword
+341,https://openalex.org/W4296100178,grovers,keyword
+342,https://openalex.org/W4296100178,energy applications,keyword
+343,https://openalex.org/W2117306550,Sina Jafarpour,author
+344,https://openalex.org/W2117306550,"Department of Computer Engineering, Sharif University of Technology, Iran",institution
+345,https://openalex.org/W2117306550,IR,country
+346,https://openalex.org/W2117306550,quantum,keyword
+347,https://openalex.org/W2117306550,introduction,keyword
+348,https://openalex.org/W2044386713,Long Gui-Lu,author
+349,https://openalex.org/W2044386713,"Key Laboratory for Quantum Information and Measurements and Department of Physics, Tsinghua University, Beijing 100084, China",institution
+350,https://openalex.org/W2044386713,CN,country
+351,https://openalex.org/W2044386713,quantum,keyword
+352,https://openalex.org/W2044386713,duality,keyword
+353,https://openalex.org/W2044386713,interference,keyword
+354,https://openalex.org/W3184830186,Sergey Gushanskiy,author
+355,https://openalex.org/W3184830186,"Department of Computer Engineering, Southern Federal University, Taganrog, Russia",institution
+356,https://openalex.org/W3184830186,RU,country
+357,https://openalex.org/W3184830186,Alexander Gorbunov,author
+360,https://openalex.org/W3184830186,Viktor Potapov,author
+363,https://openalex.org/W3184830186,development circuits,keyword
+364,https://openalex.org/W3184830186,error correction,keyword
+365,https://openalex.org/W1997854118,S. N. Andrianov,author
+366,https://openalex.org/W1997854118,"Institute for Informatics of Tatarstan Republic Academy of Sciences, Kazan, Russia",institution
+367,https://openalex.org/W1997854118,RU,country
+368,https://openalex.org/W1997854118,S. A. Moiseev,author
+369,https://openalex.org/W1997854118,"Institute for Informatics of Tatarstan Republic Academy of Sciences, Kazan, Russia; Kazan Physical and Technical Institute of Russian Academy of Sciences, Kazan, Russia",institution
+371,https://openalex.org/W1997854118,multiatomic ensembles,keyword
+372,https://openalex.org/W1997854118,quantum,keyword
+373,https://openalex.org/W2791224451,Farid Ablayev,author
+374,https://openalex.org/W2791224451,Kazan Federal University,institution
+375,https://openalex.org/W2791224451,RU,country
+376,https://openalex.org/W2791224451,Marat Ablayev,author
+379,https://openalex.org/W2791224451,Alexander Vasiliev,author
+382,https://openalex.org/W2791224451,quantum,keyword
+383,https://openalex.org/W2791224451,computing,keyword
+384,https://openalex.org/W3099192371,Jason M Dominy,author
+385,https://openalex.org/W3099192371,"Center for Quantum Information Science and Technology, University of Southern California, Los Angeles, CA 90089, USA",institution
+386,https://openalex.org/W3099192371,US,country
+387,https://openalex.org/W3099192371,Gerardo A Paz-Silva,author
+390,https://openalex.org/W3099192371,A T Rezakhani,author
+391,https://openalex.org/W3099192371,"Center for Quantum Information Science and Technology, University of Southern California, Los Angeles, CA 90089, USA; Department of Physics, Sharif University of Technology, Tehran, Iran",institution
+392,https://openalex.org/W3099192371,IR,country
+394,https://openalex.org/W3099192371,D A Lidar,author
+395,https://openalex.org/W3099192371,"Department of Physics, University of Southern California, Los Angeles, CA 90089, USA",institution
+397,https://openalex.org/W3099192371,quantum zeno effect,keyword
+398,https://openalex.org/W3099192371,quantum control,keyword
+399,https://openalex.org/W2151415361,Shi-Liang Zhu,author
+400,https://openalex.org/W2151415361,"Department of Physics, South China Normal University, Guangzhou, China; Department of Physics, University of Hong Kong, Pokfulam Road, Hong Kong, China",institution
+401,https://openalex.org/W2151415361,CN,country
+402,https://openalex.org/W2151415361,HK,country
+403,https://openalex.org/W2151415361,Z. D. Wang,author
+404,https://openalex.org/W2151415361,"Department of Materials Science and Engineering, University of Science and Technology of China, Hefei, China; Department of Physics, University of Hong Kong, Pokfulam Road, Hong Kong, China",institution
+407,https://openalex.org/W2151415361,unconventional geometric quantum computation,keyword
+408,https://openalex.org/W2764247099,Ahmed Farouk,author
+409,https://openalex.org/W2764247099,"Faculty of Computer and Information Sciences, Mansoura University, Mansoura, Egypt; University of Science and Technology, Zewail City of Science and Technology, Giza, Egypt",institution
+410,https://openalex.org/W2764247099,EG,country
+411,https://openalex.org/W2764247099,O. Tarawneh,author
+412,https://openalex.org/W2764247099,Al-Zahra College for Women,institution
+413,https://openalex.org/W2764247099,OM,country
+414,https://openalex.org/W2764247099,Mohamed Elhoseny,author
+415,https://openalex.org/W2764247099,mansoura University,institution
+417,https://openalex.org/W2764247099,J. Batle,author
+418,https://openalex.org/W2764247099,"Department de Física, Universitat de Les Illes Balears, Palma de Mallorca, Spain",institution
+419,https://openalex.org/W2764247099,ES,country
+420,https://openalex.org/W2764247099,Mosayeb Naseri,author
+421,https://openalex.org/W2764247099,"Department of Physics, Kermanshah Branch, Islamic Azad University, Kermanshah, Iran",institution
+422,https://openalex.org/W2764247099,IR,country
+423,https://openalex.org/W2764247099,Aboul Ella Hassanien,author
+424,https://openalex.org/W2764247099, Cairo University,institution
+426,https://openalex.org/W2764247099,M. Abedl-Aty,author
+427,https://openalex.org/W2764247099,"University of Science and Technology, Zewail City of Science and Technology, Giza, Egypt",institution
+429,https://openalex.org/W2764247099,cryptography,keyword
+430,https://openalex.org/W2764247099,quantum,keyword
+431,https://openalex.org/W1675770203,Seth Lloyd,author
+432,https://openalex.org/W1675770203,-MIT,institution
+433,https://openalex.org/W1675770203,RU,country
+434,https://openalex.org/W1675770203,Benjamin Rahn,author
+435,https://openalex.org/W1675770203,Harvard.,institution
+436,https://openalex.org/W1675770203,US,country
+437,https://openalex.org/W1675770203,Charlene Ahn,author
+438,https://openalex.org/W1675770203,- Caltech,institution
+440,https://openalex.org/W1675770203,robust quantum computation,keyword
+441,https://openalex.org/W1675770203,quantum computation,keyword
+442,https://openalex.org/W1675770203,simulation,keyword
+443,https://openalex.org/W2944451514,Viktor Potapov,author
+444,https://openalex.org/W2944451514,"Department of Computer Engineering, Southern Federal University, Taganrog, Russia",institution
+445,https://openalex.org/W2944451514,RU,country
+446,https://openalex.org/W2944451514,Sergey Gushanskiy,author
+449,https://openalex.org/W2944451514,Maxim Polenov,author
+452,https://openalex.org/W2944451514,quantum computers,keyword
+453,https://openalex.org/W2944451514,cores,keyword
+454,https://openalex.org/W2944451514,optimization,keyword
+455,https://openalex.org/W2944451514,low-level,keyword
+456,https://openalex.org/W3198665004,Vladimir K. Voronov,author
+457,https://openalex.org/W3198665004,"Department of Computer Technical, Irkutsk National Research Technical University, Irkutsk, 664074, Russia.",institution
+458,https://openalex.org/W3198665004,RU,country
+459,https://openalex.org/W3198665004,quantum-dot computation procedure,keyword
+460,https://openalex.org/W3198665004,electronic block,keyword
+461,https://openalex.org/W4251760348,Lev B. Klebanov,author
+462,https://openalex.org/W4251760348,Russian Academy of Natural Sciences,institution
+463,https://openalex.org/W4251760348,RU,country
+464,https://openalex.org/W4251760348,Svetlozar T. Rachev,author
+465,https://openalex.org/W4251760348,"University of California, Santa Barbara",institution
+466,https://openalex.org/W4251760348,US,country
+467,https://openalex.org/W4251760348,tomography,keyword
+468,https://openalex.org/W4251760348,quantum mechanics,keyword
+469,https://openalex.org/W3134863278,Jacob Biamonte,author
+470,https://openalex.org/W3134863278,"Skolkovo Institute of Science and Technology, 3 Nobel Street, Moscow 121205, Russia",institution
+471,https://openalex.org/W3134863278,RU,country
+472,https://openalex.org/W3134863278,quantum,keyword
+473,https://openalex.org/W3134863278,computation,keyword
+474,https://openalex.org/W3184088449,Yuri I. Ozhigov,author
+475,https://openalex.org/W3184088449,Moscow State University,institution
+476,https://openalex.org/W3184088449,RU,country
+477,https://openalex.org/W3184088449,quantum,keyword
+478,https://openalex.org/W3184088449,lectures,keyword
+479,https://openalex.org/W2529617085,Eesa Nikahd,author
+480,https://openalex.org/W2529617085,"Quantum Design Automation Lab, Department of Computer Engineering and Information Technology, Amirkabir University of Technology, Tehran, Iran",institution
+481,https://openalex.org/W2529617085,IR,country
+482,https://openalex.org/W2529617085,Mahboobeh Houshmand,author
+483,https://openalex.org/W2529617085,"Department of Computer Engineering Mashhad Branch, Islamic Azad University Mashhad Iran",institution
+485,https://openalex.org/W2529617085,Morteza Saheb Zamani,author
+488,https://openalex.org/W2529617085,Mehdi Sedighi,author
+491,https://openalex.org/W2529617085,quantum,keyword
+492,https://openalex.org/W2529617085,computation,keyword
+493,https://openalex.org/W2529617085,graph-based,keyword
+494,https://openalex.org/W2529617085,one-way,keyword
+495,https://openalex.org/W2508786350,S N Andrianov,author
+496,https://openalex.org/W2508786350,"Institute of Advanced Research, Academy of Sciences of the Republic of Tatarstan, Kazan, Russia",institution
+497,https://openalex.org/W2508786350,RU,country
+498,https://openalex.org/W2508786350,S A Moiseev,author
+499,https://openalex.org/W2508786350,"Kazan E. K. Zavoisky Physical-Technical Institute, Kazan Scientific Center, Russian Academy of Sciences, Kazan, Russia",institution
+501,https://openalex.org/W2508786350,nanophotonic quantum computer,keyword
+502,https://openalex.org/W2508786350,atomic,keyword
+503,https://openalex.org/W4213304426,Sergey P. Suprun,author
+504,https://openalex.org/W4213304426,"Institute of Semiconductor Physics, Siberian Branch of Russian Academy of Sciences, Novosibirsk, Russia",institution
+505,https://openalex.org/W4213304426,RU,country
+506,https://openalex.org/W4213304426,Anatoly P. Suprun,author
+507,https://openalex.org/W4213304426,"Laboratory for Cognitive Researches Institute for System Analysis, Russian Academy of Sciences, Moscow,Russian Federation",institution
+509,https://openalex.org/W4213304426,quantum,keyword
+510,https://openalex.org/W4213304426,computers,keyword
+511,https://openalex.org/W4213304426,classical,keyword
+512,https://openalex.org/W3149175869,Sergey Gushanskiy,author
+513,https://openalex.org/W3149175869,"Department of Computer Engineering, Southern Federal University, Taganrog, Russia",institution
+514,https://openalex.org/W3149175869,RU,country
+515,https://openalex.org/W3149175869,Alexander Gorbunov,author
+518,https://openalex.org/W3149175869,Viktor Potapov,author
+521,https://openalex.org/W3149175869,development quantum algorithms,keyword
+522,https://openalex.org/W3149175869,elimination quantum types,keyword
+523,https://openalex.org/W3130655125,Olga Ivancova,author
+524,https://openalex.org/W3130655125,"Joint institute for nuclear researches, Dubna, Russian Federation",institution
+525,https://openalex.org/W3130655125,RU,country
+526,https://openalex.org/W3130655125,Vladimir Korenkov,author
+527,https://openalex.org/W3130655125,"Joint institute for nuclear researches, Dubna, Russian Federation; Dubna State University, Dubna, Russian Federation",institution
+529,https://openalex.org/W3130655125,Olga Tyatyushkina,author
+530,https://openalex.org/W3130655125,"Dubna State University, Dubna, Russian Federation",institution
+532,https://openalex.org/W3130655125,Sergey Ulyanov,author
+535,https://openalex.org/W3130655125,Toshio Fukuda,author
+536,https://openalex.org/W3130655125,"Nagoya University, Furo-cho, Chikusa-ku, Nagoya, Japan",institution
+537,https://openalex.org/W3130655125,JP,country
+538,https://openalex.org/W3130655125,quantum software engineering,keyword
+539,https://openalex.org/W3130655125,approximate optimization algorithm,keyword
+540,https://openalex.org/W3130655125,end-to-end,keyword
+541,https://openalex.org/W3161808795,G Yerlanova,author
+542,https://openalex.org/W3161808795,"Department of Computer Science, Eurasian National University, 2 Satpayeva Street, Nur-Sultan, Republic of Kazakhstan",institution
+543,https://openalex.org/W3161808795,KZ,country
+544,https://openalex.org/W3161808795,M Serik,author
+547,https://openalex.org/W3161808795,A Kopyltsov,author
+548,https://openalex.org/W3161808795,"Physics Department, Saint Petersburg State University of Aerospace Instrumentation, 67 BolshayaMorskaya Street, St. Petersburg, Russia",institution
+549,https://openalex.org/W3161808795,RU,country
+550,https://openalex.org/W3161808795,quantum computers,keyword
+551,https://openalex.org/W3161808795,parallel computing,keyword
+552,https://openalex.org/W3161808795,high performance computers,keyword
+553,https://openalex.org/W3161808795,performance computers,keyword
+554,https://openalex.org/W2327411520,Lev B. Klebanov,author
+555,https://openalex.org/W2327411520,Russian Academy of Natural Sciences,institution
+556,https://openalex.org/W2327411520,RU,country
+557,https://openalex.org/W2327411520,Svetlozar T. Rachev,author
+558,https://openalex.org/W2327411520,"University of California, Santa Barbara",institution
+559,https://openalex.org/W2327411520,US,country
+560,https://openalex.org/W2327411520,tomography,keyword
+561,https://openalex.org/W2327411520,quantum mechanics,keyword
+562,https://openalex.org/W2181040799,Vyacheslav Guzik,author
+563,https://openalex.org/W2181040799,"Department of Computer Engineering, Southern Federal University, Taganrog, Russia",institution
+564,https://openalex.org/W2181040799,RU,country
+565,https://openalex.org/W2181040799,Sergey Gushanskiy,author
+568,https://openalex.org/W2181040799,Evgeny Kubrakov,author
+571,https://openalex.org/W2181040799,Maxim Polenov,author
+574,https://openalex.org/W2181040799,quantum gates,keyword
+575,https://openalex.org/W2181040799,optimization algorithm,keyword
+576,https://openalex.org/W4293113267,Sergey Gushanskiy,author
+577,https://openalex.org/W4293113267,"Southern Federal University, Russia",institution
+578,https://openalex.org/W4293113267,RU,country
+579,https://openalex.org/W4293113267,Viktor Potapov,author
+582,https://openalex.org/W4293113267,Alexey Samoylov,author
+585,https://openalex.org/W4293113267,quantum neural networks,keyword
+586,https://openalex.org/W4293113267,neural networks,keyword
+587,https://openalex.org/W4293113267,single-qubit,keyword
+588,https://openalex.org/W4282941693,Sergey Gushanskiy,author
+589,https://openalex.org/W4282941693,"Southern Federal University,Department of Computer Engineering,Taganrog,Russia",institution
+590,https://openalex.org/W4282941693,RU,country
+591,https://openalex.org/W4282941693,Viktor Potapov,author
+594,https://openalex.org/W4282941693,quantum,keyword
+595,https://openalex.org/W4282941693,code,keyword
+596,https://openalex.org/W4367597947,Mostafa Mokhles,author
+597,https://openalex.org/W4367597947,"Faculty of Computer Science, National Research University Higher School of Economics, Moscow, Russia",institution
+598,https://openalex.org/W4367597947,RU,country
+599,https://openalex.org/W4367597947,Ilya Makarov,author
+600,https://openalex.org/W4367597947,"AI Center, NUST MISiS, Moscow, Russia; Artificial Intelligence Research Institute (AIRI), Moscow, Russia; Laboratory of Algorithms and Technologies for Networks Analysis, HSE University, Nizhny Novgorod, Russia",institution
+602,https://openalex.org/W4367597947,classification,keyword
+603,https://openalex.org/W4367597947,quantum,keyword
+604,https://openalex.org/W4367597947,multi-class,keyword
+605,https://openalex.org/W3160115532,Nikita Kolganov,author
+606,https://openalex.org/W3160115532,"Institute for Theoretical and Mathematical Physics, MSU, 119991 Moscow, Russia; Moscow Institute of Physics and Technology, 141701 Dolgoprudny, Russia; National Research Center “Kurchatov Institute”, 123182 Moscow, Russia",institution
+607,https://openalex.org/W3160115532,RU,country
+608,https://openalex.org/W3160115532,Sergey Mironov,author
+609,https://openalex.org/W3160115532,"Institute for Nuclear Research, RAS, 117312 Moscow, Russia; Institute for Theoretical and Mathematical Physics, MSU, 119991 Moscow, Russia; Moscow Institute of Physics and Technology, 141701 Dolgoprudny, Russia; National Research Center “Kurchatov Institute”, 123182 Moscow, Russia",institution
+611,https://openalex.org/W3160115532,Andrey Morozov,author
+612,https://openalex.org/W3160115532,"Institute for Information Transmission Problems, 127994 Moscow, Russia; Moscow Institute of Physics and Technology, 141701 Dolgoprudny, Russia; National Research Center “Kurchatov Institute”, 123182 Moscow, Russia",institution
+614,https://openalex.org/W3160115532,quantum,keyword
+615,https://openalex.org/W3160115532,computer,keyword
+616,https://openalex.org/W2585884280,E. Charbon,author
+617,https://openalex.org/W2585884280,"Delft University of Technology, Delft, The Netherlands; EPFL, Lausanne, Switzerland",institution
+618,https://openalex.org/W2585884280,CH,country
+619,https://openalex.org/W2585884280,NL,country
+620,https://openalex.org/W2585884280,F. Sebastiano,author
+621,https://openalex.org/W2585884280,"Delft University of Technology, Delft,   The Netherlands",institution
+623,https://openalex.org/W2585884280,A. Vladimirescu,author
+624,https://openalex.org/W2585884280,"Delft University of Technology, Delft, The Netherlands; Institut Superieur d'Electronique, de Paris, France; UC Berkeley, Berkeley, USA",institution
+625,https://openalex.org/W2585884280,FR,country
+627,https://openalex.org/W2585884280,US,country
+628,https://openalex.org/W2585884280,H. Homulle,author
+631,https://openalex.org/W2585884280,S. Visser,author
+634,https://openalex.org/W2585884280,L. Song,author
+635,https://openalex.org/W2585884280,"Delft University of Technology, Delft, The Netherlands; Tsinghua University, Beijing, China",institution
+636,https://openalex.org/W2585884280,CN,country
+638,https://openalex.org/W2585884280,R M. Incandela,author
+641,https://openalex.org/W2585884280,quantum,keyword
+642,https://openalex.org/W2585884280,computing,keyword
+643,https://openalex.org/W2585884280,cryo-cmos,keyword
+644,https://openalex.org/W3098947601,M.A Man'ko,author
+645,https://openalex.org/W3098947601,"P.N. Lebedev Physical Institute, Leninskii Prospect 53, Moscow 117924, Russia; Zentrum für interdisziplinäre Forschung, Universität Bielefeld, Wellenberg 1, 33615 Bielefeld, Germany",institution
+646,https://openalex.org/W3098947601,DE,country
+647,https://openalex.org/W3098947601,RU,country
+648,https://openalex.org/W3098947601,V.I Man'ko,author
+652,https://openalex.org/W3098947601,R Vilela Mendes,author
+653,https://openalex.org/W3098947601,"Grupo de Física Matemática, Complexo Interdisciplinar, Universidade de Lisboa, Av. Gama Pinto, 2, P1699 Lisboa Codex, Portugal; Zentrum für interdisziplinäre Forschung, Universität Bielefeld, Wellenberg 1, 33615 Bielefeld, Germany",institution
+655,https://openalex.org/W3098947601,PT,country
+656,https://openalex.org/W3098947601,quantum,keyword
+657,https://openalex.org/W3098947601,computation,keyword
+658,https://openalex.org/W3098947601,systems,keyword
+659,https://openalex.org/W2591919004,L Vasyukov Vladimir,author
+660,https://openalex.org/W2591919004,National research university Higher School of Economics,institution
+661,https://openalex.org/W2591919004,RU,country
+662,https://openalex.org/W2591919004,quantum computational logic,keyword
+663,https://openalex.org/W2591919004,axiomatization,keyword
+664,https://openalex.org/W2488302183,A. Kitaev,author
+665,https://openalex.org/W2488302183,"California Institute of Technology, Pasadena, CA",institution
+666,https://openalex.org/W2488302183,US,country
+667,https://openalex.org/W2488302183,A. Shen,author
+668,https://openalex.org/W2488302183,"Independent University of Moscow, Moscow, Russia",institution
+669,https://openalex.org/W2488302183,RU,country
+670,https://openalex.org/W2488302183,M. Vyalyi,author
+673,https://openalex.org/W2488302183,quantum computation,keyword
+674,https://openalex.org/W2488302183,definition,keyword
+675,https://openalex.org/W2488302183,examples,keyword
+676,https://openalex.org/W2056449078,Zoheir Ezziane,author
+677,https://openalex.org/W2056449078,"Applied Science and Technology, Higher Colleges of Technology, 17258 Al-Ain, UAE",institution
+678,https://openalex.org/W2056449078,AE,country
+679,https://openalex.org/W2056449078,quantum,keyword
+680,https://openalex.org/W2056449078,computing,keyword
+681,https://openalex.org/W2056449078,measurement,keyword
+682,https://openalex.org/W3088999189,Pavel E. Baskakov,author
+683,https://openalex.org/W3088999189,Don State Technical University,institution
+684,https://openalex.org/W3088999189,RU,country
+685,https://openalex.org/W3088999189,Yuri Yu. Khabovets,author
+688,https://openalex.org/W3088999189,Irina A. Pilipenko,author
+691,https://openalex.org/W3088999189,Veronika O. Kravchenko,author
+694,https://openalex.org/W3088999189,Larisa V. Cherkesova,author
+697,https://openalex.org/W3088999189,emulating quantum computing,keyword
+698,https://openalex.org/W3088999189,tools,keyword
+699,https://openalex.org/W2904720022,Adrian Parra-Rodriguez,author
+700,https://openalex.org/W2904720022,"Department of Physical Chemistry, University of the Basque Country UPV/EHU, Apartado 644, E-48080 Bilbao, Spain",institution
+701,https://openalex.org/W2904720022,ES,country
+702,https://openalex.org/W2904720022,Pavel Lougovski,author
+703,https://openalex.org/W2904720022,"Quantum Information Science Group, Oak Ridge National Laboratory, Oak Ridge, Tennessee 37831, USA",institution
+704,https://openalex.org/W2904720022,US,country
+705,https://openalex.org/W2904720022,Lucas Lamata,author
+706,https://openalex.org/W2904720022,"Departamento de Física Atómica, Molecular y Nuclear, Universidad de Sevilla, E-41080 Sevilla, Spain; Department of Physical Chemistry, University of the Basque Country UPV/EHU, Apartado 644, E-48080 Bilbao, Spain",institution
+708,https://openalex.org/W2904720022,Enrique Solano,author
+709,https://openalex.org/W2904720022,"Department of Physical Chemistry, University of the Basque Country UPV/EHU, Apartado 644, E-48080 Bilbao, Spain; IKERBASQUE, Basque Foundation for Science, Maria Diaz de Haro 3, E-48013 Bilbao, Spain; International Center of Quantum Artificial Intelligence for Science and Technology (QuArtist) and Physics Department, Shanghai University, 200444 Shanghai, China",institution
+710,https://openalex.org/W2904720022,CN,country
+712,https://openalex.org/W2904720022,Mikel Sanz,author
+715,https://openalex.org/W2904720022,quantum,keyword
+716,https://openalex.org/W2904720022,computation,keyword
+717,https://openalex.org/W2904720022,digital-analog,keyword
+718,https://openalex.org/W3134749139,Olga Ivancova,author
+719,https://openalex.org/W3134749139,"Joint institute for nuclear researches, Dubna, Russian Federation; Dubna State University, Dubna, Russian Federation",institution
+720,https://openalex.org/W3134749139,RU,country
+721,https://openalex.org/W3134749139,Vladimir Korenkov,author
+722,https://openalex.org/W3134749139,"Joint institute for nuclear researches, Dubna, Russian Federation",institution
+724,https://openalex.org/W3134749139,Olga Tyatyushkina,author
+725,https://openalex.org/W3134749139,"Dubna State University, Dubna, Russian Federation",institution
+727,https://openalex.org/W3134749139,Sergey Ulyanov,author
+730,https://openalex.org/W3134749139,Toshio Fukuda,author
+731,https://openalex.org/W3134749139,"Nagoya University, Furo-cho, Chikusa-ku, Nagoya, Japan",institution
+732,https://openalex.org/W3134749139,JP,country
+733,https://openalex.org/W3134749139,quantum software engineering–quantum,keyword
+734,https://openalex.org/W3134749139,quantum supremacy,keyword
+735,https://openalex.org/W3134749139,quantum gate level,keyword
+736,https://openalex.org/W3134749139,software engineering–quantum,keyword
+737,https://openalex.org/W3134749139,end-to-end,keyword
+738,https://openalex.org/W4292702557,Aurthur Vimalachandran Thomas Jayachandran,author
+739,https://openalex.org/W4292702557,"Department of Theory of Aircraft Engines, Samara University,  Samara, Russia",institution
+740,https://openalex.org/W4292702557,RU,country
+741,https://openalex.org/W4292702557,quantum computing,keyword
+742,https://openalex.org/W4292702557,gas turbine design,keyword
+743,https://openalex.org/W4386715627,Mohamad Taghi Dejpasand,author
+744,https://openalex.org/W4386715627,"Photonics and Quantum Technologies Research School, Nuclear Science and Technology Research Institute, Tehran 11155-3486, Iran",institution
+745,https://openalex.org/W4386715627,IR,country
+746,https://openalex.org/W4386715627,Morteza Sasani Ghamsari,author
+749,https://openalex.org/W4386715627,quantum computers,keyword
+750,https://openalex.org/W4386715627,qubits,keyword
+751,https://openalex.org/W4386715627,research trends,keyword
+752,https://openalex.org/W4386715627,building blocks,keyword
+753,https://openalex.org/W3043514756,He-Liang Huang,author
+754,https://openalex.org/W3043514756,"Hefei National Laboratory for Physical Sciences at Microscale and Department of Modern Physics, University of Science and Technology of China, Hefei, 230026, China",institution
+755,https://openalex.org/W3043514756,CN,country
+756,https://openalex.org/W3043514756,Dachao Wu,author
+759,https://openalex.org/W3043514756,Daojin Fan,author
+762,https://openalex.org/W3043514756,Xiaobo Zhu,author
+763,https://openalex.org/W3043514756,"Shanghai Branch, CAS Centre for Excellence and Synergetic Innovation Centre in Quantum Information and Quantum Physics, University of Science and Technology of China, Shanghai, 201315, China",institution
+765,https://openalex.org/W3043514756,quantum computing,keyword
+766,https://openalex.org/W2998036117,A. B. Vavrenyuk,author
+767,https://openalex.org/W2998036117,"National Research Nuclear University (MEPhI), Moscow, Russia",institution
+768,https://openalex.org/W2998036117,RU,country
+769,https://openalex.org/W2998036117,V. V. Makarov,author
+772,https://openalex.org/W2998036117,V. A. Shurygin,author
+775,https://openalex.org/W2998036117,quantum computer,keyword
+776,https://openalex.org/W2060795920,E.A. Liberman,author
+777,https://openalex.org/W2060795920,"Institute for Information Transmission Problems, Russian Academy of Sciences, Yermolov Street 19, Moscow, GSP-4, Russia",institution
+778,https://openalex.org/W2060795920,RU,country
+779,https://openalex.org/W2060795920,S.V. Minina,author
+782,https://openalex.org/W2060795920,molecular quantum computer,keyword
+783,https://openalex.org/W4366964020,Anatoly Khomonenko,author
+784,https://openalex.org/W4366964020,"Emperor Alexander I St. Petersburg State Transport University, 9 Moskovsky pr., 190031 Saint Petersburg, Russia",institution
+785,https://openalex.org/W4366964020,RU,country
+786,https://openalex.org/W4366964020,Maad M. Khalil,author
+787,https://openalex.org/W4366964020,"University of Diyala, Department of Computer Science, Diyala, Iraq",institution
+788,https://openalex.org/W4366964020,IQ,country
+789,https://openalex.org/W4366964020,railroads,keyword
+790,https://openalex.org/W4366964020,quantum,keyword
+791,https://openalex.org/W4366964020,computing,keyword
+792,https://openalex.org/W637985913,Edward L. Wolf,author
+793,https://openalex.org/W637985913,Applied Physics,institution
+794,https://openalex.org/W637985913,RU,country
+795,https://openalex.org/W637985913,quantum computing,keyword
+796,https://openalex.org/W637985913,nanoelectronics nanotechnology,keyword
+797,https://openalex.org/W3102660662,A. A. Zhukov,author
+798,https://openalex.org/W3102660662,"Dukhov Research Institute of Automatics (VNIIA), Moscow, Russia; National Research Nuclear University (MEPhI), Moscow, Russia",institution
+799,https://openalex.org/W3102660662,RU,country
+800,https://openalex.org/W3102660662,Evgeniy O. Kiktenko,author
+801,https://openalex.org/W3102660662,"Geoelectromagnetic Research Center of Schmidt Institute of Physics of the Earth, Russian Academy of Sciences, Moscow, Russia; Russian Quantum Center, Moscow, Russia; Steklov Mathematical Institute of Russian Academy of Sciences, Moscow, Russia",institution
+803,https://openalex.org/W3102660662,A. A. Elistratov,author
+804,https://openalex.org/W3102660662,"Dukhov Research Institute of Automatics (VNIIA), Moscow, Russia",institution
+806,https://openalex.org/W3102660662,W. V. Pogosov,author
+807,https://openalex.org/W3102660662,"Dukhov Research Institute of Automatics (VNIIA), Moscow, Russia; Institute for Theoretical and Applied Electrodynamics, Russian Academy of Sciences, Moscow, Russia; Moscow Institute of Physics and Technology, Moscow Region, Russia",institution
+809,https://openalex.org/W3102660662,Yu. E. Lozovik,author
+810,https://openalex.org/W3102660662,"Dukhov Research Institute of Automatics (VNIIA), Moscow, Russia; Institute of Spectroscopy, Russian Academy of Sciences, Moscow, Russia; Moscow Institute of Electronics and Mathematics, National Research University Higher School of Economics, Moscow, Russia",institution
+812,https://openalex.org/W3102660662,programmable quantum computers,keyword
+813,https://openalex.org/W3102660662,benchmark,keyword
+814,https://openalex.org/W3102660662,communication,keyword
+815,https://openalex.org/W4283370840,Sergey Gushanskiy,author
+816,https://openalex.org/W4283370840,"Department of Computer Engineering , Southern Federal University , Taganrog , Russia",institution
+817,https://openalex.org/W4283370840,RU,country
+818,https://openalex.org/W4283370840,Maxim Polenov,author
+821,https://openalex.org/W4283370840,Viktor Potapov,author
+824,https://openalex.org/W4283370840,averaging noise,keyword
+825,https://openalex.org/W4283370840,arbitrary errors,keyword
+826,https://openalex.org/W4283370840,quantum,keyword
+827,https://openalex.org/W2558753986,S. A. Moiseev,author
+828,https://openalex.org/W2558753986,"Kazan Physical and Technical Institute, Russian Academy of Sciences, Kazan Scientific Center, Tatarstan, Russia; Kazan Quantum Center of Kazan National Research University, Kazan, Tatarstan, Russia",institution
+829,https://openalex.org/W2558753986,RU,country
+830,https://openalex.org/W2558753986,S. N. Andrianov,author
+831,https://openalex.org/W2558753986,"Institute of Perspective Researches, Academy of Sciences of the Republic of Tatarstan, Kazan, Tatarstan, Russia; Kazan Quantum Center of Kazan National Research University, Kazan, Tatarstan, Russia",institution
+833,https://openalex.org/W2558753986,quantum memory,keyword
+834,https://openalex.org/W2558753986,atomic quantum transistor,keyword
+835,https://openalex.org/W2558753986,quantum computer,keyword
+836,https://openalex.org/W3213904105,I N Balaba,author
+837,https://openalex.org/W3213904105,"Tula State Lev Tolstoy Pedagogical University, 300026, Tula, Lenin avenue, 125, Russia",institution
+838,https://openalex.org/W3213904105,RU,country
+839,https://openalex.org/W3213904105,G S Deryabina,author
+840,https://openalex.org/W3213904105,"Bauman Moscow State Technical University, 105005, Moscow, ul. Baumanskaya 2-ya, 5, Russia",institution
+842,https://openalex.org/W3213904105,I A Pinchuk,author
+843,https://openalex.org/W3213904105,"Moscow Region State University, 141014, Moscow Region, city of Mytishi Very Voloshinoy street, 24, Russia",institution
+845,https://openalex.org/W3213904105,I V Sergeev,author
+846,https://openalex.org/W3213904105,"Institute of Advanced Training and Professional Retraining of Educational Workers Tula region, 300041, Tula, Lenin street, 22, Russia",institution
+848,https://openalex.org/W3213904105,S B Zabelina,author
+851,https://openalex.org/W3213904105,quantum computing,keyword
+852,https://openalex.org/W3213904105,efficient algorithms,keyword
+853,https://openalex.org/W2612118928,C. G. Almudever,author
+854,https://openalex.org/W2612118928,"[Computer Engineering Lab and QuTech, Delft University of Technology]",institution
+855,https://openalex.org/W2612118928,NL,country
+856,https://openalex.org/W2612118928,L. Lao,author
+859,https://openalex.org/W2612118928,X. Fu,author
+862,https://openalex.org/W2612118928,N. Khammassi,author
+865,https://openalex.org/W2612118928,I. Ashraf,author
+868,https://openalex.org/W2612118928,D. Iorga,author
+871,https://openalex.org/W2612118928,S. Varsamopoulos,author
+874,https://openalex.org/W2612118928,C. Eichler,author
+875,https://openalex.org/W2612118928,"[Quantum Device Lab, ETH Zurich]",institution
+876,https://openalex.org/W2612118928,CH,country
+877,https://openalex.org/W2612118928,US,country
+878,https://openalex.org/W2612118928,A. Wallraff,author
+882,https://openalex.org/W2612118928,L. Geck,author
+883,https://openalex.org/W2612118928,"ZEA-2: Electronic Systems, Central Institute of Engineering, Electronics and Analytics, Jülich",institution
+884,https://openalex.org/W2612118928,A. Kruth,author
+886,https://openalex.org/W2612118928,J. Knoch,author
+887,https://openalex.org/W2612118928,"Institute of Semiconductor Electronics and JARA-FIT, RWTH Aachen University",institution
+888,https://openalex.org/W2612118928,DE,country
+889,https://openalex.org/W2612118928,RU,country
+890,https://openalex.org/W2612118928,H. Bluhm,author
+891,https://openalex.org/W2612118928,"JARA-FIT Institute for Quantum Information, RWTH Aachen University and Forschungszentrum Jülich",institution
+893,https://openalex.org/W2612118928,K Bertels,author
+896,https://openalex.org/W2612118928,quantum,keyword
+897,https://openalex.org/W2612118928,engineering challenges,keyword
+898,https://openalex.org/W2612118928,computing,keyword
+899,https://openalex.org/W2949784080,V. V. Aristov,author
+900,https://openalex.org/W2949784080,Institute of Microelectronics Technology (Russia),institution
+901,https://openalex.org/W2949784080,RU,country
+902,https://openalex.org/W2949784080,A. V. Nikulov,author
+905,https://openalex.org/W2949784080,quantum,keyword
+906,https://openalex.org/W2949784080,hidden variables,keyword
+907,https://openalex.org/W2949784080,computation,keyword
+908,https://openalex.org/W2923187158,Marat Ismagilov,author
+909,https://openalex.org/W2923187158,"Kazan Federal University, Russia",institution
+910,https://openalex.org/W2923187158,RU,country
+911,https://openalex.org/W2923187158,Rustam Sayfutdinov,author
+914,https://openalex.org/W2923187158,Alexander Vasiliev,author
+917,https://openalex.org/W2923187158,quantum,keyword
+918,https://openalex.org/W2923187158,architecture,keyword
+919,https://openalex.org/W2923187158,platform,keyword
+920,https://openalex.org/W4387444924,Sergey Gushanskiy,author
+921,https://openalex.org/W4387444924,"Department of Computer Engineering, Southern Federal University, Taganrog, Russia",institution
+922,https://openalex.org/W4387444924,RU,country
+923,https://openalex.org/W4387444924,Viktor Potapov,author
+926,https://openalex.org/W4387444924,Natalia Korobeynikova,author
+929,https://openalex.org/W4387444924,quantum control system,keyword
+930,https://openalex.org/W4387444924,computational process,keyword
+931,https://openalex.org/W4285117926,Mario Coccia,author
+932,https://openalex.org/W4285117926,"National Research Council of Italy, Collegio Carlo Alberto, Via Real Collegio, Moncalieri (Torino), Italy",institution
+933,https://openalex.org/W4285117926,IT,country
+934,https://openalex.org/W4285117926,Saeed Roshani,author
+935,https://openalex.org/W4285117926,"Allameh Tabataba&#x0027;i University, Department of Technology and Entrepreneurship Management, Tehran, Iran",institution
+936,https://openalex.org/W4285117926,IR,country
+937,https://openalex.org/W4285117926,Melika Mosleh,author
+938,https://openalex.org/W4285117926,"Birmingham Business School, College of Social Sciences, University of Birmingham, Birmingham, U.K.",institution
+939,https://openalex.org/W4285117926,GB,country
+940,https://openalex.org/W4285117926,emerging quantum industry,keyword
+941,https://openalex.org/W4285117926,quantum computing,keyword
+942,https://openalex.org/W4285117926,innovation management implications,keyword
+943,https://openalex.org/W1976187104,M. I. Gavrilov,author
+944,https://openalex.org/W1976187104,"Department of Higher Mathematics, St. Petersburg State University of Information Technologies, Mechanics and Optics, St. Petersburg, Russia",institution
+945,https://openalex.org/W1976187104,RU,country
+946,https://openalex.org/W1976187104,L. V. Gortinskaya,author
+949,https://openalex.org/W1976187104,A. A. Pestov,author
+952,https://openalex.org/W1976187104,I. Yu. Popov,author
+955,https://openalex.org/W1976187104,E. S. Tesovskaya,author
+958,https://openalex.org/W1976187104,quantum,keyword
+959,https://openalex.org/W4288040069,Marziyeh Yahyavi,author
+960,https://openalex.org/W4288040069,"Department of Theoretical Physics and Astrophysics, University of Tabriz , Tabriz 5166616471, Iran",institution
+961,https://openalex.org/W4288040069,IR,country
+962,https://openalex.org/W4288040069,Mohammad Ali Jafarizadeh,author
+965,https://openalex.org/W4288040069,Naser Karimi,author
+966,https://openalex.org/W4288040069,"Department of Science, Farhangian University , Tehran , 19989-63341, Iran",institution
+968,https://openalex.org/W4288040069,Ahmad Heshmati,author
+969,https://openalex.org/W4288040069,"Department of Physics, Shabestar Branch, Islamic Azad University , Shabestar, Iran",institution
+971,https://openalex.org/W4288040069,quantum,keyword
+972,https://openalex.org/W4288040069,direct measurement,keyword
+973,https://openalex.org/W4288040069,three-tangle,keyword
+974,https://openalex.org/W4288040069,three-qubit,keyword
+975,https://openalex.org/W1927085689,E.A. Manykin,author
+976,https://openalex.org/W1927085689,"RSC Kurchatovsky Institute, Moscow, Russia",institution
+977,https://openalex.org/W1927085689,RU,country
+978,https://openalex.org/W1927085689,E.V. Melnichenko,author
+979,https://openalex.org/W1927085689,,institution
+980,https://openalex.org/W1927085689,quantum,keyword
+981,https://openalex.org/W3208106953,Vladimir Hahanov,author
+982,https://openalex.org/W3208106953,"Kharkov National University of Radio Electronics,Design Automation Department,Kharkov,Ukraine",institution
+983,https://openalex.org/W3208106953,UA,country
+984,https://openalex.org/W3208106953,Wajeb Gharibi,author
+985,https://openalex.org/W3208106953,"#N#                  University of Missouri, Kansas City, MO, USA#N#",institution
+986,https://openalex.org/W3208106953,US,country
+987,https://openalex.org/W3208106953,Mikhail Karavay,author
+988,https://openalex.org/W3208106953,"V.A. Trapeznikov Institute of Control Scienses of Russian Academy of Sciences,Moscow,Russia",institution
+989,https://openalex.org/W3208106953,RU,country
+990,https://openalex.org/W3208106953,Ka Lok Man,author
+991,https://openalex.org/W3208106953,"Xi'An Jiaotong-Liverpool University, China.",institution
+992,https://openalex.org/W3208106953,CN,country
+993,https://openalex.org/W3208106953,Svetlana Chumachenko,author
+996,https://openalex.org/W3208106953,Eugenia Litvinova,author
+999,https://openalex.org/W3208106953,Tariq Hama Salih,author
+1002,https://openalex.org/W3208106953,David Devadze,author
+1003,https://openalex.org/W3208106953,"Batumi Shota Rustaveli State University,Department of Computer Sciences,Batumi,Georgia",institution
+1004,https://openalex.org/W3208106953,GE,country
+1005,https://openalex.org/W3208106953,Ivan Hahanov,author
+1008,https://openalex.org/W3208106953,quantum digital–analogue,keyword
+1009,https://openalex.org/W3208106953,computing,keyword
+1010,https://openalex.org/W1972140889,Alexandr A. Ezhov,author
+1011,https://openalex.org/W1972140889,Troitsk Institute of Innovation and Fusion Research (Russia),institution
+1012,https://openalex.org/W1972140889,RU,country
+1013,https://openalex.org/W1972140889,neural technology,keyword
+1014,https://openalex.org/W1972140889,<title>quantum,keyword
+1015,https://openalex.org/W2970352374,Jacob D. Biamonte,author
+1016,https://openalex.org/W2970352374,"Deep Quantum Laboratory, Skolkovo Institute of Science and Technology, Moscow, Russia",institution
+1017,https://openalex.org/W2970352374,RU,country
+1018,https://openalex.org/W2952860957,Seth Lloyd,author
+1019,https://openalex.org/W2952860957,MIT; Mechanical Engineering,institution
+1020,https://openalex.org/W2952860957,RU,country
+1021,https://openalex.org/W2952860957,computation,keyword
+1022,https://openalex.org/W2146565722,S. Javad Akhtarshenas,author
+1023,https://openalex.org/W2146565722,"Department of Physics, University of Isfahan, Isfahan, Iran",institution
+1024,https://openalex.org/W2146565722,IR,country
+1025,https://openalex.org/W2146565722,Hamidreza Mohammadi,author
+1028,https://openalex.org/W2146565722,Saman Karimi,author
+1031,https://openalex.org/W2146565722,Zahra Azmi,author
+1034,https://openalex.org/W2146565722,computable measure,keyword
+1035,https://openalex.org/W2146565722,quantum,keyword
+1036,https://openalex.org/W2146565722,correlation,keyword
+1037,https://openalex.org/W652499025,Masanori Ohya,author
+1038,https://openalex.org/W652499025,Tokyo Univ. of science,institution
+1039,https://openalex.org/W652499025,Igor Volovich,author
+1040,https://openalex.org/W652499025,Steklov Mathematical Institute,institution
+1041,https://openalex.org/W652499025,RU,country
+1042,https://openalex.org/W652499025,quantum,keyword
+1043,https://openalex.org/W652499025,models,keyword
+1044,https://openalex.org/W652499025,computer,keyword
+1045,https://openalex.org/W1986323608,A. V. Tsukanov,author
+1046,https://openalex.org/W1986323608,"Institute of Physics and Technology, Russian Academy of Sciences, Moscow, Russia",institution
+1047,https://openalex.org/W1986323608,RU,country
+1048,https://openalex.org/W1986323608,optomechanical systems,keyword
+1049,https://openalex.org/W1986323608,quantum,keyword
+1050,https://openalex.org/W1986323608,computing,keyword
+1051,https://openalex.org/W3012879893,Shijie Wei,author
+1052,https://openalex.org/W3012879893,"Beijing Academy of Quantum Information Sciences, Beijing 100193China; State Key Laboratory of Low-Dimensional Quantum Physics and Department of Physics, Tsinghua University, Beijing 100084, China",institution
+1053,https://openalex.org/W3012879893,CN,country
+1054,https://openalex.org/W3012879893,Hang Li,author
+1055,https://openalex.org/W3012879893,"State Key Laboratory of Low-Dimensional Quantum Physics and Department of Physics, Tsinghua University, Beijing 100084, China",institution
+1057,https://openalex.org/W3012879893,GuiLu Long,author
+1060,https://openalex.org/W3012879893,full quantum eigensolver,keyword
+1061,https://openalex.org/W3012879893,simulations,keyword
+1062,https://openalex.org/W2013032002,A A Kalachev,author
+1063,https://openalex.org/W2013032002,"E.K. Zavoisky Physical-Technical Institute, Kazan Scientific Center, Russian Academy of Sciences, Kazan, Russian Federation",institution
+1064,https://openalex.org/W2013032002,RU,country
+1065,https://openalex.org/W2013032002,V V Samartsev,author
+1068,https://openalex.org/W2013032002,quantum computations,keyword
+1069,https://openalex.org/W2013032002,memory,keyword
+1070,https://openalex.org/W2951558227,Eesa Nikahd,author
+1071,https://openalex.org/W2951558227,"Quantum Design Automation Lab, Department of Computer Engineering and Information Technology, Amirkabir University of Technology, Tehran, Iran",institution
+1072,https://openalex.org/W2951558227,IR,country
+1073,https://openalex.org/W2951558227,Mahboobeh Houshmand,author
+1076,https://openalex.org/W2951558227,Morteza Saheb Zamani,author
+1079,https://openalex.org/W2951558227,Mehdi Sedighi,author
+1080,https://openalex.org/W2951558227,Amirkabir University of Technology,institution
+1082,https://openalex.org/W2951558227,quantum,keyword
+1083,https://openalex.org/W2951558227,computer simulation,keyword
+1084,https://openalex.org/W2951558227,one-way,keyword
+1085,https://openalex.org/W3103169934,T. Lanting,author
+1086,https://openalex.org/W3103169934,"D-Wave Systems Inc., 3033 Beta Avenue, Burnaby, British Columbia, Canada V5G 4M9",institution
+1087,https://openalex.org/W3103169934,CA,country
+1088,https://openalex.org/W3103169934,A. J. Przybysz,author
+1091,https://openalex.org/W3103169934,A. Yu Smirnov,author
+1094,https://openalex.org/W3103169934,F. M. Spedalieri,author
+1095,https://openalex.org/W3103169934,"Center for Quantum Information Science and Technology, University of Southern California, Los Angeles, California 90089, USA",institution
+1096,https://openalex.org/W3103169934,US,country
+1097,https://openalex.org/W3103169934,M. H. Amin,author
+1098,https://openalex.org/W3103169934,"D-Wave Systems Inc., 3033 Beta Avenue, Burnaby, British Columbia, Canada V5G 4M9; Department of Physics, Simon Fraser University, Burnaby, British Columbia, Canada V5A 1S6",institution
+1100,https://openalex.org/W3103169934,A. J. Berkley,author
+1103,https://openalex.org/W3103169934,R. Harris,author
+1106,https://openalex.org/W3103169934,F. Altomare,author
+1109,https://openalex.org/W3103169934,S. Boixo,author
+1110,https://openalex.org/W3103169934,"Google, 340 Main Street, Venice, California 90291, USA; Information Sciences Institute, University of Southern California, Los Angeles, California 90089, USA",institution
+1112,https://openalex.org/W3103169934,P. Bunyk,author
+1115,https://openalex.org/W3103169934,N. Dickson,author
+1118,https://openalex.org/W3103169934,C. Enderud,author
+1121,https://openalex.org/W3103169934,J. P. Hilton,author
+1124,https://openalex.org/W3103169934,E. Hoskinson,author
+1127,https://openalex.org/W3103169934,M. W. Johnson,author
+1130,https://openalex.org/W3103169934,E. Ladizinsky,author
+1133,https://openalex.org/W3103169934,N. Ladizinsky,author
+1136,https://openalex.org/W3103169934,R. Neufeld,author
+1139,https://openalex.org/W3103169934,T. Oh,author
+1142,https://openalex.org/W3103169934,I. Perminov,author
+1145,https://openalex.org/W3103169934,C. Rich,author
+1148,https://openalex.org/W3103169934,M. C. Thom,author
+1151,https://openalex.org/W3103169934,E. Tolkacheva,author
+1154,https://openalex.org/W3103169934,Sergey Victorovich Uchaikin,author
+1155,https://openalex.org/W3103169934,"D-Wave Systems Inc., 3033 Beta Avenue, Burnaby, British Columbia, Canada V5G 4M9; National Research Tomsk Polytechnic University, 30 Lenin Avenue, Tomsk, 634050, Russia",institution
+1157,https://openalex.org/W3103169934,RU,country
+1158,https://openalex.org/W3103169934,A. B. Wilson,author
+1161,https://openalex.org/W3103169934,G. Rose,author
+1164,https://openalex.org/W3103169934,entanglement,keyword
+1165,https://openalex.org/W3103169934,quantum,keyword
+1166,https://openalex.org/W3103169934,annealing,keyword
+1167,https://openalex.org/W4311899354,V S Magomadov,author
+1168,https://openalex.org/W4311899354,"Faculty of information technology, Chechen State University, 32 Sheripov Street, Grozny, 364024, Russia",institution
+1169,https://openalex.org/W4311899354,RU,country
+1170,https://openalex.org/W4311899354,quantum computing,keyword
+1171,https://openalex.org/W4311899354,current state,keyword
+1172,https://openalex.org/W3034657377,Viktor S. Potapov,author
+1173,https://openalex.org/W3034657377,Southern Federal University,institution
+1174,https://openalex.org/W3034657377,RU,country
+1175,https://openalex.org/W3034657377,Sergei M. Gushansky,author
+1178,https://openalex.org/W3034657377,quantum computations,keyword
+1179,https://openalex.org/W3034657377,quantum algorithm,keyword
+1180,https://openalex.org/W3034657377,simons,keyword
+1181,https://openalex.org/W2803463291,Viktor Potapov,author
+1182,https://openalex.org/W2803463291,"Department of Computer Engineering, Southern Federal University, Taganrog, Russia",institution
+1183,https://openalex.org/W2803463291,RU,country
+1184,https://openalex.org/W2803463291,Sergei Gushanskiy,author
+1187,https://openalex.org/W2803463291,Vyacheslav Guzik,author
+1190,https://openalex.org/W2803463291,Maxim Polenov,author
+1193,https://openalex.org/W2803463291,quantum computer simulator,keyword
+1194,https://openalex.org/W2803463291,computational structure,keyword
+1195,https://openalex.org/W3189250281,Marco Cerezo,author
+1196,https://openalex.org/W3189250281,"Quantum Science Center, Oak Ridge, USA; Theoretical Division, Los Alamos National Laboratory, Los Alamos, USA",institution
+1197,https://openalex.org/W3189250281,US,country
+1198,https://openalex.org/W3189250281,Andrew Arrasmith,author
+1201,https://openalex.org/W3189250281,Ryan Babbush,author
+1202,https://openalex.org/W3189250281,"Google Quantum AI Team, Venice, USA",institution
+1204,https://openalex.org/W3189250281,Simon C. Benjamin,author
+1205,https://openalex.org/W3189250281,"Department of Materials, University of Oxford, Oxford, UK",institution
+1206,https://openalex.org/W3189250281,GB,country
+1207,https://openalex.org/W3189250281,Suguru Endo,author
+1208,https://openalex.org/W3189250281,"NTT Secure Platform Laboratories, NTT Corporation, Tokyo, Japan",institution
+1209,https://openalex.org/W3189250281,JP,country
+1210,https://openalex.org/W3189250281,Keisuke Fujii,author
+1211,https://openalex.org/W3189250281,"Center for Emergent Matter Science, RIKEN, Saitama, Japan; Graduate School of Engineering Science, Osaka University, Osaka, Japan",institution
+1213,https://openalex.org/W3189250281,Jarrod R. McClean,author
+1216,https://openalex.org/W3189250281,Kosuke Mitarai,author
+1217,https://openalex.org/W3189250281,"Graduate School of Engineering Science, Osaka University, Osaka, Japan; JST, PRESTO, Saitama, Japan",institution
+1219,https://openalex.org/W3189250281,Xiao Yuan,author
+1220,https://openalex.org/W3189250281,"Center on Frontiers of Computing Studies, Department of Computer Science, Peking University, Beijing, China; Stanford Institute for Theoretical Physics, Stanford University, Stanford, USA",institution
+1221,https://openalex.org/W3189250281,CN,country
+1223,https://openalex.org/W3189250281,Lukasz Cincio,author
+1226,https://openalex.org/W3189250281,Patrick J. Coles,author
+1229,https://openalex.org/W3189250281,variational quantum,keyword
+1230,https://openalex.org/W3189250281,algorithms,keyword
+1231,https://openalex.org/W2007536474,Lu-Ming Duan,author
+1232,https://openalex.org/W2007536474,"Department of Physics and Nonlinear Science Center, University of Science and Technology of China, Hefei, Anhui 230026, People's Republic of China",institution
+1233,https://openalex.org/W2007536474,CN,country
+1234,https://openalex.org/W2007536474,Guang-Can Guo,author
+1237,https://openalex.org/W2007536474,quantum computation,keyword
+1238,https://openalex.org/W2007536474,coherence,keyword
+1239,https://openalex.org/W2007536474,bits,keyword
+1240,https://openalex.org/W3039381625,Hannu Reittu,author
+1241,https://openalex.org/W3039381625, VTT Technical Research Centre of Finland,institution
+1242,https://openalex.org/W3039381625,FI,country
+1243,https://openalex.org/W3039381625,Ville Kotovirta,author
+1244,https://openalex.org/W3039381625,(Helsinki University of Technology),institution
+1245,https://openalex.org/W3039381625,RU,country
+1246,https://openalex.org/W3039381625,Lasse Leskelä,author
+1249,https://openalex.org/W3039381625,Hannu Rummukainen,author
+1252,https://openalex.org/W3039381625,Tomi Räty,author
+1255,https://openalex.org/W3039381625,quantum annealing,keyword
+1256,https://openalex.org/W3039381625,large graphs,keyword
+1257,https://openalex.org/W3039381625,analyzing,keyword
+1258,https://openalex.org/W2189148991,Asma Taheri Monfared,author
+1259,https://openalex.org/W2189148991,"Department of Computer, Abadan Branch, Islamic Azad University, Abadan, Iran",institution
+1260,https://openalex.org/W2189148991,IR,country
+1261,https://openalex.org/W2189148991,Majid Haghparast,author
+1262,https://openalex.org/W2189148991,"Department of Computer Engineering, Yadegar -e- Imam Khomeini (RAH) Branch, Islamic Azad University, Tehran, Iran",institution
+1264,https://openalex.org/W2189148991,ternary,keyword
+1265,https://openalex.org/W2189148991,new quantum/reversible,keyword
+1266,https://openalex.org/W3128504623,Suguru Endo,author
+1267,https://openalex.org/W3128504623,"NTT Secure Platform Laboratories, NTT Corporation, Musashino, Tokyo 180-8585, Japan",institution
+1268,https://openalex.org/W3128504623,JP,country
+1269,https://openalex.org/W3128504623,Zhenyu Cai,author
+1270,https://openalex.org/W3128504623,"Department of Materials, University of Oxford, Parks Road, Oxford OX1 3PH, United Kingdom,",institution
+1271,https://openalex.org/W3128504623,GB,country
+1272,https://openalex.org/W3128504623,Xiao Yuan,author
+1273,https://openalex.org/W3128504623,"Center on Frontiers of Computing Studies, Department of Computer Science, Peking University, Beijing 100871, China; Stanford Institute for Theoretical Physics, Stanford University, Stanford, CA 94305, U.S.A.",institution
+1274,https://openalex.org/W3128504623,CN,country
+1275,https://openalex.org/W3128504623,US,country
+1276,https://openalex.org/W3128504623,quantum-classical error mitigation,keyword
+1277,https://openalex.org/W3128504623,hybrid,keyword
+1278,https://openalex.org/W2231791940,Jiang Zhang,author
+1279,https://openalex.org/W2231791940,"Centre for Quantum Technologies, National University of Singapore, Singapore, Singapore; Department of Physics, Shandong University, Jinan, China",institution
+1280,https://openalex.org/W2231791940,CN,country
+1281,https://openalex.org/W2231791940,SG,country
+1282,https://openalex.org/W2231791940,Thi Ha Kyaw,author
+1283,https://openalex.org/W2231791940,Centre for Quantum Technologies National University of Singapore 3 Science Drive 2 Singapore 117543 Singapore,institution
+1285,https://openalex.org/W2231791940,Dianmin Tong,author
+1286,https://openalex.org/W2231791940,"Department of physics, Shandong University, Jinan 250100, China",institution
+1288,https://openalex.org/W2231791940,Erik Sjöqvist,author
+1289,https://openalex.org/W2231791940,"Department of Quantum Chemistry Uppsala University Box 518, Se-751 20 Uppsala, Sweden",institution
+1290,https://openalex.org/W2231791940,SE,country
+1291,https://openalex.org/W2231791940,Leong Chuan Kwek,author
+1292,https://openalex.org/W2231791940,"Centre for Quantum Technologies, National University of Singapore, Singapore, Singapore; MajuLab, CNRS-UNS-NUS-NTU International Joint Research Unit, Singapore; National Institute of Education, Nanyang Technological University, Singapore, Singapore",institution
+1294,https://openalex.org/W2231791940,transitionless quantum,keyword
+1295,https://openalex.org/W2231791940,non-abelian,keyword
