@@ -52,7 +52,7 @@ def make_graph(name, **kwargs):
 
     # set the parameters.
     A = kwargs['A'] if 'A' in kwargs else 1.0
-    default_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
+    default_vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
     default_size = kwargs['size'] if 'size' in kwargs else 150
     threshold = kwargs['distance_threshold'] if 'distance_threshold' in kwargs else 0.5
     # assign shapes to each type.
@@ -61,7 +61,7 @@ def make_graph(name, **kwargs):
     # create a graph.
     G = nx.Graph()
     for i, paper_id in enumerate(paper_ids):  # add the papers to the graph.
-        G.add_node(paper_id, size=default_size, shape='o', type='paper', color=default_color)
+        G.add_node(paper_id, size=default_size, shape='o', type='paper', color=default_vertex_color)
 
     # add the other types of vertices to the graph, as well as the blue edges.
     df = pd.read_csv('data/graphs/' + name + '_graph.csv')
@@ -73,7 +73,7 @@ def make_graph(name, **kwargs):
     for j, target in enumerate(targets):
         if target == '':  # skip empty targets.
             continue
-        G.add_node(target, size=default_size, shape=shapes[types[j]], type=types[j], color=default_color)
+        G.add_node(target, size=default_size, shape=shapes[types[j]], type=types[j], color=default_vertex_color)
 
     # add the blue edges to the graph.
     for j in range(len(targets)):
@@ -85,7 +85,7 @@ def make_graph(name, **kwargs):
             if dists[i, j] > threshold:  # skip the zero distances.
                 continue
 
-            G.add_edge(paper_ids[i], paper_ids[j], weight=10 * dists[i, j], color='yellow')  # add the yellow edges.
+            G.add_edge(paper_ids[i], paper_ids[j], weight=A + 10 * dists[i, j], color='red')  # add the yellow edges.
 
     return G
 
@@ -126,20 +126,25 @@ def draw_graph(G, name, **kwargs):
     # draw the vertices according to shapes.
     for shape in shapes:
         # get a list of nodes with the same shape.
-        nodes = [node for node in G.nodes() if
-                 shape == G.nodes.data()[node]['shape']]
+        vertices_ = [v for v in G.nodes() if
+                     shape == G.nodes.data()[v]['shape']]
         # get a list of the sizes of said nodes.
-        node_sizes = [G.nodes.data()[node]['size'] for node in nodes]
+        vertex_sizes = [G.nodes.data()[node]['size'] for node in vertices_]
         # get a list of the colors of said nodes.
-        node_colors = [G.nodes.data()[node]['color'] for node in nodes]
-        nx.draw_networkx_nodes(G, pos, nodelist=nodes, node_size=node_sizes,
-                               node_shape=shape, node_color=node_colors, alpha=0.8,
+        vertex_colors = [G.nodes.data()[node]['color'] for node in vertices_]
+        nx.draw_networkx_nodes(G, pos, nodelist=vertices_, node_size=vertex_sizes,
+                               node_shape=shape, node_color=vertex_colors, alpha=0.8,
                                linewidths=1.5, edgecolors='black')  # always draw a black border.
 
     # draw the edges.
     nx.draw_networkx_edges(G, pos, edgelist=G.edges(), edge_color=colors, width=weights)
     if save:
-        plt.savefig(f'Figures/{name}_{method}_{int(100 * rate)}.png')
+        try:
+            plt.savefig(f'Figures/{int(100 * rate)}_percents/{method}_method/{name}.png')
+        except FileNotFoundError:  # create the directory if it doesn't exist.
+            import os
+            os.makedirs(f'Figures/{int(100 * rate)}_percents/{method}_method/')
+            plt.savefig(f'Figures/{int(100 * rate)}_percents/{method}_method/{name}.png')
     plt.show()
 
 
