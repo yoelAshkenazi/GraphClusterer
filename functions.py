@@ -1,3 +1,8 @@
+"""
+Yoel Ashkenazi
+Clustering the graphs using the original edges and similarity edges based on the distances.
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -140,11 +145,11 @@ def draw_graph(G, name, **kwargs):
     nx.draw_networkx_edges(G, pos, edgelist=G.edges(), edge_color=colors, width=weights)
     if save:
         try:
-            plt.savefig(f'Figures/{int(100 * rate)}_percents/{method}_method/{name}.png')
+            plt.savefig(f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}.png')
         except FileNotFoundError:  # create the directory if it doesn't exist.
             import os
-            os.makedirs(f'Figures/{int(100 * rate)}_percents/{method}_method/')
-            plt.savefig(f'Figures/{int(100 * rate)}_percents/{method}_method/{name}.png')
+            os.makedirs(f'Figures/{int(100 * rate)}_percents_shown/{method}_method/')
+            plt.savefig(f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}.png')
     plt.show()
 
 
