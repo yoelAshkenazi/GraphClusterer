@@ -38,7 +38,7 @@ def run(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs:
 if __name__ == '__main__':
     # set the parameters for the graph.
     print_info = True
-    graph_kwargs = {'A': 10, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.6}
+    graph_kwargs = {'save': True, 'A': 10, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.6}
     # set the parameters for the clustering.
     clustering_kwargs = {'method': 'louvain', 'resolution': 0.15}
     # set the parameters for the drawing.

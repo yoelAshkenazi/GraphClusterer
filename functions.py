@@ -56,6 +56,7 @@ def make_graph(name, **kwargs):
     paper_ids = embeddings['IDs']  # paper ids.
 
     # set the parameters.
+    save = kwargs['save'] if 'save' in kwargs else False
     A = kwargs['A'] if 'A' in kwargs else 1.0
     default_vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
     default_size = kwargs['size'] if 'size' in kwargs else 150
@@ -92,6 +93,10 @@ def make_graph(name, **kwargs):
 
             G.add_edge(paper_ids[i], paper_ids[j], weight=A + 10 * dists[i, j], color='red')  # add the yellow edges.
 
+    if save:
+        # dump the graph to a .pkl file.
+        with open(f'data/processed_graphs/{name}.pkl', 'wb') as f:
+            pk.dump(G, f)
     return G
 
 
