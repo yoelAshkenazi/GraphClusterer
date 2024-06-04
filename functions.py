@@ -82,7 +82,7 @@ def make_graph(name, **kwargs):
 
     # add the blue edges to the graph.
     for j in range(len(targets)):
-        G.add_edge(ids[j], targets[j], weight=A, color='blue')  # add the blue edges with a weight of A.
+        G.add_edge(ids[j], targets[j], weight=2 * A, color='blue')  # add the blue edges with a weight of A.
 
     # add the yellow edges to the graph.
     for i in range(len(paper_ids)):
