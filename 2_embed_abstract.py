@@ -7,9 +7,11 @@ from os.path import join
 import pickle
 import pandas as pd
 from sentence_transformers import SentenceTransformer
+import warnings
+warnings.filterwarnings("ignore")
 
 DATA_PATH = 'data/graphs'
-EMBEDDINGS_PATH = 'embeddings'
+EMBEDDINGS_PATH = 'data/embeddings'
 
 # Load the model
 model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
@@ -17,6 +19,7 @@ model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
 
 # Iterate over all files in the data folder
 for file_name in os.listdir(DATA_PATH):
+    print(file_name)
     # Skip the graph files
     if "graph" in file_name:
         continue
@@ -39,5 +42,7 @@ for file_name in os.listdir(DATA_PATH):
         # Save the embeddings
         embeddings_dict[id] = embeddings
     # Save the embeddings
-    with open(join(EMBEDDINGS_PATH, f'{file_name.split(".")[0]}_embeddings.pkl'), 'wb') as f:
+    name = file_name.split(".")[0]
+    print(file_name.split(".")[0])
+    with open(f"{EMBEDDINGS_PATH}/{name}_embeddings.pkl", 'wb') as f:
         pickle.dump(embeddings_dict, f)
