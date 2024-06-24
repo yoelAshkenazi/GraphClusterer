@@ -56,7 +56,6 @@ def make_graph(name, **kwargs):
     paper_ids = embeddings['IDs']  # paper ids.
 
     # set the parameters.
-    save = kwargs['save'] if 'save' in kwargs else False
     A = kwargs['A'] if 'A' in kwargs else 1.0
     default_vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
     default_size = kwargs['size'] if 'size' in kwargs else 150
@@ -85,18 +84,14 @@ def make_graph(name, **kwargs):
     for j in range(len(targets)):
         G.add_edge(ids[j], targets[j], weight=2 * A, color='blue')  # add the blue edges with a weight of A.
 
-    # add the yellow edges to the graph.
+    # add the red edges to the graph.
     for i in range(len(paper_ids)):
         for j in range(i + 1, len(paper_ids)):
             if dists[i, j] > threshold:  # skip the zero distances.
                 continue
 
-            G.add_edge(paper_ids[i], paper_ids[j], weight=A + 10 * dists[i, j], color='red')  # add the yellow edges.
+            G.add_edge(paper_ids[i], paper_ids[j], weight=A + 10 * dists[i, j], color='red')  # add the red edges.
 
-    if save:
-        # dump the graph to a .pkl file.
-        with open(f'data/processed_graphs/{name}.pkl', 'wb') as f:
-            pk.dump(G, f)
     return G
 
 
@@ -158,15 +153,17 @@ def draw_graph(G, name, **kwargs):
     plt.show()
 
 
-def cluster_graph(G, **kwargs):
+def cluster_graph(G, name, **kwargs):
     """
     divide the vertices of the graph into clusters.
     set a random color to each cluster's nodes.
     :param G: the graph to cluster.
+    :param name: the name of the graph.
     :param kwargs: additional arguments for the clustering method.
     :return:
     """
     # get the clustering method.
+    save = kwargs['save'] if 'save' in kwargs else False
     method = kwargs['method'] if 'method' in kwargs else 'louvain'
 
     if method == 'louvain':  # use the louvain method.
@@ -185,4 +182,11 @@ def cluster_graph(G, **kwargs):
     for i, cluster in enumerate(partition):
         for node in cluster:
             G.nodes[node]['color'] = colors[i]
+
+    if save:
+        # dump the graph to a .pkl file.
+        with open(f'data/processed_graphs/{name}.pkl', 'wb') as f:
+            pk.dump(G, f)
+            print(f"Graph for '{name}' saved successfully to 'data/processed_graphs/{name}.pkl'.")
+
     return partition
