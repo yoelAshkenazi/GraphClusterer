@@ -87,6 +87,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, **kwargs):
     # summarize each subgraph.
     for i, subgraph in enumerate(subgraphs):
 
+        num_nodes = len(subgraph.nodes())
         # skip clusters of 1- nothing to summarize.
         if len(subgraph.nodes()) == 1:
             continue
@@ -165,9 +166,8 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, **kwargs):
         # save the summary.
         if save:
             # reminder to add the title part later.
-            num_vertices = len(subgraph.nodes)
-            vers = 'vertices' if num_vertices > 1 else 'vertex'
-            file_name = f'Summaries/{name}/{num_vertices}_{vers}_summary.txt'
+            vers = 'vertices' if num_nodes > 1 else 'vertex'
+            file_name = f'Summaries/{name}/cluster_{i + 1}_{num_nodes}_{vers}_summary.txt'
 
             try:
                 with open(file_name, 'w') as f:
