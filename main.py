@@ -17,7 +17,7 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
     :return:
     """
     # print description.
-    print("\n" + "-" * 50 + f"\nCreating and clustering a graph for '{_name}' dataset...\n" + "-" * 50 + "\n)")
+    print("\n" + "-" * 50 + f"\nCreating and clustering a graph for '{_name}' dataset...\n" + "-" * 50 + "\n")
     # create the graph.
     _G = functions.make_graph(_name, **_graph_kwargs)
     if _print_info:
@@ -56,10 +56,10 @@ def run_summarization(_name: str, _summarize_kwargs: dict):
 if __name__ == '__main__':
     # set the parameters for the graph.
     print_info = True
-    graph_kwargs = {'A': 10, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.55}
+    graph_kwargs = {'A': 15, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.55}
 
     # set the parameters for the clustering.
-    clustering_kwargs = {'save': True, 'method': 'louvain', 'resolution': 0.2}
+    clustering_kwargs = {'save': True, 'method': 'louvain', 'resolution': 0.15}
 
     # set the parameters for the drawing.
     draw_kwargs = {'save': True, 'method': 'louvain', 'shown_percentage': 0.3}
@@ -79,8 +79,8 @@ if __name__ == '__main__':
              'composite material', 'hypersonic missile', 'nuclear reactor',
              'quantum computing', 'scramjet', 'smart material', 'wind tunnel']
 
-    # for name in names:
-    #     run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
+    for name in names:
+        run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
     #
     # in order to run the summarization part, you need to have python 3.7.
     #     run_summarization(name, summarize_kwargs)

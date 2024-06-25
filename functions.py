@@ -90,7 +90,7 @@ def make_graph(name, **kwargs):
             if dists[i, j] > threshold:  # skip the zero distances.
                 continue
 
-            G.add_edge(paper_ids[i], paper_ids[j], weight=A + 10 * dists[i, j], color='red')  # add the red edges.
+            G.add_edge(paper_ids[i], paper_ids[j], weight= 10 * dists[i, j], color='red')  # add the red edges.
 
     return G
 
