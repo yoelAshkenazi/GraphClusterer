@@ -79,9 +79,8 @@ if __name__ == '__main__':
              'composite material', 'hypersonic missile', 'nuclear reactor',
              'quantum computing', 'scramjet', 'smart material', 'wind tunnel']
 
-    for i, name in enumerate(names):
-    #     run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
-
-    # demonstrate example of summarization the second to last set.
-        if i == len(names) - 2:
-            run_summarization(name, summarize_kwargs)
+    for name in names:
+        run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
+    #
+    # in order to run the summarization part, you need to have python 3.7.
+    #     run_summarization(name, summarize_kwargs)

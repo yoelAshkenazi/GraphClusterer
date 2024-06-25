@@ -82,7 +82,7 @@ def make_graph(name, **kwargs):
 
     # add the blue edges to the graph.
     for j in range(len(targets)):
-        G.add_edge(ids[j], targets[j], weight=2 * A, color='blue')  # add the blue edges with a weight of A.
+        G.add_edge(ids[j], targets[j], weight=(2 * A), color='blue')  # add the blue edges with a weight of A.
 
     # add the red edges to the graph.
     for i in range(len(paper_ids)):
@@ -90,7 +90,7 @@ def make_graph(name, **kwargs):
             if dists[i, j] > threshold:  # skip the zero distances.
                 continue
 
-            G.add_edge(paper_ids[i], paper_ids[j], weight= 10 * dists[i, j], color='red')  # add the red edges.
+            G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j]), color='red')  # add the red edges.
 
     return G
 
@@ -124,8 +124,8 @@ def draw_graph(G, name, **kwargs):
     vertices = random.sample(list(G.nodes), int(rate * len(G.nodes())))
     G = G.subgraph(vertices)
 
-    colors = [G[u][v]['color'] for u, v in G.edges()]  # colors for all edges.
-    weights = [G[u][v]['weight'] for u, v in G.edges()]  # weights for all edges.
+    blue_weights = [G[u][v]['weight'] for u, v in G.edges() if G[u][v]['color'] == 'blue']  # weights for blue edges.
+    red_weights = [15 * G[u][v]['weight'] for u, v in G.edges() if G[u][v]['color'] == 'red']  # weights for red edges.
     # draw vertices with given shapes and sizes.
     shapes = nx.get_node_attributes(G, 'shape').values()
     # draw the vertices according to shapes.
@@ -141,8 +141,13 @@ def draw_graph(G, name, **kwargs):
                                node_shape=shape, node_color=vertex_colors, alpha=0.8,
                                linewidths=1.5, edgecolors='black')  # always draw a black border.
 
-    # draw the edges.
-    nx.draw_networkx_edges(G, pos, edgelist=G.edges(), edge_color=colors, width=weights)
+    # draw the blue edges.
+    nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'blue'],
+                           edge_color='blue', width=blue_weights, alpha=0.75)
+    # draw the red edges. (with a weight of 10 times the original weight)
+    nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'red'],
+                           edge_color='red', width=red_weights, alpha=0.75)
+
     if save:
         try:
             plt.savefig(f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}.png')
@@ -190,3 +195,25 @@ def cluster_graph(G, name, **kwargs):
             print(f"Graph for '{name}' saved successfully to 'data/processed_graphs/{name}.pkl'.")
 
     return partition
+
+
+def analyze_clusters(G):
+    """
+    Analyze the clusters of the graph.
+    :param G: the graph.
+    :return: a dictionary with the amount of papers in each cluster.
+    """
+    # first we filter articles by vertex type.
+    articles = [node for node in G.nodes() if G.nodes.data()[node]['type'] == 'paper']
+    articles_graph = G.subgraph(articles)
+    graph = articles_graph
+
+    # second filter divides the graph by colors.
+    nodes = graph.nodes(data=True)
+    colors = set([node[1]['color'] for node in nodes])
+    sizes = []
+    for color in colors:  # filter by colors.
+        nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
+        sizes.append(len(nodes))
+
+    return sizes
