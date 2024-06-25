@@ -77,22 +77,19 @@ if __name__ == '__main__':
     summarize_kwargs = {'save': True, 'add_title': True}
 
     # run the pipeline.
-    names = ['3D printing', 'additive manufacturing', 'autonomous drones',
-             'composite material', 'hypersonic missile', 'nuclear reactor',
-             'quantum computing', 'scramjet', 'smart material', 'wind tunnel']
+    names = ['autonomous drones', 'smart material']
 
-    sizes = {}
+    # sizes = {}
     for name in names:
-        sizes[name] = run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
-
-    #
-    # in order to run the summarization part, you need to have python 3.7.
-    #     run_summarization(name, summarize_kwargs)
+        # sizes[name] = run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
+        #
+        # in order to run the summarization part, you need to have python 3.7.
+        run_summarization(name, summarize_kwargs)
 
     # save the sizes.
-    file_path = 'data/size_analysis.csv'
-    with open(file_path, 'w') as f:
-        f.write('name,size\n')
-        for name, size in sizes.items():
-            f.write(f'{name},{size}\n')
-    print(f"Sizes saved to '{file_path}'.")
+    # file_path = 'data/size_analysis.csv'
+    # with open(file_path, 'w') as f:
+    #     f.write('name,size\n')
+    #     for name, size in sizes.items():
+    #         f.write(f'{name},{size}\n')
+    # print(f"Sizes saved to '{file_path}'.")
