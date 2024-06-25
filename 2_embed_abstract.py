@@ -34,13 +34,13 @@ for file_name in os.listdir(DATA_PATH):
     # Set a dictionary to save the embeddings
     embeddings_dict = {}
     # Iterate through the abstracts and encode them
-    for id, abstract in zip(ids, abstracts):
+    for _id, abstract in zip(ids, abstracts):
         # Add back the '.' to the end of each sentence
         abstract = [sentence + '.' for sentence in abstract]
         # Encode the abstract
         embeddings = model.encode(abstract)
         # Save the embeddings
-        embeddings_dict[id] = embeddings
+        embeddings_dict[_id] = embeddings
     # Save the embeddings
     name = file_name.split(".")[0]
     print(file_name.split(".")[0])
