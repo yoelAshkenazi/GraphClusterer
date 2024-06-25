@@ -97,6 +97,8 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, **kwargs):
 
         # step 1- get the abstracts.
         abstracts = [abstract for id_, abstract in df.values if id_ in subgraph.nodes()]
+        # clean nulls.
+        abstracts = [abstract for abstract in abstracts if not pd.isna(abstract)]
 
         # step 2- summarize the abstracts.
         print(f"Summarizing {len(abstracts)} abstracts...")
@@ -104,7 +106,8 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, **kwargs):
         # encode the text.
         input_ids = []
         for abstract in abstracts:
-
+            if len(input_ids) >= 4096:
+                break
             # encode each abstract separately.
             input_ids.extend(
                 tokenizer.encode(
