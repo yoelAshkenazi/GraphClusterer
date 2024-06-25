@@ -1,12 +1,12 @@
 import functions
 import warnings
-import summarize
+# import summarize
 
 warnings.filterwarnings("ignore")
 
 
 def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,
-                   _print_info: bool = False):
+                   _print_info: bool = False,):
     """
     Run the pipeline for the given name, graph_kwargs, kwargs, and draw_kwargs.
     :param _print_info: whether to print the outputs.
@@ -37,6 +37,9 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
               f"{_clustering_kwargs['resolution']}.\n"
               f"Drew {int(_draw_kwargs['shown_percentage'] * 100)}% of the original graph.\n")
 
+    # return the cluster analysis.
+    return functions.analyze_clusters(_G)
+
 
 def run_summarization(_name: str, _summarize_kwargs: dict):
     """
@@ -56,7 +59,8 @@ def run_summarization(_name: str, _summarize_kwargs: dict):
 if __name__ == '__main__':
     # set the parameters for the graph.
     print_info = True
-    graph_kwargs = {'A': 15, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.55}
+    save_analysis = True
+    graph_kwargs = {'A': 10, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.6}
 
     # set the parameters for the clustering.
     clustering_kwargs = {'save': True, 'method': 'louvain', 'resolution': 0.15}
@@ -79,8 +83,17 @@ if __name__ == '__main__':
              'composite material', 'hypersonic missile', 'nuclear reactor',
              'quantum computing', 'scramjet', 'smart material', 'wind tunnel']
 
+    sizes = {}
     for name in names:
-        run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
+        sizes[name] = run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
     #
     # in order to run the summarization part, you need to have python 3.7.
     #     run_summarization(name, summarize_kwargs)
+
+    # save the size analysis into a .csv file.
+    target_path = 'data/size_analysis.csv'
+    with open(target_path, 'w') as f:
+        f.write('Name,Sizes\n')
+        for name, sizes_ in sizes.items():
+            f.write(f"{name},{sizes_}\n")
+    print(f"Successfully saved the size analysis into '{target_path}'.")
