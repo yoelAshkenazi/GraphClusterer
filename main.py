@@ -1,8 +1,5 @@
-import networkx as nx
-import pandas as pd
 import functions
 import warnings
-import pickle
 import summarize
 
 warnings.filterwarnings("ignore")
@@ -41,6 +38,21 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
               f"Drew {int(_draw_kwargs['shown_percentage'] * 100)}% of the original graph.\n")
 
 
+def run_summarization(_name: str, _summarize_kwargs: dict):
+    """
+    Run the summarization for the given name and summarize_kwargs.
+    :param _name: the name of the dataset.
+    :param _summarize_kwargs: the parameters for the summarization.
+    :return:
+    """
+    # load the graph.
+    _G = summarize.load_graph(_name)
+    # filter the graph by colors.
+    _subgraphs = summarize.filter_by_colors(_G)
+    # summarize each cluster.
+    summarize.summarize_per_color(_subgraphs, _name, **_summarize_kwargs)
+
+
 if __name__ == '__main__':
     # set the parameters for the graph.
     print_info = True
@@ -69,8 +81,6 @@ if __name__ == '__main__':
 
     # for name in names:
     #     run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
-
-    G = summarize.load_graph('3D printing')
-    subgraphs = summarize.filter_by_colors(G)
-    summarize.summarize_per_color(subgraphs, '3D printing', **summarize_kwargs)
-
+    #
+    # in order to run the summarization part, you need to have python 3.7.
+    #     run_summarization(name, summarize_kwargs)

@@ -7,7 +7,7 @@ import pickle as pkl
 from typing import List
 import pandas as pd
 import networkx as nx
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer
 from longformer import LongformerEncoderDecoderForConditionalGeneration
 from longformer import LongformerEncoderDecoderConfig
 import torch
