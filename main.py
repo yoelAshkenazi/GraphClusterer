@@ -1,3 +1,5 @@
+import os
+
 import functions
 import warnings
 import summarize
@@ -77,7 +79,8 @@ if __name__ == '__main__':
     summarize_kwargs = {'save': True, 'add_title': True}
 
     # run the pipeline.
-    names = ['autonomous drones', 'smart material']
+    names = ['3D printing', 'additive manufacturing', 'autonomous drones', 'composite material', 'hypersonic missile',
+             'nuclear reactor', 'quantum computing', 'scramjet', 'smart material', 'wind tunnel']
 
     # sizes = {}
     for name in names:

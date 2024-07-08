@@ -19,7 +19,7 @@ def load_graph(name: str) -> nx.Graph:
     :param name: the name of the graph.
     :return:
     """
-    file_path = f"data/processed_graphs/{name}.pkl"
+    file_path = f"data/processed_graphs/{name}.gpickle"
     with open(file_path, 'rb') as f:
         graph = pkl.load(f)
 

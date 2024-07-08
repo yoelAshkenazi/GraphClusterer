@@ -190,9 +190,9 @@ def cluster_graph(G, name, **kwargs):
 
     if save:
         # dump the graph to a .pkl file.
-        with open(f'data/processed_graphs/{name}.pkl', 'wb') as f:
+        with open(f'data/processed_graphs/{name}.gpickle', 'wb') as f:
             pk.dump(G, f)
-            print(f"Graph for '{name}' saved successfully to 'data/processed_graphs/{name}.pkl'.")
+            print(f"Graph for '{name}' saved successfully to 'data/processed_graphs/{name}.gpickle'.")
 
     return partition
 
