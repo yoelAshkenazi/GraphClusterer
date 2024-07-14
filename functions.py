@@ -60,6 +60,9 @@ def make_graph(name, **kwargs):
     default_vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
     default_size = kwargs['size'] if 'size' in kwargs else 150
     threshold = kwargs['distance_threshold'] if 'distance_threshold' in kwargs else 0.5
+    use_distances = kwargs.get('use_only_distances', True)  # whether to use only the distances.
+    use_original = kwargs.get('use_only_original', True)  # whether to use only the original edges.
+    proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
     # assign shapes to each type.
     shapes = {'paper': 'o', 'author': '*', 'keyword': 'd', 'institution': 'p', 'country': 's'}
 
@@ -75,22 +78,27 @@ def make_graph(name, **kwargs):
     ids = df['paper_id']
 
     # add the vertices to the graph.
-    for j, target in enumerate(targets):
-        if target == '':  # skip empty targets.
-            continue
-        G.add_node(target, size=default_size, shape=shapes[types[j]], type=types[j], color=default_vertex_color)
+    if use_original:
+        for j, target in enumerate(targets):
+            if target == '':  # skip empty targets.
+                continue
+            G.add_node(target, size=default_size, shape=shapes[types[j]], type=types[j], color=default_vertex_color)
 
     # add the blue edges to the graph.
-    for j in range(len(targets)):
-        G.add_edge(ids[j], targets[j], weight=(2 * A), color='blue')  # add the blue edges with a weight of A.
+    if use_original:
+        for j in range(len(targets)):
+            G.add_edge(ids[j], targets[j], weight=(2 * A * proportion), color='blue')
+            # add the blue edges with a weight of A.
 
     # add the red edges to the graph.
-    for i in range(len(paper_ids)):
-        for j in range(i + 1, len(paper_ids)):
-            if dists[i, j] > threshold:  # skip the zero distances.
-                continue
+    if use_distances:
+        for i in range(len(paper_ids)):
+            for j in range(i + 1, len(paper_ids)):
+                if dists[i, j] > threshold:  # skip the zero distances.
+                    continue
 
-            G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j]), color='red')  # add the red edges.
+                G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j] * (1 - proportion)), color='red')
+                # add the red edges.
 
     return G
 
@@ -116,6 +124,9 @@ def draw_graph(G, name, **kwargs):
     figsize = kwargs['figsize'] if 'figsize' in kwargs else 20
     save = kwargs['save'] if 'save' in kwargs else False
     method = kwargs['method'] if 'method' in kwargs else 'louvain'
+    use_original = kwargs.get('use_only_original', True)  # whether to use only the original edges.
+    use_distances = kwargs.get('use_only_distances', True)  # whether to use only the distances.
+    proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
 
     plt.figure(figsize=(figsize, figsize))
     pos = nx.spring_layout(G)  # positions for all nodes.
@@ -149,12 +160,19 @@ def draw_graph(G, name, **kwargs):
                            edge_color='red', width=red_weights, alpha=0.75)
 
     if save:
+        filename = f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}'
+        if not use_original:
+            filename += '_only_distances'
+        elif not use_distances:
+            filename += '_only_original'
+        if proportion != 0.5:
+            filename += f'_proportion_{proportion}'
         try:
-            plt.savefig(f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}.png')
+            plt.savefig(f'{filename}.png')
         except FileNotFoundError:  # create the directory if it doesn't exist.
             import os
             os.makedirs(f'Figures/{int(100 * rate)}_percents_shown/{method}_method/')
-            plt.savefig(f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}.png')
+            plt.savefig(f'{filename}.png')
     plt.show()
 
 
@@ -170,6 +188,9 @@ def cluster_graph(G, name, **kwargs):
     # get the clustering method.
     save = kwargs['save'] if 'save' in kwargs else False
     method = kwargs['method'] if 'method' in kwargs else 'louvain'
+    use_original = kwargs.get('use_only_original', True)  # whether to use only the original edges.
+    use_distances = kwargs.get('use_only_distances', True)  # whether to use only the distances.
+    proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
 
     if method == 'louvain':  # use the louvain method.
         res = kwargs['resolution'] if 'resolution' in kwargs else 1.0
@@ -189,10 +210,19 @@ def cluster_graph(G, name, **kwargs):
             G.nodes[node]['color'] = colors[i]
 
     if save:
+        if not use_original:
+            filename = f'data/processed_graphs/only_distances/{name}'
+        elif not use_distances:
+            filename = f'data/processed_graphs/only_original/{name}'
+        else:
+            filename = f'data/processed_graphs/{name}'
+        if proportion != 0.5:
+            filename += f'_proportion_{proportion}'
+        filename += '.gpickle'
         # dump the graph to a .pkl file.
-        with open(f'data/processed_graphs/{name}.gpickle', 'wb') as f:
+        with open(filename, 'wb') as f:
             pk.dump(G, f, protocol=pk.HIGHEST_PROTOCOL)
-            print(f"Graph for '{name}' saved successfully to 'data/processed_graphs/{name}.gpickle'.")
+            print(f"Graph for '{name}' saved successfully to '{filename}'.")
 
     return partition
 

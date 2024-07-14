@@ -17,16 +17,36 @@ os.environ['OPENAI_API_KEY'] = api_key
 client = OpenAI(api_key=api_key, organization=organization)
 
 
-def evaluate(name: str):
+def evaluate(name: str, version: str, proportion: float = 0.5):
     """
     Load the cluster summary for the given name.
     :param name: the name of the dataset.
+    :param version: the version of the graph.
+    :param proportion: the proportion of the graph to use.
     :return:
     """
+    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                               "or 'proportion'."
+
+    if version == 'distances':
+        graph_path = f"data/processed_graphs/only_distances/{name}.gpickle"
+        summary_path = f"Summaries/{name}_only_distances/"
+
+    elif version == 'original':
+        graph_path = f"data/processed_graphs/only_original/{name}.gpickle"
+        summary_path = f"Summaries/{name}_only_original/"
+
+    else:
+        if proportion != 0.5:
+            graph_path = f"data/processed_graphs/{name}_proportion_{proportion}.gpickle"
+            summary_path = f"Summaries/{name}_proportion_{proportion}/"
+        else:
+            graph_path = f"data/processed_graphs/{name}.gpickle"
+            summary_path = f"Summaries/{name}/"
 
     # load the graph.
-    file_path = f"data/processed_graphs/{name}.gpickle"
-    with open(file_path, 'rb') as f:
+
+    with open(graph_path, 'rb') as f:
         graph = pkl.load(f)
 
     # filter the graph in order to remove the nan nodes.
@@ -38,15 +58,14 @@ def evaluate(name: str):
     graph = graph.subgraph(nodes)
 
     G = graph
-    file_path = f"Summaries/{name}/"
 
-    clusters = os.listdir(file_path)
+    clusters = os.listdir(summary_path)
 
     summaries = {}
     colors = [cluster.split('_')[2] for cluster in clusters]  # get the colors.
     subgraphs = {}
     for i, cluster in enumerate(clusters):
-        with open(f'{file_path}{cluster}', 'r') as f:
+        with open(f'{summary_path}{cluster}', 'r') as f:
             summaries[cluster] = f.read()
 
         # get the subgraph.
@@ -60,6 +79,8 @@ def evaluate(name: str):
 
     data = pd.read_csv(f"data/graphs/{name}_papers.csv")[['id', 'abstract']]  # load the data.
     evaluations = {}
+    total_in_score = 0  # total scores for the abstracts sampled inside the clusters.
+    total_out_score = 0  # total scores for the abstracts sampled outside the clusters.
     for cluster, summary in summaries.items():
         # get the subgraph.
         subgraph = subgraphs[cluster]
@@ -80,8 +101,6 @@ def evaluate(name: str):
         outside_abstracts = random.sample(outside_abstracts, len(cluster_abstracts))
 
         # ask GPT which abstracts are more similar to the summary.
-        cluster_avg_score = 0
-        outside_avg_score = 0
         for i in range(len(cluster_abstracts)):
             # ask GPT which abstract is more similar to the summary.
             response = client.chat.completions.create(
@@ -104,7 +123,7 @@ def evaluate(name: str):
             score_in = response.choices[0].message.content
             # get the score.
             score_in = int(score_in.split('\n')[-1].split(':')[-1])
-            cluster_avg_score += score_in
+            total_in_score += score_in
 
             # ask GPT which abstract is more similar to the summary.
             response = client.chat.completions.create(
@@ -128,24 +147,13 @@ def evaluate(name: str):
             # get the score.
             score_out = int(score_out.split('\n')[-1].split(':')[-1])
 
-            outside_avg_score += score_out
+            total_out_score += score_out
 
-        # get the average scores.
-        cluster_avg_score /= len(cluster_abstracts)
-        outside_avg_score /= len(cluster_abstracts)
+        decision = "consistent" if total_in_score >= total_out_score else "inconsistent"
 
-        decision = "consistent" if cluster_avg_score >= outside_avg_score else "inconsistent"
-
-        evaluations[cluster_name] = (cluster_avg_score, outside_avg_score, decision)
+        evaluations[cluster_name] = (total_in_score, total_out_score, decision)
 
         print(f"Cluster summary for cluster '{cluster_name}' is {decision} with the cluster abstracts. "
-              f"\nScore in: {cluster_avg_score}\nScore out: {outside_avg_score}\n{'-' * 50}")
+              f"\nScore in: {total_in_score}\nScore out: {total_out_score}\n{'-' * 50}")
 
-    df = pd.DataFrame(evaluations, index=['cluster_score', 'outside_score', 'decision'])
-    try:
-        df.to_csv(f"Evaluations/{name}_evaluations.csv")
-    except OSError:
-        os.makedirs("Evaluations/")
-        df.to_csv(f"Evaluations/{name}_evaluations.csv")
-    print(f"Finished evaluating the summaries for {name}.")
-    return df
+    return total_in_score, total_out_score, evaluations

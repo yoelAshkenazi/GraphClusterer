@@ -11,16 +11,39 @@ from transformers import AutoTokenizer
 from longformer import LongformerEncoderDecoderForConditionalGeneration
 from longformer import LongformerEncoderDecoderConfig
 import torch
+from openai import OpenAI
+
+client = OpenAI(api_key='sk-proj-2gkj2jzXE7fAgLzqIn9TT3BlbkFJzQwHpetTBkmbSO6Q6KBl',
+                organization='org-FKQBIvqIr7JF5Jhysdnrxx5z')  # set the openai api key. and the organization.
 
 
-def load_graph(name: str) -> nx.Graph:
+def load_graph(name: str, version: str, proportion) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
+    :param version: the version of the graph.
+    :param proportion: the proportion of the graph.
     :return:
     """
-    file_path = f"data/processed_graphs/{name}.gpickle"
-    with open(file_path, 'rb') as f:
+
+    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                               "or 'proportion'."
+
+    if version == 'distances':
+        graph_path = f"data/processed_graphs/only_distances/{name}.gpickle"
+
+    elif version == 'original':
+        graph_path = f"data/processed_graphs/only_original/{name}.gpickle"
+
+    else:
+        if proportion != 0.5:
+            graph_path = f"data/processed_graphs/{name}_proportion_{proportion}.gpickle"
+        else:
+            graph_path = f"data/processed_graphs/{name}.gpickle"
+
+    # load the graph.
+
+    with open(graph_path, 'rb') as f:
         graph = pkl.load(f)
 
     # filter the graph in order to remove the nan nodes.
@@ -30,6 +53,7 @@ def load_graph(name: str) -> nx.Graph:
     print(
         f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
     graph = graph.subgraph(nodes)
+
     return graph
 
 
@@ -57,19 +81,28 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     return subgraphs
 
 
-def summarize_per_color(subgraphs: List[nx.Graph], name: str, **kwargs):
+def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, proportion: float, save: bool = False,):
     """
     This method summarizes each of the subgraphs' abstract texts using PRIMER, prints the results and save them
     to a .txt file.
     :param name: The name of the dataset.
     :param subgraphs: List of subgraphs.
-    :param kwargs: Additional parameters.
+    :param version: The version of the graph.
+    :param proportion: The proportion of the graph.
+    :param save: Whether to save the results.
     :return:
     """
 
-    # define parameters.
-    save = kwargs['save'] if 'save' in kwargs else False
-    add_title = kwargs['add_title'] if 'add_title' in kwargs else False
+    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                               "or 'proportion'."
+    result_file_path = f"Summaries/{name}"
+    if version == 'distances':
+        result_file_path += '_only_distances/'
+    elif version == 'original':
+        result_file_path += '_only_original/'
+    else:
+        if proportion != 0.5:
+            result_file_path += f'_proportion_{proportion}/'
 
     # define the model and tokenizer.
     tokenizer = AutoTokenizer.from_pretrained('./PRIMERA_model/')
@@ -159,23 +192,47 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, **kwargs):
             generated_ids.tolist(), skip_special_tokens=True
         )[0]
 
-        # add title.
-        if add_title:
-            print(f"Cluster {i + 1}: {color.capitalize()} cluster")
+        # generate a title for the summary.
+
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {
+                    "role": "system",
+                    "content": f"Generate a 4 letter title for the following summary:\n{summary}\n"
+                }
+            ],
+            max_tokens=100,
+            n=1,
+            stop=None,
+            temperature=0.5
+        )
+
+        title = response.choices[0].message.content.split('\n')[-1]
 
         # print the summary.
         print(f"Summary: {summary}")
 
         # save the summary.
         if save:
-            # reminder to add the title part later.
-            vers = 'vertices' if num_nodes > 1 else 'vertex'
-            file_name = f'Summaries/{name}/cluster_{i + 1}_{color}_{num_nodes}_{vers}_summary.txt'
+            vers = 'vertices' if num_nodes == 1 else 'vertex'
+
+            file_name = f'{result_file_path}/cluster_{i + 1}_{color}_{num_nodes}_{vers}_summary.txt'
 
             try:
                 with open(file_name, 'w') as f:
                     f.write(summary)
             except FileNotFoundError:  # create the directory if it doesn't exist.
-                os.makedirs(f'Summaries/{name}')
+                os.makedirs(result_file_path)
                 with open(file_name, 'w') as f:
+                    f.write(summary)
+
+            # save a copy for clients with the title.
+            titled_summary_path = "Titled " + result_file_path + '/' + title + '.txt'
+            try:
+                with open(titled_summary_path, 'w') as f:
+                    f.write(summary)
+            except FileNotFoundError:  # create the directory if it doesn't exist.
+                os.makedirs("Titled " + result_file_path)
+                with open(titled_summary_path, 'w') as f:
                     f.write(summary)
