@@ -48,8 +48,9 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     nodes = graph.nodes(data=True)
     colors = set([node[1]['color'] for node in nodes])
     subgraphs = []
-    for color in colors:  # filter by colors.
+    for i, color in enumerate(colors):  # filter by colors.
         nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
+
         subgraph = graph.subgraph(nodes)
         subgraphs.append(subgraph)
 
@@ -86,6 +87,8 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, **kwargs):
 
     # summarize each subgraph.
     for i, subgraph in enumerate(subgraphs):
+
+        color = list(subgraph.nodes(data=True))[0][1]['color']
 
         num_nodes = len(subgraph.nodes())
         # skip clusters of 1- nothing to summarize.
@@ -158,7 +161,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, **kwargs):
 
         # add title.
         if add_title:
-            print(f"Cluster {i + 1}: no title yet.")
+            print(f"Cluster {i + 1}: {color.capitalize()} cluster")
 
         # print the summary.
         print(f"Summary: {summary}")
@@ -167,7 +170,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, **kwargs):
         if save:
             # reminder to add the title part later.
             vers = 'vertices' if num_nodes > 1 else 'vertex'
-            file_name = f'Summaries/{name}/cluster_{i + 1}_{num_nodes}_{vers}_summary.txt'
+            file_name = f'Summaries/{name}/cluster_{i + 1}_{color}_{num_nodes}_{vers}_summary.txt'
 
             try:
                 with open(file_name, 'w') as f:
