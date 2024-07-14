@@ -2,7 +2,7 @@ import os
 
 import functions
 import warnings
-import summarize
+# import summarize
 import evaluate
 
 warnings.filterwarnings("ignore")
