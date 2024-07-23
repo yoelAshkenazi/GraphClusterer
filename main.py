@@ -2,8 +2,8 @@ import os
 
 import functions
 import warnings
-# import summarize
-import evaluate
+import summarize
+# import evaluate
 
 warnings.filterwarnings("ignore")
 
@@ -53,7 +53,7 @@ def run_summarization(_name: str, _version: str, _proportion: float, _save: bool
     :return:
     """
     # load the graph.
-    _G = summarize.load_graph(_name)
+    _G = summarize.load_graph(_name, _version, _proportion)
     # filter the graph by colors.
     _subgraphs = summarize.filter_by_colors(_G)
     # summarize each cluster.
@@ -62,10 +62,10 @@ def run_summarization(_name: str, _version: str, _proportion: float, _save: bool
 
 if __name__ == '__main__':
     # set the parameters for the graph and summarization.
-    use_only_distances = False
+    use_only_distances = True
     use_only_original = True
     proportion = 0.5
-    version = 'original'
+    version = 'proportion'
 
     print_info = True
     graph_kwargs = {'A': 15, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.55,
@@ -89,43 +89,20 @@ if __name__ == '__main__':
 
     # run the pipeline.
     names = ['3D printing', 'smart material', 'additive manufacturing', 'autonomous drones', 'composite material',
-             'hypersonic missile', 'nuclear reactor', 'quantum computing', 'scramjet', 'wind tunnel']
+             'hypersonic missile']
 
     # sizes = {}
     # in_scores = {}
     # out_scores = {}
 
-    # for name in names:  # run the pipeline for each name with only the original distances.
+    for name in names:  # run the pipeline for each name with only the original distances.
     #     run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
-    #     run_summarization(name, version, proportion, _save=True)
-    #     a, b = evaluate.evaluate(name, version, proportion)
-    #     in_scores[name] = a
-    #     out_scores[name] = b
-    #
-    # graph_kwargs['use_only_distances'] = True
-    # clustering_kwargs['use_only_distances'] = True
-    # graph_kwargs['use_only_original'] = False
-    # clustering_kwargs['use_only_original'] = False
-    # version = 'distances'
-    #
-    # for name in names:  # run the pipeline for each name with only the distances.
-    #     run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
-    #     run_summarization(name, version, proportion, _save=True)
+        print(f"'{name}' with {version} graph and {proportion} proportion.")
+        run_summarization(name, version, proportion, _save=True)
     #     a, b = evaluate.evaluate(name, version, proportion)
     #     in_scores[name] = a
     #     out_scores[name] = b
 
-    # use both.
-    # graph_kwargs['use_only_original'] = True
-    # clustering_kwargs['use_only_original'] = True
-    # version = 'proportion'
-
-    # for name in names:  # run the pipeline for each name with both the original and distances.
-    #     run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
-    #     run_summarization(name, version, proportion, _save=True)
-    #     a, b = evaluate.evaluate(name, version, proportion)
-    #     in_scores[name] = a
-    #     out_scores[name] = b
 
     # print the results.
     # print(f"\nIn scores: {in_scores}\nOut scores: {out_scores}")

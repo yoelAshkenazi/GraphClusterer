@@ -11,10 +11,6 @@ from transformers import AutoTokenizer
 from longformer import LongformerEncoderDecoderForConditionalGeneration
 from longformer import LongformerEncoderDecoderConfig
 import torch
-from openai import OpenAI
-
-client = OpenAI(api_key='sk-proj-2gkj2jzXE7fAgLzqIn9TT3BlbkFJzQwHpetTBkmbSO6Q6KBl',
-                organization='org-FKQBIvqIr7JF5Jhysdnrxx5z')  # set the openai api key. and the organization.
 
 
 def load_graph(name: str, version: str, proportion) -> nx.Graph:
@@ -192,23 +188,23 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
             generated_ids.tolist(), skip_special_tokens=True
         )[0]
 
-        # generate a title for the summary.
-
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": f"Generate a 4 letter title for the following summary:\n{summary}\n"
-                }
-            ],
-            max_tokens=100,
-            n=1,
-            stop=None,
-            temperature=0.5
-        )
-
-        title = response.choices[0].message.content.split('\n')[-1]
+        # # generate a title for the summary.
+        #
+        # response = client.chat.completions.create(
+        #     model="gpt-3.5-turbo",
+        #     messages=[
+        #         {
+        #             "role": "system",
+        #             "content": f"Generate a 4 letter title for the following summary:\n{summary}\n"
+        #         }
+        #     ],
+        #     max_tokens=100,
+        #     n=1,
+        #     stop=None,
+        #     temperature=0.5
+        # )
+        #
+        # title = response.choices[0].message.content.split('\n')[-1]
 
         # print the summary.
         print(f"Summary: {summary}")
@@ -227,12 +223,12 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
                 with open(file_name, 'w') as f:
                     f.write(summary)
 
-            # save a copy for clients with the title.
-            titled_summary_path = "Titled " + result_file_path + '/' + title + '.txt'
-            try:
-                with open(titled_summary_path, 'w') as f:
-                    f.write(summary)
-            except FileNotFoundError:  # create the directory if it doesn't exist.
-                os.makedirs("Titled " + result_file_path)
-                with open(titled_summary_path, 'w') as f:
-                    f.write(summary)
+            # # save a copy for clients with the title.
+            # titled_summary_path = "Titled " + result_file_path + '/' + title + '.txt'
+            # try:
+            #     with open(titled_summary_path, 'w') as f:
+            #         f.write(summary)
+            # except FileNotFoundError:  # create the directory if it doesn't exist.
+            #     os.makedirs("Titled " + result_file_path)
+            #     with open(titled_summary_path, 'w') as f:
+            #         f.write(summary)
