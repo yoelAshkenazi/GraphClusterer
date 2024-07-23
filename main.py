@@ -1,9 +1,9 @@
 import os
-
+import pandas as pd
 import functions
 import warnings
-import summarize
-# import evaluate
+# import summarize
+import evaluate
 
 warnings.filterwarnings("ignore")
 
@@ -92,17 +92,45 @@ if __name__ == '__main__':
              'hypersonic missile']
 
     # sizes = {}
-    # in_scores = {}
-    # out_scores = {}
+    in_scores = {name: {} for name in names}
+    out_scores = {name: {} for name in names}
+    success_rates = {name: {} for name in names}  # the success rates for each dataset.
 
     for name in names:  # run the pipeline for each name with only the original distances.
-    #     run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
+        #    run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
         print(f"'{name}' with {version} graph and {proportion} proportion.")
-        run_summarization(name, version, proportion, _save=True)
-    #     a, b = evaluate.evaluate(name, version, proportion)
-    #     in_scores[name] = a
-    #     out_scores[name] = b
+        #    run_summarization(name, version, proportion, _save=True)
+        a, b, _ = evaluate.evaluate(name, version, proportion)
+        in_scores[name]['proportion'] = a
+        out_scores[name]['proportion'] = b
+        success_rates[name]['proportion'] = a / (a + b) if a + b != 0 else 0
 
+    version = 'distances'
+    for name in names:  # run the pipeline for each name with only the distances.
+        a, b, _ = evaluate.evaluate(name, version, proportion)
+        in_scores[name]['distances'] = a
+        out_scores[name]['distances'] = b
+        success_rates[name]['distances'] = a / (a + b) if a + b != 0 else 0
+
+    version = 'original'
+    for name in names:  # run the pipeline for each name with only the original distances.
+        a, b, _ = evaluate.evaluate(name, version, proportion)
+        in_scores[name]['original'] = a
+        out_scores[name]['original'] = b
+        success_rates[name]['original'] = a / (a + b) if a + b != 0 else 0
+
+    # save the results
+    df1 = pd.DataFrame(in_scores)
+    df2 = pd.DataFrame(out_scores)
+    df3 = pd.DataFrame(success_rates)
+
+    # save the results.
+    if not os.path.exists('Results/'):
+        os.makedirs('Results/')
+
+    df1.to_csv('Results/in_scores.csv')
+    df2.to_csv('Results/out_scores.csv')
+    df3.to_csv('Results/success_rates.csv')
 
     # print the results.
     # print(f"\nIn scores: {in_scores}\nOut scores: {out_scores}")
