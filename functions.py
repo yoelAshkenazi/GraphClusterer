@@ -57,6 +57,7 @@ def make_graph(name, **kwargs):
 
     # set the parameters.
     A = kwargs['A'] if 'A' in kwargs else 1.0
+    K = kwargs['K'] if 'K' in kwargs else None
     default_vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
     default_size = kwargs['size'] if 'size' in kwargs else 150
     threshold = kwargs['distance_threshold'] if 'distance_threshold' in kwargs else 0.5
@@ -93,6 +94,15 @@ def make_graph(name, **kwargs):
     # add the red edges to the graph.
     if use_distances:
         for i in range(len(paper_ids)):
+            if K is not None:
+                # use KNN to add the red edges.
+                # get the K nearest neighbors.
+                indices = dists[i].argsort()[1: K + 1]  # get the K nearest neighbors not including the paper itself.
+                for j in indices:
+                    G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j] * (1 - proportion)), color='red')
+                    # add the red edges.
+                continue
+
             for j in range(i + 1, len(paper_ids)):
                 if dists[i, j] > threshold:  # skip the zero distances.
                     continue

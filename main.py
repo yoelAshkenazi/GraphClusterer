@@ -6,6 +6,8 @@ import warnings
 import evaluate
 
 warnings.filterwarnings("ignore")
+ALL_NAMES = ['3D printing', "additive manufacturing", "autonomous drones", "composite material", "hypersonic missile",
+             "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]
 
 
 def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,
@@ -60,22 +62,73 @@ def run_summarization(_name: str, _version: str, _proportion: float, _save: bool
     summarize.summarize_per_color(_subgraphs, _name, _version, _proportion, _save)
 
 
+def create_graphs_all_versions(_graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,
+                               print_info_: bool = False):
+    """
+    Create the graphs for all versions.
+
+    :param _graph_kwargs: the parameters for the graph.
+    :param _clustering_kwargs: the parameters for the clustering.
+    :param _draw_kwargs: the parameters for the drawing.
+    :param print_info_: whether to print the outputs.
+    :return:
+    """
+    """
+    First run the proportion version (p=q=0.5).
+    """
+    distances_only = True
+    original_only = True
+    proportion_ = 0.5
+    _graph_kwargs['use_only_distances'] = distances_only
+    _graph_kwargs['use_only_original'] = original_only
+    _graph_kwargs['proportion'] = proportion_
+
+    for _name in ALL_NAMES:
+        run_graph_part(_name, _graph_kwargs, _clustering_kwargs, _draw_kwargs, print_info)
+
+    """
+    Then run the distances only version.
+    """
+    distances_only = True
+    original_only = False
+    proportion_ = 0.5
+    _graph_kwargs['use_only_distances'] = distances_only
+    _graph_kwargs['use_only_original'] = original_only
+    _graph_kwargs['proportion'] = proportion_
+
+    for _name in ALL_NAMES:
+        run_graph_part(_name, _graph_kwargs, _clustering_kwargs, _draw_kwargs, print_info)
+
+    """
+    Then run the original only version.
+    """
+    distances_only = False
+    original_only = True
+    proportion_ = 0.5
+    _graph_kwargs['use_only_distances'] = distances_only
+    _graph_kwargs['use_only_original'] = original_only
+    _graph_kwargs['proportion'] = proportion_
+
+    for _name in ALL_NAMES:
+        run_graph_part(_name, _graph_kwargs, _clustering_kwargs, _draw_kwargs, print_info)
+
+
 if __name__ == '__main__':
     # set the parameters for the graph and summarization.
-    use_only_distances = False
-    use_only_original = True
+    use_only_distances = {'distances': True, 'original': False, 'proportion': True}
+    use_only_original = {'distances': False, 'original': True, 'proportion': True}
     proportion = 0.5
     version = 'original'
 
     print_info = True
     graph_kwargs = {'A': 15, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.55,
-                    'use_only_distances': use_only_distances, 'use_only_original': use_only_original,
-                    'proportion': proportion}
+                    'use_only_distances': use_only_distances[version], 'use_only_original': use_only_original[version],
+                    'proportion': proportion, 'K': 5}
 
     # set the parameters for the clustering.
     clustering_kwargs = {'save': True, 'method': 'louvain', 'resolution': 0.15,
-                         'use_only_distances': use_only_distances, 'use_only_original': use_only_original,
-                         'proportion': proportion}
+                         'use_only_distances': use_only_distances[version],
+                         'use_only_original': use_only_original[version], 'proportion': proportion}
 
     # set the parameters for the drawing.
     draw_kwargs = {'save': True, 'method': 'louvain', 'shown_percentage': 0.3}
@@ -88,48 +141,44 @@ if __name__ == '__main__':
     """
 
     # run the pipeline.
-    names = ["nuclear reactor", "scramjet", "wind tunnel", "quantum computing"]
+    """
+    Step 1- create the graphs for all versions. (need to do only once per choice of parameters)
+    """
+    # create_graphs_all_versions(graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
 
     # sizes = {}
-    in_scores = {name: {} for name in names}
-    out_scores = {name: {} for name in names}
-    success_rates = {name: {} for name in names}  # the success rates for each dataset.
+    # in_scores = {name: {} for name in names}
+    # out_scores = {name: {} for name in names}
+    # success_rates = {name: {} for name in names}  # the success rates for each dataset.
+    """
+    Step 2- summarize the clusters for all versions.
+    Step 3- evaluate the results.
+    """
+    for name in ALL_NAMES:  # run the pipeline for each name with only the original distances.
+        for version in ['distances', 'original', 'proportion']:
+            print(f"'{name}' with {version} graph.")
+            # run_summarization(name, version, proportion, _save=True)
+            # a, b, _ = evaluate.evaluate(name, version, proportion)
+            # in_scores[name][version] = a
+            # out_scores[name][version] = b
+            # success_rates[name][version] = a / (a + b) if a + b != 0 else 0
+            # print(f"Success rate for '{name}' with {version} graph: {success_rates[name][version]}")
 
-    for name in names:  # run the pipeline for each name with only the original distances.
-        #    run_graph_part(name, graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
-        print(f"'{name}' with {version} graph and {proportion} proportion.")
-        #    run_summarization(name, version, proportion, _save=True)
-        a, b, _ = evaluate.evaluate(name, version, proportion)
-        in_scores[name]['proportion'] = a
-        out_scores[name]['proportion'] = b
-        success_rates[name]['proportion'] = a / (a + b) if a + b != 0 else 0
-
-    version = 'distances'
-    for name in names:  # run the pipeline for each name with only the distances.
-        a, b, _ = evaluate.evaluate(name, version, proportion)
-        in_scores[name]['distances'] = a
-        out_scores[name]['distances'] = b
-        success_rates[name]['distances'] = a / (a + b) if a + b != 0 else 0
-
-    version = 'original'
-    for name in names:  # run the pipeline for each name with only the original distances.
-        a, b, _ = evaluate.evaluate(name, version, proportion)
-        in_scores[name]['original'] = a
-        out_scores[name]['original'] = b
-        success_rates[name]['original'] = a / (a + b) if a + b != 0 else 0
-
+    """
+    Step 4- save the results.
+    """
     # save the results
-    df1 = pd.DataFrame(in_scores)
-    df2 = pd.DataFrame(out_scores)
-    df3 = pd.DataFrame(success_rates)
-
-    # save the results.
-    if not os.path.exists('Results/'):
-        os.makedirs('Results/')
-
-    df1.to_csv('Results/in_scores.csv')
-    df2.to_csv('Results/out_scores.csv')
-    df3.to_csv('Results/success_rates.csv')
+    # df1 = pd.DataFrame(in_scores)
+    # df2 = pd.DataFrame(out_scores)
+    # df3 = pd.DataFrame(success_rates)
+    #
+    # # save the results.
+    # if not os.path.exists('Results/'):
+    #     os.makedirs('Results/')
+    #
+    # df1.to_csv('Results/in_scores.csv')
+    # df2.to_csv('Results/out_scores.csv')
+    # df3.to_csv('Results/success_rates.csv')
 
     # print the results.
     # print(f"\nIn scores: {in_scores}\nOut scores: {out_scores}")
