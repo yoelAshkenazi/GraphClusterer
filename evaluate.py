@@ -9,7 +9,7 @@ import random
 import pickle as pkl
 
 # organization='org-FKQBIvqIr7JF5Jhysdnrxx5z',
-api_key = 'sk-proj-jqcYHZiJQ8NTuQj6wVoBT3BlbkFJ5iR1QbLZU5QxLpb2bvMo'
+api_key = ''
 organization = 'org-FKQBIvqIr7JF5Jhysdnrxx5z'
 # set the openai api key. and the organization. also as an environment variable.
 os.environ['OPENAI_API_KEY'] = api_key
