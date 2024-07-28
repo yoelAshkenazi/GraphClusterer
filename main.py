@@ -62,15 +62,13 @@ def run_summarization(_name: str, _version: str, _proportion: float, _save: bool
     summarize.summarize_per_color(_subgraphs, _name, _version, _proportion, _save)
 
 
-def create_graphs_all_versions(_graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,
-                               print_info_: bool = False):
+def create_graphs_all_versions(_graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,):
     """
     Create the graphs for all versions.
 
     :param _graph_kwargs: the parameters for the graph.
     :param _clustering_kwargs: the parameters for the clustering.
     :param _draw_kwargs: the parameters for the drawing.
-    :param print_info_: whether to print the outputs.
     :return:
     """
     """
