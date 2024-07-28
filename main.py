@@ -62,10 +62,10 @@ def run_summarization(_name: str, _version: str, _proportion: float, _save: bool
 
 if __name__ == '__main__':
     # set the parameters for the graph and summarization.
-    use_only_distances = True
+    use_only_distances = False
     use_only_original = True
     proportion = 0.5
-    version = 'proportion'
+    version = 'original'
 
     print_info = True
     graph_kwargs = {'A': 15, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.55,
@@ -88,8 +88,7 @@ if __name__ == '__main__':
     """
 
     # run the pipeline.
-    names = ['3D printing', 'smart material', 'additive manufacturing', 'autonomous drones', 'composite material',
-             'hypersonic missile']
+    names = ["nuclear reactor", "scramjet", "wind tunnel", "quantum computing"]
 
     # sizes = {}
     # in_scores = {}
