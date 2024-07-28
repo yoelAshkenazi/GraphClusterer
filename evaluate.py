@@ -9,7 +9,7 @@ import random
 import pickle as pkl
 
 # organization='org-FKQBIvqIr7JF5Jhysdnrxx5z',
-api_key = 'sk-proj-2gkj2jzXE7fAgLzqIn9TT3BlbkFJzQwHpetTBkmbSO6Q6KBl'
+api_key = 'sk-proj-jqcYHZiJQ8NTuQj6wVoBT3BlbkFJ5iR1QbLZU5QxLpb2bvMo'
 organization = 'org-FKQBIvqIr7JF5Jhysdnrxx5z'
 # set the openai api key. and the organization. also as an environment variable.
 os.environ['OPENAI_API_KEY'] = api_key
@@ -65,14 +65,18 @@ def evaluate(name: str, version: str, proportion: float = 0.5):
     colors = [cluster.split('_')[2] for cluster in clusters]  # get the colors.
     subgraphs = {}
     for i, cluster in enumerate(clusters):
+        decode_break = False
         with open(f'{summary_path}{cluster}', 'r') as f:
-            summaries[cluster] = f.read()
+            try:
+                summaries[cluster] = f.read()
+            except UnicodeDecodeError:
+                decode_break = True
+        if decode_break:
+            continue
 
         # get the subgraph.
         color = colors[i]
         subgraphs[cluster] = G.subgraph([node for node, data in G.nodes(data=True) if data['color'] == color])
-
-        print(subgraphs[cluster].nodes(data=True))
 
     # for each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
     # then ask GPT which abstracts are more similar to the summary.
@@ -98,10 +102,13 @@ def evaluate(name: str, version: str, proportion: float = 0.5):
 
         # sample 20% of the cluster size (k) and k abstracts from outside the cluster.
         cluster_abstracts = random.sample(cluster_abstracts, int(0.2 * len(cluster_abstracts)))
-        outside_abstracts = random.sample(outside_abstracts, len(cluster_abstracts))
+        try:
+            outside_abstracts = random.sample(outside_abstracts, len(cluster_abstracts))
+        except ValueError:
+            pass  # if there are not enough abstracts, sample all of them.
 
         # ask GPT which abstracts are more similar to the summary.
-        for i in range(len(cluster_abstracts)):
+        for i in range(min(len(cluster_abstracts), len(outside_abstracts))):
             # ask GPT which abstract is more similar to the summary.
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
