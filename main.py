@@ -2,11 +2,11 @@ import os
 import pandas as pd
 import functions
 import warnings
-# import summarize
-import evaluate
+import summarize
+# import evaluate
 
 warnings.filterwarnings("ignore")
-ALL_NAMES = ['3D printing', "additive manufacturing", "autonomous drones", "composite material", "hypersonic missile",
+ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
              "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]
 
 
@@ -45,13 +45,14 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
     return functions.analyze_clusters(_G)
 
 
-def run_summarization(_name: str, _version: str, _proportion: float, _save: bool = False):
+def run_summarization(_name: str, _version: str, _proportion: float, _save: bool = False, _k: int = 5):
     """
     Run the summarization for the given name and summarize_kwargs.
     :param _name: the name of the dataset.
     :param _version: the version of the graph.
     :param _proportion: the proportion of the graph.
     :param _save: whether to save the results.
+    :param _k: the KNN parameter.
     :return:
     """
     # load the graph.
@@ -59,7 +60,7 @@ def run_summarization(_name: str, _version: str, _proportion: float, _save: bool
     # filter the graph by colors.
     _subgraphs = summarize.filter_by_colors(_G)
     # summarize each cluster.
-    summarize.summarize_per_color(_subgraphs, _name, _version, _proportion, _save)
+    summarize.summarize_per_color(_subgraphs, _name, _version, _proportion, _save, _k)
 
 
 def create_graphs_all_versions(_graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,):
@@ -117,6 +118,7 @@ if __name__ == '__main__':
     use_only_original = {'distances': False, 'original': True, 'proportion': True}
     proportion = 0.5
     version = 'original'
+    K = 5
 
     print_info = True
     graph_kwargs = {'A': 15, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.55,
@@ -142,6 +144,7 @@ if __name__ == '__main__':
     """
     Step 1- create the graphs for all versions. (need to do only once per choice of parameters)
     """
+    graph_kwargs['K'] = K
     # create_graphs_all_versions(graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
 
     # sizes = {}
@@ -152,7 +155,7 @@ if __name__ == '__main__':
     Step 2- summarize the clusters for all versions.
     Step 3- evaluate the results.
     """
-    for name in ALL_NAMES:  # run the pipeline for each name with only the original distances.
+    for name in ALL_NAMES[-1:]:  # run the pipeline for each name with only the original distances.
         for version in ['distances', 'original', 'proportion']:
             print(f"'{name}' with {version} graph.")
             # run_summarization(name, version, proportion, _save=True)
@@ -161,7 +164,7 @@ if __name__ == '__main__':
             # out_scores[name][version] = b
             # success_rates[name][version] = a / (a + b) if a + b != 0 else 0
             # print(f"Success rate for '{name}' with {version} graph: {success_rates[name][version]}")
-
+            run_summarization(name, version, proportion, _save=True, k=K)
     """
     Step 4- save the results.
     """
@@ -172,7 +175,7 @@ if __name__ == '__main__':
     #
     # # save the results.
     # if not os.path.exists('Results/'):
-    #     os.makedirs('Results/')
+    #     os.makedirs('Results/k_{k}/')
     #
     # df1.to_csv('Results/in_scores.csv')
     # df2.to_csv('Results/out_scores.csv')

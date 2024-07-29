@@ -77,7 +77,8 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     return subgraphs
 
 
-def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, proportion: float, save: bool = False,):
+def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, proportion: float, save: bool = False,
+                        k:int=5):
     """
     This method summarizes each of the subgraphs' abstract texts using PRIMER, prints the results and save them
     to a .txt file.
@@ -86,12 +87,13 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
     :param version: The version of the graph.
     :param proportion: The proportion of the graph.
     :param save: Whether to save the results.
+    :param k: The KNN parameter.
     :return:
     """
 
     assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
                                                                "or 'proportion'."
-    result_file_path = f"Summaries/{name}"
+    result_file_path = f"Summaries/k_{k}/{name}"
     if version == 'distances':
         result_file_path += '_only_distances/'
     elif version == 'original':

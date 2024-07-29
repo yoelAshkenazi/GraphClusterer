@@ -17,12 +17,13 @@ os.environ['OPENAI_API_KEY'] = api_key
 client = OpenAI(api_key=api_key, organization=organization)
 
 
-def evaluate(name: str, version: str, proportion: float = 0.5):
+def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5):
     """
     Load the cluster summary for the given name.
     :param name: the name of the dataset.
     :param version: the version of the graph.
     :param proportion: the proportion of the graph to use.
+    :param k: The KNN parameter.
     :return:
     """
     assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
@@ -30,19 +31,19 @@ def evaluate(name: str, version: str, proportion: float = 0.5):
 
     if version == 'distances':
         graph_path = f"data/processed_graphs/only_distances/{name}.gpickle"
-        summary_path = f"Summaries/{name}_only_distances/"
+        summary_path = f"Summaries/k_{k}/{name}_only_distances/"
 
     elif version == 'original':
         graph_path = f"data/processed_graphs/only_original/{name}.gpickle"
-        summary_path = f"Summaries/{name}_only_original/"
+        summary_path = f"Summaries/k_{k}/{name}_only_original/"
 
     else:
         if proportion != 0.5:
             graph_path = f"data/processed_graphs/{name}_proportion_{proportion}.gpickle"
-            summary_path = f"Summaries/{name}_proportion_{proportion}/"
+            summary_path = f"Summaries/k_{k}/{name}_proportion_{proportion}/"
         else:
             graph_path = f"data/processed_graphs/{name}.gpickle"
-            summary_path = f"Summaries/{name}/"
+            summary_path = f"Summaries/k_{k}/{name}/"
 
     # load the graph.
 
