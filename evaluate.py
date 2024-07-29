@@ -30,19 +30,19 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5):
                                                                "or 'proportion'."
 
     if version == 'distances':
-        graph_path = f"data/processed_graphs/only_distances/{name}.gpickle"
+        graph_path = f"data/processed_graphs/k_{k}/only_distances/{name}.gpickle"
         summary_path = f"Summaries/k_{k}/{name}_only_distances/"
 
     elif version == 'original':
-        graph_path = f"data/processed_graphs/only_original/{name}.gpickle"
+        graph_path = f"data/processed_graphs/k_{k}/only_original/{name}.gpickle"
         summary_path = f"Summaries/k_{k}/{name}_only_original/"
 
     else:
         if proportion != 0.5:
-            graph_path = f"data/processed_graphs/{name}_proportion_{proportion}.gpickle"
+            graph_path = f"data/processed_graphs/k_{k}/{name}_proportion_{proportion}.gpickle"
             summary_path = f"Summaries/k_{k}/{name}_proportion_{proportion}/"
         else:
-            graph_path = f"data/processed_graphs/{name}.gpickle"
+            graph_path = f"data/processed_graphs/k_{k}/{name}.gpickle"
             summary_path = f"Summaries/k_{k}/{name}/"
 
     # load the graph.

@@ -201,6 +201,7 @@ def cluster_graph(G, name, **kwargs):
     use_original = kwargs.get('use_only_original', True)  # whether to use only the original edges.
     use_distances = kwargs.get('use_only_distances', True)  # whether to use only the distances.
     proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
+    K = kwargs.get('K', 5)  # the KNN parameter.
 
     if method == 'louvain':  # use the louvain method.
         res = kwargs['resolution'] if 'resolution' in kwargs else 1.0
@@ -219,13 +220,13 @@ def cluster_graph(G, name, **kwargs):
         for node in cluster:
             G.nodes[node]['color'] = colors[i]
 
-    if save:
+    if save:  # save the graph.
         if not use_original:
-            filename = f'data/processed_graphs/only_distances/{name}'
+            filename = f'data/processed_graphs/k_{K}/only_distances/{name}'
         elif not use_distances:
-            filename = f'data/processed_graphs/only_original/{name}'
+            filename = f'data/processed_graphs/k_{K}/only_original/{name}'
         else:
-            filename = f'data/processed_graphs/{name}'
+            filename = f'data/processed_graphs/k_{K}/{name}'
         if proportion != 0.5:
             filename += f'_proportion_{proportion}'
         filename += '.gpickle'

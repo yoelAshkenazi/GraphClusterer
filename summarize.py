@@ -13,11 +13,12 @@ from longformer import LongformerEncoderDecoderConfig
 import torch
 
 
-def load_graph(name: str, version: str, proportion) -> nx.Graph:
+def load_graph(name: str, version: str, proportion, k: int = 5) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
     :param version: the version of the graph.
+    :param k: the KNN parameter.
     :param proportion: the proportion of the graph.
     :return:
     """
@@ -26,16 +27,16 @@ def load_graph(name: str, version: str, proportion) -> nx.Graph:
                                                                "or 'proportion'."
 
     if version == 'distances':
-        graph_path = f"data/processed_graphs/only_distances/{name}.gpickle"
+        graph_path = f"data/processed_graphs/k_{k}/only_distances/{name}.gpickle"
 
     elif version == 'original':
-        graph_path = f"data/processed_graphs/only_original/{name}.gpickle"
+        graph_path = f"data/processed_graphs/k_{k}/only_original/{name}.gpickle"
 
     else:
         if proportion != 0.5:
-            graph_path = f"data/processed_graphs/{name}_proportion_{proportion}.gpickle"
+            graph_path = f"data/processed_graphs/k_{k}/{name}_proportion_{proportion}.gpickle"
         else:
-            graph_path = f"data/processed_graphs/{name}.gpickle"
+            graph_path = f"data/processed_graphs/k_{k}/{name}.gpickle"
 
     # load the graph.
 
@@ -78,7 +79,7 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
 
 
 def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, proportion: float, save: bool = False,
-                        k:int=5):
+                        k: int = 5):
     """
     This method summarizes each of the subgraphs' abstract texts using PRIMER, prints the results and save them
     to a .txt file.
@@ -190,24 +191,6 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
             generated_ids.tolist(), skip_special_tokens=True
         )[0]
 
-        # # generate a title for the summary.
-        #
-        # response = client.chat.completions.create(
-        #     model="gpt-3.5-turbo",
-        #     messages=[
-        #         {
-        #             "role": "system",
-        #             "content": f"Generate a 4 letter title for the following summary:\n{summary}\n"
-        #         }
-        #     ],
-        #     max_tokens=100,
-        #     n=1,
-        #     stop=None,
-        #     temperature=0.5
-        # )
-        #
-        # title = response.choices[0].message.content.split('\n')[-1]
-
         # print the summary.
         print(f"Summary: {summary}")
 
@@ -224,13 +207,3 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
                 os.makedirs(result_file_path)
                 with open(file_name, 'w') as f:
                     f.write(summary)
-
-            # # save a copy for clients with the title.
-            # titled_summary_path = "Titled " + result_file_path + '/' + title + '.txt'
-            # try:
-            #     with open(titled_summary_path, 'w') as f:
-            #         f.write(summary)
-            # except FileNotFoundError:  # create the directory if it doesn't exist.
-            #     os.makedirs("Titled " + result_file_path)
-            #     with open(titled_summary_path, 'w') as f:
-            #         f.write(summary)
