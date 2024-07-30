@@ -223,16 +223,26 @@ def cluster_graph(G, name, **kwargs):
     if save:  # save the graph.
         if not use_original:
             filename = f'data/processed_graphs/k_{K}/only_distances/{name}'
+            dirname = f'data/processed_graphs/k_{K}/only_distances/'
         elif not use_distances:
             filename = f'data/processed_graphs/k_{K}/only_original/{name}'
+            dirname = f'data/processed_graphs/k_{K}/only_original/'
         else:
             filename = f'data/processed_graphs/k_{K}/{name}'
+            dirname = f'data/processed_graphs/k_{K}/'
         if proportion != 0.5:
             filename += f'_proportion_{proportion}'
         filename += '.gpickle'
         # dump the graph to a .pkl file.
-        with open(filename, 'wb') as f:
-            pk.dump(G, f, protocol=pk.HIGHEST_PROTOCOL)
+        try:
+            with open(filename, 'wb') as f:
+                pk.dump(G, f, protocol=pk.HIGHEST_PROTOCOL)
+            print(f"Graph for '{name}' saved successfully to '{filename}'.")
+        except FileNotFoundError:  # create the directory if it doesn't exist.
+            import os
+            os.makedirs(dirname)
+            with open(filename, 'wb') as f:
+                pk.dump(G, f, protocol=pk.HIGHEST_PROTOCOL)
             print(f"Graph for '{name}' saved successfully to '{filename}'.")
 
     return partition
