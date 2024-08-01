@@ -2,8 +2,8 @@ import os
 import pandas as pd
 import functions
 import warnings
-import summarize
-# import evaluate
+# import summarize
+import evaluate
 
 warnings.filterwarnings("ignore")
 ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
@@ -127,7 +127,7 @@ if __name__ == '__main__':
     use_only_original = {'distances': False, 'original': True, 'proportion': True}
     proportion = 0.5
     version = 'original'
-    K = 10
+    K = 5
 
     print_info = True
     graph_kwargs = {'A': 15, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.55,
@@ -155,42 +155,46 @@ if __name__ == '__main__':
     """
     graph_kwargs['K'] = K
     clustering_kwargs['K'] = K
-    # create_graphs_all_versions(graph_kwargs, clustering_kwargs, draw_kwargs,)
+    # create_graphs_all_versions(graph_kwargs, clustering_kwargs, draw_kwargs)
 
     # sizes = {}
-    # in_scores = {name: {} for name in names}
-    # out_scores = {name: {} for name in names}
-    # success_rates = {name: {} for name in names}  # the success rates for each dataset.
+    in_scores = {name: {} for name in ALL_NAMES}
+    out_scores = {name: {} for name in ALL_NAMES}
+    success_rates = {name: {} for name in ALL_NAMES}  # the success rates for each dataset.
     """
     Step 2- summarize the clusters for all versions.
     Step 3- evaluate the results.
     """
-    for name in ALL_NAMES[-2:]:  # run the pipeline for each name with only the original distances.
+    for name in ALL_NAMES[:]:  # run the pipeline for each name with only the original distances.
         for version in ['distances', 'original', 'proportion']:
             print(f"'{name}' with {version} graph.")
-            # a, b, _ = evaluate.evaluate(name, version, proportion)
-            # in_scores[name][version] = a
-            # out_scores[name][version] = b
-            # success_rates[name][version] = a / (a + b) if a + b != 0 else 0
-            # print(f"Success rate for '{name}' with {version} graph: {success_rates[name][version]}")
-            run_summarization(name, version, proportion, _save=True, _k=K)
+            a, b, _ = evaluate.evaluate(name, version, proportion, K)
+            in_scores[name][version] = a
+            out_scores[name][version] = b
+            success_rates[name][version] = a / (a + b) if a + b != 0 else 0
+            print(f"Success rate for '{name}' with {version} graph: {success_rates[name][version]}")
+            # run_summarization(name, version, proportion, _save=True, _k=K)
     """
     Step 4- save the results.
     """
     # save the results
-    # df1 = pd.DataFrame(in_scores)
-    # df2 = pd.DataFrame(out_scores)
-    # df3 = pd.DataFrame(success_rates)
-    #
-    # # save the results.
-    # if not os.path.exists('Results/'):
-    #     os.makedirs('Results/k_{k}/')
-    #
-    # df1.to_csv('Results/in_scores.csv')
-    # df2.to_csv('Results/out_scores.csv')
-    # df3.to_csv('Results/success_rates.csv')
+    df1 = pd.DataFrame(in_scores)
+    df2 = pd.DataFrame(out_scores)
+    df3 = pd.DataFrame(success_rates)
+
+    # save the results.
+    try:
+        df1.to_csv(f'Results/k_{K}/in_scores.csv')
+        df2.to_csv(f'Results/k_{K}/out_scores.csv')
+        df3.to_csv(f'Results/k_{K}/success_rates.csv')
+    except OSError:
+        os.makedirs('Results', exist_ok=True)
+        os.makedirs(f'Results/k_{K}', exist_ok=True)
+        df1.to_csv(f'Results/k_{K}/in_scores.csv')
+        df2.to_csv(f'Results/k_{K}/out_scores.csv')
+        df3.to_csv(f'Results/k_{K}/success_rates.csv')
 
     # print the results.
-    # print(f"\nIn scores: {in_scores}\nOut scores: {out_scores}")
-    # print(f"\nAverage in score: {sum(in_scores.values()) / len(in_scores)}")
-    # print(f"Average out score: {sum(out_scores.values()) / len(out_scores)}")
+    print(f"\nIn scores: {in_scores}\nOut scores: {out_scores}")
+    print(f"\nAverage in score: {sum(in_scores.values()) / len(in_scores)}")
+    print(f"Average out score: {sum(out_scores.values()) / len(out_scores)}")
