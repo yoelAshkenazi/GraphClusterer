@@ -8,7 +8,7 @@ from openai import OpenAI
 import random
 import pickle as pkl
 
-api_key = 'sk-proj-1eNy6uBD0Kf164fT0tyPT3BlbkFJ9kyyJVQXMVS33CFz12zK'
+api_key = ''
 organization = 'org-FKQBIvqIr7JF5Jhysdnrxx5z'
 
 client = OpenAI(api_key=api_key, organization=organization)
