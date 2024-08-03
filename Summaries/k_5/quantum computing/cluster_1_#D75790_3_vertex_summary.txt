@@ -1,1 +1,0 @@
-Recent advances on quantum computing hardware have pushed quantum computing to the verge of quantum supremacy. Here, we bring together many-body quantum physics and quantum computing by using a method for strongly interacting two-dimensional systems, the projected entangled-pair states, to realize an effective general-purpose simulator of quantum algorithms..
