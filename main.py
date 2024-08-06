@@ -2,9 +2,9 @@ import os
 import pandas as pd
 import functions
 import warnings
-import summarize
-
-# import evaluate
+# import summarize
+import evaluate
+import pickle as pkl
 
 warnings.filterwarnings("ignore")
 ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
@@ -64,7 +64,7 @@ def run_summarization(_name: str, _version: str, _proportion: float, _save: bool
     summarize.summarize_per_color(_subgraphs, _name, _version, _proportion, _save, _k)
 
 
-def create_graphs_all_versions(_graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kwargs_: dict, ):
+def create_graphs_all_versions(_graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kwargs_: dict,):
     """
     Create the graphs for all versions.
 
@@ -166,37 +166,34 @@ if __name__ == '__main__':
     Step 2- summarize the clusters for all versions.
     Step 3- evaluate the results.
     """
-    for name in ALL_NAMES[8:]:  # run the pipeline for each name with only the original distances.
+    for name in ['additive manufacturing']:  # run the pipeline for each name with only the original distances.
         for version in ['distances', 'original', 'proportion']:
             print(f"'{name}' with {version} graph.")
-    #         # a, b, _ = evaluate.evaluate(name, version, proportion, K)
-    #         # in_scores[name][version] = a
-    #         # out_scores[name][version] = b
-    #         # success_rates[name][version] = a / (a + b) if a + b != 0 else 0
-    #         # print(f"Success rate for '{name}' with {version} graph: {success_rates[name][version]}")
-            run_summarization(name, version, proportion, _save=True, _k=K)
+            a, b, _ = evaluate.evaluate(name, version, proportion, K)
+            in_scores[name][version] = a
+            out_scores[name][version] = b
+            success_rates[name][version] = a / (a + b) if a + b != 0 else 0
+            print(f"Success rate for '{name}' with {version} graph: {success_rates[name][version]}")
+            # run_summarization(name, version, proportion, _save=True, _k=K)
+    """
+    Step 4- save the results.
+    """
+    # save the results
+    df1 = pd.DataFrame(in_scores)
+    df2 = pd.DataFrame(out_scores)
+    df3 = pd.DataFrame(success_rates)
 
-"""
-Step 4- save the results.
-"""
-# save the results
-# df1 = pd.DataFrame(in_scores)
-# df2 = pd.DataFrame(out_scores)
-# df3 = pd.DataFrame(success_rates)
-#
-# # save the results.
-# try:
-#     df1.to_csv(f'Results/k_{K}/in_scores.csv')
-#     df2.to_csv(f'Results/k_{K}/out_scores.csv')
-#     df3.to_csv(f'Results/k_{K}/success_rates.csv')
-# except OSError:
-#     os.makedirs('Results', exist_ok=True)
-#     os.makedirs(f'Results/k_{K}', exist_ok=True)
-#     df1.to_csv(f'Results/k_{K}/in_scores.csv')
-#     df2.to_csv(f'Results/k_{K}/out_scores.csv')
-#     df3.to_csv(f'Results/k_{K}/success_rates.csv')
-#
-# # print the results.
-# print(f"\nIn scores: {in_scores}\nOut scores: {out_scores}")
-# print(f"\nAverage in score: {sum(in_scores.values()) / len(in_scores)}")
-# print(f"Average out score: {sum(out_scores.values()) / len(out_scores)}")
+    try:
+        df1.to_csv(f'Results/k_{K}/in_scores.csv')
+        df2.to_csv(f'Results/k_{K}/out_scores.csv')
+        df3.to_csv(f'Results/k_{K}/success_rates.csv')
+    except OSError:
+        os.makedirs('Results', exist_ok=True)
+        os.makedirs(f'Results/k_{K}', exist_ok=True)
+        df1.to_csv(f'Results/k_{K}/in_scores.csv')
+        df2.to_csv(f'Results/k_{K}/out_scores.csv')
+        df3.to_csv(f'Results/k_{K}/success_rates.csv')
+
+    # print the results.
+    print(f"\nIn scores: {in_scores}\nOut scores: {out_scores}")
+

@@ -7,11 +7,79 @@ import pandas as pd
 from openai import OpenAI
 import random
 import pickle as pkl
+import networkx as nx
+from typing import List
 
-api_key = ''
+api_key = ('sk-proj-OUZv-h8VjURUnxZLOYP9OV1cv0t-1m8yGF5zAfmGoyRzXd3lpcxAO2jSFVAwhOSAOyfGdQS'
+           '-rOT3BlbkFJWrUPzxJo3bMeXLEz4yoS1xTd4PysH-_y6G1FoJSYh_E5j0XwESto5TrgrSZDNyV2UXdey_ZXEA')
 organization = 'org-FKQBIvqIr7JF5Jhysdnrxx5z'
 
 client = OpenAI(api_key=api_key, organization=organization)
+
+
+def load_graph(name: str, version: str, proportion, k: int = 5) -> nx.Graph:
+    """
+    Load the graph with the given name.
+    :param name: the name of the graph.
+    :param version: the version of the graph.
+    :param k: the KNN parameter.
+    :param proportion: the proportion of the graph.
+    :return:
+    """
+
+    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                               "or 'proportion'."
+
+    if version == 'distances':
+        graph_path = f"data/processed_graphs/k_{k}/only_distances/{name}.gpickle"
+
+    elif version == 'original':
+        graph_path = f"data/processed_graphs/k_{k}/only_original/{name}.gpickle"
+
+    else:
+        if proportion != 0.5:
+            graph_path = f"data/processed_graphs/k_{k}/{name}_proportion_{proportion}.gpickle"
+        else:
+            graph_path = f"data/processed_graphs/k_{k}/{name}.gpickle"
+
+    # load the graph.
+
+    with open(graph_path, 'rb') as f:
+        graph = pkl.load(f)
+
+    # filter the graph in order to remove the nan nodes.
+    nodes = graph.nodes(data=True)
+    s = len(nodes)
+    nodes = [node for node, data in nodes if not pd.isna(node)]
+    print(
+        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+    graph = graph.subgraph(nodes)
+
+    return graph
+
+
+def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
+    """
+    Partition the graph into subgraphs according to the community colors.
+    :param graph: the graph.
+    :return:
+    """
+    # first we filter articles by vertex type.
+    articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
+    articles_graph = graph.subgraph(articles)
+    graph = articles_graph
+
+    # second filter divides the graph by colors.
+    nodes = graph.nodes(data=True)
+    colors = set([node[1]['color'] for node in nodes])
+    subgraphs = []
+    for i, color in enumerate(colors):  # filter by colors.
+        nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
+
+        subgraph = graph.subgraph(nodes)
+        subgraphs.append(subgraph)
+
+    return subgraphs
 
 
 def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5):
@@ -27,35 +95,21 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5):
                                                                "or 'proportion'."
 
     if version == 'distances':
-        graph_path = f"data/processed_graphs/k_{k}/only_distances/{name}.gpickle"
         summary_path = f"Summaries/k_{k}/{name}_only_distances/"
 
     elif version == 'original':
-        graph_path = f"data/processed_graphs/k_{k}/only_original/{name}.gpickle"
         summary_path = f"Summaries/k_{k}/{name}_only_original/"
 
     else:
         if proportion != 0.5:
-            graph_path = f"data/processed_graphs/k_{k}/{name}_proportion_{proportion}.gpickle"
             summary_path = f"Summaries/k_{k}/{name}_proportion_{proportion}/"
         else:
-            graph_path = f"data/processed_graphs/k_{k}/{name}.gpickle"
             summary_path = f"Summaries/k_{k}/{name}/"
 
     # load the graph.
-
-    with open(graph_path, 'rb') as f:
-        graph = pkl.load(f)
-
-    # filter the graph in order to remove the nan nodes.
-    nodes = graph.nodes(data=True)
-    s = len(nodes)
-    nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(
-        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
-    graph = graph.subgraph(nodes)
-
+    graph = load_graph(name, version, proportion, k)
     G = graph
+    print(G)  # print the graph.
 
     clusters = os.listdir(summary_path)
 
@@ -75,6 +129,7 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5):
         # get the subgraph.
         color = colors[i]
         subgraphs[cluster] = G.subgraph([node for node, data in G.nodes(data=True) if data['color'] == color])
+        print(subgraphs[cluster])  # print the subgraph.
 
     # for each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
     # then ask GPT which abstracts are more similar to the summary.
@@ -98,7 +153,7 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5):
         cluster_abstracts = [abstract for abstract in cluster_abstracts if not pd.isna(abstract)]
         outside_abstracts = [abstract for abstract in outside_abstracts if not pd.isna(abstract)]
 
-        # sample 20% of the cluster size (k) and k abstracts from outside the cluster.
+        # sample 20% of the cluster size (m) and m abstracts from outside the cluster.
         cluster_abstracts = random.sample(cluster_abstracts, int(0.2 * len(cluster_abstracts)))
         try:
             outside_abstracts = random.sample(outside_abstracts, len(cluster_abstracts))

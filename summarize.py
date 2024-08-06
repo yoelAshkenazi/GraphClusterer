@@ -103,6 +103,11 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
         if proportion != 0.5:
             result_file_path += f'_proportion_{proportion}/'
 
+    # if there are previous summaries, delete them.
+    if os.path.exists(result_file_path):
+        for file in os.listdir(result_file_path):
+            os.remove(os.path.join(result_file_path, file))
+
     # define the model and tokenizer.
     tokenizer = AutoTokenizer.from_pretrained('./PRIMERA_model/')
     config = LongformerEncoderDecoderConfig.from_pretrained('./PRIMERA_model/')
@@ -197,7 +202,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
         # save the summary.
         if save:
 
-            vers = 'vertices' if num_nodes == 1 else 'vertex'
+            vers = 'vertices' if num_nodes != 1 else 'vertex'
 
             file_name = f'{result_file_path}/cluster_{i + 1}_{color}_{num_nodes}_{vers}_summary.txt'
 
