@@ -135,7 +135,9 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
 
         # get the subgraph.
         color = colors[i]
-        subgraphs[cluster] = G.subgraph([node for node, data in G.nodes(data=True) if data['color'] == color])
+        nodes = G.nodes(data=True)
+        nodes = [node for node in nodes if node[1]['color'] == color]
+        subgraphs[cluster] = G.subgraph(nodes)
         print(subgraphs[cluster])  # print the subgraph.
 
     # for each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.

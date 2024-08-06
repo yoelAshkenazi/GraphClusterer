@@ -2,9 +2,8 @@ import os
 import pandas as pd
 import functions
 import warnings
-# import summarize
-import evaluate
-import pickle as pkl
+import summarize
+# import evaluate
 
 warnings.filterwarnings("ignore")
 ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
@@ -170,15 +169,16 @@ if __name__ == '__main__':
     Step 2- summarize the clusters for all versions.
     Step 3- evaluate the results.
     """
-    for name in ['additive manufacturing']:  # run the pipeline for each name with only the original distances.
+    for name in ALL_NAMES[8:]:  # run the pipeline for each name with only the original distances.
         for version in ['distances', 'original', 'proportion']:
-            print(f"'{name}' with {version} graph.")
+            print(f"'{name}' with {version}, {proportion if version == 'proportion' else ''},"
+                  f" {weight if weight != 1 else ''} graph.")
             # a, b, _ = evaluate.evaluate(name, version, proportion, K)
             # in_scores[name][version] = a
             # out_scores[name][version] = b
             # success_rates[name][version] = a / (a + b) if a + b != 0 else 0
             # print(f"Success rate for '{name}' with {version} graph: {success_rates[name][version]}")
-            run_summarization(name, version, proportion, _save=True, _k=K, )
+            run_summarization(name, version, proportion, _save=True, _k=K, _weight=weight)
     """
     Step 4- save the results.
     """

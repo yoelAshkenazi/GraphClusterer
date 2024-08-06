@@ -78,6 +78,7 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
 
         subgraph = graph.subgraph(nodes)
         subgraphs.append(subgraph)
+        print(f"color {color} has {len(subgraph.nodes())} vertices.")
 
     return subgraphs
 
@@ -137,17 +138,18 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
         if len(subgraph.nodes()) == 1:
             continue
 
-        # if the cluster is too large, summarize only the first 10 vertices.
-        if len(subgraph.nodes()) > 10:
-            subgraph = subgraph.subgraph(list(subgraph.nodes())[:10])
+        # if the cluster is too large, summarize only 10 vertices at random.
 
         # step 1- get the abstracts.
         abstracts = [abstract for id_, abstract in df.values if id_ in subgraph.nodes()]
+        if len(abstracts) > 10:
+            abstracts = list(pd.Series(abstracts).sample(10))
         # clean nulls.
         abstracts = [abstract for abstract in abstracts if not pd.isna(abstract)]
 
         # step 2- summarize the abstracts.
-        print(f"Summarizing {len(abstracts)} abstracts...")
+        print(f"Summarizing {len(subgraph)} abstracts...\nCluster color: {color}\nNumber of vertices: {num_nodes}"
+              f"\n{'-' * 40}")
 
         # encode the text.
         input_ids = []
@@ -200,7 +202,9 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
         summary = tokenizer.batch_decode(
             generated_ids.tolist(), skip_special_tokens=True
         )[0]
-
+        if summary == '':
+            print(f"Cluster {i + 1} summary is empty.")
+            continue
         # print the summary.
         print(f"Summary: {summary}")
 
