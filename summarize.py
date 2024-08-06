@@ -103,11 +103,6 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
         if proportion != 0.5:
             result_file_path += f'_proportion_{proportion}/'
 
-    if save:
-        # clear the results folder path.
-        for file in os.listdir(result_file_path):
-            os.remove(f"{result_file_path}/{file}")
-
     # define the model and tokenizer.
     tokenizer = AutoTokenizer.from_pretrained('./PRIMERA_model/')
     config = LongformerEncoderDecoderConfig.from_pretrained('./PRIMERA_model/')
