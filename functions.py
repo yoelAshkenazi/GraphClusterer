@@ -364,7 +364,7 @@ def evaluate_clusters(G, name):
     return avg_index, largest_cluster_percentage
 
 
-def check_weight_prop(G, start, end, step, name, res,):
+def check_weight_prop(G, start, end, step, name, res, repeat):
     """
     takes a proportion graph, copies it and changes the weights for each edge type:
     1. original edges. set to 1
@@ -376,33 +376,47 @@ def check_weight_prop(G, start, end, step, name, res,):
     :param step:  the step of the range.
     :param name:  the name of the dataset.
     :param res:  the resolution coefficient.
+    :param repeat:  the number of times to repeat the process.
     :return:
     """
 
     # initialize the variables.
-    avg_indexes = []
-    largest_cluster_percentages = []
+    final_avg_indexes = []
+    final_largest_cluster_percentages = []
+    final_std_indexes = []
+    final_std_percentages = []
 
     # copy the graph.
     G_copy = copy.deepcopy(G)
     x_lst = np.linspace(start, end, step)
     x_lst = [10 ** -x for x in x_lst]
     # change the weights for the edges.
+
     for i in x_lst:
         for u, v in G_copy.edges():
             if G_copy[u][v]['color'] == 'blue':
                 G_copy[u][v]['weight'] = 1
             else:
                 G_copy[u][v]['weight'] = 10 ** -i
+        avg_indexes = []
+        largest_cluster_percentages = []
+        for j in range(repeat):
+            # re-cluster the graph.
+            cluster_graph(G_copy, name, method='louvain', resolution=res, save=False)
+            # evaluate the clusters.
+            avg_index, largest_cluster_percentage = evaluate_clusters(G_copy, name)
+            avg_indexes.append(avg_index)
+            largest_cluster_percentages.append(largest_cluster_percentage)
 
-        # re-cluster the graph.
-        cluster_graph(G_copy, name, method='louvain', resolution=res, save=False)
-        # evaluate the clusters.
-        avg_index, largest_cluster_percentage = evaluate_clusters(G_copy, name)
-        avg_indexes.append(avg_index)
-        largest_cluster_percentages.append(largest_cluster_percentage)
-    print(avg_indexes)
-    return avg_indexes, largest_cluster_percentages
+        # get the average and standard deviation for the indexes and percentages,
+        # meaning for each weight we get the average and standard deviation of the indexes and percentages.
+        final_avg_indexes.append(round(np.mean(avg_indexes), 3))
+        final_largest_cluster_percentages.append(round(np.mean(largest_cluster_percentages), 3))
+        final_std_indexes.append(round(np.std(avg_indexes), 3)/np.sqrt(repeat))
+        final_std_percentages.append(round(np.std(largest_cluster_percentages), 3)/np.sqrt(repeat))
+
+    return (final_avg_indexes, final_largest_cluster_percentages,
+            final_std_indexes, final_std_percentages)
 
 
 def plot_props(start, end, step, names: list, indexes: dict, percentages: dict):
@@ -420,8 +434,10 @@ def plot_props(start, end, step, names: list, indexes: dict, percentages: dict):
     plt.figure(figsize=(20, 10))
     x_vals = np.linspace(start, end, step)
     for i, name in enumerate(names):
-        plt.plot(x_vals, indexes[name], label=name, alpha=0.75)
-    plt.xlabel('Exponent')
+        plt.plot(x_vals, indexes[name][0], label=name, linewidth=5)
+        plt.fill_between(x_vals, np.array(indexes[name][0]) - np.array(indexes[name][1]),
+                         np.array(indexes[name][0]) + np.array(indexes[name][1]), alpha=0.25)
+    plt.xlabel('Exponent (x in $10^{-x}$)')
     plt.ylabel('Average Cluster Distance Index')
     plt.title('Average Cluster Distance Index for Different Weight Proportions')
     plt.legend()
@@ -432,8 +448,10 @@ def plot_props(start, end, step, names: list, indexes: dict, percentages: dict):
     # plot the largest cluster percentages.
     plt.figure(figsize=(20, 10))
     for i, name in enumerate(names):
-        plt.plot(x_vals, percentages[name], label=name)
-    plt.xlabel('(-) Exponent')
+        plt.plot(x_vals, percentages[name][0], label=name, linewidth=5)
+        plt.fill_between(x_vals, np.array(percentages[name][0]) - np.array(percentages[name][1]),
+                         np.array(percentages[name][0]) + np.array(percentages[name][1]), alpha=0.25)
+    plt.xlabel('Exponent (x in $10^{-x}$)')
     plt.ylabel('Largest Cluster Percentage')
     plt.title('Largest Cluster Percentage for Different Weight Proportions')
     plt.legend()

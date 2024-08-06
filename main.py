@@ -222,13 +222,26 @@ if __name__ == '__main__':
     """
     Plot the results.
     """
-    indexes = {name: [] for name in ALL_NAMES}
-    percentages = {name: [] for name in ALL_NAMES}
+    indexes = {name: () for name in ALL_NAMES}
+    percentages = {name: () for name in ALL_NAMES}
     for name in ALL_NAMES:
         G = functions.load_graph(name, 'proportion', 0.5, 5)
-        a, b = functions.check_weight_prop(G, 0, 2, 10, name, res)
-        indexes[name] = a
-        percentages[name] = b
+        a, b, c, d = functions.check_weight_prop(G, -2, 2, 10, name, res, repeat=10)
+        indexes[name] = a, c  # index mean and std.
+        percentages[name] = b, d  # percentage mean and std.
 
-    functions.plot_props(0, 2, 10, ALL_NAMES, indexes, percentages)
+    functions.plot_props(-2, 2, 10, ALL_NAMES, indexes, percentages)
+    # save the results.
+    df1 = pd.DataFrame(indexes)
+    df2 = pd.DataFrame(percentages)
+    # change row names to mean and ste.
+    df1.index = ['mean', 'ste']
+    df2.index = ['mean', 'ste']
+    try:
+        df1.to_csv(f'Results/avg_distance.csv')
+        df2.to_csv(f'Results/percentages.csv')
+    except OSError:
+        os.makedirs('Results', exist_ok=True)
+        df1.to_csv(f'Results/avg_distance.csv')
+        df2.to_csv(f'Results/percentages.csv')
     print("Done.")
