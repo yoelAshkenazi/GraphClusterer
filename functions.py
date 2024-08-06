@@ -2,7 +2,9 @@
 Yoel Ashkenazi
 Clustering the graphs using the original edges and similarity edges based on the distances.
 """
+import copy
 
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -29,6 +31,47 @@ def get_file_path(name):
     :return:
     """
     return 'data/distances/' + name + '_papers_embeddings.pkl'
+
+
+def load_graph(name: str, version: str, proportion, k: int = 5) -> nx.Graph:
+    """
+    Load the graph with the given name.
+    :param name: the name of the graph.
+    :param version: the version of the graph.
+    :param k: the KNN parameter.
+    :param proportion: the proportion of the graph.
+    :return:
+    """
+
+    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                               "or 'proportion'."
+
+    if version == 'distances':
+        graph_path = f"data/processed_graphs/k_{k}/only_distances/{name}.gpickle"
+
+    elif version == 'original':
+        graph_path = f"data/processed_graphs/k_{k}/only_original/{name}.gpickle"
+
+    else:
+        if proportion != 0.5:
+            graph_path = f"data/processed_graphs/k_{k}/{name}_proportion_{proportion}.gpickle"
+        else:
+            graph_path = f"data/processed_graphs/k_{k}/{name}.gpickle"
+
+    # load the graph.
+
+    with open(graph_path, 'rb') as f:
+        graph = pk.load(f)
+
+    # filter the graph in order to remove the nan nodes.
+    nodes = graph.nodes(data=True)
+    s = len(nodes)
+    nodes = [node for node, data in nodes if not pd.isna(node)]
+    print(
+        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+    graph = graph.subgraph(nodes)
+
+    return graph
 
 
 def make_graph(name, **kwargs):
@@ -85,8 +128,6 @@ def make_graph(name, **kwargs):
                 continue
             G.add_node(target, size=default_size, shape=shapes[types[j]], type=types[j], color=default_vertex_color)
 
-    # add the blue edges to the graph.
-    if use_original:
         for j in range(len(targets)):
             G.add_edge(ids[j], targets[j], weight=(2 * A * proportion), color='blue')
             # add the blue edges with a weight of A.
@@ -268,3 +309,134 @@ def analyze_clusters(G):
         sizes.append(len(nodes))
 
     return sizes
+
+
+def evaluate_clusters(G, name):
+    """
+    Evaluate the clusters of the graph.
+    :param name: the name of the dataset.
+    :param G:  the graph.
+    :return:
+    """
+
+    # load the embeddings.
+    file_path = get_file_path(name)
+    embeddings = load_pkl(file_path)
+    dists = embeddings['Distances']  # distances between papers.
+    paper_ids = embeddings['IDs']  # paper ids.
+
+    # get the total average distance.
+    avg_all_dists = 0
+    for i in range(len(paper_ids)):
+        for j in range(i + 1, len(paper_ids)):
+            avg_all_dists += dists[i, j]
+    avg_all_dists /= (len(paper_ids) * (len(paper_ids) - 1) / 2)
+
+    # get the average distance for each cluster.
+    # filter the vertices by color and type.
+    articles = [node for node in G.nodes() if G.nodes.data()[node]['type'] == 'paper']
+    articles_graph = G.subgraph(articles)
+    colors = set([node[1]['color'] for node in articles_graph.nodes(data=True)])
+    sizes = []
+    avg_cluster_dists = []
+    for color in colors:
+        cluster = [node for node in articles_graph.nodes() if articles_graph.nodes.data()[node]['color'] == color]
+        sizes.append(len(cluster))
+        avg_cluster_dist = 0
+        for i in range(len(paper_ids)):
+            for j in range(i + 1, len(paper_ids)):
+                if paper_ids[i] in cluster and paper_ids[j] in cluster:
+                    avg_cluster_dist += dists[i, j]
+        if len(cluster) == 1:
+            avg_cluster_dist = 0
+        else:
+            avg_cluster_dist /= (len(cluster) * (len(cluster) - 1) / 2)
+        avg_cluster_dists.append(avg_cluster_dist)
+
+    # get the average distance for the clusters.
+    avg_cluster_dists = sum(avg_cluster_dists) / len(avg_cluster_dists)
+    avg_index = avg_cluster_dists / avg_all_dists  # get the average index.
+    avg_index = round(avg_index, 5)
+    # get the percentage of papers in the largest cluster.
+    largest_cluster = max(sizes)
+    largest_cluster_percentage = largest_cluster / len(articles)
+
+    return avg_index, largest_cluster_percentage
+
+
+def check_weight_prop(G, start, end, step, name, res,):
+    """
+    takes a proportion graph, copies it and changes the weights for each edge type:
+    1. original edges. set to 1
+    2. similarity edges. set to 10**-x for x in range(start, end, step)
+    then re-clusters the graph and returns the average index and largest cluster percentage for each weight.
+    :param G:  the graph.
+    :param start:  the start of the range.
+    :param end:  the end of the range.
+    :param step:  the step of the range.
+    :param name:  the name of the dataset.
+    :param res:  the resolution coefficient.
+    :return:
+    """
+
+    # initialize the variables.
+    avg_indexes = []
+    largest_cluster_percentages = []
+
+    # copy the graph.
+    G_copy = copy.deepcopy(G)
+    x_lst = np.linspace(start, end, step)
+    x_lst = [10 ** -x for x in x_lst]
+    # change the weights for the edges.
+    for i in x_lst:
+        for u, v in G_copy.edges():
+            if G_copy[u][v]['color'] == 'blue':
+                G_copy[u][v]['weight'] = 1
+            else:
+                G_copy[u][v]['weight'] = 10 ** -i
+
+        # re-cluster the graph.
+        cluster_graph(G_copy, name, method='louvain', resolution=res, save=False)
+        # evaluate the clusters.
+        avg_index, largest_cluster_percentage = evaluate_clusters(G_copy, name)
+        avg_indexes.append(avg_index)
+        largest_cluster_percentages.append(largest_cluster_percentage)
+    print(avg_indexes)
+    return avg_indexes, largest_cluster_percentages
+
+
+def plot_props(start, end, step, names: list, indexes: dict, percentages: dict):
+    """
+    plots the average cluster distance index and the largest cluster percentage for each weight.
+    :param start:  the start of the range.
+    :param end:  the end of the range.
+    :param step:   the step of the range.
+    :param names:  the names of the datasets.
+    :param indexes:  the average cluster distance indexes.
+    :param percentages:  the largest cluster percentages.
+    :return:
+    """
+    # plot the average indexes.
+    plt.figure(figsize=(20, 10))
+    x_vals = np.linspace(start, end, step)
+    for i, name in enumerate(names):
+        plt.plot(x_vals, indexes[name], label=name, alpha=0.75)
+    plt.xlabel('Exponent')
+    plt.ylabel('Average Cluster Distance Index')
+    plt.title('Average Cluster Distance Index for Different Weight Proportions')
+    plt.legend()
+    plt.grid()
+    plt.savefig('Figures/weight_proportions_avg_dist.png')
+    plt.show()
+
+    # plot the largest cluster percentages.
+    plt.figure(figsize=(20, 10))
+    for i, name in enumerate(names):
+        plt.plot(x_vals, percentages[name], label=name)
+    plt.xlabel('(-) Exponent')
+    plt.ylabel('Largest Cluster Percentage')
+    plt.title('Largest Cluster Percentage for Different Weight Proportions')
+    plt.legend()
+    plt.grid()
+    plt.savefig('Figures/weight_proportions_largest_perc.png')
+    plt.show()
