@@ -33,30 +33,34 @@ def get_file_path(name):
     return 'data/distances/' + name + '_papers_embeddings.pkl'
 
 
-def load_graph(name: str, version: str, proportion, k: int = 5) -> nx.Graph:
+def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
     :param version: the version of the graph.
     :param k: the KNN parameter.
     :param proportion: the proportion of the graph.
+    :param weight: the weight of the edges.
     :return:
     """
 
     assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
                                                                "or 'proportion'."
 
+    graph_path = f"data/processed_graphs/k_{k}/"
+    if weight != 1:
+        graph_path += f"weight_{weight}/"
     if version == 'distances':
-        graph_path = f"data/processed_graphs/k_{k}/only_distances/{name}.gpickle"
+        graph_path += f"only_distances/{name}.gpickle"
 
     elif version == 'original':
-        graph_path = f"data/processed_graphs/k_{k}/only_original/{name}.gpickle"
+        graph_path += f"only_original/{name}.gpickle"
 
     else:
         if proportion != 0.5:
-            graph_path = f"data/processed_graphs/k_{k}/{name}_proportion_{proportion}.gpickle"
+            graph_path += f"{name}_proportion_{proportion}.gpickle"
         else:
-            graph_path = f"data/processed_graphs/k_{k}/{name}.gpickle"
+            graph_path += f"{name}.gpickle"
 
     # load the graph.
 
@@ -107,6 +111,7 @@ def make_graph(name, **kwargs):
     use_distances = kwargs.get('use_only_distances', True)  # whether to use only the distances.
     use_original = kwargs.get('use_only_original', True)  # whether to use only the original edges.
     proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
+    weight = kwargs.get('weight', 1)  # the weight of the edges.
     # assign shapes to each type.
     shapes = {'paper': 'o', 'author': '*', 'keyword': 'd', 'institution': 'p', 'country': 's'}
 
@@ -129,7 +134,10 @@ def make_graph(name, **kwargs):
             G.add_node(target, size=default_size, shape=shapes[types[j]], type=types[j], color=default_vertex_color)
 
         for j in range(len(targets)):
-            G.add_edge(ids[j], targets[j], weight=(2 * A * proportion), color='blue')
+            if weight == 1:
+                G.add_edge(ids[j], targets[j], weight=(2 * A * proportion), color='blue')
+            else:
+                G.add_edge(ids[j], targets[j], weight=1, color='blue')
             # add the blue edges with a weight of A.
 
     # add the red edges to the graph.
@@ -140,7 +148,10 @@ def make_graph(name, **kwargs):
                 # get the K nearest neighbors.
                 indices = dists[i].argsort()[1: K + 1]  # get the K nearest neighbors not including the paper itself.
                 for j in indices:
-                    G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j] * (1 - proportion)), color='red')
+                    if weight == 1:
+                        G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j] * (1 - proportion)), color='red')
+                    else:
+                        G.add_edge(paper_ids[i], paper_ids[j], weight=weight, color='red')
                     # add the red edges.
                 continue
 
@@ -148,7 +159,10 @@ def make_graph(name, **kwargs):
                 if dists[i, j] > threshold:  # skip the zero distances.
                     continue
 
-                G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j] * (1 - proportion)), color='red')
+                if weight == 1:
+                    G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j] * (1 - proportion)), color='red')
+                else:
+                    G.add_edge(paper_ids[i], paper_ids[j], weight=weight, color='red')
                 # add the red edges.
 
     return G
@@ -243,6 +257,7 @@ def cluster_graph(G, name, **kwargs):
     use_distances = kwargs.get('use_only_distances', True)  # whether to use only the distances.
     proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
     K = kwargs.get('K', 5)  # the KNN parameter.
+    weight = kwargs.get('weight', 1)  # the weight of the edges.
 
     if method == 'louvain':  # use the louvain method.
         res = kwargs['resolution'] if 'resolution' in kwargs else 1.0
@@ -262,15 +277,14 @@ def cluster_graph(G, name, **kwargs):
             G.nodes[node]['color'] = colors[i]
 
     if save:  # save the graph.
+        dirname = f'data/processed_graphs/k_{K}/'
+        if weight != 1:
+            dirname += f'weight_{weight}/'
         if not use_original:
-            filename = f'data/processed_graphs/k_{K}/only_distances/{name}'
-            dirname = f'data/processed_graphs/k_{K}/only_distances/'
+            dirname += f'only_distances/'
         elif not use_distances:
-            filename = f'data/processed_graphs/k_{K}/only_original/{name}'
-            dirname = f'data/processed_graphs/k_{K}/only_original/'
-        else:
-            filename = f'data/processed_graphs/k_{K}/{name}'
-            dirname = f'data/processed_graphs/k_{K}/'
+            dirname += f'only_original/'
+        filename = dirname + name
         if proportion != 0.5:
             filename += f'_proportion_{proportion}'
         filename += '.gpickle'

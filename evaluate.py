@@ -17,30 +17,34 @@ organization = 'org-FKQBIvqIr7JF5Jhysdnrxx5z'
 client = OpenAI(api_key=api_key, organization=organization)
 
 
-def load_graph(name: str, version: str, proportion, k: int = 5) -> nx.Graph:
+def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
     :param version: the version of the graph.
     :param k: the KNN parameter.
     :param proportion: the proportion of the graph.
+    :param weight: the weight of the edges.
     :return:
     """
 
     assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
                                                                "or 'proportion'."
 
+    graph_path = f"data/processed_graphs/k_{k}/"
+    if weight != 1:
+        graph_path += f"weight_{weight}/"
     if version == 'distances':
-        graph_path = f"data/processed_graphs/k_{k}/only_distances/{name}.gpickle"
+        graph_path += f"only_distances/{name}.gpickle"
 
     elif version == 'original':
-        graph_path = f"data/processed_graphs/k_{k}/only_original/{name}.gpickle"
+        graph_path += f"only_original/{name}.gpickle"
 
     else:
         if proportion != 0.5:
-            graph_path = f"data/processed_graphs/k_{k}/{name}_proportion_{proportion}.gpickle"
+            graph_path += f"{name}_proportion_{proportion}.gpickle"
         else:
-            graph_path = f"data/processed_graphs/k_{k}/{name}.gpickle"
+            graph_path += f"{name}.gpickle"
 
     # load the graph.
 
@@ -82,29 +86,32 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     return subgraphs
 
 
-def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5):
+def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1):
     """
     Load the cluster summary for the given name.
     :param name: the name of the dataset.
     :param version: the version of the graph.
     :param proportion: the proportion of the graph to use.
     :param k: The KNN parameter.
+    :param weight: the weight of the edges.
     :return:
     """
     assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
                                                                "or 'proportion'."
-
+    summary_path = f"Summaries/k_{k}/"
+    if weight != 1:
+        summary_path += f"weight_{weight}/"
     if version == 'distances':
-        summary_path = f"Summaries/k_{k}/{name}_only_distances/"
+        summary_path += f"{name}_only_distances/"
 
     elif version == 'original':
-        summary_path = f"Summaries/k_{k}/{name}_only_original/"
+        summary_path += f"{name}_only_original/"
 
     else:
         if proportion != 0.5:
-            summary_path = f"Summaries/k_{k}/{name}_proportion_{proportion}/"
+            summary_path += f"{name}_proportion_{proportion}/"
         else:
-            summary_path = f"Summaries/k_{k}/{name}/"
+            summary_path += f"{name}/"
 
     # load the graph.
     graph = load_graph(name, version, proportion, k)

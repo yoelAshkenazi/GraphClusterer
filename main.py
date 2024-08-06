@@ -46,7 +46,8 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
     return functions.analyze_clusters(_G)
 
 
-def run_summarization(_name: str, _version: str, _proportion: float, _save: bool = False, _k: int = 5):
+def run_summarization(_name: str, _version: str, _proportion: float, _save: bool = False, _k: int = 5,
+                      _weight: float = 1):
     """
     Run the summarization for the given name and summarize_kwargs.
     :param _name: the name of the dataset.
@@ -54,14 +55,15 @@ def run_summarization(_name: str, _version: str, _proportion: float, _save: bool
     :param _proportion: the proportion of the graph.
     :param _save: whether to save the results.
     :param _k: the KNN parameter.
+    :param _weight: the weight of the edges.
     :return:
     """
     # load the graph.
-    _G = summarize.load_graph(_name, _version, _proportion)
+    _G = summarize.load_graph(_name, _version, _proportion, _k, _weight)
     # filter the graph by colors.
     _subgraphs = summarize.filter_by_colors(_G)
     # summarize each cluster.
-    summarize.summarize_per_color(_subgraphs, _name, _version, _proportion, _save, _k)
+    summarize.summarize_per_color(_subgraphs, _name, _version, _proportion, _save, _k, _weight)
 
 
 def create_graphs_all_versions(_graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kwargs_: dict,):
@@ -128,17 +130,18 @@ if __name__ == '__main__':
     use_only_original = {'distances': False, 'original': True, 'proportion': True}
     proportion = 0.5
     version = 'original'
+    weight = 10 ** (-0.7)  # the weight for the edges.
     res = 0.15
-    K = 3
+    K = 5
 
     print_info = True
     graph_kwargs = {'A': 15, 'size': 2000, 'color': '#1f78b4', 'distance_threshold': 0.55,
                     'use_only_distances': use_only_distances[version], 'use_only_original': use_only_original[version],
-                    'proportion': proportion, 'K': K}
+                    'proportion': proportion, 'K': K, 'weight': weight}
 
     # set the parameters for the clustering.
     clustering_kwargs = {'save': True, 'method': 'louvain', 'resolution': res,
-                         'use_only_distances': use_only_distances[version],
+                         'use_only_distances': use_only_distances[version], 'weight': weight,
                          'use_only_original': use_only_original[version], 'proportion': proportion, 'K': K}
 
     # set the parameters for the drawing.
@@ -167,15 +170,15 @@ if __name__ == '__main__':
     Step 2- summarize the clusters for all versions.
     Step 3- evaluate the results.
     """
-    # for name in ['additive manufacturing']:  # run the pipeline for each name with only the original distances.
-        # for version in ['distances', 'original', 'proportion']:
-            # print(f"'{name}' with {version} graph.")
+    for name in ['additive manufacturing']:  # run the pipeline for each name with only the original distances.
+        for version in ['distances', 'original', 'proportion']:
+            print(f"'{name}' with {version} graph.")
             # a, b, _ = evaluate.evaluate(name, version, proportion, K)
             # in_scores[name][version] = a
             # out_scores[name][version] = b
             # success_rates[name][version] = a / (a + b) if a + b != 0 else 0
             # print(f"Success rate for '{name}' with {version} graph: {success_rates[name][version]}")
-            # run_summarization(name, version, proportion, _save=True, _k=K)
+            run_summarization(name, version, proportion, _save=True, _k=K, )
     """
     Step 4- save the results.
     """
@@ -199,7 +202,7 @@ if __name__ == '__main__':
     # print(f"\nIn scores: {in_scores}\nOut scores: {out_scores}")
 
     """
-    Evaluate the clusters.
+    Evaluate the clusters for different K values.
     """
     # avg_indexes = {name: {} for name in ALL_NAMES}
     # avg_percentages = {name: {} for name in ALL_NAMES}
@@ -220,28 +223,28 @@ if __name__ == '__main__':
     # df.to_csv('Results/avg_percentages.csv')
 
     """
-    Plot the results.
+    Plot the results for different weights.
     """
-    indexes = {name: () for name in ALL_NAMES}
-    percentages = {name: () for name in ALL_NAMES}
-    for name in ALL_NAMES:
-        G = functions.load_graph(name, 'proportion', 0.5, 5)
-        a, b, c, d = functions.check_weight_prop(G, -2, 2, 10, name, res, repeat=10)
-        indexes[name] = a, c  # index mean and std.
-        percentages[name] = b, d  # percentage mean and std.
-
-    functions.plot_props(-2, 2, 10, ALL_NAMES, indexes, percentages)
-    # save the results.
-    df1 = pd.DataFrame(indexes)
-    df2 = pd.DataFrame(percentages)
-    # change row names to mean and ste.
-    df1.index = ['mean', 'ste']
-    df2.index = ['mean', 'ste']
-    try:
-        df1.to_csv(f'Results/avg_distance.csv')
-        df2.to_csv(f'Results/percentages.csv')
-    except OSError:
-        os.makedirs('Results', exist_ok=True)
-        df1.to_csv(f'Results/avg_distance.csv')
-        df2.to_csv(f'Results/percentages.csv')
-    print("Done.")
+    # indexes = {name: () for name in ALL_NAMES}
+    # percentages = {name: () for name in ALL_NAMES}
+    # for name in ALL_NAMES:
+    #     G = functions.load_graph(name, 'proportion', 0.5, 5)
+    #     a, b, c, d = functions.check_weight_prop(G, -2, 2, 10, name, res, repeat=10)
+    #     indexes[name] = a, c  # index mean and std.
+    #     percentages[name] = b, d  # percentage mean and std.
+    #
+    # functions.plot_props(-2, 2, 10, ALL_NAMES, indexes, percentages)
+    # # save the results.
+    # df1 = pd.DataFrame(indexes)
+    # df2 = pd.DataFrame(percentages)
+    # # change row names to mean and ste.
+    # df1.index = ['mean', 'ste']
+    # df2.index = ['mean', 'ste']
+    # try:
+    #     df1.to_csv(f'Results/avg_distance.csv')
+    #     df2.to_csv(f'Results/percentages.csv')
+    # except OSError:
+    #     os.makedirs('Results', exist_ok=True)
+    #     df1.to_csv(f'Results/avg_distance.csv')
+    #     df2.to_csv(f'Results/percentages.csv')
+    # print("Done.")
