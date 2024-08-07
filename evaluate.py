@@ -10,8 +10,8 @@ import pickle as pkl
 import networkx as nx
 from typing import List
 
-api_key = ('sk-proj-OUZv-h8VjURUnxZLOYP9OV1cv0t-1m8yGF5zAfmGoyRzXd3lpcxAO2jSFVAwhOSAOyfGdQS'
-           '-rOT3BlbkFJWrUPzxJo3bMeXLEz4yoS1xTd4PysH-_y6G1FoJSYh_E5j0XwESto5TrgrSZDNyV2UXdey_ZXEA')
+api_key = ('sk-proj-QmQAKfTAciapEYB9EOFC7GzMlxm1Y8OgbpLGaojODhKupIXUVU4A3xO4hMiIpSjwGlm7L27rVmT3BlbkFJvbdo'
+           '-Iny4yCtHBN6CZyBBT7IVOY7_x6xPoMKUGtcssmWcezeazQRULrEsG9RpqgegyDdloiQoA')
 organization = 'org-FKQBIvqIr7JF5Jhysdnrxx5z'
 
 client = OpenAI(api_key=api_key, organization=organization)
@@ -114,7 +114,7 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
             summary_path += f"{name}/"
 
     # load the graph.
-    graph = load_graph(name, version, proportion, k)
+    graph = load_graph(name, version, proportion, k, weight)
     G = graph
     print(G)  # print the graph.
 
@@ -135,10 +135,9 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
 
         # get the subgraph.
         color = colors[i]
-        nodes = G.nodes(data=True)
-        nodes = [node for node in nodes if node[1]['color'] == color]
+        nodes = [node for node in G.nodes() if G.nodes.data()[node]['color'] == color]
         subgraphs[cluster] = G.subgraph(nodes)
-        print(subgraphs[cluster])  # print the subgraph.
+        print(f"{subgraphs[cluster]} (color {color})")  # print the subgraph.
 
     # for each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
     # then ask GPT which abstracts are more similar to the summary.
