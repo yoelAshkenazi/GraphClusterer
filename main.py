@@ -2,13 +2,14 @@ import os
 import pandas as pd
 import functions
 import warnings
-# import summarize
+#import summarize
 import evaluate
+import random
 
 warnings.filterwarnings("ignore")
 ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
              "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]
-
+VERSION = ['distances', 'original', 'proportion']
 
 def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,
                    _print_info: bool = False):
@@ -162,90 +163,37 @@ if __name__ == '__main__':
     # create_graphs_all_versions(graph_kwargs, clustering_kwargs, draw_kwargs)
 
     # sizes = {}
-    in_scores = {name: {} for name in ALL_NAMES}
-    out_scores = {name: {} for name in ALL_NAMES}
+    avg_index = {name: {} for name in ALL_NAMES}  # the average index for each dataset.
+    largest_cluster_percentage = {name: {} for name in ALL_NAMES}  # the largest cluster percentage.
+    avg_relevancy = {name: {} for name in ALL_NAMES}  # the average relevancy for each dataset.
+    avg_coherence = {name: {} for name in ALL_NAMES}  # the average coherence for each dataset.
+    avg_consistency = {name: {} for name in ALL_NAMES}  # the average consistency for each dataset.
+    avg_fluency = {name: {} for name in ALL_NAMES}  # the average fluency for each dataset.
     success_rates = {name: {} for name in ALL_NAMES}  # the success rates for each dataset.
     """
     Step 2- summarize the clusters for all versions.
     Step 3- evaluate the results.
     """
-    for name in ALL_NAMES:  # run the pipeline for each name with only the original distances.
-        for version in ['distances', 'original', 'proportion']:
-            print(f"'{name}' with {version}, {proportion if version == 'proportion' else ''},"
+    pairs = [(random.choice(ALL_NAMES), random.choice(VERSION)) for _ in range(1)]
+
+    for name, version in pairs:
+        print(f"'{name}' with {version}, {proportion if version == 'proportion' else ''},"
                   f" {weight if weight != 1 else ''} graph.")
-            a, b, _ = evaluate.evaluate(name, version, proportion, K, weight)
-            in_scores[name][version] = a
-            out_scores[name][version] = b
-            success_rates[name][version] = a / (a + b) if a + b != 0 else 0
-            print(f"Success rate for '{name}' with {version} graph: {success_rates[name][version]}")
-            # run_summarization(name, version, proportion, _save=True, _k=K, _weight=weight)
-    """
-    Step 4- save the results.
-    """
-    # save the results
-    df1 = pd.DataFrame(in_scores)
-    df2 = pd.DataFrame(out_scores)
-    df3 = pd.DataFrame(success_rates)
-    filename = f'Results/k_{K}/'
-    if weight != 1:
-        filename += f'weight_{weight}/'
-    try:
-        df1.to_csv(f'{filename}in_scores.csv')
-        df2.to_csv(f'{filename}out_scores.csv')
-        df3.to_csv(f'{filename}success_rates.csv')
-    except OSError:
-        os.makedirs(filename, exist_ok=True)
-        df1.to_csv(f'{filename}in_scores.csv')
-        df2.to_csv(f'{filename}out_scores.csv')
-        df3.to_csv(f'{filename}success_rates.csv')
+        G = functions.load_graph(name, version, proportion, K, weight)
+        avg_index[name][version], largest_cluster_percentage[name][version] =  functions.evaluate_clusters(G, name)
+        success_rates[name][version] = evaluate.evaluate(name, version, proportion, K, weight)
+        avg_relevancy[name][version], avg_coherence[name][version], avg_consistency[name][version], avg_fluency[name][version] = evaluate.myEval(name, version, proportion, K, weight)
+          
 
-    # print the results.
-    print(f"\nIn scores: {in_scores}\nOut scores: {out_scores}")
+    metrics_dict = {
+    'avg_index': avg_index,
+    'largest_cluster_percentage': largest_cluster_percentage,
+    'avg_relevancy': avg_relevancy,
+    'avg_coherence': avg_coherence,
+    'avg_consistency': avg_consistency,
+    'avg_fluency': avg_fluency,
+    'success_rates': success_rates
+    }
 
-    """
-    Evaluate the clusters for different K values.
-    """
-    # avg_indexes = {name: {} for name in ALL_NAMES}
-    # avg_percentages = {name: {} for name in ALL_NAMES}
-    # for k in [3, 5, 10]:
-    #     print(f"K = {k}")
-    #     for name in ALL_NAMES:
-    #         filename = f'data/processed_graphs/k_{k}/only_distances/{name}.gpickle'
-    #         with open(filename, 'rb') as f:
-    #             G = pkl.load(f)
-    #
-    #         a, b = functions.evaluate_clusters(G, name)
-    #         avg_indexes[name][k] = a
-    #         avg_percentages[name][k] = b
-    #
-    # df = pd.DataFrame(avg_indexes)
-    # df.to_csv('Results/avg_indexes.csv')
-    # df = pd.DataFrame(avg_percentages)
-    # df.to_csv('Results/avg_percentages.csv')
-
-    """
-    Plot the results for different weights.
-    """
-    # indexes = {name: () for name in ALL_NAMES}
-    # percentages = {name: () for name in ALL_NAMES}
-    # for name in ALL_NAMES:
-    #     G = functions.load_graph(name, 'proportion', 0.5, 5)
-    #     a, b, c, d = functions.check_weight_prop(G, -2, 2, 10, name, res, repeat=10)
-    #     indexes[name] = a, c  # index mean and std.
-    #     percentages[name] = b, d  # percentage mean and std.
-    #
-    # functions.plot_props(-2, 2, 10, ALL_NAMES, indexes, percentages)
-    # # save the results.
-    # df1 = pd.DataFrame(indexes)
-    # df2 = pd.DataFrame(percentages)
-    # # change row names to mean and ste.
-    # df1.index = ['mean', 'ste']
-    # df2.index = ['mean', 'ste']
-    # try:
-    #     df1.to_csv(f'Results/avg_distance.csv')
-    #     df2.to_csv(f'Results/percentages.csv')
-    # except OSError:
-    #     os.makedirs('Results', exist_ok=True)
-    #     df1.to_csv(f'Results/avg_distance.csv')
-    #     df2.to_csv(f'Results/percentages.csv')
-    # print("Done.")
+    for (name, version) in pairs:
+        evaluate.plot_bar(name, version, metrics_dict,proportion, K, weight)
