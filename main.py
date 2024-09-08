@@ -89,7 +89,7 @@ def create_graphs_all_versions(_graph_kwargs_: dict, _clustering_kwargs_: dict, 
     _clustering_kwargs_['proportion'] = proportion_
 
     for _name in ALL_NAMES:
-        run_graph_part(_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, print_info)
+            (_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, print_info)
 
     """
     Then run the distances only version.
