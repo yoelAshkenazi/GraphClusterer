@@ -4,6 +4,7 @@ import os
 import shutil  # For deleting files
 from functions import evaluate_clusters, make_graph, cluster_graph
 import pickle as pk
+import pandas as pd
 
 # Define ALL_NAMES (list of dataset names)
 ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", 
@@ -103,7 +104,7 @@ for name in ALL_NAMES:
     # Create a study for this dataset with a pruning strategy (MedianPruner)
     study = optuna.create_study(direction='minimize', pruner=optuna.pruners.MedianPruner())
     
-    # Optimize the parameters for 200 trials for the current dataset
+    # Optimize the parameters for 2000 trials for the current dataset
     study.optimize(lambda trial: objective(trial, name), n_trials=2000)
     
     # Get the best trial
@@ -111,13 +112,7 @@ for name in ALL_NAMES:
     best_weight = best_trial.params['weight']
     best_resolution = best_trial.params['resolution']
     
-    # Store the optimized parameters in the dictionary
-    optimized_params[name] = {'weight': best_weight, 'resolution': best_resolution}
-    
-    print(f"Best trial for {name}: avg_index = {best_trial.value}, "
-          f"weight = {best_weight}, resolution = {best_resolution}")
-    
-    # After finding the best parameters, create and save the optimized graph for this dataset
+    # Create the graph using the best parameters
     best_graph_kwargs = {
         'weight': best_weight,
         'size': 200,
@@ -139,16 +134,34 @@ for name in ALL_NAMES:
     # Cluster the graph with the best resolution and weight
     cluster_graph(best_G, name, **best_clustering_kwargs)
     
+    # Evaluate the clusters for the final best graph
+    avg_index, largest_cluster_percentage = evaluate_clusters(best_G, name)
+    
     # Save the optimized graph directly in 'data/optimized_graphs'
     save_graph(best_G, name, best_weight, best_resolution)
+    
+    # Store the optimized parameters including avg_index and largest_cluster_percentage
+    optimized_params[name] = {
+        'weight': best_weight,
+        'resolution': best_resolution,
+        'avg_index': avg_index,
+        'largest_cluster_percentage': largest_cluster_percentage
+    }
+    
+    print(f"Best trial for {name}: avg_index = {avg_index}, "
+          f"weight = {best_weight}, resolution = {best_resolution}, "
+          f"largest_cluster_percentage = {largest_cluster_percentage}")
 
 # After optimization, print the final table of optimized parameters
-import pandas as pd
 
 # Convert the optimized parameters dictionary to a DataFrame for better display
 df = pd.DataFrame(optimized_params).T  # Transpose to make datasets the index
+df.reset_index(inplace=True)
+df.rename(columns={'index': 'Dataset'}, inplace=True)
+
+# Display the final table
 print("\nFinal Optimized Parameters for Each Dataset:\n")
-print(df)
+print(df[['Dataset', 'weight', 'resolution', 'avg_index', 'largest_cluster_percentage']])
 
 # Optionally, save the table to a CSV file for future reference
-df.to_csv('data/optimized_graphs/optimized_parameters.csv')
+df.to_csv('data/optimized_graphs/optimized_parameters_with_index.csv', index=False)
