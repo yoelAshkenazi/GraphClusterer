@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import pickle as pk
 import random
+import os
 
 
 # load a .pkl file.
@@ -33,7 +34,7 @@ def get_file_path(name):
     return 'data/distances/' + name + '_papers_embeddings.pkl'
 
 
-def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1) -> nx.Graph:
+def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
@@ -41,26 +42,33 @@ def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 
     :param k: the KNN parameter.
     :param proportion: the proportion of the graph.
     :param weight: the weight of the edges.
+    :param optimized: whether to use the optimized version of the graph.
     :return:
     """
 
-    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                               "or 'proportion'."
-
-    graph_path = f"data/processed_graphs/k_{k}/"
-    if weight != 1:
-        graph_path += f"weight_{weight}/"
-    if version == 'distances':
-        graph_path += f"only_distances/{name}.gpickle"
-
-    elif version == 'original':
-        graph_path += f"only_original/{name}.gpickle"
-
+    if optimized:
+        graph_path = None
+        for file in os.listdir('data/optimized_graphs'):
+            if file.startswith(name):
+                graph_path = 'data/optimized_graphs/' + file
+                break
     else:
-        if proportion != 0.5:
-            graph_path += f"{name}_proportion_{proportion}.gpickle"
+        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                                   "or 'proportion'."
+        graph_path = f"data/processed_graphs/k_{k}/"
+        if weight != 1:
+            graph_path += f"weight_{weight}/"
+        if version == 'distances':
+            graph_path += f"only_distances/{name}.gpickle"
+
+        elif version == 'original':
+            graph_path += f"only_original/{name}.gpickle"
+
         else:
-            graph_path += f"{name}.gpickle"
+            if proportion != 0.5:
+                graph_path += f"{name}_proportion_{proportion}.gpickle"
+            else:
+                graph_path += f"{name}.gpickle"
 
     # load the graph.
 

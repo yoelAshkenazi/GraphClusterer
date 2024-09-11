@@ -12,8 +12,6 @@ import networkx as nx
 from typing import List
 import matplotlib.pyplot as plt
 
-
-
 # Define the Evaluation Prompt Template
 EVALUATION_PROMPT_TEMPLATE = """
 You will be given one summary written for an article. Your task is to rate the summary on one metric.
@@ -103,55 +101,11 @@ evaluation_metrics = {
     "Fluency": (FLUENCY_SCORE_CRITERIA, FLUENCY_SCORE_STEPS),
 }
 
-api_key = ('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')
+api_key = (
+    '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')
 organization = 'org-FKQBIvqIr7JF5Jhysdnrxx5z'
 
 client = OpenAI(api_key=api_key, organization=organization)
-
-
-def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1) -> nx.Graph:
-    """
-    Load the graph with the given name.
-    :param name: the name of the graph.
-    :param version: the version of the graph.
-    :param k: the KNN parameter.
-    :param proportion: the proportion of the graph.
-    :param weight: the weight of the edges.
-    :return:
-    """
-
-    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                               "or 'proportion'."
-
-    graph_path = f"data/processed_graphs/k_{k}/"
-    if weight != 1:
-        graph_path += f"weight_{weight}/"
-    if version == 'distances':
-        graph_path += f"only_distances/{name}.gpickle"
-
-    elif version == 'original':
-        graph_path += f"only_original/{name}.gpickle"
-
-    else:
-        if proportion != 0.5:
-            graph_path += f"{name}_proportion_{proportion}.gpickle"
-        else:
-            graph_path += f"{name}.gpickle"
-
-    # load the graph.
-
-    with open(graph_path, 'rb') as f:
-        graph = pkl.load(f)
-
-    # filter the graph in order to remove the nan nodes.
-    nodes = graph.nodes(data=True)
-    s = len(nodes)
-    nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(
-        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
-    graph = graph.subgraph(nodes)
-
-    return graph
 
 
 def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
@@ -177,10 +131,64 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
 
     return subgraphs
 
+
+def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
+    """
+    Load the graph with the given name.
+    :param name: the name of the graph.
+    :param version: the version of the graph.
+    :param k: the KNN parameter.
+    :param proportion: the proportion of the graph.
+    :param weight: the weight of the edges.
+    :param optimized: whether to use the optimized version of the graph.
+    :return:
+    """
+
+    if optimized:
+        graph_path = None
+        for file in os.listdir('data/optimized_graphs'):
+            if file.startswith(name):
+                graph_path = 'data/optimized_graphs/' + file
+                break
+    else:
+        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                                   "or 'proportion'."
+        graph_path = f"data/processed_graphs/k_{k}/"
+        if weight != 1:
+            graph_path += f"weight_{weight}/"
+        if version == 'distances':
+            graph_path += f"only_distances/{name}.gpickle"
+
+        elif version == 'original':
+            graph_path += f"only_original/{name}.gpickle"
+
+        else:
+            if proportion != 0.5:
+                graph_path += f"{name}_proportion_{proportion}.gpickle"
+            else:
+                graph_path += f"{name}.gpickle"
+
+    # load the graph.
+
+    with open(graph_path, 'rb') as f:
+        graph = pkl.load(f)
+
+    # filter the graph in order to remove the nan nodes.
+    nodes = graph.nodes(data=True)
+    s = len(nodes)
+    nodes = [node for node, data in nodes if not pd.isna(node)]
+    print(
+        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+    graph = graph.subgraph(nodes)
+
+    return graph
+
+
 ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
              "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]
 
-def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1):
+
+def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False):
     """
     Load the cluster summary for the given name and calculate average scores for relevancy, coherence, consistency,
     and fluency.
@@ -189,29 +197,35 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
     :param proportion: the proportion of the graph to use.
     :param k: The KNN parameter.
     :param weight: the weight of the edges.
+    :param optimized: whether to use the optimized version of the graph.
     :return: Averages of the averages for relevancy, coherence, consistency, and fluency.
     """
-    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', 'proportion'."
-    
-    # Start building the path
-    summary_path = f"Summaries/k_{k}/"
-    if weight != 1:
-        summary_path += f"weight_{weight}/"
-    if version == 'distances':
-        summary_path += f"{name}_only_distances/"
-
-    elif version == 'original':
-        summary_path += f"{name}_only_original/"
-
+    if optimized:
+        summary_path = f"Summaries/optimized/"
+        for file in os.listdir('Summaries/optimized'):
+            if file.startswith(name):
+                summary_path += file
+                break
     else:
-        if proportion != 0.5:
-            summary_path += f"{name}_proportion_{proportion}/"
-        else:
-            summary_path += f"{name}/"
+        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                                   "or 'proportion'."
+        summary_path = f"Summaries/k_{k}/"
+        if weight != 1:
+            summary_path += f"weight_{weight}/"
+        if version == 'distances':
+            summary_path += f"{name}_only_distances/"
 
+        elif version == 'original':
+            summary_path += f"{name}_only_original/"
+
+        else:
+            if proportion != 0.5:
+                summary_path += f"{name}_proportion_{proportion}/"
+            else:
+                summary_path += f"{name}/"
 
     # Load the graph
-    graph = load_graph(name, version, proportion, k, weight)
+    graph = load_graph(name, version, proportion, k, weight, optimized)
     G = graph
     print(G)  # Print the graph.
 
@@ -296,13 +310,16 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
                     cluster_consistency_scores.append(score)
                 elif eval_type == "Fluency":
                     cluster_fluency_scores.append(score)
-        
-        # Calculate average for each cluster.
-        avg_cluster_relevancy = sum(cluster_relevancy_scores) / len(cluster_relevancy_scores) if len(cluster_relevancy_scores) > 0 else 0
-        avg_cluster_coherence = sum(cluster_coherence_scores) / len(cluster_coherence_scores) if len(cluster_coherence_scores) > 0 else 0
-        avg_cluster_consistency = sum(cluster_consistency_scores) / len(cluster_consistency_scores) if len(cluster_consistency_scores) > 0 else 0
-        avg_cluster_fluency = sum(cluster_fluency_scores) / len(cluster_fluency_scores) if len(cluster_fluency_scores) > 0 else 0
 
+        # Calculate average for each cluster.
+        avg_cluster_relevancy = sum(cluster_relevancy_scores) / len(cluster_relevancy_scores) if len(
+            cluster_relevancy_scores) > 0 else 0
+        avg_cluster_coherence = sum(cluster_coherence_scores) / len(cluster_coherence_scores) if len(
+            cluster_coherence_scores) > 0 else 0
+        avg_cluster_consistency = sum(cluster_consistency_scores) / len(cluster_consistency_scores) if len(
+            cluster_consistency_scores) > 0 else 0
+        avg_cluster_fluency = sum(cluster_fluency_scores) / len(cluster_fluency_scores) if len(
+            cluster_fluency_scores) > 0 else 0
 
         # Store these averages to later calculate the dataset-level averages.
         all_relevancy_scores.append(avg_cluster_relevancy)
@@ -310,16 +327,14 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
         all_consistency_scores.append(avg_cluster_consistency)
         all_fluency_scores.append(avg_cluster_fluency)
 
-
-
     # Calculate the overall averages across all clusters.
     avg_relevancy = sum(all_relevancy_scores) / len(all_relevancy_scores) if len(all_relevancy_scores) > 0 else 0
     avg_coherence = sum(all_coherence_scores) / len(all_coherence_scores) if len(all_coherence_scores) > 0 else 0
-    avg_consistency = sum(all_consistency_scores) / len(all_consistency_scores) if len(all_consistency_scores) > 0 else 0
+    avg_consistency = sum(all_consistency_scores) / len(all_consistency_scores) if len(
+        all_consistency_scores) > 0 else 0
     avg_fluency = sum(all_fluency_scores) / len(all_fluency_scores) if len(all_fluency_scores) > 0 else 0
 
-
-        # print the scores
+    # print the scores
     print("coherence: ", avg_relevancy)
     print("consistency: ", avg_coherence)
     print("fluency: ", avg_consistency)
@@ -328,7 +343,8 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
 
     return avg_relevancy, avg_coherence, avg_consistency, avg_fluency
 
-def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1):
+
+def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False):
     """
     Load the cluster summary for the given name.
     :param name: the name of the dataset.
@@ -336,27 +352,35 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
     :param proportion: the proportion of the graph to use.
     :param k: The KNN parameter.
     :param weight: the weight of the edges.
+    :param optimized: whether to use the optimized version of the graph.
     :return:
     """
-    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                               "or 'proportion'."
-    summary_path = f"Summaries/k_{k}/"
-    if weight != 1:
-        summary_path += f"weight_{weight}/"
-    if version == 'distances':
-        summary_path += f"{name}_only_distances/"
-
-    elif version == 'original':
-        summary_path += f"{name}_only_original/"
-
+    if optimized:
+        summary_path = f"Summaries/optimized/"
+        for file in os.listdir('Summaries/optimized'):
+            if file.startswith(name):
+                summary_path += file
+                break
     else:
-        if proportion != 0.5:
-            summary_path += f"{name}_proportion_{proportion}/"
+        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                                   "or 'proportion'."
+        summary_path = f"Summaries/k_{k}/"
+        if weight != 1:
+            summary_path += f"weight_{weight}/"
+        if version == 'distances':
+            summary_path += f"{name}_only_distances/"
+
+        elif version == 'original':
+            summary_path += f"{name}_only_original/"
+
         else:
-            summary_path += f"{name}/"
+            if proportion != 0.5:
+                summary_path += f"{name}_proportion_{proportion}/"
+            else:
+                summary_path += f"{name}/"
 
     # load the graph.
-    graph = load_graph(name, version, proportion, k, weight)
+    graph = load_graph(name, version, proportion, k, weight, optimized)
     G = graph
     print(G)  # print the graph.
 
@@ -468,7 +492,9 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
 
     return total_in_score / (total_in_score + total_out_score) if total_in_score + total_out_score != 0 else 0
 
-def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.5, k: int = 5, weight: float = 1):
+
+def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.5, k: int = 5, weight: float = 1,
+             optimized: bool = False):
     """
     Create and save a bar plot for the given metrics of a specific name and version.
 
@@ -478,18 +504,19 @@ def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.
     :param proportion: the proportion of the graph to use.
     :param k: The KNN parameter.
     :param weight: the weight of the edges.
+    :param optimized: whether to use the optimized version of the graph.
     :return:
     
     """
     # Retrieve metrics for the specific name and version
     values = [
-        metrics_dict['avg_index'][name][version],                    # Average Index
-        metrics_dict['largest_cluster_percentage'][name][version],   # Largest Cluster Percentage
-        metrics_dict['avg_relevancy'][name][version],                # Average Relevancy
-        metrics_dict['avg_coherence'][name][version],                # Average Coherence
-        metrics_dict['avg_consistency'][name][version],              # Average Consistency
-        metrics_dict['avg_fluency'][name][version],                  # Average Fluency
-        metrics_dict['success_rates'][name][version]                 # Success Rate
+        metrics_dict['avg_index'][name][version],  # Average Index
+        metrics_dict['largest_cluster_percentage'][name][version],  # Largest Cluster Percentage
+        metrics_dict['avg_relevancy'][name][version],  # Average Relevancy
+        metrics_dict['avg_coherence'][name][version],  # Average Coherence
+        metrics_dict['avg_consistency'][name][version],  # Average Consistency
+        metrics_dict['avg_fluency'][name][version],  # Average Fluency
+        metrics_dict['success_rates'][name][version]  # Success Rate
     ]
 
     # Define the labels for the x-axis with line breaks after each word
@@ -532,10 +559,12 @@ def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.
         )
 
     # Adjust layout to prevent clipping of labels
-    
 
     plt.tight_layout()
-    
+    plt.show()
+
+    # Save the plot to a file, need to add a filter if its an optimized graph.
+    """
     directory = f"Results/plots/k_{k}/weight_{weight}/"
     plot_file_path = f"{name}"
     if version == 'distances':
@@ -550,5 +579,4 @@ def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.
     except OSError:
         os.makedirs(directory)
         plt.savefig(directory + plot_file_path)
-    # Show the plot
-    plt.show()
+    """
