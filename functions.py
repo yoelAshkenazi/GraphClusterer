@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import pickle as pk
 import random
+import os
+import functions
 
 
 # load a .pkl file.
@@ -33,7 +35,7 @@ def get_file_path(name):
     return 'data/distances/' + name + '_papers_embeddings.pkl'
 
 
-def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1) -> nx.Graph:
+def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False, wikipedia: bool = False) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
@@ -41,26 +43,38 @@ def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 
     :param k: the KNN parameter.
     :param proportion: the proportion of the graph.
     :param weight: the weight of the edges.
+    :param optimized: whether to use the optimized version of the graph.
     :return:
     """
-
-    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                               "or 'proportion'."
-
-    graph_path = f"data/processed_graphs/k_{k}/"
-    if weight != 1:
-        graph_path += f"weight_{weight}/"
-    if version == 'distances':
-        graph_path += f"only_distances/{name}.gpickle"
-
-    elif version == 'original':
-        graph_path += f"only_original/{name}.gpickle"
-
+    if wikipedia:
+        graph_path = None
+        for file in os.listdir('data/wikipedia_graphs'):
+            if file.startswith(name):
+                graph_path = 'data/wikipedia_graphs/' + file
+                break
+    if optimized:
+        graph_path = None
+        for file in os.listdir('data/optimized_graphs'):
+            if file.startswith(name):
+                graph_path = 'data/optimized_graphs/' + file
+                break
     else:
-        if proportion != 0.5:
-            graph_path += f"{name}_proportion_{proportion}.gpickle"
+        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                                   "or 'proportion'."
+        graph_path = f"data/processed_graphs/k_{k}/"
+        if weight != 1:
+            graph_path += f"weight_{weight}/"
+        if version == 'distances':
+            graph_path += f"only_distances/{name}.gpickle"
+
+        elif version == 'original':
+            graph_path += f"only_original/{name}.gpickle"
+
         else:
-            graph_path += f"{name}.gpickle"
+            if proportion != 0.5:
+                graph_path += f"{name}_proportion_{proportion}.gpickle"
+            else:
+                graph_path += f"{name}.gpickle"
 
     # load the graph.
 
@@ -90,7 +104,7 @@ def make_graph(name, **kwargs):
     ------------
     name = '3D printing'
 
-    graph_kwargs = {'A': 1.0, 'size': 200, 'color': '#1f78b4', 'distance_threshold': 0.5}
+    graph_kwargs = {'A': 1.0, 'size': 200, 'color': '#1f78b4', 'distance_threshold': 0.5, distance_matrix: dists}
 
     G = functions.make_graph('3D printing', **graph_kwargs)
 
@@ -99,7 +113,8 @@ def make_graph(name, **kwargs):
     # load the embeddings.
     file_path = get_file_path(name)
     embeddings = load_pkl(file_path)
-    dists = embeddings['Distances']  # distances between papers.
+    dists = kwargs.get('distance_matrix', embeddings['Distances'])
+    # distances between papers.
     paper_ids = embeddings['IDs']  # paper ids.
 
     # set the parameters.
@@ -174,17 +189,7 @@ def draw_graph(G, name, **kwargs):
     :param G: the graph to draw.
     :param name: the name of the graph.
     :return:
-
-    ------------
-    Example:
-    ------------
-    name = '3D printing'
-
-    draw_kwargs = {'shown_percentage': 0.65, 'figsize': 25, 'save': True, 'method': 'louvain'}
-    functions.draw_graph(G, **draw_kwargs)
-    this will draw the graph for the '3D printing' embeddings, with the given parameters.
     """
-
     rate = kwargs['shown_percentage'] if 'shown_percentage' in kwargs else 0.2
     figsize = kwargs['figsize'] if 'figsize' in kwargs else 20
     save = kwargs['save'] if 'save' in kwargs else False
@@ -200,29 +205,30 @@ def draw_graph(G, name, **kwargs):
     vertices = random.sample(list(G.nodes), int(rate * len(G.nodes())))
     G = G.subgraph(vertices)
 
-    blue_weights = [G[u][v]['weight'] for u, v in G.edges() if G[u][v]['color'] == 'blue']  # weights for blue edges.
-    red_weights = [15 * G[u][v]['weight'] for u, v in G.edges() if G[u][v]['color'] == 'red']  # weights for red edges.
+    blue_weights = [G[u][v].get('weight', 1) for u, v in G.edges() if G[u][v]['color'] == 'blue']  # weights for blue edges.
+    red_weights = [15 * G[u][v].get('weight', 1) if G[u][v].get('weight', 1) != 1 else 1 for u, v in G.edges() if G[u][v]['color'] == 'red']  # weights for red edges.
     # draw vertices with given shapes and sizes.
     shapes = nx.get_node_attributes(G, 'shape').values()
     # draw the vertices according to shapes.
     for shape in shapes:
         # get a list of nodes with the same shape.
         vertices_ = [v for v in G.nodes() if
-                     shape == G.nodes.data()[v]['shape']]
+                    shape == G.nodes()[v]['shape']]
         # get a list of the sizes of said nodes.
-        vertex_sizes = [G.nodes.data()[node]['size'] for node in vertices_]
+        vertex_sizes = [G.nodes()[node].get('size', 500) for node in vertices_]
         # get a list of the colors of said nodes.
-        vertex_colors = [G.nodes.data()[node]['color'] for node in vertices_]
+        vertex_colors = [G.nodes[node]['color'] for node in vertices_]
         nx.draw_networkx_nodes(G, pos, nodelist=vertices_, node_size=vertex_sizes,
-                               node_shape=shape, node_color=vertex_colors, alpha=0.8,
-                               linewidths=1.5, edgecolors='black')  # always draw a black border.
+                            node_shape=shape, node_color=vertex_colors, alpha=0.8,
+                            linewidths=1.5, edgecolors='black')  # always draw a black border.
 
     # draw the blue edges.
     nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'blue'],
-                           edge_color='blue', width=blue_weights, alpha=0.75)
+                        edge_color='blue', width=blue_weights, alpha=0.75)
     # draw the red edges. (with a weight of 10 times the original weight)
     nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'red'],
-                           edge_color='red', width=red_weights, alpha=0.75)
+                        edge_color='red', width=red_weights, alpha=0.75)
+    plt.show()
 
     if save:
         filename = f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}'
@@ -472,3 +478,4 @@ def plot_props(start, end, step, names: list, indexes: dict, percentages: dict):
     plt.grid()
     plt.savefig('Figures/weight_proportions_largest_perc.png')
     plt.show()
+
