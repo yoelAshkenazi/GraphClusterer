@@ -104,6 +104,57 @@ evaluation_metrics = {
 # Authenticate with Replicate
 client = replicate.Client(api_token="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")
 
+def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
+    """
+    Load the graph with the given name.
+    :param name: the name of the graph.
+    :param version: the version of the graph.
+    :param k: the KNN parameter.
+    :param proportion: the proportion of the graph.
+    :param weight: the weight of the edges.
+    :param optimized: whether to use the optimized version of the graph.
+    :return:
+    """
+
+    if optimized:
+        graph_path = None
+        for file in os.listdir('data/optimized_graphs'):
+            if file.startswith(name):
+                graph_path = 'data/optimized_graphs/' + file
+                break
+    else:
+        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                                   "or 'proportion'."
+        graph_path = f"data/processed_graphs/k_{k}/"
+        if weight != 1:
+            graph_path += f"weight_{weight}/"
+        if version == 'distances':
+            graph_path += f"only_distances/{name}.gpickle"
+
+        elif version == 'original':
+            graph_path += f"only_original/{name}.gpickle"
+
+        else:
+            if proportion != 0.5:
+                graph_path += f"{name}_proportion_{proportion}.gpickle"
+            else:
+                graph_path += f"{name}.gpickle"
+
+    # load the graph.
+
+    with open(graph_path, 'rb') as f:
+        graph = pkl.load(f)
+
+    # filter the graph in order to remove the nan nodes.
+    nodes = graph.nodes(data=True)
+    s = len(nodes)
+    nodes = [node for node, data in nodes if not pd.isna(node)]
+    print(
+        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+    graph = graph.subgraph(nodes)
+
+    return graph
+
 
 def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False):
     """
@@ -204,22 +255,21 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
                     summary=summary,
                 )
 
-                # Call Llama 2 70B via Replicate to evaluate the metric
-                response = client.run(
-                    "replicate/llama-2-70b",  # Replace with the correct model path on Replicate
-                    input={
-                        "prompt": prompt,
-                        "max_tokens": 100,
-                        "temperature": 0
-                    }
+                # Call GPT-3.5 Turbo to evaluate the metric
+                response = client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=100,
+                    n=1,
+                    stop=None,
+                    temperature=0
                 )
-                score = response['text'].strip()
-
-                # Process and store the score in the corresponding list
+                score = response.choices[0].message.content
                 if score[-1] == '.':
                     score = score[:-1]
                 score = int(score[-1])
 
+                # Store the score in the corresponding list
                 if eval_type == "Relevance":
                     cluster_relevancy_scores.append(score)
                 elif eval_type == "Coherence":
@@ -253,10 +303,10 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
     avg_fluency = sum(all_fluency_scores) / len(all_fluency_scores) if len(all_fluency_scores) > 0 else 0
 
     # print the scores
-    print("Relevance: ", avg_relevancy)
-    print("Coherence: ", avg_coherence)
-    print("Consistency: ", avg_consistency)
-    print("Fluency: ", avg_fluency)
+    print("coherence: ", avg_relevancy)
+    print("consistency: ", avg_coherence)
+    print("fluency: ", avg_consistency)
+    print("relevancy: ", avg_fluency)
     print('-' * 50)
 
     return avg_relevancy, avg_coherence, avg_consistency, avg_fluency
@@ -324,7 +374,7 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
         print(f"{subgraphs[cluster]} (color {color})")  # print the subgraph.
 
     # for each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
-    # then ask Llama 2 70B which abstracts are more similar to the summary.
+    # then ask GPT which abstracts are more similar to the summary.
 
     data = pd.read_csv(f"data/graphs/{name}_papers.csv")[['id', 'abstract']]  # load the data.
     evaluations = {}
@@ -352,40 +402,50 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
         except ValueError:
             pass  # if there are not enough abstracts, sample all of them.
 
-        # ask Llama 2 70B which abstracts are more similar to the summary.
+        # ask GPT which abstracts are more similar to the summary.
         for i in range(min(len(cluster_abstracts), len(outside_abstracts))):
-            # ask Llama 2 70B which abstract is more similar to the summary.
-            response = client.run(
-                "replicate/llama-2-70b",  # Replace with the correct model path on Replicate
-                input={
-                    "prompt": f"Answer using only a number between 1 to 100: "
-                              f"How consistent is the following summary with the abstract?\n"
-                              f"Summary: {summary}\n"
-                              f"Abstract: {cluster_abstracts[i]}\n",
-                    "max_tokens": 100,
-                    "temperature": 0.5
-                }
+            # ask GPT which abstract is more similar to the summary.
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": f"Answer using only a number between 1 to 100: "
+                                   f"How consistent is the following summary with the abstract?\n"
+                                   f"Summary: {summary}\n"
+                                   f"Abstract: {cluster_abstracts[i]}\n"
+                    }
+                ],
+                max_tokens=100,
+                n=1,
+                stop=None,
+                temperature=0.5
             )
 
-            score_in = response['output'].strip()
+            score_in = response.choices[0].message.content
             # get the score.
             score_in = int(score_in.split('\n')[-1].split(':')[-1])
             total_in_score += score_in
 
-            # ask Llama 2 70B which abstract is more similar to the summary.
-            response = client.run(
-                "replicate/llama-2-70b",  # Replace with the correct model path on Replicate
-                input={
-                    "prompt": f"Answer using only a number between 1 to 100: "
-                              f"How consistent is the following summary with the abstract?\n"
-                              f"Summary: {summary}\n"
-                              f"Abstract: {outside_abstracts[i]}\n",
-                    "max_tokens": 100,
-                    "temperature": 0.5
-                }
+            # ask GPT which abstract is more similar to the summary.
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": f"Answer using only a number between 1 to 100:"
+                                   f"How consistent is the following summary with the abstract?\n"
+                                   f"Summary: {summary}\n"
+                                   f"Abstract: {outside_abstracts[i]}\n"
+                    }
+                ],
+                max_tokens=100,
+                n=1,
+                stop=None,
+                temperature=0.5
             )
 
-            score_out = response['output'].strip()
+            score_out = response.choices[0].message.content
             # get the score.
             score_out = int(score_out.split('\n')[-1].split(':')[-1])
 
@@ -399,169 +459,4 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
               f"\nScore in: {total_in_score}\nScore out: {total_out_score}\n{'-' * 50}")
 
     return total_in_score / (total_in_score + total_out_score) if total_in_score + total_out_score != 0 else 0
-
-
-def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
-    """
-    Partition the graph into subgraphs according to the community colors.
-    :param graph: the graph.
-    :return:
-    """
-    # first we filter articles by vertex type.
-    articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
-    articles_graph = graph.subgraph(articles)
-    graph = articles_graph
-
-    # second filter divides the graph by colors.
-    nodes = graph.nodes(data=True)
-    colors = set([node[1]['color'] for node in nodes])
-    subgraphs = []
-    for i, color in enumerate(colors):  # filter by colors.
-        nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
-
-        subgraph = graph.subgraph(nodes)
-        subgraphs.append(subgraph)
-
-    return subgraphs
-
-
-def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
-    """
-    Load the graph with the given name.
-    :param name: the name of the graph.
-    :param version: the version of the graph.
-    :param k: the KNN parameter.
-    :param proportion: the proportion of the graph.
-    :param weight: the weight of the edges.
-    :param optimized: whether to use the optimized version of the graph.
-    :return:
-    """
-
-    if optimized:
-        graph_path = None
-        for file in os.listdir('data/optimized_graphs'):
-            if file.startswith(name):
-                graph_path = 'data/optimized_graphs/' + file
-                break
-    else:
-        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                                   "or 'proportion'."
-        graph_path = f"data/processed_graphs/k_{k}/"
-        if weight != 1:
-            graph_path += f"weight_{weight}/"
-        if version == 'distances':
-            graph_path += f"only_distances/{name}.gpickle"
-
-        elif version == 'original':
-            graph_path += f"only_original/{name}.gpickle"
-
-        else:
-            if proportion != 0.5:
-                graph_path += f"{name}_proportion_{proportion}.gpickle"
-            else:
-                graph_path += f"{name}.gpickle"
-
-    # load the graph.
-
-    with open(graph_path, 'rb') as f:
-        graph = pkl.load(f)
-
-    # filter the graph in order to remove the nan nodes.
-    nodes = graph.nodes(data=True)
-    s = len(nodes)
-    nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(
-        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
-    graph = graph.subgraph(nodes)
-
-    return graph
-
-
-def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.5, k: int = 5, weight: float = 1,
-             optimized: bool = False):
-    """
-    Create and save a bar plot for the given metrics of a specific name and version.
-
-    :param name: the name of the dataset.
-    :param version: the version of the graph.
-    :param metrics_dict: Dictionary containing metrics for each (name, version) combination.
-    :param proportion: the proportion of the graph to use.
-    :param k: The KNN parameter.
-    :param weight: the weight of the edges.
-    :param optimized: whether to use the optimized version of the graph.
-    :return:
-    
-    """
-    # Retrieve metrics for the specific name and version
-    values = [
-        metrics_dict['avg_index'][name][version],  # Average Index
-        metrics_dict['largest_cluster_percentage'][name][version],  # Largest Cluster Percentage
-        metrics_dict['avg_relevancy'][name][version],  # Average Relevancy
-        metrics_dict['avg_coherence'][name][version],  # Average Coherence
-        metrics_dict['avg_consistency'][name][version],  # Average Consistency
-        metrics_dict['avg_fluency'][name][version],  # Average Fluency
-        metrics_dict['success_rates'][name][version]  # Success Rate
-    ]
-
-    # Define the labels for the x-axis with line breaks after each word
-    x_labels = [
-        "Average\nIndex",
-        "Largest\nCluster\nPercentage",
-        "Average\nRelevancy",
-        "Average\nCoherence",
-        "Average\nConsistency",
-        "Average\nFluency",
-        "Success\nRate"
-    ]
-
-    # Create the bar plot
-    plt.figure(figsize=(10, 6))  # Set the size of the figure
-    bars = plt.bar(x_labels, values, color='skyblue', edgecolor='black')
-
-    # Set y-axis limits and labels
-    plt.ylim(0, 5.5)  # Adjust according to the expected range of your data
-    plt.xlabel("Evaluation Metrics", fontsize=14)
-    plt.ylabel("Score", fontsize=14)
-
-    # Set the title of the plot
-    plt.title(f"Results for '{name}' with {version} graph", fontsize=16, fontweight='bold')
-
-    # Add gridlines for better readability
-    plt.grid(axis='y', linestyle='--', alpha=0.7)
-
-    # Display the value just above the top of each bar
-    for bar in bars:
-        yval = bar.get_height()
-        plt.text(
-            bar.get_x() + bar.get_width() / 2,
-            yval + 0.05,  # Adjust this value to position the text above the bar top
-            f"{yval:.2f}",
-            ha='center',
-            va='bottom',  # Align text to the bottom of the text (above the bar height)
-            fontsize=12,
-            fontweight='bold'
-        )
-
-    # Adjust layout to prevent clipping of labels
-
-    plt.tight_layout()
-    plt.show()
-
-    # Save the plot to a file, need to add a filter if its an optimized graph.
-    """
-    directory = f"Results/plots/k_{k}/weight_{weight}/"
-    plot_file_path = f"{name}"
-    if version == 'distances':
-        plot_file_path += '_only_distances'
-    elif version == 'original':
-        plot_file_path += '_only_original'
-    else:
-        if proportion != 0.5:
-            plot_file_path += f'_proportion_{proportion}'
-    try:
-        plt.savefig(directory + plot_file_path)
-    except OSError:
-        os.makedirs(directory)
-        plt.savefig(directory + plot_file_path)
-    """
 
