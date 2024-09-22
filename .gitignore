@@ -1,3 +1,9 @@
 
 # Do not include the PRIMERA_model in the git repository
 PRIMERA_model
+
+venv
+
+myenv
+
+optuna

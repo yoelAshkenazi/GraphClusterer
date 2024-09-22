@@ -138,13 +138,13 @@ def evaluate_and_plot(_proportion: float, _K: int, _weight: float, optimized: bo
     :param num_to_print: the number of graphs to print.
     :return:
     """
-    avg_index = {name: {} for name in ALL_NAMES}  # the average index for each dataset.
-    largest_cluster_percentage = {name: {} for name in ALL_NAMES}  # the largest cluster percentage.
-    avg_relevancy = {name: {} for name in ALL_NAMES}  # the average relevancy for each dataset.
-    avg_coherence = {name: {} for name in ALL_NAMES}  # the average coherence for each dataset.
-    avg_consistency = {name: {} for name in ALL_NAMES}  # the average consistency for each dataset.
-    avg_fluency = {name: {} for name in ALL_NAMES}  # the average fluency for each dataset.
-    success_rates = {name: {} for name in ALL_NAMES}  # the success rates for each dataset.
+    avg_index = {_name: {} for _name in ALL_NAMES}  # the average index for each dataset.
+    largest_cluster_percentage = {_name: {} for _name in ALL_NAMES}  # the largest cluster percentage.
+    avg_relevancy = {_name: {} for _name in ALL_NAMES}  # the average relevancy for each dataset.
+    avg_coherence = {_name: {} for _name in ALL_NAMES}  # the average coherence for each dataset.
+    avg_consistency = {_name: {} for _name in ALL_NAMES}  # the average consistency for each dataset.
+    avg_fluency = {_name: {} for _name in ALL_NAMES}  # the average fluency for each dataset.
+    success_rates = {_name: {} for _name in ALL_NAMES}  # the success rates for each dataset.
 
     pairs = [(random.choice(ALL_NAMES), random.choice(VERSION)) for _ in range(num_to_print)]
 
@@ -154,8 +154,8 @@ def evaluate_and_plot(_proportion: float, _K: int, _weight: float, optimized: bo
         G = functions.load_graph(_name, _version, _proportion, _K, _weight)
         avg_index[_name][_version], largest_cluster_percentage[_name][_version] = functions.evaluate_clusters(G, _name)
         success_rates[_name][_version] = evaluate.evaluate(_name, _version, _proportion, _K, _weight)
-        avg_relevancy[_name][_version], avg_coherence[_name][_version], avg_consistency[_name][_version], avg_fluency[_name][
-            _version] = evaluate.myEval(_name, _version, _proportion, _K, _weight)
+        avg_relevancy[_name][_version], avg_coherence[_name][_version], avg_consistency[_name][_version], avg_fluency[
+            _name][_version] = evaluate.myEval(_name, _version, _proportion, _K, _weight)
 
     metrics_dict = {
         'avg_index': avg_index,

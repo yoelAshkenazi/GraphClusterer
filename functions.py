@@ -98,7 +98,7 @@ def make_graph(name, **kwargs):
     ------------
     name = '3D printing'
 
-    graph_kwargs = {'A': 1.0, 'size': 200, 'color': '#1f78b4', 'distance_threshold': 0.5}
+    graph_kwargs = {'A': 1.0, 'size': 200, 'color': '#1f78b4', 'distance_threshold': 0.5, distance_matrix: dists}
 
     G = functions.make_graph('3D printing', **graph_kwargs)
 
@@ -107,7 +107,8 @@ def make_graph(name, **kwargs):
     # load the embeddings.
     file_path = get_file_path(name)
     embeddings = load_pkl(file_path)
-    dists = embeddings['Distances']  # distances between papers.
+    dists = kwargs.get('distance_matrix', embeddings['Distances'])
+    # distances between papers.
     paper_ids = embeddings['IDs']  # paper ids.
 
     # set the parameters.
