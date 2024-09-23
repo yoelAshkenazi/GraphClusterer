@@ -1,0 +1,1 @@
+Thermodynamic analysis of critical regimes (regimes with thermal flow chocking phenomena at the exit) of dual-mode scramjet combustor operation has been performed using a quasi-one-dimensional flow scheme on an example of a heat supply to the gas flow in a duct with supersonic velocity at the entrance..
