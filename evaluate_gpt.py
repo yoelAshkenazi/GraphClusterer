@@ -1,11 +1,11 @@
 """
 Yoel Ashkenazi
-This file is responsible for evaluating the summarization results using Llama 2 70B via the Replicate API.
+This file is responsible for evaluating the summarization results using GPT-4 api.
 """
 import os
 import pandas as pd
 import numpy as np
-import replicate
+from openai import OpenAI
 import random
 import pickle as pkl
 import networkx as nx
@@ -101,8 +101,91 @@ evaluation_metrics = {
     "Fluency": (FLUENCY_SCORE_CRITERIA, FLUENCY_SCORE_STEPS),
 }
 
-# Authenticate with Replicate
-client = replicate.Client(api_token="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")
+api_key = (
+    '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')
+organization = 'org-FKQBIvqIr7JF5Jhysdnrxx5z'
+
+client = OpenAI(api_key=api_key, organization=organization)
+
+
+def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
+    """
+    Partition the graph into subgraphs according to the community colors.
+    :param graph: the graph.
+    :return:
+    """
+    # first we filter articles by vertex type.
+    articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
+    articles_graph = graph.subgraph(articles)
+    graph = articles_graph
+
+    # second filter divides the graph by colors.
+    nodes = graph.nodes(data=True)
+    colors = set([node[1]['color'] for node in nodes])
+    subgraphs = []
+    for i, color in enumerate(colors):  # filter by colors.
+        nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
+
+        subgraph = graph.subgraph(nodes)
+        subgraphs.append(subgraph)
+
+    return subgraphs
+
+
+def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
+    """
+    Load the graph with the given name.
+    :param name: the name of the graph.
+    :param version: the version of the graph.
+    :param k: the KNN parameter.
+    :param proportion: the proportion of the graph.
+    :param weight: the weight of the edges.
+    :param optimized: whether to use the optimized version of the graph.
+    :return:
+    """
+
+    if optimized:
+        graph_path = None
+        for file in os.listdir('data/optimized_graphs'):
+            if file.startswith(name):
+                graph_path = 'data/optimized_graphs/' + file
+                break
+    else:
+        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
+                                                                   "or 'proportion'."
+        graph_path = f"data/processed_graphs/k_{k}/"
+        if weight != 1:
+            graph_path += f"weight_{weight}/"
+        if version == 'distances':
+            graph_path += f"only_distances/{name}.gpickle"
+
+        elif version == 'original':
+            graph_path += f"only_original/{name}.gpickle"
+
+        else:
+            if proportion != 0.5:
+                graph_path += f"{name}_proportion_{proportion}.gpickle"
+            else:
+                graph_path += f"{name}.gpickle"
+
+    # load the graph.
+
+    with open(graph_path, 'rb') as f:
+        graph = pkl.load(f)
+
+    # filter the graph in order to remove the nan nodes.
+    nodes = graph.nodes(data=True)
+    s = len(nodes)
+    nodes = [node for node, data in nodes if not pd.isna(node)]
+    print(
+        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+    graph = graph.subgraph(nodes)
+
+    return graph
+
+
+ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
+             "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]
 
 
 def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False):
@@ -204,22 +287,21 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
                     summary=summary,
                 )
 
-                # Call Llama 2 70B via Replicate to evaluate the metric
-                response = client.run(
-                    "replicate/llama-2-70b",  # Replace with the correct model path on Replicate
-                    input={
-                        "prompt": prompt,
-                        "max_tokens": 100,
-                        "temperature": 0
-                    }
+                # Call GPT-3.5 Turbo to evaluate the metric
+                response = client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=100,
+                    n=1,
+                    stop=None,
+                    temperature=0
                 )
-                score = response['text'].strip()
-
-                # Process and store the score in the corresponding list
+                score = response.choices[0].message.content
                 if score[-1] == '.':
                     score = score[:-1]
                 score = int(score[-1])
 
+                # Store the score in the corresponding list
                 if eval_type == "Relevance":
                     cluster_relevancy_scores.append(score)
                 elif eval_type == "Coherence":
@@ -253,10 +335,10 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
     avg_fluency = sum(all_fluency_scores) / len(all_fluency_scores) if len(all_fluency_scores) > 0 else 0
 
     # print the scores
-    print("Relevance: ", avg_relevancy)
-    print("Coherence: ", avg_coherence)
-    print("Consistency: ", avg_consistency)
-    print("Fluency: ", avg_fluency)
+    print("coherence: ", avg_relevancy)
+    print("consistency: ", avg_coherence)
+    print("fluency: ", avg_consistency)
+    print("relevancy: ", avg_fluency)
     print('-' * 50)
 
     return avg_relevancy, avg_coherence, avg_consistency, avg_fluency
@@ -324,7 +406,7 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
         print(f"{subgraphs[cluster]} (color {color})")  # print the subgraph.
 
     # for each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
-    # then ask Llama 2 70B which abstracts are more similar to the summary.
+    # then ask GPT which abstracts are more similar to the summary.
 
     data = pd.read_csv(f"data/graphs/{name}_papers.csv")[['id', 'abstract']]  # load the data.
     evaluations = {}
@@ -352,40 +434,50 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
         except ValueError:
             pass  # if there are not enough abstracts, sample all of them.
 
-        # ask Llama 2 70B which abstracts are more similar to the summary.
+        # ask GPT which abstracts are more similar to the summary.
         for i in range(min(len(cluster_abstracts), len(outside_abstracts))):
-            # ask Llama 2 70B which abstract is more similar to the summary.
-            response = client.run(
-                "replicate/llama-2-70b",  # Replace with the correct model path on Replicate
-                input={
-                    "prompt": f"Answer using only a number between 1 to 100: "
-                              f"How consistent is the following summary with the abstract?\n"
-                              f"Summary: {summary}\n"
-                              f"Abstract: {cluster_abstracts[i]}\n",
-                    "max_tokens": 100,
-                    "temperature": 0.5
-                }
+            # ask GPT which abstract is more similar to the summary.
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": f"Answer using only a number between 1 to 100: "
+                                   f"How consistent is the following summary with the abstract?\n"
+                                   f"Summary: {summary}\n"
+                                   f"Abstract: {cluster_abstracts[i]}\n"
+                    }
+                ],
+                max_tokens=100,
+                n=1,
+                stop=None,
+                temperature=0.5
             )
 
-            score_in = response['output'].strip()
+            score_in = response.choices[0].message.content
             # get the score.
             score_in = int(score_in.split('\n')[-1].split(':')[-1])
             total_in_score += score_in
 
-            # ask Llama 2 70B which abstract is more similar to the summary.
-            response = client.run(
-                "replicate/llama-2-70b",  # Replace with the correct model path on Replicate
-                input={
-                    "prompt": f"Answer using only a number between 1 to 100: "
-                              f"How consistent is the following summary with the abstract?\n"
-                              f"Summary: {summary}\n"
-                              f"Abstract: {outside_abstracts[i]}\n",
-                    "max_tokens": 100,
-                    "temperature": 0.5
-                }
+            # ask GPT which abstract is more similar to the summary.
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": f"Answer using only a number between 1 to 100:"
+                                   f"How consistent is the following summary with the abstract?\n"
+                                   f"Summary: {summary}\n"
+                                   f"Abstract: {outside_abstracts[i]}\n"
+                    }
+                ],
+                max_tokens=100,
+                n=1,
+                stop=None,
+                temperature=0.5
             )
 
-            score_out = response['output'].strip()
+            score_out = response.choices[0].message.content
             # get the score.
             score_out = int(score_out.split('\n')[-1].split(':')[-1])
 
@@ -399,82 +491,6 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
               f"\nScore in: {total_in_score}\nScore out: {total_out_score}\n{'-' * 50}")
 
     return total_in_score / (total_in_score + total_out_score) if total_in_score + total_out_score != 0 else 0
-
-
-def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
-    """
-    Partition the graph into subgraphs according to the community colors.
-    :param graph: the graph.
-    :return:
-    """
-    # first we filter articles by vertex type.
-    articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
-    articles_graph = graph.subgraph(articles)
-    graph = articles_graph
-
-    # second filter divides the graph by colors.
-    nodes = graph.nodes(data=True)
-    colors = set([node[1]['color'] for node in nodes])
-    subgraphs = []
-    for i, color in enumerate(colors):  # filter by colors.
-        nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
-
-        subgraph = graph.subgraph(nodes)
-        subgraphs.append(subgraph)
-
-    return subgraphs
-
-
-def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
-    """
-    Load the graph with the given name.
-    :param name: the name of the graph.
-    :param version: the version of the graph.
-    :param k: the KNN parameter.
-    :param proportion: the proportion of the graph.
-    :param weight: the weight of the edges.
-    :param optimized: whether to use the optimized version of the graph.
-    :return:
-    """
-
-    if optimized:
-        graph_path = None
-        for file in os.listdir('data/optimized_graphs'):
-            if file.startswith(name):
-                graph_path = 'data/optimized_graphs/' + file
-                break
-    else:
-        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                                   "or 'proportion'."
-        graph_path = f"data/processed_graphs/k_{k}/"
-        if weight != 1:
-            graph_path += f"weight_{weight}/"
-        if version == 'distances':
-            graph_path += f"only_distances/{name}.gpickle"
-
-        elif version == 'original':
-            graph_path += f"only_original/{name}.gpickle"
-
-        else:
-            if proportion != 0.5:
-                graph_path += f"{name}_proportion_{proportion}.gpickle"
-            else:
-                graph_path += f"{name}.gpickle"
-
-    # load the graph.
-
-    with open(graph_path, 'rb') as f:
-        graph = pkl.load(f)
-
-    # filter the graph in order to remove the nan nodes.
-    nodes = graph.nodes(data=True)
-    s = len(nodes)
-    nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(
-        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
-    graph = graph.subgraph(nodes)
-
-    return graph
 
 
 def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.5, k: int = 5, weight: float = 1,
@@ -564,4 +580,3 @@ def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.
         os.makedirs(directory)
         plt.savefig(directory + plot_file_path)
     """
-
