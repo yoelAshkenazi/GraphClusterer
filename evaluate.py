@@ -1,16 +1,24 @@
 """
 Yoel Ashkenazi
-This file is responsible for evaluating the summarization results using Llama 2 70B via the Replicate API.
+This file is responsible for evaluating the summarization results using Cohere's API.
 """
 import os
 import pandas as pd
 import numpy as np
-import replicate
 import random
 import pickle as pkl
 import networkx as nx
 from typing import List
 import matplotlib.pyplot as plt
+import cohere  # Added Cohere import
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+cohere_key = os.getenv("api_key")
+
+# Initialize Cohere client with your API key
+co = cohere.Client(api_key=cohere_key)  
 
 # Define the Evaluation Prompt Template
 EVALUATION_PROMPT_TEMPLATE = """
@@ -100,10 +108,6 @@ evaluation_metrics = {
     "Consistency": (CONSISTENCY_SCORE_CRITERIA, CONSISTENCY_SCORE_STEPS),
     "Fluency": (FLUENCY_SCORE_CRITERIA, FLUENCY_SCORE_STEPS),
 }
-
-# Authenticate with Replicate
-client = replicate.Client(api_token="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")
-
 
 def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False):
     """
@@ -204,21 +208,25 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
                     summary=summary,
                 )
 
-                # Call Llama 2 70B via Replicate to evaluate the metric
-                response = client.run(
-                    "replicate/llama-2-70b",  # Replace with the correct model path on Replicate
-                    input={
-                        "prompt": prompt,
-                        "max_tokens": 100,
-                        "temperature": 0
-                    }
+                # Call Cohere's API to evaluate the metric
+                response = co.generate(
+                    model="command-r-plus-08-2024",  # Replace with the desired Cohere model
+                    prompt=prompt,  # Use the prompt directly instead of messages
+                    max_tokens=100,
+                    temperature=0.0  # Set temperature to 0 for deterministic output
                 )
-                score = response['text'].strip()
+
+                # Extract the response text
+                score = response.generations[0].text.strip()
 
                 # Process and store the score in the corresponding list
-                if score[-1] == '.':
+                if score.endswith('.'):
                     score = score[:-1]
-                score = int(score[-1])
+                try:
+                    score = int(score[-1])
+                except (IndexError, ValueError):
+                    print(f"Unexpected score format: '{score}'. Defaulting to 0.")
+                    score = 0
 
                 if eval_type == "Relevance":
                     cluster_relevancy_scores.append(score)
@@ -230,14 +238,10 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
                     cluster_fluency_scores.append(score)
 
         # Calculate average for each cluster.
-        avg_cluster_relevancy = sum(cluster_relevancy_scores) / len(cluster_relevancy_scores) if len(
-            cluster_relevancy_scores) > 0 else 0
-        avg_cluster_coherence = sum(cluster_coherence_scores) / len(cluster_coherence_scores) if len(
-            cluster_coherence_scores) > 0 else 0
-        avg_cluster_consistency = sum(cluster_consistency_scores) / len(cluster_consistency_scores) if len(
-            cluster_consistency_scores) > 0 else 0
-        avg_cluster_fluency = sum(cluster_fluency_scores) / len(cluster_fluency_scores) if len(
-            cluster_fluency_scores) > 0 else 0
+        avg_cluster_relevancy = sum(cluster_relevancy_scores) / len(cluster_relevancy_scores) if cluster_relevancy_scores else 0
+        avg_cluster_coherence = sum(cluster_coherence_scores) / len(cluster_coherence_scores) if cluster_coherence_scores else 0
+        avg_cluster_consistency = sum(cluster_consistency_scores) / len(cluster_consistency_scores) if cluster_consistency_scores else 0
+        avg_cluster_fluency = sum(cluster_fluency_scores) / len(cluster_fluency_scores) if cluster_fluency_scores else 0
 
         # Store these averages to later calculate the dataset-level averages.
         all_relevancy_scores.append(avg_cluster_relevancy)
@@ -246,13 +250,12 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
         all_fluency_scores.append(avg_cluster_fluency)
 
     # Calculate the overall averages across all clusters.
-    avg_relevancy = sum(all_relevancy_scores) / len(all_relevancy_scores) if len(all_relevancy_scores) > 0 else 0
-    avg_coherence = sum(all_coherence_scores) / len(all_coherence_scores) if len(all_coherence_scores) > 0 else 0
-    avg_consistency = sum(all_consistency_scores) / len(all_consistency_scores) if len(
-        all_consistency_scores) > 0 else 0
-    avg_fluency = sum(all_fluency_scores) / len(all_fluency_scores) if len(all_fluency_scores) > 0 else 0
+    avg_relevancy = sum(all_relevancy_scores) / len(all_relevancy_scores) if all_relevancy_scores else 0
+    avg_coherence = sum(all_coherence_scores) / len(all_coherence_scores) if all_coherence_scores else 0
+    avg_consistency = sum(all_consistency_scores) / len(all_consistency_scores) if all_consistency_scores else 0
+    avg_fluency = sum(all_fluency_scores) / len(all_fluency_scores) if all_fluency_scores else 0
 
-    # print the scores
+    # Print the scores
     print("Relevance: ", avg_relevancy)
     print("Coherence: ", avg_coherence)
     print("Consistency: ", avg_consistency)
@@ -260,7 +263,6 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
     print('-' * 50)
 
     return avg_relevancy, avg_coherence, avg_consistency, avg_fluency
-
 
 def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False):
     """
@@ -297,15 +299,15 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
             else:
                 summary_path += f"{name}/"
 
-    # load the graph.
+    # Load the graph.
     graph = load_graph(name, version, proportion, k, weight, optimized)
     G = graph
-    print(G)  # print the graph.
+    print(G)  # Print the graph.
 
     clusters = os.listdir(summary_path)
 
     summaries = {}
-    colors = [cluster.split('_')[2] for cluster in clusters]  # get the colors.
+    colors = [cluster.split('_')[2] for cluster in clusters]  # Get the colors.
     subgraphs = {}
     for i, cluster in enumerate(clusters):
         decode_break = False
@@ -317,78 +319,85 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
         if decode_break:
             continue
 
-        # get the subgraph.
+        # Get the subgraph.
         color = colors[i]
         nodes = [node for node in G.nodes() if G.nodes.data()[node]['color'] == color]
         subgraphs[cluster] = G.subgraph(nodes)
-        print(f"{subgraphs[cluster]} (color {color})")  # print the subgraph.
+        print(f"{subgraphs[cluster]} (color {color})")  # Print the subgraph.
 
-    # for each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
-    # then ask Llama 2 70B which abstracts are more similar to the summary.
+    # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
+    # Then ask Cohere's API which abstracts are more similar to the summary.
 
-    data = pd.read_csv(f"data/graphs/{name}_papers.csv")[['id', 'abstract']]  # load the data.
+    data = pd.read_csv(f"data/graphs/{name}_papers.csv")[['id', 'abstract']]  # Load the data.
     evaluations = {}
-    total_in_score = 0  # total scores for the abstracts sampled inside the clusters.
-    total_out_score = 0  # total scores for the abstracts sampled outside the clusters.
+    total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
+    total_out_score = 0  # Total scores for the abstracts sampled outside the clusters.
     for cluster, summary in summaries.items():
-        # get the subgraph.
+        # Get the subgraph.
         subgraph = subgraphs[cluster]
-        cluster_name = cluster.split('_')[2]  # get the color.
+        cluster_name = cluster.split('_')[2]  # Get the color.
 
-        # get the abstracts from the cluster.
+        # Get the abstracts from the cluster.
         cluster_abstracts = [abstract for id_, abstract in data.values if id_ in subgraph.nodes()]
 
-        # get the abstracts from outside the cluster.
+        # Get the abstracts from outside the cluster.
         outside_abstracts = [abstract for id_, abstract in data.values if id_ not in subgraph.nodes()]
 
-        # clean nans.
+        # Clean NaNs.
         cluster_abstracts = [abstract for abstract in cluster_abstracts if not pd.isna(abstract)]
         outside_abstracts = [abstract for abstract in outside_abstracts if not pd.isna(abstract)]
 
-        # sample 20% of the cluster size (m) and m abstracts from outside the cluster.
-        cluster_abstracts = random.sample(cluster_abstracts, int(0.2 * len(cluster_abstracts)))
+        # Sample 20% of the cluster size (m) and m abstracts from outside the cluster.
+        cluster_sample_size = max(1, int(0.2 * len(cluster_abstracts)))
+        cluster_abstracts = random.sample(cluster_abstracts, cluster_sample_size)
         try:
-            outside_abstracts = random.sample(outside_abstracts, len(cluster_abstracts))
+            outside_abstracts = random.sample(outside_abstracts, cluster_sample_size)
         except ValueError:
-            pass  # if there are not enough abstracts, sample all of them.
+            outside_abstracts = random.sample(outside_abstracts, len(outside_abstracts))  # If not enough, sample all.
 
-        # ask Llama 2 70B which abstracts are more similar to the summary.
+        # Ask Cohere's API which abstracts are more similar to the summary.
         for i in range(min(len(cluster_abstracts), len(outside_abstracts))):
-            # ask Llama 2 70B which abstract is more similar to the summary.
-            response = client.run(
-                "replicate/llama-2-70b",  # Replace with the correct model path on Replicate
-                input={
-                    "prompt": f"Answer using only a number between 1 to 100: "
-                              f"How consistent is the following summary with the abstract?\n"
-                              f"Summary: {summary}\n"
-                              f"Abstract: {cluster_abstracts[i]}\n",
-                    "max_tokens": 100,
-                    "temperature": 0.5
-                }
+            # Evaluate consistency for abstracts inside the cluster.
+            prompt_in = f"Answer using only a number between 1 to 100: " \
+                        f"How consistent is the following summary with the abstract?\n" \
+                        f"Summary: {summary}\n" \
+                        f"Abstract: {cluster_abstracts[i]}\n"
+
+            response_in = co.generate (
+                model="command-r-plus-08-2024",
+                prompt=prompt_in,
+                max_tokens=100,
+                temperature=0.0
             )
 
-            score_in = response['output'].strip()
-            # get the score.
-            score_in = int(score_in.split('\n')[-1].split(':')[-1])
+            score_in_text = response_in.generations[0].text.strip()
+            try:
+                score_in = int(score_in_text.split('\n')[-1].split(':')[-1])
+            except (IndexError, ValueError):
+                print(f"Unexpected score format: '{score_in_text}'. Defaulting to 0.")
+                score_in = 0
             total_in_score += score_in
 
-            # ask Llama 2 70B which abstract is more similar to the summary.
-            response = client.run(
-                "replicate/llama-2-70b",  # Replace with the correct model path on Replicate
-                input={
-                    "prompt": f"Answer using only a number between 1 to 100: "
-                              f"How consistent is the following summary with the abstract?\n"
-                              f"Summary: {summary}\n"
-                              f"Abstract: {outside_abstracts[i]}\n",
-                    "max_tokens": 100,
-                    "temperature": 0.5
-                }
+            # Evaluate consistency for abstracts outside the cluster.
+            prompt_out = f"Answer using only a number between 1 to 100: " \
+                         f"How consistent is the following summary with the abstract?\n" \
+                         f"Summary: {summary}\n" \
+                         f"Abstract: {outside_abstracts[i]}\n"
+
+            # Replace co.chat with co.generate
+            response_out = co.generate(
+                model="command-r-plus-08-2024",  # Replace with the desired Cohere model
+                prompt=prompt_out,
+                max_tokens=100,
+                temperature=0.0  # Set temperature to 0 for deterministic output
             )
 
-            score_out = response['output'].strip()
-            # get the score.
-            score_out = int(score_out.split('\n')[-1].split(':')[-1])
-
+            score_out_text = response_out.generations[0].text.strip()
+            try:
+                score_out = int(score_out_text.split('\n')[-1].split(':')[-1])
+            except (IndexError, ValueError):
+                print(f"Unexpected score format: '{score_out_text}'. Defaulting to 0.")
+                score_out = 0
             total_out_score += score_out
 
         decision = "consistent" if total_in_score >= total_out_score else "inconsistent"
@@ -398,8 +407,7 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
         print(f"Cluster summary for cluster '{cluster_name}' is {decision} with the cluster abstracts. "
               f"\nScore in: {total_in_score}\nScore out: {total_out_score}\n{'-' * 50}")
 
-    return total_in_score / (total_in_score + total_out_score) if total_in_score + total_out_score != 0 else 0
-
+    return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
 
 def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     """
@@ -407,23 +415,22 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     :param graph: the graph.
     :return:
     """
-    # first we filter articles by vertex type.
+    # First, filter articles by vertex type.
     articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
     articles_graph = graph.subgraph(articles)
     graph = articles_graph
 
-    # second filter divides the graph by colors.
+    # Second filter divides the graph by colors.
     nodes = graph.nodes(data=True)
     colors = set([node[1]['color'] for node in nodes])
     subgraphs = []
-    for i, color in enumerate(colors):  # filter by colors.
+    for i, color in enumerate(colors):  # Filter by colors.
         nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
 
         subgraph = graph.subgraph(nodes)
         subgraphs.append(subgraph)
 
     return subgraphs
-
 
 def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
     """
@@ -461,12 +468,11 @@ def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 
             else:
                 graph_path += f"{name}.gpickle"
 
-    # load the graph.
-
+    # Load the graph.
     with open(graph_path, 'rb') as f:
         graph = pkl.load(f)
 
-    # filter the graph in order to remove the nan nodes.
+    # Filter the graph to remove NaN nodes.
     nodes = graph.nodes(data=True)
     s = len(nodes)
     nodes = [node for node, data in nodes if not pd.isna(node)]
@@ -475,7 +481,6 @@ def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 
     graph = graph.subgraph(nodes)
 
     return graph
-
 
 def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.5, k: int = 5, weight: float = 1,
              optimized: bool = False):
@@ -490,7 +495,7 @@ def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.
     :param weight: the weight of the edges.
     :param optimized: whether to use the optimized version of the graph.
     :return:
-    
+
     """
     # Retrieve metrics for the specific name and version
     values = [
@@ -547,7 +552,7 @@ def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.
     plt.tight_layout()
     plt.show()
 
-    # Save the plot to a file, need to add a filter if its an optimized graph.
+    # Save the plot to a file, need to add a filter if it's an optimized graph.
     """
     directory = f"Results/plots/k_{k}/weight_{weight}/"
     plot_file_path = f"{name}"
@@ -564,4 +569,3 @@ def plot_bar(name: str, version: str, metrics_dict: list, proportion: float = 0.
         os.makedirs(directory)
         plt.savefig(directory + plot_file_path)
     """
-

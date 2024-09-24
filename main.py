@@ -2,8 +2,8 @@ import os
 import pandas as pd
 import functions
 import warnings
-import summarize
-# import evaluate
+# import summarize
+import evaluate
 import random
 
 warnings.filterwarnings("ignore")
@@ -11,7 +11,8 @@ warnings.filterwarnings("ignore")
 ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
              "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]
 """
-ALL_NAMES = ["wind tunnel", "quantum computing", "smart material"]
+ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
+             "nuclear reactor", "scramjet", "quantum computing", "smart material"]
 VERSION = ['distances', 'original', 'proportion']
 
 
@@ -214,8 +215,8 @@ if __name__ == '__main__':
     """
     Step 2- summarize the clusters for all versions.
     """
-    for name in ALL_NAMES:
-        run_summarization(name, 'distances', 5, True, 5, 5, True)
+
     """
     Step 3- evaluate the results.
     """
+    evaluate_and_plot(proportion, K, weight, optimized=True, num_to_print=3)

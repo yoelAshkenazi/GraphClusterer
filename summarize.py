@@ -8,8 +8,8 @@ from typing import List
 import pandas as pd
 import networkx as nx
 from transformers import AutoTokenizer
-from longformer import LongformerEncoderDecoderForConditionalGeneration
-from longformer import LongformerEncoderDecoderConfig
+from transformers import LongformerEncoderDecoderForConditionalGeneration, LongformerEncoderDecoderConfig
+
 import torch
 
 
