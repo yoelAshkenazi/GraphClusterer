@@ -1,0 +1,9 @@
+Instructions:
+You have received the texts to summarize, separated by '<New Text>' between each consecutive pair of texts.
+You will summarize the texts according to the following rules:
+1- You must not directly reference any of the texts.
+2- Your summary must be between 5-10 sentences long.
+3- Your summary must mention key ideas and concepts that repeat in the texts.
+4- You must not invent any information. The summary must contain only information directly deduced from the texts.
+5- Your summary must be coherent, fluent in language, and relevant in content to the texts.
+Texts:

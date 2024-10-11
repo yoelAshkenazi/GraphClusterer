@@ -262,7 +262,7 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
     return avg_relevancy, avg_coherence, avg_consistency, avg_fluency
 
 
-def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False, G: nx.Graph = None) -> float:
+def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False):
     """
     Load the cluster summary for the given name.
     :param name: the name of the dataset.
@@ -271,7 +271,6 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
     :param k: The KNN parameter.
     :param weight: the weight of the edges.
     :param optimized: whether to use the optimized version of the graph.
-    :param G: the graph.
     :return:
     """
     if optimized:
@@ -306,9 +305,12 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
     
     print(f"Listing files in {summary_path}:")
     print(os.listdir(summary_path))  # Debug statement to list all files in the directory
-    print('-' * 50)
+
+    # Load the graph.
+    graph = load_graph(name, version, proportion, k, weight, optimized)
+    G = graph
     print(G)  # Print the graph.
-    print('-' * 50)
+
     clusters = os.listdir(summary_path)
     print(f"Clusters found: {clusters}")  # Debug statement to list all clusters
 
@@ -334,9 +336,7 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
         color = colors[i]
         nodes = [node for node in G.nodes() if G.nodes.data()[node]['color'] == color]
         subgraphs[cluster] = G.subgraph(nodes)
-        print('-' * 50)
         print(f"{subgraphs[cluster]} (color {color})")  # Print the subgraph.
-        print('-' * 50)
 
     # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
     # Then ask Cohere's API which abstracts are more similar to the summary.

@@ -3,40 +3,13 @@ Yoel Ashkenazi
 this file is responsible for summarizing the result graphs.
 """
 import os
-import pickle as pkl
-from typing import List
 import pandas as pd
+from typing import List
 import networkx as nx
-from transformers import AutoTokenizer
-from transformers import LongformerEncoderDecoderForConditionalGeneration, LongformerEncoderDecoderConfig
-
-import torch
-
-
-def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
-    """
-    Partition the graph into subgraphs according to the community colors.
-    :param graph: the graph.
-    :return:
-    """
-    # first we filter articles by vertex type.
-    articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
-    articles_graph = graph.subgraph(articles)
-    graph = articles_graph
-
-    # second filter divides the graph by colors.
-    nodes = graph.nodes(data=True)
-    colors = set([node[1]['color'] for node in nodes])
-    subgraphs = []
-    for i, color in enumerate(colors):  # filter by colors.
-        nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
-
-        subgraph = graph.subgraph(nodes)
-        subgraphs.append(subgraph)
-        print(f"color {color} has {len(subgraph.nodes())} vertices.")
-
-    return subgraphs
-
+import cohere
+from dotenv import load_dotenv
+import pickle as pkl
+import replicate
 
 def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
     """
@@ -70,12 +43,11 @@ def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 
 
         else:
             if proportion != 0.5:
-                graph_path += f"{name}_proportion_{proportion}.gpickle"
+                graph_path += f"{name}proportion{proportion}.gpickle"
             else:
                 graph_path += f"{name}.gpickle"
 
     # load the graph.
-
     with open(graph_path, 'rb') as f:
         graph = pkl.load(f)
 
@@ -90,27 +62,52 @@ def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 
     return graph
 
 
-def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, proportion: float, save: bool = False,
-                        k: int = 5, weight: float = 1, optimized: bool = False):
+def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     """
-    This method summarizes each of the subgraphs' abstract texts using PRIMER, prints the results and save them
-    to a .txt file.
-    :param name: The name of the dataset.
+    Partition the graph into subgraphs according to the community colors.
+    :param graph: the graph.
+    :return:
+    """
+    # first we filter articles by vertex type.
+    articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
+    articles_graph = graph.subgraph(articles)
+    graph = articles_graph
+
+    # second filter divides the graph by colors.
+    nodes = graph.nodes(data=True)
+    colors = set([node[1]['color'] for node in nodes])
+    subgraphs = []
+    for i, color in enumerate(colors):  # filter by colors.
+        nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
+
+        subgraph = graph.subgraph(nodes)
+        subgraphs.append(subgraph)
+        print(f"color {color} has {len(subgraph.nodes())} vertices.")
+
+    return subgraphs
+
+
+def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, proportion: float, save: bool = False,
+                       k: int = 5, weight: float = 1, optimized: bool = False):
+    """
+    Summarizes each subgraph's abstract texts using Cohere's API, prints the results, and optionally saves them to text files.
+
     :param subgraphs: List of subgraphs.
+    :param name: The name of the dataset.
     :param version: The version of the graph.
     :param proportion: The proportion of the graph.
     :param save: Whether to save the results.
     :param k: The KNN parameter.
     :param weight: The weight of the edges.
-    :param optimized: Whether to use the optimized version of the model.
-    :return:
+    :param optimized: Whether to use the optimized version of the graph.
+    :return: None
     """
 
-    assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                               "or 'proportion'."
+    # File path construction as per user-provided method
     if optimized:
         result_file_path = "Summaries/optimized/" + name + '/'
     else:
+        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', or 'proportion'."
         result_file_path = f"Summaries/k_{k}/weight_{weight}/{name}"
         if version == 'distances':
             result_file_path += '_only_distances/'
@@ -118,118 +115,111 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
             result_file_path += '_only_original/'
         else:
             if proportion != 0.5:
-                result_file_path += f'_proportion_{proportion}/'
+                result_file_path += f'proportion{proportion}/'
 
-    # if there are previous summaries, delete them.
+    # Ensure the directory exists
+    os.makedirs(result_file_path, exist_ok=True)
+
+    # Clean previous summaries by removing existing files in the directory
     if os.path.exists(result_file_path):
         for file in os.listdir(result_file_path):
             os.remove(os.path.join(result_file_path, file))
 
-    # define the model and tokenizer.
-    tokenizer = AutoTokenizer.from_pretrained('./PRIMERA_model/')
-    config = LongformerEncoderDecoderConfig.from_pretrained('./PRIMERA_model/')
-    model = LongformerEncoderDecoderForConditionalGeneration.from_pretrained(
-        './PRIMERA_model/', config=config)
-    PAD_TOKEN_ID = tokenizer.pad_token_id
-    DOCSEP_TOKEN_ID = tokenizer.convert_tokens_to_ids("<doc-sep>")
+    # Integrate dotenv to load environment variables
+    load_dotenv()
 
-    # load the abstracts.
+    cohere_api_key = os.getenv("COHERE_API_KEY")
+    co = cohere.Client(cohere_api_key)
+
+    api_token = os.getenv("LLAMA_API_KEY")
+    # Load the abstracts from the CSV file
     PATH = f'data/graphs/{name}_papers.csv'
 
-    # save only the id and abstract columns.
+    # Ensure the CSV file exists
+    if not os.path.exists(PATH):
+        raise FileNotFoundError(f"The file {PATH} does not exist.")
+
+    # Read only the id and abstract columns
     df = pd.read_csv(PATH)[['id', 'abstract']]
+    count_titles = 2
+    titles_list = []
 
-    # summarize each subgraph.
-    for i, subgraph in enumerate(subgraphs):
-
+    # Iterate over each subgraph to generate summaries
+    for i, subgraph in enumerate(subgraphs, start=1):
+        # Extract the color attribute from the first node
         color = list(subgraph.nodes(data=True))[0][1]['color']
-
         num_nodes = len(subgraph.nodes())
-        # skip clusters of 1- nothing to summarize.
-        if len(subgraph.nodes()) == 1:
+        # Skip clusters with only one node
+        if num_nodes == 1:
             continue
 
-        # if the cluster is too large, summarize only 10 vertices at random.
+        # Extract abstracts corresponding to the nodes in the subgraph
+        node_ids = set(subgraph.nodes())
+        abstracts = df[df['id'].isin(node_ids)]['abstract'].dropna().tolist()
 
-        # step 1- get the abstracts.
-        abstracts = [abstract for id_, abstract in df.values if id_ in subgraph.nodes()]
-        if len(abstracts) > 10:
-            abstracts = list(pd.Series(abstracts).sample(10))
-        # clean nulls.
-        abstracts = [abstract for abstract in abstracts if not pd.isna(abstract)]
-
-        # step 2- summarize the abstracts.
-        print(f"Summarizing {len(subgraph)} abstracts...\nCluster color: {color}\nNumber of vertices: {num_nodes}"
-              f"\n{'-' * 40}")
-
-        # encode the text.
-        input_ids = []
-        for abstract in abstracts:
-            if len(input_ids) >= 4096:
-                break
-            # encode each abstract separately.
-            input_ids.extend(
-                tokenizer.encode(
-                    abstract,
-                    truncation=True,
-                    max_length=4096 // len(abstracts),
-                )
-            )
-
-            # add a document separator token.
-            input_ids.append(DOCSEP_TOKEN_ID)
-
-        # add start and end tokens.
-        input_ids = (
-            [tokenizer.bos_token_id]
-            + input_ids
-            + [tokenizer.eos_token_id]
-        )
-        # if the input is too long, truncate it.
-        if len(input_ids) > 4096:
-            input_ids = input_ids[:4096]
-
-        # add padding.
-        input_ids += [PAD_TOKEN_ID] * (4096 - len(input_ids))  # add padding.
-        input_ids = torch.tensor(input_ids).unsqueeze(0)
-
-        # add global attention mask.
-        global_attention_mask = torch.zeros_like(input_ids).to(input_ids.device)
-
-        # put global attention on <s> token
-        global_attention_mask[:, 0] = 1
-        global_attention_mask[input_ids == DOCSEP_TOKEN_ID] = 1
-
-        # generate the summary.
-        generated_ids = model.generate(
-            input_ids=input_ids,
-            global_attention_mask=global_attention_mask,
-            use_cache=True,
-            max_length=1024,
-            num_beams=5,
-        )
-
-        # decode the summary.
-        summary = tokenizer.batch_decode(
-            generated_ids.tolist(), skip_special_tokens=True
-        )[0]
-        if summary == '':
-            print(f"Cluster {i + 1} summary is empty.")
+        # If no abstracts are found, skip the cluster
+        if not abstracts:
+            print(f"Cluster {i}: No abstracts found. Skipping.")
             continue
-        # print the summary.
-        print(f"Summary: {summary}")
 
+        # Combine all abstracts into a single text block with clear delimiters and instructional prompt
+        combined_abstracts = " ".join([f"<New Text:> {abstract}" for j, abstract in enumerate(abstracts)])
+        with open('prompt for command-r.txt', 'r') as file:
+            instructions_command_r = file.read()
+        # Display summarization information
+        print(f"Summarizing {len(abstracts)} abstracts.\nCluster color: {color}.\nNumber of vertices: {num_nodes}.")
+
+        # Generate the summary using Cohere's summarize API
+        response = co.generate(
+                model='command-r-plus-08-2024',
+                prompt=instructions_command_r+combined_abstracts,
+                max_tokens=300
+        )
+        summary = response.generations[0].text.strip()
+
+        with open('prompt for llama.txt', 'r') as file:
+            instructions_llama = file.read()
+        input_params = {
+            "prompt": instructions_llama + summary,
+            "max_tokens": 300
+        }
+        output = replicate.run(
+            "meta/meta-llama-3.1-405b-instruct",
+            input=input_params
+        )
+        summary = "".join(output)
+
+        with open('prompt for llama 2.txt' , 'r') as file:
+            instructions_llama2 = file.read()
+        input_params = {
+            "prompt": instructions_llama2 + summary,
+            "max_tokens": 300
+        }
+        output = replicate.run(
+            "meta/meta-llama-3.1-405b-instruct",
+            input=input_params
+        )
+        title = "".join(output)
+        title = title.replace('"', '')
+        if title in titles_list:
+            title = f"{title} ({count_titles})"
+            count_titles += 1
+        titles_list.append(title)
         # save the summary.
         if save:
 
             vers = 'vertices' if num_nodes != 1 else 'vertex'
 
-            file_name = f'{result_file_path}/cluster_{i + 1}_{color}_{num_nodes}_{vers}_summary.txt'
+            file_name = f'{title} ({num_nodes} {vers}).txt'
 
             try:
-                with open(file_name, 'w') as f:
+                with open(result_file_path + file_name, 'w') as f:
                     f.write(summary)
+                    print(f"Summary saved to {result_file_path + file_name}") #
             except FileNotFoundError:  # create the directory if it doesn't exist.
                 os.makedirs(result_file_path)
                 with open(file_name, 'w') as f:
                     f.write(summary)
+        print('\n*3')
+    return titles_list #
+        

@@ -1,0 +1,15 @@
+Instructions:
+
+- You are getting a text as an input.
+- You will generate a title for it.
+- The title should be 4 words max.
+- The title must capture the unique concepts in the text.
+- Do not introduce any additional words to the text.
+
+For example:
+If the text is about how to bake a cake, your answer will be "How to bake a cake".
+
+Important Rules:
+Do not add to your answer any introductions such as "This is one suggestion for naming this text:" or "Here is a potential title for the text:" etc.
+
+Text:

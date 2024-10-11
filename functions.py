@@ -79,8 +79,7 @@ def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 
     nodes = graph.nodes(data=True)
     s = len(nodes)
     nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(
-        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+    print(f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
     graph = graph.subgraph(nodes)
 
     return graph
