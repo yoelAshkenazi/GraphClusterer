@@ -6,15 +6,20 @@ import pandas as pd
 import random
 import pickle as pkl
 import networkx as nx
-from typing import List
+from typing import List ,Dict
 import matplotlib.pyplot as plt
 import cohere  # Added Cohere import
 import os
+from dotenv import load_dotenv
+import re
+
+
+load_dotenv()
+cohere_key = os.getenv("COHERE_API_KEY")
 
 
 # Initialize Cohere client with your API key
-co = cohere.Client(api_key="nECzpidx1wy8QavqvK3CUxOQWNjMJVnoKNI26wez")
-
+co = cohere.Client(api_key=cohere_key)
 # Define the Evaluation Prompt Template
 EVALUATION_PROMPT_TEMPLATE = """
 You will be given one summary written for an article. Your task is to rate the summary on one metric.
@@ -105,68 +110,47 @@ evaluation_metrics = {
 }
 
 
-def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False):
+def myEval(name: str, G: nx.Graph = None):
     """
     Load the cluster summary for the given name and calculate average scores for relevancy, coherence, consistency,
     and fluency.
     :param name: the name of the dataset.
-    :param version: the version of the graph.
-    :param proportion: the proportion of the graph to use.
-    :param k: The KNN parameter.
-    :param weight: the weight of the edges.
     :param optimized: whether to use the optimized version of the graph.
     :return: Averages of the averages for relevancy, coherence, consistency, and fluency.
     """
-    if optimized:
-        summary_path = f"Summaries/optimized/"
-        for file in os.listdir('Summaries/optimized'):
-            if file.startswith(name):
-                summary_path += file
-                break
-    else:
-        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                                   "or 'proportion'."
-        summary_path = f"Summaries/k_{k}/"
-        if weight != 1:
-            summary_path += f"weight_{weight}/"
-        if version == 'distances':
-            summary_path += f"{name}_only_distances/"
-
-        elif version == 'original':
-            summary_path += f"{name}_only_original/"
-
-        else:
-            if proportion != 0.5:
-                summary_path += f"{name}_proportion_{proportion}/"
-            else:
-                summary_path += f"{name}/"
-
-    # Load the graph
-    graph = load_graph(name, version, proportion, k, weight, optimized)
-    G = graph
-    print(G)  # Print the graph.
-
+    summary_path = f"Summaries/optimized/"
+    for file in os.listdir('Summaries/optimized'):
+        if file.startswith(name):
+            summary_path += file
+    
+    # Check if the summary directory exists and list its contents
+    if not os.path.exists(summary_path):
+        print(f"Error: Directory {summary_path} does not exist!")
+        return None
+    
+    clusters = os.listdir(summary_path)
     # Prepare to store summaries and subgraphs
     summaries = {}
-    clusters = os.listdir(summary_path)
-    colors = [cluster.split('_')[2] for cluster in clusters]  # Get the colors.
+    titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
+    title_to_color = extract_colors(G)
     subgraphs = {}
 
-    for i, cluster in enumerate(clusters):
+    for i, title in enumerate(titles):
         decode_break = False
-        with open(os.path.join(summary_path, cluster), 'r') as f:
+        summary_file_path = os.path.join(summary_path, clusters[i])
+        with open(summary_file_path, 'r') as f:
             try:
-                summaries[cluster] = f.read()
+                summaries[title] = f.read()
             except UnicodeDecodeError:
                 decode_break = True
         if decode_break:
+            print(f"Failed to decode summary file: {summary_file_path}")
             continue
-
         # Get the subgraph.
-        color = colors[i]
-        nodes = [node for node in G.nodes() if G.nodes.data()[node]['color'] == color]
-        subgraphs[cluster] = G.subgraph(nodes)
-        print(f"{subgraphs[cluster]} (color {color})")  # Print the subgraph.
+        color = title_to_color[title]
+        nodes = [node for node in G.nodes if G.nodes[node]['color'] == color]
+
+        subgraphs[title] = G.subgraph(nodes)
 
     # Load the data
     data = pd.read_csv(f"data/graphs/{name}_papers.csv")[['id', 'abstract']]
@@ -176,17 +160,26 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
     all_consistency_scores = []
     all_fluency_scores = []
 
-    for cluster, summary in summaries.items():
-        subgraph = subgraphs[cluster]
-        cluster_name = cluster.split('_')[2]  # Get the color.
-
-        # Get the abstracts from the cluster.
-        cluster_abstracts = [abstract for id_, abstract in data.values if id_ in subgraph.nodes()]
+    for title, summary in summaries.items():
+        subgraph = subgraphs[title]
+        cluster_name = title
         
+        cluster_abstracts = [abstract for id_, abstract in data.values if id_ in subgraph.nodes()]
+        cluster_sample_size = max(1, int(0.2 * len(cluster_abstracts)))
+
+        cluster_abstracts = random.sample(cluster_abstracts, cluster_sample_size)
 
         # Clean NaNs and sample 20% of the cluster size.
-        cluster_abstracts = [abstract for abstract in cluster_abstracts if not pd.isna(abstract)]
-        sampled_abstracts = random.sample(cluster_abstracts, max(1, int(0.2 * len(cluster_abstracts))))
+        sampled_abstracts = random.sample(cluster_abstracts, cluster_sample_size)
+
+        # Determine the sample size, ensuring it's not larger than the available abstracts
+        if len(cluster_abstracts) < cluster_sample_size:
+            print(f"Warning: Adjusting sample size for cluster '{cluster_name}' due to small population.")
+            cluster_sample_size = len(cluster_abstracts)
+
+        if len(cluster_abstracts) == 0:
+            print(f"No abstracts found in cluster '{cluster_name}'. Skipping this cluster.")
+            continue
 
         cluster_relevancy_scores = []
         cluster_coherence_scores = []
@@ -252,91 +245,61 @@ def myEval(name: str, version: str, proportion: float = 0.5, k: int = 5, weight:
     avg_consistency = sum(all_consistency_scores) / len(all_consistency_scores) if all_consistency_scores else 0
     avg_fluency = sum(all_fluency_scores) / len(all_fluency_scores) if all_fluency_scores else 0
 
-    # Print the scores
-    print("Relevance: ", avg_relevancy)
-    print("Coherence: ", avg_coherence)
-    print("Consistency: ", avg_consistency)
-    print("Fluency: ", avg_fluency)
-    print('-' * 50)
-
     return avg_relevancy, avg_coherence, avg_consistency, avg_fluency
 
+def extract_colors(graph: nx.Graph) -> Dict[str, str]:
+    """
+    Extract the colors of the clusters from the graph.
+    :param graph: the graph.
+    :return:
+    """
+    title_to_color = {}
+    for node in graph.nodes:
+        title = graph.nodes[node].get('title', None)
+        if title is not None:
+            title_to_color[title] = graph.nodes[node]['color']
+    return title_to_color
 
-def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weight: float = 1, optimized: bool = False, G: nx.Graph = None) -> float:
+def evaluate(name: str, G: nx.Graph = None) -> float:
     """
     Load the cluster summary for the given name.
     :param name: the name of the dataset.
-    :param version: the version of the graph.
-    :param proportion: the proportion of the graph to use.
-    :param k: The KNN parameter.
-    :param weight: the weight of the edges.
-    :param optimized: whether to use the optimized version of the graph.
     :param G: the graph.
     :return:
     """
-    if optimized:
-        summary_path = f"Summaries/optimized/"
-        print(f"Looking for summaries in optimized directory: {summary_path}")  # Debug statement
-        for file in os.listdir('Summaries/optimized'):
-            print(f"Found file in optimized directory: {file}")  # Debug statement
-            if file.startswith(name):
-                summary_path += file
-                print(f"Using summary path: {summary_path}")  # Debug statement
-                break
-    else:
-        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', 'proportion'."
-        summary_path = f"Summaries/k_{k}/"
-        if weight != 1:
-            summary_path += f"weight_{weight}/"
-        if version == 'distances':
-            summary_path += f"{name}_only_distances/"
-        elif version == 'original':
-            summary_path += f"{name}_only_original/"
-        else:
-            if proportion != 0.5:
-                summary_path += f"{name}_proportion_{proportion}/"
-            else:
-                summary_path += f"{name}/"
-        print(f"Looking for summaries in directory: {summary_path}")  # Debug statement
-
+    summary_path = f"Summaries/optimized/"
+    for file in os.listdir('Summaries/optimized'):
+        if file.startswith(name):
+            summary_path += file
+    
     # Check if the summary directory exists and list its contents
     if not os.path.exists(summary_path):
         print(f"Error: Directory {summary_path} does not exist!")
         return None
     
-    print(f"Listing files in {summary_path}:")
-    print(os.listdir(summary_path))  # Debug statement to list all files in the directory
-    print('-' * 50)
-    print(G)  # Print the graph.
-    print('-' * 50)
     clusters = os.listdir(summary_path)
-    print(f"Clusters found: {clusters}")  # Debug statement to list all clusters
 
     summaries = {}
-    colors = [cluster.split('_')[2] for cluster in clusters]  # Get the colors.
+    titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
+    title_to_color = extract_colors(G)
     subgraphs = {}
-    for i, cluster in enumerate(clusters):
+    for i, title in enumerate(titles):
         decode_break = False
-        summary_file_path = os.path.join(summary_path, cluster)
-        print(f"Opening summary file: {summary_file_path}")  # Debug statement
+        summary_file_path = os.path.join(summary_path, clusters[i])
         with open(summary_file_path, 'r') as f:
             try:
-                summaries[cluster] = f.read()
-                print(f"Loaded summary for cluster {cluster}")  # Debug statement
-                print(f"Summary: {summaries[cluster]}")  # Debug statement
+                summaries[title] = f.read()
             except UnicodeDecodeError:
                 decode_break = True
         if decode_break:
-            print(f"Failed to decode summary file: {summary_file_path}")  # Debug statement
+            print(f"Failed to decode summary file: {summary_file_path}")
             continue
-
         # Get the subgraph.
-        color = colors[i]
-        nodes = [node for node in G.nodes() if G.nodes.data()[node]['color'] == color]
-        subgraphs[cluster] = G.subgraph(nodes)
-        print('-' * 50)
-        print(f"{subgraphs[cluster]} (color {color})")  # Print the subgraph.
-        print('-' * 50)
+        color = title_to_color[title]
+        nodes = [node for node in G.nodes if G.nodes[node]['color'] == color]
+
+        subgraphs[title] = G.subgraph(nodes)
+
 
     # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
     # Then ask Cohere's API which abstracts are more similar to the summary.
@@ -345,10 +308,10 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
     evaluations = {}
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
     total_out_score = 0  # Total scores for the abstracts sampled outside the clusters.
-    for cluster, summary in summaries.items():
+    for title, summary in summaries.items():
         # Get the subgraph.
-        subgraph = subgraphs[cluster]
-        cluster_name = cluster.split('_')[2]  # Get the color.
+        subgraph = subgraphs[title]
+        cluster_name = title
 
         # Get the abstracts from the cluster.
         cluster_abstracts = [abstract for id_, abstract in data.values if id_ in subgraph.nodes()]
@@ -435,7 +398,6 @@ def evaluate(name: str, version: str, proportion: float = 0.5, k: int = 5, weigh
     return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
 
 
-
 def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     """
     Partition the graph into subgraphs according to the community colors.
@@ -460,44 +422,19 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     return subgraphs
 
 
-def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
+def load_graph(name: str) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
-    :param version: the version of the graph.
-    :param k: the KNN parameter.
-    :param proportion: the proportion of the graph.
-    :param weight: the weight of the edges.
-    :param optimized: whether to use the optimized version of the graph.
     :return:
     """
 
-    if optimized:
-        graph_path = None
-        for file in os.listdir('data/optimized_graphs'):
-            if file.startswith(name):
-                graph_path = 'data/optimized_graphs/' + file
-                break
-    else:
-        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                                   "or 'proportion'."
-        graph_path = f"data/processed_graphs/k_{k}/"
-        if weight != 1:
-            graph_path += f"weight_{weight}/"
-        if version == 'distances':
-            graph_path += f"only_distances/{name}.gpickle"
-
-        elif version == 'original':
-            graph_path += f"only_original/{name}.gpickle"
-
-        else:
-            if proportion != 0.5:
-                graph_path += f"{name}_proportion_{proportion}.gpickle"
-            else:
-                graph_path += f"{name}.gpickle"
+    graph_path = None
+    for file in os.listdir('data/optimized_graphs'):
+        if file.startswith(name):
+            graph_path = 'data/optimized_graphs/' + file
 
     # Load the graph.
-    print(graph_path)
     with open(graph_path, 'rb') as f:
         graph = pkl.load(f)
 
@@ -505,35 +442,32 @@ def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 
     nodes = graph.nodes(data=True)
     s = len(nodes)
     nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(
-        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+    print(f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
     graph = graph.subgraph(nodes)
 
     return graph
 
 
-def plot_bar(name: str, version: str, metrics_dict: list):
+def plot_bar(name: str, metrics_dict: list):
     """
     Create and save a bar plot for the given metrics of a specific name and version.
 
     :param name: the name of the dataset.
-    :param version: the version of the graph.
     :param metrics_dict: Dictionary containing metrics for each (name, version) combination.
     :return:
-
     """
     # Retrieve metrics for the specific name and version
     values = [
-        metrics_dict['avg_index'][name][version],  # Average Index
-        metrics_dict['largest_cluster_percentage'][name][version],  # Largest Cluster Percentage
-        metrics_dict['avg_relevancy'][name][version],  # Average Relevancy
-        metrics_dict['avg_coherence'][name][version],  # Average Coherence
-        metrics_dict['avg_consistency'][name][version],  # Average Consistency
-        metrics_dict['avg_fluency'][name][version],  # Average Fluency
-        metrics_dict['success_rates'][name][version]  # Success Rate
+        metrics_dict['avg_index'][name],  
+        metrics_dict['largest_cluster_percentage'][name],  
+        metrics_dict['avg_relevancy'][name],  
+        metrics_dict['avg_coherence'][name],  
+        metrics_dict['avg_consistency'][name],  
+        metrics_dict['avg_fluency'][name],  
+        metrics_dict['success_rates'][name]  
     ]
 
-    # Define the labels for the x-axis with line breaks after each word
+    # Define the labels for the x-axis
     x_labels = [
         "Average\nIndex",
         "Largest\nCluster\nPercentage",
@@ -545,52 +479,47 @@ def plot_bar(name: str, version: str, metrics_dict: list):
     ]
 
     # Create the bar plot
-    plt.figure(figsize=(10, 6))  # Set the size of the figure
+    plt.figure(figsize=(10, 6))
     bars = plt.bar(x_labels, values, color='skyblue', edgecolor='black')
 
     # Set y-axis limits and labels
-    plt.ylim(0, 5.5)  # Adjust according to the expected range of your data
+    plt.ylim(0, 5.5)
     plt.xlabel("Evaluation Metrics", fontsize=14)
     plt.ylabel("Score", fontsize=14)
-
-    # Set the title of the plot
-    plt.title(f"Results for '{name}' with {version} graph", fontsize=16, fontweight='bold')
-
-    # Add gridlines for better readability
+    plt.title(f"Results for '{name}' graph", fontsize=16, fontweight='bold')
     plt.grid(axis='y', linestyle='--', alpha=0.7)
 
-    # Display the value just above the top of each bar
+    # Display the value above each bar
     for bar in bars:
         yval = bar.get_height()
         plt.text(
             bar.get_x() + bar.get_width() / 2,
-            yval + 0.05,  # Adjust this value to position the text above the bar top
+            yval + 0.05,
             f"{yval:.2f}",
-            ha='center',
-            va='bottom',  # Align text to the bottom of the text (above the bar height)
-            fontsize=12,
-            fontweight='bold'
+            ha='center', va='bottom', fontsize=12, fontweight='bold'
         )
 
-    # Adjust layout to prevent clipping of labels
-
+    # Adjust layout to prevent clipping
     plt.tight_layout()
-    plt.show()
 
-    # Save the plot to a file, need to add a filter if it's an optimized graph.
-    """
-    directory = f"Results/plots/k_{k}/weight_{weight}/"
-    plot_file_path = f"{name}"
-    if version == 'distances':
-        plot_file_path += '_only_distances'
-    elif version == 'original':
-        plot_file_path += '_only_original'
-    else:
-        if proportion != 0.5:
-            plot_file_path += f'_proportion_{proportion}'
+    # Sanitize the file name to avoid issues with spaces or special characters
+    sanitized_name = re.sub(r'[\\/*?:"<>|]', "_", name)
+
+    # Define the folder path and file path
+    plot_folder = "Results/plots"  # Always save in this folder
+    plot_file_name = f"{sanitized_name}.png"  # Save the figure with the given name
+    full_path = os.path.join(plot_folder, plot_file_name)
+
+    # Create the plots folder if it doesn't exist
+    os.makedirs(plot_folder, exist_ok=True)
+
+    # Save the plot
     try:
-        plt.savefig(directory + plot_file_path)
-    except OSError:
-        os.makedirs(directory)
-        plt.savefig(directory + plot_file_path)
-    """
+        plt.savefig(full_path)
+    except Exception as e:
+        print(f"Error saving the plot: {e}")
+
+    plt.show()  # Show the plot after saving
+    plt.close()  # Clear the figure to free memory
+
+    print(f"Plot saved at: {full_path}")

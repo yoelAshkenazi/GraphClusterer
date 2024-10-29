@@ -1,17 +1,16 @@
 import functions
 import warnings
 import summarize
-# import evaluate
+import evaluate
 import itertools
+import json
+import os
 
 warnings.filterwarnings("ignore")
-"""
+"""ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
+             "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]"""
 ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
              "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]
-"""
-ALL_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
-             "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]
-VERSION = ['distances', 'original', 'proportion']
 
 
 def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,
@@ -49,35 +48,27 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
     return functions.analyze_clusters(_G)
 
 
-def run_summarization(_name: str, _version: str, _proportion: float, _save: bool = False, _k: int = 5,
-                      _weight: float = 1, is_optimized: bool = False) -> object:
+def run_summarization(_name: str) -> object:
     """
     Run the summarization for the given name and summarize_kwargs.
     :param _name: the name of the dataset.
-    :param _version: the version of the graph.
-    :param _proportion: the proportion of the graph.
-    :param _save: whether to save the results.
-    :param _k: the KNN parameter.
-    :param _weight: the weight of the edges.
-    :param is_optimized: whether to use the optimized version of the graph.
     :return:
     """
     # load the graph.
-    _G = summarize.load_graph(_name, _version, _proportion, _k, _weight, is_optimized)
+    _G = summarize.load_graph(_name)
     # filter the graph by colors.
     _subgraphs = summarize.filter_by_colors(_G)
     # summarize each cluster.
-    titles = summarize.summarize_per_color(_subgraphs, _name, _version, _proportion, _save, _k, _weight, is_optimized) #
+    titles = summarize.summarize_per_color(_subgraphs, _name) #
     return titles #
 
 
-def create_graphs_all_versions(graph_kwargs: dict, clustering_kwargs: dict, draw_kwargs: dict, ):
+def create_graphs_all_versions(_graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kwargs_: dict,):
     """
     Create the graphs for all versions.
-
-    :param graph_kwargs: the parameters for the graph.
-    :param clustering_kwargs: the parameters for the clustering.
-    :param draw_kwargs: the parameters for the drawing.
+    :param _graph_kwargs_: the parameters for the graph.
+    :param _clustering_kwargs_: the parameters for the clustering.
+    :param _draw_kwargs_: the parameters for the drawing.
     :return:
     """
     """
@@ -86,15 +77,15 @@ def create_graphs_all_versions(graph_kwargs: dict, clustering_kwargs: dict, draw
     distances_only = True
     original_only = True
     proportion_ = 0.5
-    graph_kwargs['use_only_distances'] = distances_only
-    graph_kwargs['use_only_original'] = original_only
-    graph_kwargs['proportion'] = proportion_
-    clustering_kwargs['use_only_distances'] = distances_only
-    clustering_kwargs['use_only_original'] = original_only
-    clustering_kwargs['proportion'] = proportion_
+    _graph_kwargs_['use_only_distances'] = distances_only
+    _graph_kwargs_['use_only_original'] = original_only
+    _graph_kwargs_['proportion'] = proportion_
+    _clustering_kwargs_['use_only_distances'] = distances_only
+    _clustering_kwargs_['use_only_original'] = original_only
+    _clustering_kwargs_['proportion'] = proportion_
 
     for _name in ALL_NAMES:
-        (name, _graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
+        run_graph_part(_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, print_info)
 
     """
     Then run the distances only version.
@@ -102,15 +93,15 @@ def create_graphs_all_versions(graph_kwargs: dict, clustering_kwargs: dict, draw
     distances_only = True
     original_only = False
     proportion_ = 0.5
-    graph_kwargs['use_only_distances'] = distances_only
-    graph_kwargs['use_only_original'] = original_only
-    graph_kwargs['proportion'] = proportion_
-    clustering_kwargs['use_only_distances'] = distances_only
-    clustering_kwargs['use_only_original'] = original_only
-    clustering_kwargs['proportion'] = proportion_
+    _graph_kwargs_['use_only_distances'] = distances_only
+    _graph_kwargs_['use_only_original'] = original_only
+    _graph_kwargs_['proportion'] = proportion_
+    _clustering_kwargs_['use_only_distances'] = distances_only
+    _clustering_kwargs_['use_only_original'] = original_only
+    _clustering_kwargs_['proportion'] = proportion_
 
     for _name in ALL_NAMES:
-        run_graph_part(name, _graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
+        run_graph_part(_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, print_info)
 
     """
     Then run the original only version.
@@ -118,18 +109,19 @@ def create_graphs_all_versions(graph_kwargs: dict, clustering_kwargs: dict, draw
     distances_only = False
     original_only = True
     proportion_ = 0.5
-    graph_kwargs['use_only_distances'] = distances_only
-    graph_kwargs['use_only_original'] = original_only
-    graph_kwargs['proportion'] = proportion_
-    clustering_kwargs['use_only_distances'] = distances_only
-    clustering_kwargs['use_only_original'] = original_only
-    clustering_kwargs['proportion'] = proportion_
+    _graph_kwargs_['use_only_distances'] = distances_only
+    _graph_kwargs_['use_only_original'] = original_only
+    _graph_kwargs_['proportion'] = proportion_
+    _clustering_kwargs_['use_only_distances'] = distances_only
+    _clustering_kwargs_['use_only_original'] = original_only
+    _clustering_kwargs_['proportion'] = proportion_
 
     for _name in ALL_NAMES:
-        run_graph_part(name, _graph_kwargs, clustering_kwargs, draw_kwargs, print_info)
+        run_graph_part(_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, print_info)
+    
 
 
-def evaluate_and_plot(_proportion: float, _K: int, _weight: float, optimized: bool = False):
+def evaluate_and_plot():
     """
     Evaluate and plot metrics for all combinations of names and versions.
 
@@ -147,19 +139,16 @@ def evaluate_and_plot(_proportion: float, _K: int, _weight: float, optimized: bo
     avg_fluency = {_name: {} for _name in ALL_NAMES}  # the average fluency for each dataset.
     success_rates = {_name: {} for _name in ALL_NAMES}  # the success rates for each dataset.
 
-    if optimized:
-        pairs = list(itertools.product(ALL_NAMES, VERSION[:-1]))
-    else:
-        pairs = list(itertools.product(ALL_NAMES, VERSION))
 
-    for _name, _version in pairs:
-        print(f"Evaluating '{_name}' with version '{_version}', proportion={_proportion}, weight={_weight}")
-        G = functions.load_graph(_name, _version, _proportion, _K, _weight, optimized)
-        avg_index[_name][_version], largest_cluster_percentage[_name][_version] = functions.evaluate_clusters(G, _name)
-        success_rates[_name][_version] = evaluate.evaluate(_name, _version, _proportion, _K, _weight, optimized, G)
-        avg_relevancy[_name][_version], avg_coherence[_name][_version], avg_consistency[_name][_version],
-        avg_fluency[_name][_version] = evaluate.myEval(_name, _version, _proportion, _K, _weight, optimized)
-
+    for _name in ALL_NAMES:
+        G = functions.load_graph(_name)
+        avg_index[_name], largest_cluster_percentage[_name] = functions.evaluate_clusters(G, _name)
+        success_rates[_name] = evaluate.evaluate(_name, G)
+        a, b, c, d = evaluate.myEval(_name, G)
+        avg_relevancy[_name] = a
+        avg_coherence[_name] = b
+        avg_consistency[_name] = c
+        avg_fluency[_name] = d
     metrics_dict = {
         'avg_index': avg_index,
         'largest_cluster_percentage': largest_cluster_percentage,
@@ -170,8 +159,8 @@ def evaluate_and_plot(_proportion: float, _K: int, _weight: float, optimized: bo
         'success_rates': success_rates
     }
 
-    for _name, _version in pairs:
-        evaluate.plot_bar(_name, _version, metrics_dict)
+    for _name in ALL_NAMES:
+        evaluate.plot_bar(_name, metrics_dict)
 
 
 if __name__ == '__main__':
@@ -229,16 +218,16 @@ if __name__ == '__main__':
     # create_graphs_all_versions(graph_kwargs, clustering_kwargs, draw_kwargs)
 
     # Step 2: Summarize the clusters for all versions. (Uncomment if needed)
-    summarization_dict = {} #
+    os.makedirs("Summaries/optimized", exist_ok=True)
+    titles_dict = {}
     for _name in ALL_NAMES:
         print(f"Running summarization for '{_name}'.")
-        titles = run_summarization(_name, version, proportion, _save=True, _k=K, _weight=weight, is_optimized=True) #
-        summarization_dict[_name] = titles #
-    for key, value in summarization_dict.items():
-        print('-' * 50)
-        print(f"{key} title names:")
-        for item in value:
-            print(item)
-
+        titles = run_summarization(_name)
+        titles_dict[_name] = titles
+    # Save titles_dict as a JSON file
+    output_path = os.path.join("Summaries", "optimized", "Titles.json")
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(titles_dict, f, ensure_ascii=False, indent=4)
+    
     # Step 3: Evaluate the results.
-    # evaluate_and_plot(proportion, K, weight, optimized=True)
+    evaluate_and_plot()

@@ -10,42 +10,35 @@ import cohere
 from dotenv import load_dotenv
 import pickle as pkl
 import replicate
+import summarize
 
-def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
+def upload_graph(graph: nx.Graph, name: str) -> None:
+    """
+    Upload the graph to the given path.
+    :param graph: the graph to upload.
+    :param name: the name of the graph.
+    :return: None
+    """
+    graph_path = f"data/optimized_graphs/{name}.gpickle"
+    # save the graph.
+    with open(graph_path, 'wb') as f:
+        pkl.dump(graph, f, protocol=pkl.HIGHEST_PROTOCOL)
+
+    print(f"{'-'*50}\nGraph saved to {graph_path}.")
+
+
+def load_graph(name: str) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
-    :param version: the version of the graph.
-    :param k: the KNN parameter.
-    :param proportion: the proportion of the graph.
-    :param weight: the weight of the edges.
-    :param optimized: whether to use the optimized version of the graph.
+    :return: the graph.
     :return:
     """
 
-    if optimized:
-        graph_path = None
-        for file in os.listdir('data/optimized_graphs'):
-            if file.startswith(name):
-                graph_path = 'data/optimized_graphs/' + file
-                break
-    else:
-        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                                   "or 'proportion'."
-        graph_path = f"data/processed_graphs/k_{k}/"
-        if weight != 1:
-            graph_path += f"weight_{weight}/"
-        if version == 'distances':
-            graph_path += f"only_distances/{name}.gpickle"
-
-        elif version == 'original':
-            graph_path += f"only_original/{name}.gpickle"
-
-        else:
-            if proportion != 0.5:
-                graph_path += f"{name}proportion{proportion}.gpickle"
-            else:
-                graph_path += f"{name}.gpickle"
+    graph_path = None
+    for file in os.listdir('data/optimized_graphs'):
+        if file.startswith(name):
+            graph_path = 'data/optimized_graphs/' + file
 
     # load the graph.
     with open(graph_path, 'rb') as f:
@@ -87,35 +80,18 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     return subgraphs
 
 
-def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, proportion: float, save: bool = False,
-                       k: int = 5, weight: float = 1, optimized: bool = False):
+def summarize_per_color(subgraphs: List[nx.Graph], name: str):
     """
     Summarizes each subgraph's abstract texts using Cohere's API, prints the results, and optionally saves them to text files.
 
     :param subgraphs: List of subgraphs.
     :param name: The name of the dataset.
-    :param version: The version of the graph.
-    :param proportion: The proportion of the graph.
-    :param save: Whether to save the results.
-    :param k: The KNN parameter.
-    :param weight: The weight of the edges.
-    :param optimized: Whether to use the optimized version of the graph.
     :return: None
     """
-
+    # load the graph.
+    G = summarize.load_graph(name)
     # File path construction as per user-provided method
-    if optimized:
-        result_file_path = "Summaries/optimized/" + name + '/'
-    else:
-        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', or 'proportion'."
-        result_file_path = f"Summaries/k_{k}/weight_{weight}/{name}"
-        if version == 'distances':
-            result_file_path += '_only_distances/'
-        elif version == 'original':
-            result_file_path += '_only_original/'
-        else:
-            if proportion != 0.5:
-                result_file_path += f'proportion{proportion}/'
+    result_file_path = "Summaries/optimized/" + name + '/'
 
     # Ensure the directory exists
     os.makedirs(result_file_path, exist_ok=True)
@@ -143,7 +119,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
     df = pd.read_csv(PATH)[['id', 'abstract']]
     count_titles = 2
     titles_list = []
-
+    vertex_to_title_map = {}
     # Iterate over each subgraph to generate summaries
     for i, subgraph in enumerate(subgraphs, start=1):
         # Extract the color attribute from the first node
@@ -167,7 +143,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
         with open('prompt for command-r.txt', 'r') as file:
             instructions_command_r = file.read()
         # Display summarization information
-        print(f"Summarizing {len(abstracts)} abstracts.\nCluster color: {color}.\nNumber of vertices: {num_nodes}.")
+        print(f"{'-'*50}\nSummarizing {len(abstracts)} abstracts.\nCluster color: {color}.\nNumber of vertices: {num_nodes}.")
 
         # Generate the summary using Cohere's summarize API
         response = co.generate(
@@ -191,8 +167,11 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
 
         with open('prompt for llama 2.txt' , 'r') as file:
             instructions_llama2 = file.read()
+        prompt = instructions_llama2 + summary
+        if titles_list:
+            prompt += f"\n\nTry ao avoid giving one of those titles: {titles_list}"
         input_params = {
-            "prompt": instructions_llama2 + summary,
+            "prompt": prompt,
             "max_tokens": 300
         }
         output = replicate.run(
@@ -206,20 +185,22 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, version: str, prop
             count_titles += 1
         titles_list.append(title)
         # save the summary.
-        if save:
+        vers = 'vertices' if num_nodes != 1 else 'vertex'
 
-            vers = 'vertices' if num_nodes != 1 else 'vertex'
+        file_name = f'{title} ({num_nodes} {vers}).txt'
 
-            file_name = f'{title} ({num_nodes} {vers}).txt'
-
-            try:
-                with open(result_file_path + file_name, 'w') as f:
-                    f.write(summary)
-                    print(f"Summary saved to {result_file_path + file_name}") #
-            except FileNotFoundError:  # create the directory if it doesn't exist.
-                os.makedirs(result_file_path)
-                with open(file_name, 'w') as f:
-                    f.write(summary)
-        print('\n*3')
+        try:
+            with open(result_file_path + file_name, 'w') as f:
+                f.write(summary)
+                print(f"Summary saved to {result_file_path + file_name}") #
+        except FileNotFoundError:  # create the directory if it doesn't exist.
+            os.makedirs(result_file_path)
+            with open(file_name, 'w') as f:
+                f.write(summary)
+        
+        for v in subgraph.nodes():
+            vertex_to_title_map[v] = f'{title} ({num_nodes} {vers})'
+    nx.set_node_attributes(G, values=vertex_to_title_map, name='title')
+    upload_graph(G, name)
     return titles_list #
         

@@ -34,7 +34,7 @@ def get_file_path(name):
     return 'data/distances/' + name + '_papers_embeddings.pkl'
 
 
-def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 1, optimized: bool = False) -> nx.Graph:
+def load_graph(name: str) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
@@ -46,29 +46,10 @@ def load_graph(name: str, version: str, proportion, k: int = 5, weight: float = 
     :return:
     """
 
-    if optimized:
-        graph_path = None
-        for file in os.listdir('data/optimized_graphs'):
-            if file.startswith(name):
-                graph_path = 'data/optimized_graphs/' + file
-                break
-    else:
-        assert version in ['distances', 'original', 'proportion'], "Version must be one of 'distances', 'original', " \
-                                                                   "or 'proportion'."
-        graph_path = f"data/processed_graphs/k_{k}/"
-        if weight != 1:
-            graph_path += f"weight_{weight}/"
-        if version == 'distances':
-            graph_path += f"only_distances/{name}.gpickle"
-
-        elif version == 'original':
-            graph_path += f"only_original/{name}.gpickle"
-
-        else:
-            if proportion != 0.5:
-                graph_path += f"{name}_proportion_{proportion}.gpickle"
-            else:
-                graph_path += f"{name}.gpickle"
+    graph_path = None
+    for file in os.listdir('data/optimized_graphs'):
+        if file.startswith(name):
+            graph_path = 'data/optimized_graphs/' + file
 
     # load the graph.
 
