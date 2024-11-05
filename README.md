@@ -111,7 +111,7 @@ Where:
 * `k`: The number of neighbors to account for in the distance based edges.
 
 
-Returns: '$\mathcal{P}$' a partition of vertices from `G` into communities.
+Returns: $\mathcal{P}$ a partition of vertices from `G` into communities.
 
 Example for the clustering:
 
