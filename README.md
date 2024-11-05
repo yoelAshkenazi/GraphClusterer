@@ -82,6 +82,8 @@ where:
 
 
 Returns: Processed graph (`networkx.Graph` object)
+   
+<img src="https://github.com/user-attachments/assets/e2715659-458f-41e5-b16b-7879c5aef7e0" alt="0" width="600px">
 
 ### Clustering
 After processing/creating the graph of texts (and keywords), we cluster the graph using the [Louvain method](https://en.wikipedia.org/wiki/Louvain_method) with the implementation embedded in the `networkx` module.
@@ -110,6 +112,11 @@ Where:
 
 Returns: '$\mathcal{P}$' a partition of vertices from `G` into communities.
 
+Example for the clustering:
+
+<img src="https://github.com/user-attachments/assets/54c32d5a-f4f5-4dc3-a144-ec990f7bb0b3" alt="unnamed" width="600px">
+
+
 ### Summarization
 As mentioned in the [introduction](#introduction) section, the main goal of our pipeline is to summarize clusters of vertices, rather than the full graph.
 To achieve that we perform the following steps:
@@ -134,6 +141,20 @@ Where:
 
 
 The function fetches the texts from the vertices in the subgraph, send them to the above 3 iterations of LLM generation, and saves the summaries for each cluster as a '`.txt`' file in a folder named `name`.
+
+<img src="https://github.com/user-attachments/assets/3394ceaa-7660-4e79-803a-5d21836ec5b6" alt="0" width="600px">
+
+## Example of a summary:
+```text
+Biomass-derived carbons (BDCs) and their composites with conductive materials, such as metals, metal sulfides, carbon nanotubes,
+and reduced graphene oxide, are used to enhance the performance of supercapacitors. By combining BDCs with conductive additives,
+researchers aim to improve conductivity, charge/discharge capabilities, and specific surface area, resulting in higher specific
+capacitance values. This approach integrates the benefits of electrochemical double-layer capacitors (EDLCs) and pseudocapacitors,
+leading to enhanced energy density. Layered double hydroxides (LDHs), synthetic two-dimensional nano-structured anionic clays, are
+also explored as hosts for Azo-compounds to create nano-hybrid materials. Intercalating large anionic pigments like phenyl azobenzoic
+sodium salt into Zn-Al LDH increases the interlayer spacing significantly, and the resulting nano-hybrid material is used as a filler
+for polyvinyl alcohol (PVA) to form nano-composites that exhibit improved thermal stability compared to pure PVA.
+```
 
 ### Evaluation
 In the evaluation section, we execute a series of tests in order to assess the quality of:
@@ -170,6 +191,8 @@ In addition to the other metrics, we also estimated how much a given summary agr
 
 In order to estimate this metric, for each cluster we sampled texts from within and from outside it, then sent them with a specially designed prompt to an LLM judge (we used '`command-r`' here as well). 
 
+<img src="https://github.com/user-attachments/assets/c1d93f94-d081-4a8d-97a2-919c8c810ad3" alt="0" width="600px">
 
 ### Results
-![composite material](https://github.com/user-attachments/assets/d67c59e8-54d9-4cdd-9a49-5075470db79f)
+<img src="https://github.com/user-attachments/assets/a6be5c2f-b1a4-4dd3-b792-1662560bc237" alt="composite material" width="600px">
+
