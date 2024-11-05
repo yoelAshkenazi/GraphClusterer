@@ -1,4 +1,5 @@
 # Graph Clustering and Summarizing
+## Introduction
 We aim to improve the quality of a multi-document summary, given the connections between the texts (via shared authors, institution, subject etc.). 
 Our method is as follows:
 1. Calculate the direct distances between the texts in the graph. 
