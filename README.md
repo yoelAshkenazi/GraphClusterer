@@ -169,3 +169,7 @@ The scripts we used for each of the four metrics are from [this repository](http
 In addition to the other metrics, we also estimated how much a given summary agrees with texts from its origin compared to texts from other clusters.
 
 In order to estimate this metric, for each cluster we sampled texts from within and from outside it, then sent them with a specially designed prompt to an LLM judge (we used '`command-r`' here as well). 
+
+
+### Results
+![composite material](https://github.com/user-attachments/assets/d67c59e8-54d9-4cdd-9a49-5075470db79f)
