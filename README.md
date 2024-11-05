@@ -16,7 +16,6 @@ Our python package contains a full pipeline that performs the above operations (
 
 -  [Installation](#installation)
 -  [Quick tour](#quick-tour)
--  [Examples](#examples)
 
 ## Installation
 We do not have an official python package manager installation available yet. However, 
@@ -137,4 +136,36 @@ Where:
 The function fetches the texts from the vertices in the subgraph, send them to the above 3 iterations of LLM generation, and saves the summaries for each cluster as a '`.txt`' file in a folder named `name`.
 
 ### Evaluation
-(***REGEV CONTINUE HERE***)
+In the evaluation section, we execute a series of tests in order to assess the quality of:
+* The [clustering](#clustering-scores).
+*The [summaries](#summary-scores) (as text documents).
+*The [consistency](#consistency-index) between a summary and its origin.
+
+
+#### Clustering scores
+The clustering scores evaluate how good the clustering partitioned the graph. For that we used two metrics (one is irrelevant if the graph is given by the user and not created by our '`make_graph()`' method). Here we computed everything by ourselves.
+1. 'Average index': This metric measures the proportion between the average distance between two vertices from the same cluster, compared to two random vertices. (This method is relevant only for graphs our method created)
+2. 'Largest cluster percentage': This metric measures the percentage of data in the largest cluster created.
+
+
+Both metrics are between 0 and 1, and we would expect different optimal results:
+* The optimal 'average index' should be as low as possible, but strictly positive.
+* The optimal 'largest cluster percentage' shoule be around 0.5 (or 50% of the data).
+
+
+#### Summary scores
+The summary scores measure how understandable a summary is as a text. For that four scores are estimated:
+1. 'Fluency'
+2. 'Consistency'
+3. 'Coherence'
+4. 'Relevancy'
+
+
+The estimation is made with an LLM judge (we used '`command-r`', but other models perform similarly here).
+The scripts we used for each of the four metrics are from [this repository](https://github.com/microsoft/promptflow/tree/main/examples/flows/evaluation/eval-summarization).
+
+
+#### Consistency index
+In addition to the other metrics, we also estimated how much a given summary agrees with texts from its origin compared to texts from other clusters.
+
+In order to estimate this metric, for each cluster we sampled texts from within and from outside it, then sent them with a specially designed prompt to an LLM judge (we used '`command-r`' here as well). 
