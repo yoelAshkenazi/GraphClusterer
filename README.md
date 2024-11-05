@@ -159,8 +159,8 @@ for polyvinyl alcohol (PVA) to form nano-composites that exhibit improved therma
 ### Evaluation
 In the evaluation section, we execute a series of tests in order to assess the quality of:
 * The [clustering](#clustering-scores).
-*The [summaries](#summary-scores) (as text documents).
-*The [consistency](#consistency-index) between a summary and its origin.
+* The [summaries](#summary-scores) (as text documents).
+* The [consistency](#consistency-index) between a summary and its origin.
 
 
 #### Clustering scores
