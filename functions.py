@@ -38,11 +38,6 @@ def load_graph(name: str) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
-    :param version: the version of the graph.
-    :param k: the KNN parameter.
-    :param proportion: the proportion of the graph.
-    :param weight: the weight of the edges.
-    :param optimized: whether to use the optimized version of the graph.
     :return:
     """
 
@@ -189,7 +184,7 @@ def draw_graph(G, name, **kwargs):
     vertices = random.sample(list(G.nodes), int(rate * len(G.nodes())))
     G = G.subgraph(vertices)
 
-    blue_weights = [G[u][v]['weight'] for u, v in G.edges() if G[u][v]['color'] == 'blue']  # weights for blue edges.
+    blue_weights = [G[u][v]['weight'] * 5 for u, v in G.edges() if G[u][v]['color'] == 'blue']  # weights for blue edges.
     red_weights = [15 * G[u][v]['weight'] for u, v in G.edges() if G[u][v]['color'] == 'red']  # weights for red edges.
     # draw vertices with given shapes and sizes.
     shapes = nx.get_node_attributes(G, 'shape').values()
@@ -199,7 +194,7 @@ def draw_graph(G, name, **kwargs):
         vertices_ = [v for v in G.nodes() if
                      shape == G.nodes.data()[v]['shape']]
         # get a list of the sizes of said nodes.
-        vertex_sizes = [G.nodes.data()[node]['size'] for node in vertices_]
+        vertex_sizes = [1000 for node in vertices_]
         # get a list of the colors of said nodes.
         vertex_colors = [G.nodes.data()[node]['color'] for node in vertices_]
         nx.draw_networkx_nodes(G, pos, nodelist=vertices_, node_size=vertex_sizes,

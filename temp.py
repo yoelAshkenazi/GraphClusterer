@@ -1,204 +1,135 @@
-import optuna
+import random
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+import numpy as np
+import networkx as nx
 import os
-from functions import evaluate_clusters, make_graph, cluster_graph, get_file_path, load_pkl
 import pickle as pk
 import pandas as pd
-from calc_energy import compute_energy_distance_matrix
-from optuna.samplers import TPESampler
 
-# Define ALL_DATASET_NAMES (list of dataset names)
-ALL_DATASET_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones",
-                     "hypersonic missile", "nuclear reactor", "scramjet", "wind tunnel", "quantum computing",
-                     "smart material"]
+def load_graph(name):
+    """
+    Load the graph with the given name.
+    :param name: the name of the graph.
+    :return: the graph.
+    """
+    graph_path = None
+    for file in os.listdir('data/wikipedia_graphs'):
+        if file.startswith(name):
+            graph_path = 'data/wikipedia_graphs/' + file
 
-# Dictionary to store the optimized parameters for each dataset
-optimized_params = {}
+    # load the graph.
+    with open(graph_path, 'rb') as f:
+        graph = pk.load(f)
 
-# Track the best non-infinity trial globally
-best_valid_trial_params = {}
+    # filter the graph in order to remove the nan nodes.
+    nodes = graph.nodes(data=True)
+    s = len(nodes)
+    nodes = [node for node, data in nodes if not pd.isna(node)]
+    print(
+        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+    graph = graph.subgraph(nodes)
 
+    return graph
 
-# Define the objective function to optimize independently for each dataset
-def objective(trial, _dataset_name):
-    global best_valid_trial_params
+def cluster_graph(G, res):
+    """
+    divide the vertices of the graph into clusters.
+    set a random color to each cluster's nodes.
+    :param G: the graph to cluster.
+    :param kwargs: additional arguments for the clustering method.
+    :return:
+    """
 
-    # Suggest values for filter, weight, and resolution for the current dataset
-    _filter_value = trial.suggest_float('filter', 0, 5)
-    _weight_value = trial.suggest_float('weight', 0.01, 0.3)
-    _resolution_value = trial.suggest_float('resolution', 0.001, 0.2)
+    partition = nx.algorithms.community.louvain_communities(G, resolution=res)
 
-    # Compute the energy distance matrix using the filter value
-    _energy_distance_matrix = compute_energy_distance_matrix(_dataset_name, _filter_value)
+    colors = ['#' + ''.join([random.choice('0123456789ABCDEF') for _ in range(6)]) for _ in range(len(partition))]
+    for i, cluster in enumerate(partition):
+        for node in cluster:
+            G.nodes[node]['color'] = colors[i]
 
-    # Load paper IDs from the embeddings
-    _file_path = get_file_path(_dataset_name)
-    _embeddings = load_pkl(_file_path)
+    return partition
 
-    # Define the graph creation parameters using the computed matrix and optimized weight
-    graph_kwargs = {
-        'weight': _weight_value,
-        'size': 200,
-        'color': '#1f78b4',
-        'distance_threshold': 0.5,
-        'use_only_distances': True,
-        'use_only_original': True,
-        'distance_matrix': _energy_distance_matrix
-    }
-
-    # Create the graph for the dataset
-    graph = make_graph(_dataset_name, **graph_kwargs)
-
-    # Define the clustering parameters, including weight and resolution
-    clustering_kwargs = {
-        'method': 'louvain',
-        'resolution': _resolution_value,
-        'weight': _weight_value,
-        'save': False
-    }
-
-    # Cluster the graph with the specified weight and resolution
-    cluster_graph(graph, _dataset_name, **clustering_kwargs)
-
-    # Evaluate the clusters using only the graph and dataset name
-    _avg_index, _largest_cluster_percentage = evaluate_clusters(graph, _dataset_name)
-
-    # Ensure largest_cluster_percentage is between 20% and 75%
-    if not (0.2 <= _largest_cluster_percentage <= 0.75):
-        print(f"Trial pruned: largest_cluster_percentage {_largest_cluster_percentage} out of range.")
-        return float('inf')  # Return a high value to discard this trial
-
-    # Print results for the current trial, only printing avg_index
-    print(f"Trial {trial.number} finished with avg_index: {_avg_index:.5f}")
-
-    # If this trial is valid, store it as the best valid trial
-    if _dataset_name not in best_valid_trial_params or _avg_index < best_valid_trial_params[_dataset_name]['avg_index']:
-        print(f"New best trial for {_dataset_name}: avg_index = {_avg_index:.5f}")
-        best_valid_trial_params[_dataset_name] = {
-            'filter': _filter_value,
-            'weight': _weight_value,
-            'resolution': _resolution_value,
-            'avg_index': _avg_index,
-            'largest_cluster_percentage': _largest_cluster_percentage  # Keeping this internally for logic purposes
-        }
-
-    # Return avg_index as the objective to minimize
-    return _avg_index
+def evaluate_clusters(G):
+    """
+    Evaluate the clusters of the graph.
+    :param G:  the graph.
+    :return: largest_cluster_percentage
+    """
+    
+    # filter the vertices by type 'paper'.
+    articles = [node for node in G.nodes() if G.nodes.data()[node].get('type', 'paper')]
+    articles_graph = G.subgraph(articles)
+    colors = set([node[1]['color'] for node in articles_graph.nodes(data=True)])
+    
+    # Calculate the size of each cluster.
+    sizes = []
+    for color in colors:
+        cluster = [node for node in articles_graph.nodes() if articles_graph.nodes.data()[node]['color'] == color]
+        sizes.append(len(cluster))
+    
+    # Calculate the percentage of papers in the largest cluster.
+    largest_cluster = max(sizes)
+    largest_cluster_percentage = largest_cluster / len(articles)
+    
+    return largest_cluster_percentage
 
 
-# Function to clear the directory if it exists and contains files
-def clear_directory(directory):
-    if os.path.exists(directory):
-        if os.listdir(directory):
-            print(f"Directory '{directory}' is not empty. Deleting existing files...")
-            for filename in os.listdir(directory):
-                _file_path = os.path.join(directory, filename)
-                try:
-                    if os.path.isfile(_file_path):
-                        os.unlink(_file_path)
-                except Exception as e:
-                    print(f"Failed to delete {_file_path}. Reason: {e}")
-        else:
-            print(f"Directory '{directory}' is empty. Proceeding with file creation.")
-    else:
-        os.makedirs(directory)
-        print(f"Directory '{directory}' created.")
+def main():
+    name = "apple"
+    G = load_graph(name)
+    
+    # Define the range and number of resolution values
+    resolution_start = 0.001
+    resolution_end = 1.0
+    num_resolutions = 500  # Number of distinct resolution values
+    trials_per_resolution = 1000  # Number of trials per resolution
+    
+    # Generate a list of resolution values
+    resolution_values = np.linspace(resolution_start, resolution_end, num_resolutions)
+    
+    # Lists to store aggregated results
+    avg_largest_cluster = []
+    counter = 0  # To count trials where 0.6 <= percentage < 0.75
+    
+    total_iterations = num_resolutions * trials_per_resolution
+    
+    # Initialize tqdm progress bar
+    with tqdm(total=total_iterations, desc="Processing", unit="trial") as pbar:
+        for resolution in resolution_values:
+            cluster_percentages = []
+            for _ in range(trials_per_resolution):
+                clusters = cluster_graph(G, resolution)
+                largest_cluster_percentage = evaluate_clusters(G)
+                cluster_percentages.append(largest_cluster_percentage)
+                
+                if 0.6 <= largest_cluster_percentage < 0.75:
+                    counter += 1
+                
+                pbar.update(1)
+            
+            # Compute average for current resolution
+            avg = np.mean(cluster_percentages)
+            avg_largest_cluster.append(avg)
+    
+    # Compute overall statistics
+    total_trials = total_iterations
+    percentage_counter = counter / total_trials
+    
+    print(f"\nMax Average: {max(avg_largest_cluster):.4f}, Min Average: {min(avg_largest_cluster):.4f}")
+    print(f"% of trials with 0.6 <= largest_cluster_percentage < 0.75: {percentage_counter:.2%}")
+    
+    # Plotting Section
+    plt.figure(figsize=(12, 7))
+    plt.plot(resolution_values, avg_largest_cluster, label='Average Largest Cluster Percentage', color='blue', linewidth=2)
+    
+    plt.xlabel('Resolution')
+    plt.ylabel('Average Largest Cluster Percentage')
+    plt.title('Average Largest Cluster Percentage vs. Resolution')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
 
-
-# Custom function to save the graph
-def save_graph(graph, _dataset_name, filter_value, weight_value, resolution_value):
-    filename = f'data/optimized_graphs/{_dataset_name}_filter={filter_value}_weight={weight_value}_resolution={resolution_value}.gpickle'
-    try:
-        with open(filename, 'wb') as f:
-            pk.dump(graph, f, protocol=pk.HIGHEST_PROTOCOL)
-        print(f"Graph for '{_dataset_name}' saved successfully to '{filename}'.")
-    except Exception as e:
-        print(f"Error saving graph for '{_dataset_name}': {e}")
-
-
-# Clear the output directory before starting the optimization
-clear_directory('data/optimized_graphs')
-
-# Run independent optimization for each dataset in ALL_DATASET_NAMES
-for dataset_name in ALL_DATASET_NAMES:
-    print(f"Starting optimization for dataset: {dataset_name}")
-
-    # Create a TPE sampler with a lower number of startup trials and a higher gamma
-    sampler = TPESampler(n_startup_trials=10, gamma=lambda n: min(int(0.1 * n), 25))
-
-    # Create a study for this dataset with a pruning strategy (MedianPruner) and custom TPE Sampler
-    study = optuna.create_study(
-        direction='minimize',
-        pruner=optuna.pruners.MedianPruner(),
-        sampler=sampler  # Using custom TPE Sampler
-    )
-
-    # Optimize the parameters for 2000 trials for the current dataset
-    study.optimize(lambda trial: objective(trial, dataset_name), n_trials=2000, show_progress_bar=True, n_jobs=-1)
-
-    # Get the best trial
-    best_trial = study.best_trial
-    best_filter = best_trial.params['filter']
-    best_weight = best_trial.params['weight']
-    best_resolution = best_trial.params['resolution']
-
-    # Recompute the energy distance matrix using the best filter value for final evaluation
-    energy_distance_matrix = compute_energy_distance_matrix(dataset_name, best_filter)
-
-    # Load paper IDs again to ensure they are available for final evaluation
-    file_path = get_file_path(dataset_name)
-    embeddings = load_pkl(file_path)
-    paper_ids = embeddings['IDs']
-
-    # Create the graph using the best parameters and ensure the distance_matrix is passed
-    best_graph_kwargs = {
-        'weight': best_weight,
-        'size': 200,
-        'color': '#1f78b4',
-        'distance_threshold': 0.5,
-        'use_only_distances': True,
-        'distance_matrix': energy_distance_matrix  # Include the recomputed distance matrix here
-    }
-
-    best_graph = make_graph(dataset_name, **best_graph_kwargs)
-
-    # Use the best resolution and weight for clustering
-    best_clustering_kwargs = {
-        'method': 'louvain',
-        'resolution': best_resolution,
-        'weight': best_weight,
-        'save': False
-    }
-
-    cluster_graph(best_graph, dataset_name, **best_clustering_kwargs)
-
-    avg_index, largest_cluster_percentage = evaluate_clusters(best_graph, dataset_name)
-
-    # Print the best trial information, only printing avg_index
-    print(f"Best trial is {best_trial.number} with avg_index: {study.best_value:.5f}")
-
-    # Save the optimized graph
-    save_graph(best_graph, dataset_name, best_filter, best_weight, best_resolution)
-
-    # Store the optimized parameters
-    optimized_params[dataset_name] = {
-        'filter': best_filter,
-        'weight': best_weight,
-        'resolution': best_resolution,
-        'avg_index': avg_index,
-        'largest_cluster_percentage': largest_cluster_percentage
-    }
-
-    print(f"Best trial for {dataset_name}: avg_index = {avg_index}, "
-          f"filter = {best_filter}, weight = {best_weight}, resolution = {best_resolution}")
-
-# Convert the optimized parameters dictionary to a DataFrame
-df = pd.DataFrame(optimized_params).T
-df.reset_index(inplace=True)
-df.rename(columns={'index': 'Dataset'}, inplace=True)
-
-# Display the final table
-print("\nFinal Optimized Parameters for Each Dataset:\n")
-print(df[['Dataset', 'filter', 'weight', 'resolution', 'avg_index']])
-
-# Optionally, save the table to a CSV file for future reference
-df.to_csv('data/optimized_graphs/optimized_parameters_with_filter.csv', index=False)
+if __name__ == "__main__":
+    main()

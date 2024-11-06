@@ -110,12 +110,12 @@ evaluation_metrics = {
 }
 
 
-def myEval(name: str, G: nx.Graph = None):
+def metrics_evaluations(name: str, G: nx.Graph = None):
     """
     Load the cluster summary for the given name and calculate average scores for relevancy, coherence, consistency,
     and fluency.
     :param name: the name of the dataset.
-    :param optimized: whether to use the optimized version of the graph.
+    :param G: the graph.
     :return: Averages of the averages for relevancy, coherence, consistency, and fluency.
     """
     summary_path = f"Summaries/optimized/"
@@ -245,7 +245,8 @@ def myEval(name: str, G: nx.Graph = None):
     avg_consistency = sum(all_consistency_scores) / len(all_consistency_scores) if all_consistency_scores else 0
     avg_fluency = sum(all_fluency_scores) / len(all_fluency_scores) if all_fluency_scores else 0
 
-    return avg_relevancy, avg_coherence, avg_consistency, avg_fluency
+    return avg_relevancy / 5, avg_coherence / 5, avg_consistency / 5, avg_fluency / 5
+
 
 def extract_colors(graph: nx.Graph) -> Dict[str, str]:
     """
@@ -259,6 +260,7 @@ def extract_colors(graph: nx.Graph) -> Dict[str, str]:
         if title is not None:
             title_to_color[title] = graph.nodes[node]['color']
     return title_to_color
+
 
 def evaluate(name: str, G: nx.Graph = None) -> float:
     """
@@ -483,7 +485,7 @@ def plot_bar(name: str, metrics_dict: list):
     bars = plt.bar(x_labels, values, color='skyblue', edgecolor='black')
 
     # Set y-axis limits and labels
-    plt.ylim(0, 5.5)
+    plt.ylim(0, 1.1)
     plt.xlabel("Evaluation Metrics", fontsize=14)
     plt.ylabel("Score", fontsize=14)
     plt.title(f"Results for '{name}' graph", fontsize=16, fontweight='bold')
@@ -494,7 +496,7 @@ def plot_bar(name: str, metrics_dict: list):
         yval = bar.get_height()
         plt.text(
             bar.get_x() + bar.get_width() / 2,
-            yval + 0.05,
+            yval + 0.01,
             f"{yval:.2f}",
             ha='center', va='bottom', fontsize=12, fontweight='bold'
         )

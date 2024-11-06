@@ -1,76 +1,38 @@
 {
-    "3D printing": [
-        "3D Food Printing Technology",
-        "Advancements in 3D Printing",
-        "3D Printing in Healthcare",
-        "Applications of 3D Printing",
-        "3D Printing and Applications",
-        "3D Printing in Construction",
-        "NIH 3D Print Exchange"
-    ],
-    "additive manufacturing": [
-        "Additive Manufacturing for Sustainability",
-        "Advancements in Additive Manufacturing",
-        "Revolutionizing Industries with AM",
-        "3D Printing Advancements Applications"
-    ],
-    "composite material": [
-        "Composite Materials and Applications",
-        "Properties and Industrial Applications",
-        "Exploring Composite Materials Advancements",
-        "Unique Composite Material Properties",
-        "Recycling Composite Materials Challenges",
-        "Biomass-Derived Carbon Composites"
-    ],
-    "autonomous drones": [
-        "Innovative Drone Technology Applications",
-        "Drones Revolutionize Multiple Sectors",
-        "Advancements and Applications Drones",
-        "Autonomous Oil Slick Detection",
-        "Autonomous Technology and Applications",
-        "Open-Source Unmanned Vehicle Technology",
-        "Deep Learning Fault Detection"
-    ],
-    "hypersonic missile": [
-        "Hypersonic Missile Control Systems",
-        "Iraqi Missile Attacks Iran",
-        "Missile Defense and Stability",
-        "Control Strategies for Hypersonics"
-    ],
     "nuclear reactor": [
-        "Nuclear Reactors and Energy",
-        "Advancements in Nuclear Energy",
-        "Nuclear Reactor Control Systems"
+        "The Future of Nuclear",
+        "Nuclear Technology and Applications",
+        "Advanced Nuclear Reactor Technology"
     ],
     "scramjet": [
-        "Scramjet Engine Design Optimization",
-        "Research and Development Efforts",
-        "Scramjet Technology for Hypersonic Flight"
+        "Scramjet Engine Development Research",
+        "Hypersonic Scramjet Engine Design",
+        "Challenges in Scramjet Development"
     ],
     "wind tunnel": [
-        "Wind Tunnel Experiments Applications",
-        "Specialized Sensor Technologies Advantages",
-        "Airborne Substances Capture Efficiency",
-        "Magnetic Suspension in Aerodynamics",
-        "Studying Aerodynamics and Dynamics",
-        "Wind Tunnel Designs Applications",
-        "Wind Engineering Research Applications",
-        "Enhancing Reynolds Number Methods"
+        "Wind Tunnel Environmental Studies",
+        "Optical Sensors in Aerodynamics",
+        "Magnetic Suspension and Aerodynamics",
+        "Wind Tunnels and Applications",
+        "Wind Tunnel Testing Applications",
+        "Enhancing Hypersonic Wind Tunnels",
+        "Aerodynamics and Dynamics Studies",
+        "Wind Tunnel Experiment Applications"
     ],
     "quantum computing": [
-        "Quantum Computing Research Models",
-        "Quantum Computing Unique Properties",
+        "Quantum Computing and Mechanics",
+        "Quantum Computing Models Applications",
         "Advancements in Quantum Computing",
-        "Exploring Quantum Computing Applications"
+        "Quantum Computing Theory Practice"
     ],
     "smart material": [
+        "Smart Materials and Technologies",
+        "Catalysis for Energy Transition",
         "Smart Materials and Applications",
-        "Stimuli-Responsive Materials and Devices",
-        "Properties Altering External Stimuli",
-        "Smart Materials for Efficiency",
-        "Additive Manufacturing with Smart Materials",
+        "Smart Materials Enhance Industries",
+        "Biomaterials for Tissue Regeneration",
         "Advancements in 4D Printing",
-        "Smart Biomaterials for Tissue",
-        "Smart Materials Research Development"
+        "Applications of Smart Materials",
+        "Responsive Smart Material Applications"
     ]
 }
