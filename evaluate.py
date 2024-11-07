@@ -118,8 +118,8 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
     :param G: the graph.
     :return: Averages of the averages for relevancy, coherence, consistency, and fluency.
     """
-    summary_path = f"Summaries/optimized/"
-    for file in os.listdir('Summaries/optimized'):
+    summary_path = f"Results/Summaries/"
+    for file in os.listdir('Results/Summaries'):
         if file.startswith(name):
             summary_path += file
     
@@ -269,8 +269,8 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
     :param G: the graph.
     :return:
     """
-    summary_path = f"Summaries/optimized/"
-    for file in os.listdir('Summaries/optimized'):
+    summary_path = f"Results/Summaries/"
+    for file in os.listdir('Results/Summaries'):
         if file.startswith(name):
             summary_path += file
     

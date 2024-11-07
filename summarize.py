@@ -10,7 +10,6 @@ import cohere
 from dotenv import load_dotenv
 import pickle as pkl
 import replicate
-import summarize
 
 def upload_graph(graph: nx.Graph, name: str) -> None:
     """
@@ -89,9 +88,9 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
     :return: None
     """
     # load the graph.
-    G = summarize.load_graph(name)
+    G = load_graph(name)
     # File path construction as per user-provided method
-    result_file_path = "Summaries/optimized/" + name + '/'
+    result_file_path = "Results/Summaries/" + name + '/'
 
     # Ensure the directory exists
     os.makedirs(result_file_path, exist_ok=True)

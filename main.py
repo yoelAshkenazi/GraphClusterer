@@ -174,14 +174,14 @@ if __name__ == '__main__':
 
     """
     # Step 2: Summarize the clusters
-    os.makedirs("Summaries/optimized", exist_ok=True)
+    os.makedirs("Results/Summaries", exist_ok=True)
     titles_dict = {}
     for _name in ALL_NAMES:
         print(f"Running summarization for '{_name}'.")
         titles = run_summarization(_name)
         titles_dict[_name] = titles
     # Save titles_dict as a JSON file
-    output_path = os.path.join("Summaries", "optimized", "Titles.json")
+    output_path = os.path.join("Results", "Summaries", "Titles.json")
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(titles_dict, f, ensure_ascii=False, indent=4)
     """
