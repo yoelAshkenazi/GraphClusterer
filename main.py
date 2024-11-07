@@ -186,4 +186,4 @@ if __name__ == '__main__':
         json.dump(titles_dict, f, ensure_ascii=False, indent=4)
     """
     # Step 3: Evaluate the results.
-    evaluate_and_plot()
+    # evaluate_and_plot()
