@@ -7,9 +7,8 @@ from calc_energy import compute_energy_distance_matrix
 from optuna.samplers import TPESampler
 
 # Define ALL_DATASET_NAMES (list of dataset names)
-ALL_DATASET_NAMES = [
-    "additive manufacturing", "scramjet", "wind tunnel", "quantum computing",
-]
+ALL_DATASET_NAMES = ['3D printing', "additive manufacturing", "composite material", "autonomous drones", "hypersonic missile",
+                    "nuclear reactor", "scramjet", "wind tunnel", "quantum computing", "smart material"]
 
 # Dictionary to store the optimized parameters for each dataset
 optimized_params = {}
@@ -23,16 +22,13 @@ def objective(trial, _dataset_name):
     global best_valid_trial_params
 
     # Suggest values for filter, weight, and resolution for the current dataset
-    _filter_value = trial.suggest_float('filter', 0, 5)
+    _least_cutoff = trial.suggest_float('least_cutoff', 0, 5)
+    _most_cutoff = trial.suggest_float('most_cutoff', 0, 5)
     _weight_value = trial.suggest_float('weight', 0.01, 0.3)
     _resolution_value = trial.suggest_float('resolution', 0.001, 0.2)
 
     # Compute the energy distance matrix using the filter value
-    _energy_distance_matrix = compute_energy_distance_matrix(_dataset_name, _filter_value)
-
-    # Load paper IDs from the embeddings
-    _file_path = get_file_path(_dataset_name)
-    _embeddings = load_pkl(_file_path)
+    _energy_distance_matrix = compute_energy_distance_matrix(_dataset_name, _least_cutoff, _most_cutoff)
 
     # Define the graph creation parameters using the computed matrix and optimized weight
     graph_kwargs = {
@@ -74,7 +70,8 @@ def objective(trial, _dataset_name):
     if _dataset_name not in best_valid_trial_params or _avg_index < best_valid_trial_params[_dataset_name]['avg_index']:
         print(f"New best trial for {_dataset_name}: avg_index = {_avg_index:.5f}")
         best_valid_trial_params[_dataset_name] = {
-            'filter': _filter_value,
+            'least_cutoff': _least_cutoff,
+            'most_cutoff': _most_cutoff,
             'weight': _weight_value,
             'resolution': _resolution_value,
             'avg_index': _avg_index,
@@ -116,7 +113,7 @@ def clear_directory(directory, current_dataset_names):
 
 
 # Custom function to save the graph
-def save_graph(graph, _dataset_name, filter_value, weight_value, resolution_value):
+def save_graph(graph, _dataset_name):
     """
     Saves the graph object to a file with a name based on the dataset and parameters.
 
@@ -160,12 +157,13 @@ for dataset_name in ALL_DATASET_NAMES:
 
     # Get the best trial
     best_trial = study.best_trial
-    best_filter = best_trial.params['filter']
+    best_least_cutoff = best_trial.params['least_cutoff']
+    best_most_cutoff = best_trial.params['most_cutoff']
     best_weight = best_trial.params['weight']
     best_resolution = best_trial.params['resolution']
 
     # Recompute the energy distance matrix using the best filter value for final evaluation
-    energy_distance_matrix = compute_energy_distance_matrix(dataset_name, best_filter)
+    energy_distance_matrix = compute_energy_distance_matrix(dataset_name, best_least_cutoff, best_most_cutoff)
 
     # Load paper IDs again to ensure they are available for final evaluation
     file_path = get_file_path(dataset_name)
@@ -201,11 +199,12 @@ for dataset_name in ALL_DATASET_NAMES:
     print(f"Best trial is {best_trial.number} with avg_index: {study.best_value:.5f} and largest_cluster_percentage: {largest_cluster_percentage:.5f}")
 
     # Save the optimized graph
-    save_graph(best_graph, dataset_name, best_filter, best_weight, best_resolution)
+    save_graph(best_graph, dataset_name)
 
     # Store the optimized parameters
     optimized_params[dataset_name] = {
-        'filter': best_filter,
+        'least_cutoff': best_least_cutoff,
+        'most_cutoff': best_most_cutoff,
         'weight': best_weight,
         'resolution': best_resolution,
         'avg_index': avg_index,
@@ -221,7 +220,7 @@ df.rename(columns={'index': 'Dataset'}, inplace=True)
 
 # Display the final table
 print("\nFinal Optimized Parameters for Each Dataset:\n")
-print(df[['Dataset', 'filter', 'weight', 'resolution', 'avg_index', 'largest_cluster_percentage']])
+print(df[['Dataset', 'least_cutoff', 'most_cutoff', 'weight', 'resolution', 'avg_index', 'largest_cluster_percentage']])
 
 # Optionally, save the table to a CSV file for future reference
 output_csv_path = 'data/optimized_graphs/optimized_parameters_with_filter.csv'

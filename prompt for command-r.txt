@@ -6,4 +6,7 @@ You will summarize the texts according to the following rules:
 3- Your summary must mention key ideas and concepts that repeat in the texts.
 4- You must not invent any information. The summary must contain only information directly deduced from the texts.
 5- Your summary must be coherent, fluent in language, and relevant in content to the texts.
+6- In your summary, only refer to the texts you get as input, do not make things up in the summary.
+7- Try your best that the summary will be the most relevant, coherent, consistent and as fluent as can be.
+
 Texts:

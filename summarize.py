@@ -11,6 +11,11 @@ from dotenv import load_dotenv
 import pickle as pkl
 import replicate
 
+wikipedia = False
+def update_wikipedia():
+    global wikipedia
+    wikipedia = True
+
 def upload_graph(graph: nx.Graph, name: str) -> None:
     """
     Upload the graph to the given path.
@@ -18,7 +23,12 @@ def upload_graph(graph: nx.Graph, name: str) -> None:
     :param name: the name of the graph.
     :return: None
     """
-    graph_path = f"data/optimized_graphs/{name}.gpickle"
+    global wikipedia
+    if wikipedia:
+        graph_path = f"data/wikipedia_optimized/{name}.gpickle"
+    else:
+        graph_path = f"data/optimized_graphs/{name}.gpickle"
+
     # save the graph.
     with open(graph_path, 'wb') as f:
         pkl.dump(graph, f, protocol=pkl.HIGHEST_PROTOCOL)
@@ -33,11 +43,17 @@ def load_graph(name: str) -> nx.Graph:
     :return: the graph.
     :return:
     """
-
+    global wikipedia
     graph_path = None
-    for file in os.listdir('data/optimized_graphs'):
-        if file.startswith(name):
-            graph_path = 'data/optimized_graphs/' + file
+
+    if wikipedia:
+        for file in os.listdir('data/wikipedia_optimized'):
+            if file.startswith(name):
+                graph_path = 'data/wikipedia_optimized/' + file
+    else:
+        for file in os.listdir('data/optimized_graphs'):
+            if file.startswith(name):
+                graph_path = 'data/optimized_graphs/' + file
 
     # load the graph.
     with open(graph_path, 'rb') as f:
@@ -60,8 +76,13 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     :param graph: the graph.
     :return:
     """
+    global wikipedia
     # first we filter articles by vertex type.
-    articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
+    if wikipedia:
+        articles = [node for node in graph.nodes() if graph.nodes.data()[node]['shape'] == 's']
+    else:
+        articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
+
     articles_graph = graph.subgraph(articles)
     graph = articles_graph
 
@@ -87,10 +108,16 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
     :param name: The name of the dataset.
     :return: None
     """
+
+    global wikipedia
     # load the graph.
     G = load_graph(name)
     # File path construction as per user-provided method
-    result_file_path = "Results/Summaries/" + name + '/'
+    if wikipedia:
+        result_file_path = f"Results/Summaries/Wikipedia/" + name + '/'
+    else:
+        result_file_path = "Results/Summaries/Rafael/" + name + '/'
+
 
     # Ensure the directory exists
     os.makedirs(result_file_path, exist_ok=True)
@@ -108,7 +135,10 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
 
     api_token = os.getenv("LLAMA_API_KEY")
     # Load the abstracts from the CSV file
-    PATH = f'data/graphs/{name}_papers.csv'
+    if wikipedia:
+        PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
+    else:
+        PATH = f'data/graphs/{name}_papers.csv'
 
     # Ensure the CSV file exists
     if not os.path.exists(PATH):

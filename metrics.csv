@@ -1,0 +1,11 @@
+dataset name,avg_index,largest_cluster_percentage,avg_relevancy,avg_coherence,avg_consistency,avg_fluency,success_rates
+3D printing,0.699,0.650,0.681,0.708,0.602,0.936,0.798
+additive manufacturing,0.827,0.550,0.665,0.553,0.495,1.000,0.655
+composite material,0.555,0.550,0.740,0.793,0.633,0.953,0.966
+autonomous drones,0.608,0.660,0.725,0.592,0.619,0.801,0.733
+hypersonic missile,0.347,0.500,0.601,0.686,0.500,0.953,0.934
+nuclear reactor,0.453,0.670,0.568,0.548,0.392,0.959,0.753
+scramjet,0.644,0.520,0.597,0.553,0.293,0.987,0.852
+wind tunnel,0.817,0.710,0.832,0.750,0.750,0.939,0.937
+quantum computing,0.484,0.740,0.686,0.643,0.583,0.931,0.611
+smart material,0.864,0.260,0.620,0.599,0.475,0.850,0.878

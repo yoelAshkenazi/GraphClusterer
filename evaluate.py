@@ -12,8 +12,13 @@ import cohere  # Added Cohere import
 import os
 from dotenv import load_dotenv
 import re
+from matplotlib.patches import Patch
 
-
+wikipedia = False
+def update_wikipedia():
+    global wikipedia
+    wikipedia = True
+    
 load_dotenv()
 cohere_key = os.getenv("COHERE_API_KEY")
 
@@ -118,11 +123,18 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
     :param G: the graph.
     :return: Averages of the averages for relevancy, coherence, consistency, and fluency.
     """
-    summary_path = f"Results/Summaries/"
-    for file in os.listdir('Results/Summaries'):
-        if file.startswith(name):
-            summary_path += file
-    
+    global wikipedia
+    if wikipedia:
+        summary_path = f"Results/Summaries/wikipedia/"
+        for file in os.listdir('Results/Summaries/wikipedia'):
+            if file.startswith(name):
+                summary_path += file
+    else:
+        summary_path = f"Results/Summaries/Rafael/"
+        for file in os.listdir('Results/Summaries/Rafael'):
+            if file.startswith(name):
+                summary_path += file
+        
     # Check if the summary directory exists and list its contents
     if not os.path.exists(summary_path):
         print(f"Error: Directory {summary_path} does not exist!")
@@ -153,7 +165,17 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
         subgraphs[title] = G.subgraph(nodes)
 
     # Load the data
-    data = pd.read_csv(f"data/graphs/{name}_papers.csv")[['id', 'abstract']]
+    if wikipedia:
+        PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
+    else:
+        PATH = f'data/graphs/{name}_papers.csv'
+
+    # Ensure the CSV file exists
+    if not os.path.exists(PATH):
+        raise FileNotFoundError(f"The file {PATH} does not exist.")
+
+    # Read only the id and abstract columns
+    data = pd.read_csv(PATH)[['id', 'abstract']]
 
     all_relevancy_scores = []
     all_coherence_scores = []
@@ -216,6 +238,7 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
                     score = int(score[-1])
                 except (IndexError, ValueError):
                     print(f"Unexpected score format: '{score}'. Defaulting to 0.")
+
                     score = 0
 
                 if eval_type == "Relevance":
@@ -269,10 +292,17 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
     :param G: the graph.
     :return:
     """
-    summary_path = f"Results/Summaries/"
-    for file in os.listdir('Results/Summaries'):
-        if file.startswith(name):
-            summary_path += file
+    global wikipedia
+    if wikipedia:
+        summary_path = f"Results/Summaries/wikipedia/"
+        for file in os.listdir('Results/Summaries/wikipedia'):
+            if file.startswith(name):
+                summary_path += file
+    else:
+        summary_path = f"Results/Summaries/Rafael/"
+        for file in os.listdir('Results/Summaries/Rafael'):
+            if file.startswith(name):
+                summary_path += file
     
     # Check if the summary directory exists and list its contents
     if not os.path.exists(summary_path):
@@ -298,15 +328,22 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
             continue
         # Get the subgraph.
         color = title_to_color[title]
-        nodes = [node for node in G.nodes if G.nodes[node]['color'] == color]
-
+        nodes = [node for node in G.nodes() if G.nodes.data()[node]['color'] == color]
         subgraphs[title] = G.subgraph(nodes)
 
 
     # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
-    # Then ask Cohere's API which abstracts are more similar to the summary.
+    if wikipedia:
+        PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
+    else:
+        PATH = f'data/graphs/{name}_papers.csv'
 
-    data = pd.read_csv(f"data/graphs/{name}_papers.csv")[['id', 'abstract']]  # Load the data.
+    # Ensure the CSV file exists
+    if not os.path.exists(PATH):
+        raise FileNotFoundError(f"The file {PATH} does not exist.")
+
+    # Read only the id and abstract columns
+    data = pd.read_csv(PATH)[['id', 'abstract']]
     evaluations = {}
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
     total_out_score = 0  # Total scores for the abstracts sampled outside the clusters.
@@ -370,10 +407,11 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
             total_in_score += score_in
 
             # Evaluate consistency for abstracts outside the cluster.
-            prompt_out = f"Answer using only a number between 1 to 100: " \
+            prompt_out = f"Answer using only a number between 0 to 100: " \
                          f"How consistent is the following summary with the abstract?\n" \
                          f"Summary: {summary}\n" \
-                         f"Abstract: {outside_abstracts[i]}\n"
+                         f"Abstract: {outside_abstracts[i]}\n"\
+                         f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score."
 
             response_out = co.generate(
                 model="command-r-plus-08-2024",  # Replace with the desired Cohere model
@@ -400,128 +438,3 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
     return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
 
 
-def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
-    """
-    Partition the graph into subgraphs according to the community colors.
-    :param graph: the graph.
-    :return:
-    """
-    # First, filter articles by vertex type.
-    articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
-    articles_graph = graph.subgraph(articles)
-    graph = articles_graph
-
-    # Second filter divides the graph by colors.
-    nodes = graph.nodes(data=True)
-    colors = set([node[1]['color'] for node in nodes])
-    subgraphs = []
-    for i, color in enumerate(colors):  # Filter by colors.
-        nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
-
-        subgraph = graph.subgraph(nodes)
-        subgraphs.append(subgraph)
-
-    return subgraphs
-
-
-def load_graph(name: str) -> nx.Graph:
-    """
-    Load the graph with the given name.
-    :param name: the name of the graph.
-    :return:
-    """
-
-    graph_path = None
-    for file in os.listdir('data/optimized_graphs'):
-        if file.startswith(name):
-            graph_path = 'data/optimized_graphs/' + file
-
-    # Load the graph.
-    with open(graph_path, 'rb') as f:
-        graph = pkl.load(f)
-
-    # Filter the graph to remove NaN nodes.
-    nodes = graph.nodes(data=True)
-    s = len(nodes)
-    nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
-    graph = graph.subgraph(nodes)
-
-    return graph
-
-
-def plot_bar(name: str, metrics_dict: list):
-    """
-    Create and save a bar plot for the given metrics of a specific name and version.
-
-    :param name: the name of the dataset.
-    :param metrics_dict: Dictionary containing metrics for each (name, version) combination.
-    :return:
-    """
-    # Retrieve metrics for the specific name and version
-    values = [
-        metrics_dict['avg_index'][name],  
-        metrics_dict['largest_cluster_percentage'][name],  
-        metrics_dict['avg_relevancy'][name],  
-        metrics_dict['avg_coherence'][name],  
-        metrics_dict['avg_consistency'][name],  
-        metrics_dict['avg_fluency'][name],  
-        metrics_dict['success_rates'][name]  
-    ]
-
-    # Define the labels for the x-axis
-    x_labels = [
-        "Average\nIndex",
-        "Largest\nCluster\nPercentage",
-        "Average\nRelevancy",
-        "Average\nCoherence",
-        "Average\nConsistency",
-        "Average\nFluency",
-        "Success\nRate"
-    ]
-
-    # Create the bar plot
-    plt.figure(figsize=(10, 6))
-    bars = plt.bar(x_labels, values, color='skyblue', edgecolor='black')
-
-    # Set y-axis limits and labels
-    plt.ylim(0, 1.1)
-    plt.xlabel("Evaluation Metrics", fontsize=14)
-    plt.ylabel("Score", fontsize=14)
-    plt.title(f"Results for '{name}' graph", fontsize=16, fontweight='bold')
-    plt.grid(axis='y', linestyle='--', alpha=0.7)
-
-    # Display the value above each bar
-    for bar in bars:
-        yval = bar.get_height()
-        plt.text(
-            bar.get_x() + bar.get_width() / 2,
-            yval + 0.01,
-            f"{yval:.2f}",
-            ha='center', va='bottom', fontsize=12, fontweight='bold'
-        )
-
-    # Adjust layout to prevent clipping
-    plt.tight_layout()
-
-    # Sanitize the file name to avoid issues with spaces or special characters
-    sanitized_name = re.sub(r'[\\/*?:"<>|]', "_", name)
-
-    # Define the folder path and file path
-    plot_folder = "Results/plots"  # Always save in this folder
-    plot_file_name = f"{sanitized_name}.png"  # Save the figure with the given name
-    full_path = os.path.join(plot_folder, plot_file_name)
-
-    # Create the plots folder if it doesn't exist
-    os.makedirs(plot_folder, exist_ok=True)
-
-    # Save the plot
-    try:
-        plt.savefig(full_path)
-    except Exception as e:
-        print(f"Error saving the plot: {e}")
-
-    plt.show()  # Show the plot after saving
-    plt.close()  # Clear the figure to free memory
-
-    print(f"Plot saved at: {full_path}")

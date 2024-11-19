@@ -12,6 +12,10 @@ import pickle as pk
 import random
 import os
 
+wikipedia = False
+def update_wikipedia():
+    global wikipedia
+    wikipedia = True
 
 # load a .pkl file.
 def load_pkl(file_path):
@@ -38,16 +42,22 @@ def load_graph(name: str) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
+    :return: the graph.
     :return:
     """
-
+    global wikipedia
     graph_path = None
-    for file in os.listdir('data/optimized_graphs'):
-        if file.startswith(name):
-            graph_path = 'data/optimized_graphs/' + file
+
+    if wikipedia:
+        for file in os.listdir('data/wikipedia_optimized'):
+            if file.startswith(name):
+                graph_path = 'data/wikipedia_optimized/' + file
+    else:
+        for file in os.listdir('data/optimized_graphs'):
+            if file.startswith(name):
+                graph_path = 'data/optimized_graphs/' + file
 
     # load the graph.
-
     with open(graph_path, 'rb') as f:
         graph = pk.load(f)
 
@@ -55,7 +65,8 @@ def load_graph(name: str) -> nx.Graph:
     nodes = graph.nodes(data=True)
     s = len(nodes)
     nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+    print(
+        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
     graph = graph.subgraph(nodes)
 
     return graph
@@ -92,7 +103,7 @@ def make_graph(name, **kwargs):
     default_vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
     default_size = kwargs['size'] if 'size' in kwargs else 150
     threshold = kwargs['distance_threshold'] if 'distance_threshold' in kwargs else 0.5
-    use_distances = kwargs.get('use_only_distances', True)  # whether to use only the distances.
+    use_distances = kwargs.get('use_only_distances', False)  # whether to use only the distances.
     use_original = kwargs.get('use_only_original', True)  # whether to use only the original edges.
     proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
     weight = kwargs.get('weight', 1)  # the weight of the edges.
@@ -152,6 +163,39 @@ def make_graph(name, **kwargs):
     return G
 
 
+def make_wiki_graph(name, **kwargs):
+    """
+    Create a graph with the given parameters.
+    :param name: file name.
+    :param kwargs: additional arguments for the graph.
+    :return:
+    """
+    # load the embeddings.
+    node_path = f"data/wikipedia/{name}_100_samples_nodes.csv"
+    nodes = pd.read_csv(node_path)
+    edge_path = f"data/wikipedia/{name}_100_samples_edges.csv"
+    edges = pd.read_csv(edge_path)
+    # distances between papers.
+    paper_ids = nodes['id']  # paper ids.
+
+    # set the parameters.
+
+    default_vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
+    default_size = kwargs['size'] if 'size' in kwargs else 150
+    # assign shapes to each type.
+
+    # create a graph.
+    G = nx.Graph()
+    for i, paper_id in enumerate(paper_ids):  # add the papers to the graph.
+        G.add_node(paper_id, size=default_size, shape='o', type='paper', color=default_vertex_color)
+
+    firsts = edges.iloc[:, 0]
+    seconds = edges.iloc[:, 1]
+    for i in range(len(firsts)):
+        G.add_edge(firsts[i], seconds[i], weight=1, color='blue')
+    return G
+
+
 def draw_graph(G, name, **kwargs):
     """
     Draw a graph with the given colors and shapes.
@@ -169,13 +213,10 @@ def draw_graph(G, name, **kwargs):
     this will draw the graph for the '3D printing' embeddings, with the given parameters.
     """
 
-    rate = kwargs['shown_percentage'] if 'shown_percentage' in kwargs else 0.2
-    figsize = kwargs['figsize'] if 'figsize' in kwargs else 20
+    rate = kwargs['shown_percentage'] if 'shown_percentage' in kwargs else 1
+    figsize = kwargs['figsize'] if 'figsize' in kwargs else 8
     save = kwargs['save'] if 'save' in kwargs else False
     method = kwargs['method'] if 'method' in kwargs else 'louvain'
-    use_original = kwargs.get('use_only_original', True)  # whether to use only the original edges.
-    use_distances = kwargs.get('use_only_distances', True)  # whether to use only the distances.
-    proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
 
     plt.figure(figsize=(figsize, figsize))
     pos = nx.spring_layout(G)  # positions for all nodes.
@@ -210,12 +251,66 @@ def draw_graph(G, name, **kwargs):
 
     if save:
         filename = f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}'
-        if not use_original:
-            filename += '_only_distances'
-        elif not use_distances:
-            filename += '_only_original'
-        if proportion != 0.5:
-            filename += f'_proportion_{proportion}'
+        try:
+            plt.savefig(f'{filename}.png')
+        except FileNotFoundError:  # create the directory if it doesn't exist.
+            import os
+            os.makedirs(f'Figures/{int(100 * rate)}_percents_shown/{method}_method/')
+            plt.savefig(f'{filename}.png')
+    plt.show()
+
+
+def draw_wiki_graph(G, name, **kwargs):
+    """
+    Draw a graph with the given colors and shapes.
+    :param G: the graph to draw.
+    :param name: the name of the graph.
+    :return:
+
+    ------------
+    Example:
+    ------------
+    name = '3D printing'
+
+    draw_kwargs = {'shown_percentage': 0.65, 'figsize': 25, 'save': True, 'method': 'louvain'}
+    functions.draw_graph(G, **draw_kwargs)
+    this will draw the graph for the '3D printing' embeddings, with the given parameters.
+    """
+    rate = kwargs['shown_percentage'] if 'shown_percentage' in kwargs else 1
+    figsize = kwargs['figsize'] if 'figsize' in kwargs else 6
+    save = kwargs['save'] if 'save' in kwargs else False
+    method = kwargs['method'] if 'method' in kwargs else 'louvain'
+
+    plt.figure(figsize=(figsize, figsize))
+    pos = nx.spring_layout(G)  # positions for all nodes.
+
+    # randomly select a rate of vertices to draw.
+    vertices = random.sample(list(G.nodes), int(rate * len(G.nodes()))) if rate < 1 else list(G.nodes)
+    G = G.subgraph(vertices)
+
+    blue_weights = [G[u][v].get('weight', 1) * 5 for u, v in G.edges() if G[u][v].get('color', 'blue')]  # weights for blue edges.
+    # draw vertices with given shapes and sizes.
+    shapes = nx.get_node_attributes(G, 'shape').values()
+    # draw the vertices according to shapes.
+    for shape in shapes:
+        # get a list of nodes with the same shape.
+        vertices_ = [v for v in G.nodes() if
+                     shape == G.nodes.data()[v]['shape']]
+        # get a list of the sizes of said nodes.
+        vertex_sizes = [1000 for node in vertices_]
+        # get a list of the colors of said nodes.
+        vertex_colors = [G.nodes.data()[node]['color'] for node in vertices_]
+        nx.draw_networkx_nodes(G, pos, nodelist=vertices_, node_size=vertex_sizes,
+                               node_shape=shape, node_color=vertex_colors, alpha=0.8,
+                               linewidths=1.5, edgecolors='black')  # always draw a black border.
+
+    # draw the blue edges.
+    nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'blue'],
+                           edge_color='blue', width=blue_weights, alpha=0.75)
+
+
+    if save:
+        filename = f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}'
         try:
             plt.savefig(f'{filename}.png')
         except FileNotFoundError:  # create the directory if it doesn't exist.
@@ -234,26 +329,12 @@ def cluster_graph(G, name, **kwargs):
     :param kwargs: additional arguments for the clustering method.
     :return:
     """
+
+    global wikipedia
     # get the clustering method.
     save = kwargs['save'] if 'save' in kwargs else False
-    method = kwargs['method'] if 'method' in kwargs else 'louvain'
-    use_original = kwargs.get('use_only_original', True)  # whether to use only the original edges.
-    use_distances = kwargs.get('use_only_distances', True)  # whether to use only the distances.
-    proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
-    K = kwargs.get('K', 5)  # the KNN parameter.
-    weight = kwargs.get('weight', 1)  # the weight of the edges.
-
-    if method == 'louvain':  # use the louvain method.
-        res = kwargs['resolution'] if 'resolution' in kwargs else 1.0
-        partition = nx.algorithms.community.louvain_communities(G, resolution=res)
-    elif method == 'leiden':  # use the leiden method.
-        res = kwargs['resolution'] if 'resolution' in kwargs else 1.0
-        partition = nx.algorithms.community.quality.modularity(G, resolution=res)
-    elif method == 'k_clique':  # use the k-clique method.
-        k = kwargs['k'] if 'k' in kwargs else 5
-        partition = nx.algorithms.community.k_clique_communities(G, k)
-    else:
-        raise ValueError("Invalid clustering method.")
+    res = kwargs['resolution'] if 'resolution' in kwargs else 1.0        
+    partition = nx.algorithms.community.louvain_communities(G, resolution=res)
 
     colors = ['#' + ''.join([random.choice('0123456789ABCDEF') for _ in range(6)]) for _ in range(len(partition))]
     for i, cluster in enumerate(partition):
@@ -261,17 +342,12 @@ def cluster_graph(G, name, **kwargs):
             G.nodes[node]['color'] = colors[i]
 
     if save:  # save the graph.
-        dirname = f'data/processed_graphs/k_{K}/'
-        if weight != 1:
-            dirname += f'weight_{weight}/'
-        if not use_original:
-            dirname += f'only_distances/'
-        elif not use_distances:
-            dirname += f'only_original/'
-        filename = dirname + name
-        if proportion != 0.5:
-            filename += f'_proportion_{proportion}'
-        filename += '.gpickle'
+        if wikipedia:
+            dirname = f'data/processed_graphs_wikipedia/'
+        else:
+            dirname = f'data/processed_graphs_Rafael/'
+        
+        filename = dirname + name + '.gpickle'
         # dump the graph to a .pkl file.
         try:
             with open(filename, 'wb') as f:
@@ -360,6 +436,27 @@ def evaluate_clusters(G, name):
     largest_cluster_percentage = largest_cluster / len(articles)
 
     return avg_index, largest_cluster_percentage
+
+
+def evaluate_wiki_clusters(G):
+    """
+    Evaluate the clusters of the graph.
+    :param G:  the graph.
+    :return:
+    """
+    # filter the vertices by color and type.
+    articles = [node for node in G.nodes if G.nodes()[node]['shape'] == 's']
+    articles_graph = G.subgraph(articles)
+    colors = set([node[1]['color'] for node in articles_graph.nodes(data=True)])
+    sizes = []
+    for color in colors:
+        cluster = [node for node in articles_graph.nodes if articles_graph.nodes[node]['color'] == color]
+        sizes.append(len(cluster))
+    # get the percentage of papers in the largest cluster.
+    largest_cluster = max(sizes)
+    largest_cluster_percentage = largest_cluster / len(articles)
+
+    return -5, largest_cluster_percentage
 
 
 def check_weight_prop(G, start, end, step, name, res, repeat):
