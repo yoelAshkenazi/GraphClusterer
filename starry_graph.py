@@ -6,7 +6,6 @@ import cohere
 from dotenv import load_dotenv
 import pickle as pk
 import random
-import math
 import matplotlib.pyplot as plt
 
 wikipedia = False
@@ -50,12 +49,12 @@ def starr(name: str, G: nx.Graph = None) -> float:
         for file in os.listdir('Results/Summaries/Rafael'):
             if file.startswith(name):
                 summary_path += file
-    
+
     # Check if the summary directory exists and list its contents
     if not os.path.exists(summary_path):
         print(f"Error: Directory {summary_path} does not exist!")
         return None
-    
+
     clusters = os.listdir(summary_path)
     summaries = {}
     titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
@@ -74,8 +73,8 @@ def starr(name: str, G: nx.Graph = None) -> float:
             continue
         # Get the subgraph.
         color = title_to_color[title]
-        nodes = [node for node in G.nodes() if G.nodes.data()[node]['color'] == color]
-        subgraphs[title] = G.subgraph(nodes)
+        nodes = [node for node in G.nodes if G.nodes()[node].get('color', 'green') == color]
+        subgraphs[title] = G.subgraph(nodes).copy()  # Ensure mutable subgraph
 
     # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
     if wikipedia:
@@ -100,9 +99,9 @@ def starr(name: str, G: nx.Graph = None) -> float:
         summary = summaries[title]
         cluster_name = title
         # Get the abstracts from the cluster.
-        cluster_abstracts = {row['id'] : row['abstract'] for id, row in data.iterrows() if row['id'] in subgraph.nodes}
+        cluster_abstracts = {row['id']: row['abstract'] for id, row in data.iterrows() if row['id'] in subgraph.nodes}
         # Clean NaNs.
-        cluster_abstracts = {id : abstract for id, abstract in cluster_abstracts.items() if not pd.isna(abstract)}
+        cluster_abstracts = {id: abstract for id, abstract in cluster_abstracts.items() if not pd.isna(abstract)}
 
         # Get the abstracts from outside the cluster.
         outside_abstracts = [row['abstract'] for _, row in data.iterrows() if row['id'] not in subgraph.nodes]
@@ -113,14 +112,16 @@ def starr(name: str, G: nx.Graph = None) -> float:
         for id, abstract in cluster_abstracts.items():
             outside = random.choice(outside_abstracts)
             # Evaluate consistency for abstracts inside the cluster.
-            prompt_in = f"Answer using only a number between 1 to 100: " \
-                        f"How consistent is the following summary with the abstract?\n" \
-                        f"Summary: {summary}\n" \
-                        f"Abstract: {abstract}\n" \
-                         f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score," \
-                         f"and only the score, without any '.' or ',' etc."
-            
-            response_in = co.generate (
+            prompt_in = (
+                f"Answer using only a number between 1 to 100: "
+                f"How consistent is the following summary with the abstract?\n"
+                f"Summary: {summary}\n"
+                f"Abstract: {abstract}\n"
+                f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score,"
+                f" and only the score, without any '.' or ',' etc."
+            )
+
+            response_in = co.generate(
                 model="command-r-plus-08-2024",
                 prompt=prompt_in,
                 max_tokens=100,
@@ -136,12 +137,14 @@ def starr(name: str, G: nx.Graph = None) -> float:
             total_in_score += score_in
 
             # Evaluate consistency for abstracts outside the cluster.
-            prompt_out = f"Answer using only a number between 0 to 100: " \
-                         f"How consistent is the following summary with the abstract?\n" \
-                         f"Summary: {summary}\n" \
-                         f"Abstract: {outside}\n"\
-                         f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score," \
-                         f"and only the score, without any '.' or ',' etc."
+            prompt_out = (
+                f"Answer using only a number between 0 to 100: "
+                f"How consistent is the following summary with the abstract?\n"
+                f"Summary: {summary}\n"
+                f"Abstract: {outside}\n"
+                f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score,"
+                f" and only the score, without any '.' or ',' etc."
+            )
 
             response_out = co.generate(
                 model="command-r-plus-08-2024",  # Replace with the desired Cohere model
@@ -186,12 +189,11 @@ def starr(name: str, G: nx.Graph = None) -> float:
     return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
 
 
-
 def plot(name):
     # Load the CSV file
     file_path = f"Results/starry/{name}.csv"
     data = pd.read_csv(file_path)
-    
+
     # Ensure output directory exists
     output_dir = "Results/starry"
     os.makedirs(output_dir, exist_ok=True)
@@ -258,40 +260,129 @@ def plot(name):
 
     print(f"Saved legend (title mappings) to {legend_path}")
 
-        
+
+def update(name, G):
+    """
+    Update the graph based on the 'Results/starry/{name}.csv' evaluations.
+    :param name: the name of the dataset.
+    :param G: the graph to be updated.
+    """
+    # Load the CSV file created in the 'plot' function
+    csv_path = f"Results/starry/{name}.csv"
+    if not os.path.exists(csv_path):
+        print(f"Error: CSV file '{csv_path}' does not exist.")
+        return
+
+    data = pd.read_csv(csv_path)
+
+    # Initialize a list to store nodes that need to be created
+    nodes_to_create = []
+    edges_to_add = []
+
+    # Iterate over unique clusters (titles)
+    for cluster_title in data['title'].unique():
+        # Filter data for the current cluster
+        cluster_data = data[data['title'] == cluster_title]
+
+        # Extract node indices and scores
+        node_indices = cluster_data['index'].tolist()
+        total_in_scores = cluster_data['total_in_score'].tolist()
+        total_out_scores = cluster_data['total_out_score'].tolist()
+
+        # Create a mapping of node -> color (blue or red)
+        node_colors = {}
+        for i, node in enumerate(node_indices):
+            if total_in_scores[i] > total_out_scores[i]:
+                node_colors[node] = 'blue'
+            else:
+                node_colors[node] = 'red'
+
+        # Iterate over unique pairs of nodes (u, v) in the cluster
+        n = len(node_indices)
+        for i in range(n):
+            for j in range(i + 1, n):  # Ensure u != v and only consider each pair once
+                u = node_indices[i]
+                v = node_indices[j]
+
+                # Step (b): Add edges based on node colors
+                if node_colors[u] == 'blue' and node_colors[v] == 'blue':
+                    # Both u and v are blue
+                    if G.has_edge(u, v):
+                        current_weight = G[u][v].get('weight', 1)  # Default weight to 1 if missing
+                        new_weight = current_weight * 2
+                        G[u][v]['weight'] = new_weight
+                        print(f"Edge ({u}, {v}) weight increased from {current_weight} to {new_weight}.")
+                    else:
+                        edges_to_add.append((u, v, {'weight': 1}))  # Track edge to be added
+                else:
+                    # At least one of u or v is red
+                    if G.has_edge(u, v):
+                        current_weight = G[u][v].get('weight', 1)  # Default weight to 1 if missing
+                        new_weight = current_weight / 2
+                        G[u][v]['weight'] = new_weight
+                    else:
+                        # No action needed if the edge does not exist
+                        print(f"Edge ({u}, {v}) does not exist. No action taken.")
+
+                # Keep track of nodes that need to be created
+                if u not in G.nodes:
+                    nodes_to_create.append(u)
+                if v not in G.nodes:
+                    nodes_to_create.append(v)
+
+    # Add all nodes to the graph (if any were missing)
+    for node in set(nodes_to_create):  # Use `set` to ensure unique nodes
+        G.add_node(node)
+        print(f"Node '{node}' added to the graph.")
+
+    # Add all edges to the graph
+    for u, v, attributes in edges_to_add:
+        G.add_edge(u, v, **attributes)
+
+    # Save the updated graph
+    updated_graph_path = f"data/optimized_graphs/{name}.gpickle"
+    with open(updated_graph_path, 'wb') as f:
+        pk.dump(G, f)
+    print(f"Updated graph saved to {updated_graph_path}")
+
+
 def load_graph(name: str) -> nx.Graph:
     """
     Load the graph with the given name.
     :param name: the name of the graph.
     :return: the graph.
-    :return:
     """
+    graph_path = None
     for file in os.listdir('data/optimized_graphs'):
         if file.startswith(name):
-            graph_path = 'data/optimized_graphs/' + file
+            graph_path = os.path.join('data/optimized_graphs', file)
+            break
+
+    if graph_path is None:
+        raise FileNotFoundError(f"No graph file starts with '{name}' in 'data/optimized_graphs/' directory.")
 
     print(name, graph_path)
-    # load the graph.
+    # Load the graph.
     with open(graph_path, 'rb') as f:
         graph = pk.load(f)
 
-    # filter the graph in order to remove the nan nodes.
-    nodes = graph.nodes(data=True)
+    # Filter the graph in order to remove the nan nodes.
+    nodes = list(graph.nodes(data=True))
     s = len(nodes)
     nodes = [node for node, data in nodes if not pd.isna(node)]
     print(
         f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
-    graph = graph.subgraph(nodes)
+    graph = graph.subgraph(nodes).copy()  # Ensure mutable subgraph
 
     return graph
 
-#
-_name = ['3D printing', "additive manufacturing", "autonomous drones", "composite material",
-          "hypersonic missile", "nuclear reactor", "quantum computing", "scramjet", "smart material", "wind tunnel"]
 
-for name in _name:
+def iteraroe(name):
+    """
+    Complete pipeline for processing each dataset.
+    :param name: the name of the dataset.
+    """
     G = load_graph(name)
-    # sr = starr(name, G)
-    plot(name)
-
-
+    sr = starr(name, G)
+    # plot(name)
+    update(name, G)

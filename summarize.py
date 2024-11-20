@@ -81,21 +81,19 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     if wikipedia:
         articles = [node for node in graph.nodes() if graph.nodes.data()[node]['shape'] == 's']
     else:
-        articles = [node for node in graph.nodes() if graph.nodes.data()[node]['type'] == 'paper']
-
+        articles = [node for node in graph.nodes if graph.nodes()[node].get('type', '') == 'paper']
     articles_graph = graph.subgraph(articles)
     graph = articles_graph
 
     # second filter divides the graph by colors.
-    nodes = graph.nodes(data=True)
-    colors = set([node[1]['color'] for node in nodes])
+    nodes = graph.nodes
+    colors = set([graph.nodes()[n].get('color', '') for n in nodes])    
     subgraphs = []
     for i, color in enumerate(colors):  # filter by colors.
-        nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
-
+        nodes = [node for node in graph.nodes if graph.nodes()[node].get('color', 'green') == color]
         subgraph = graph.subgraph(nodes)
         subgraphs.append(subgraph)
-        print(f"color {color} has {len(subgraph.nodes())} vertices.")
+        print(f"color {color} has {len(subgraph.nodes)} vertices.")
 
     return subgraphs
 
@@ -152,7 +150,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
     # Iterate over each subgraph to generate summaries
     for i, subgraph in enumerate(subgraphs, start=1):
         # Extract the color attribute from the first node
-        color = list(subgraph.nodes(data=True))[0][1]['color']
+        color = subgraph.nodes()[list(subgraph.nodes)[0]].get('color', 'green')
         num_nodes = len(subgraph.nodes())
         # Skip clusters with only one node
         if num_nodes == 1:

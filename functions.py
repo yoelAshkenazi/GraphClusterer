@@ -408,13 +408,13 @@ def evaluate_clusters(G, name):
 
     # get the average distance for each cluster.
     # filter the vertices by color and type.
-    articles = [node for node in G.nodes() if G.nodes.data()[node]['type'] == 'paper']
+    articles = [node for node in G.nodes if G.nodes()[node].get('type', '') == 'paper']
     articles_graph = G.subgraph(articles)
-    colors = set([node[1]['color'] for node in articles_graph.nodes(data=True)])
+    colors = set([articles_graph.nodes()[node].get('color', 'green') for node in articles_graph.nodes])
     sizes = []
     avg_cluster_dists = []
     for color in colors:
-        cluster = [node for node in articles_graph.nodes() if articles_graph.nodes.data()[node]['color'] == color]
+        cluster = [node for node in G.nodes if G.nodes()[node].get('color', 'green') == color]
         sizes.append(len(cluster))
         avg_cluster_dist = 0
         for i in range(len(paper_ids)):

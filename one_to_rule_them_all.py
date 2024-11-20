@@ -2,6 +2,7 @@ import functions
 import warnings
 import summarize
 import evaluate
+import starry_graph
 import os
 import json
 import matplotlib.pyplot as plt
@@ -19,6 +20,7 @@ def update_wikipedia():
     summarize.update_wikipedia()
     evaluate.update_wikipedia()
     wikipedia = True
+
 
 def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict, _print_info: bool = False):
     """
@@ -44,13 +46,14 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
 
     # cluster the graph.
     clusters = functions.cluster_graph(_G, _name, **_clustering_kwargs)
-
+    """
     # draw the graph.
     if wikipedia:
         # functions.draw_wiki_graph(_G, _name, **_draw_kwargs)
         functions.draw_wiki_graph(_G, _name, **_draw_kwargs)
     else:
         functions.draw_graph(_G, _name, **_draw_kwargs)
+    """
 
     # print the results.
     if _print_info:
@@ -63,7 +66,7 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
     return functions.analyze_clusters(_G)
 
 
-def create_graph(_graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kwargs_: dict,):
+def create_graph(_name,_graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kwargs_: dict):
     """
     Create the graph.
     :param _graph_kwargs_: the parameters for the graph.
@@ -76,8 +79,7 @@ def create_graph(_graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kwargs_:
     _graph_kwargs_['proportion'] = proportion_
     _clustering_kwargs_['proportion'] = proportion_
 
-    for _name in ALL_NAMES:
-        run_graph_part(_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, print_info)
+    run_graph_part(_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, print_info)
 
 
 def run_summarization(_name: str) -> object:
@@ -86,7 +88,6 @@ def run_summarization(_name: str) -> object:
     :param _name: the name of the dataset.
     :return:
     """
-    print(_name)
     # load the graph.
     _G = summarize.load_graph(_name)
     # filter the graph by colors.
@@ -289,6 +290,8 @@ def the_almighty_function(pipeline_kwargs: dict):
     clustering_kwargs = pipeline_kwargs['clustering_kwargs']
     draw_kwargs = pipeline_kwargs['draw_kwargs']
     wikipedia = pipeline_kwargs['wikipedia']
+    iteration_num = pipeline_kwargs['iteration_num']
+
     if wikipedia:
         update_wikipedia()
 
@@ -297,31 +300,39 @@ def the_almighty_function(pipeline_kwargs: dict):
     and summarizing each cluster. The first part is done in '2_embed_abstract.py' and '3_calc_energy.py', 
     the second part is done in 'functions.py', and the third part is done in 'summarize.py'.
     For parts 1 and 2 you need python >=3.8, and for part 3 you need python 3.7.
-    """
+        """
 
-    # Step 1: Create the graphs for all versions. (need to do only once per choice of parameters)
-    # create_graph(graph_kwargs, clustering_kwargs, draw_kwargs)
 
-    # Step 2: Summarize the clusters
-    if wikipedia:
-        os.makedirs("Results/Summaries/wikipedia", exist_ok=True)
-    else:
-        os.makedirs("Results/Summaries/Rafael", exist_ok=True)
-    titles_dict = {}
-    for _name in ALL_NAMES:
-        print(f"Running summarization for '{_name}'.")
-        titles = run_summarization(_name)
-        titles_dict[_name] = titles
-    # Save titles_dict as a JSON file
-    if wikipedia:
-        output_path = os.path.join("Results", "Summaries", "wikipedia", "Titles.json")
-    else:
-        output_path = os.path.join("Results", "Summaries", "Rafael", "Titles.json")
+    # Iterativaly update the graph to get better results.
+    for name in ALL_NAMES:
+        for i in range(iteration_num):
+            # Step 1: Create the graphs for all versions. (need to do only once per choice of parameters)
+            create_graph(name, graph_kwargs, clustering_kwargs, draw_kwargs)
 
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(titles_dict, f, ensure_ascii=False, indent=4)
+            # Step 2: Summarize the clusters.
+            if wikipedia:
+                os.makedirs("Results/Summaries/wikipedia", exist_ok=True)
+            else:
+                os.makedirs("Results/Summaries/Rafael", exist_ok=True)
 
-    # Step 3: Evaluate the results.
-    # evaluate_and_plot()
+            # Create a dictionary to store the titles of each summary.
+            titles_dict = {}
+            print(f"Running summarization for '{name}'.")
+            titles = run_summarization(name)
+            titles_dict[name] = titles
 
+            # Save titles_dict as a JSON file
+            if wikipedia:
+                output_path = os.path.join("Results", "Summaries", "wikipedia", "Titles.json")
+            else:
+                output_path = os.path.join("Results", "Summaries", "Rafael", "Titles.json")
+
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(titles_dict, f, ensure_ascii=False, indent=4)
+
+            # Step 3: Evaluate the success rate of each cluster for each dataset and iteratively update the graph.
+            starry_graph.iteraroe(name)
     
+    evaluate_and_plot()
+    for name in ALL_NAMES:
+        starry_graph.plot(name)

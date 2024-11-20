@@ -160,7 +160,7 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
             continue
         # Get the subgraph.
         color = title_to_color[title]
-        nodes = [node for node in G.nodes if G.nodes[node]['color'] == color]
+        nodes = [node for node in G.nodes if G.nodes()[node].get('color', 'green') == color]
 
         subgraphs[title] = G.subgraph(nodes)
 
@@ -328,7 +328,7 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
             continue
         # Get the subgraph.
         color = title_to_color[title]
-        nodes = [node for node in G.nodes() if G.nodes.data()[node]['color'] == color]
+        nodes = [node for node in G.nodes if G.nodes()[node].get('color', 'green') == color]
         subgraphs[title] = G.subgraph(nodes)
 
 
