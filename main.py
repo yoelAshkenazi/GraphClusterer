@@ -3,10 +3,9 @@ import one_to_rule_them_all
 
 warnings.filterwarnings("ignore")
 WIKIPEDIA = ["apple", "car", "clock", "London", "turtle"]
-"""'3D printing', "additive manufacturing", "autonomous drones", "composite material",
- "quantum computing", "scramjet", "smart material", "wind tunnel"
- """
-RAFAEL = ["hypersonic missile", "nuclear reactor"]
+"""['3D printing', "additive manufacturing", "autonomous drones", "composite material", "hypersonic missile", "nuclear reactor",
+ "quantum computing", "scramjet", "smart material", "wind tunnel"] """
+RAFAEL = ["autonomous drones"]
 
 if __name__ == '__main__':
     # Set the parameters for the graph and summarization.
@@ -16,7 +15,7 @@ if __name__ == '__main__':
     K = 5
     print_info = True
     wikipedia = False
-    iteration_num = 2
+    iteration_num = 1
 
     # Set the parameters for the graph.
     graph_kwargs = {

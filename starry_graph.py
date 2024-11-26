@@ -6,8 +6,6 @@ import cohere
 from dotenv import load_dotenv
 import pickle as pk
 import random
-import matplotlib.pyplot as plt
-
 wikipedia = False
 load_dotenv()
 cohere_key = os.getenv("COHERE_API_KEY")
@@ -75,6 +73,16 @@ def starr(name: str, G: nx.Graph = None) -> float:
         color = title_to_color[title]
         nodes = [node for node in G.nodes if G.nodes()[node].get('color', 'green') == color]
         subgraphs[title] = G.subgraph(nodes).copy()  # Ensure mutable subgraph
+
+    # Create legend for titles
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    title_legend = {title: alphabet[i] for i, title in enumerate(sorted(set(titles)))}
+
+    # Save legend to CSV
+    legend_output_path = f"Results/starry/{name}_titles.csv"
+    legend_df = pd.DataFrame(list(title_legend.items()), columns=['Cluster Title', 'Letter'])
+    os.makedirs(os.path.dirname(legend_output_path), exist_ok=True)
+    legend_df.to_csv(legend_output_path, index=False)
 
     # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
     if wikipedia:
@@ -176,7 +184,7 @@ def starr(name: str, G: nx.Graph = None) -> float:
         evaluations[cluster_name] = (total_in_score, total_out_score, decision)
 
         print(f"Cluster summary for cluster '{cluster_name}' is {decision} with the cluster abstracts. "
-              f"\nScore in: {total_in_score}\nScore out: {total_out_score}\n{'-' * 50}")
+              f"\nScore in: {score_in}\nScore out: {score_out}\n{'-' * 50}")
 
     # Save the map to the directory 'Results/starry/{name}.csv'
     output_dir = 'Results/starry'
@@ -188,77 +196,6 @@ def starr(name: str, G: nx.Graph = None) -> float:
     map_df.to_csv(output_path, index=False)
     return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
 
-
-def plot(name):
-    # Load the CSV file
-    file_path = f"Results/starry/{name}.csv"
-    data = pd.read_csv(file_path)
-
-    # Ensure output directory exists
-    output_dir = "Results/starry"
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Initialize the graph
-    G = nx.Graph()
-
-    # Initialize variables for labeling and legend
-    title_to_letter = {}
-    letter = 'a'
-
-    # Positioning variables
-    current_center_x = 0
-    center_spacing = 2  # Space between star graph centers (smaller spacing)
-
-    # Iterate through unique titles to build the graph
-    for cluster_title in data['title'].unique():
-        # Assign a letter to the cluster title
-        title_to_letter[letter] = cluster_title
-
-        # Filter rows with the current title
-        cluster_data = data[data['title'] == cluster_title]
-
-        # Add the central node with the letter as the label
-        G.add_node(letter)
-
-        for i, row in cluster_data.iterrows():
-            index = row['index']
-            total_in_score = row['total_in_score']
-            total_out_score = row['total_out_score']
-
-            # Add the node for the index
-            G.add_node(index)
-
-            # Determine edge color based on score comparison
-            edge_color = 'blue' if total_in_score >= total_out_score else 'red'
-
-            # Add the edge between the cluster center and the index node
-            G.add_edge(letter, index, color=edge_color, weight=0.1)
-
-        # Move to the next center position
-        current_center_x += center_spacing
-
-        # Increment the letter
-        letter = chr(ord(letter) + 1)
-
-    # Draw the graph
-    plt.figure(figsize=(10, 8))  # Reduced figure size
-    colors = [G[u][v]['color'] for u, v in G.edges()]  # Get edge colors
-    pos = nx.spring_layout(G)  # Use spring layout for the graph
-    nx.draw(G, pos=pos, with_labels=True, edge_color=colors,
-            node_color='lightblue', node_size=500, font_size=8)
-
-    # Save the plot
-    output_path = os.path.join(output_dir, f"{name}.png")
-    plt.title(f"Combined Star Graphs for {name}")
-    plt.savefig(output_path, format='png')
-    plt.close()
-
-    # Save the legend as a CSV file
-    legend_path = os.path.join(output_dir, f"{name}_titles.csv")
-    legend_df = pd.DataFrame(list(title_to_letter.items()), columns=["Letter", "Cluster Title"])
-    legend_df.to_csv(legend_path, index=False)
-
-    print(f"Saved legend (title mappings) to {legend_path}")
 
 
 def update(name, G):
@@ -311,7 +248,6 @@ def update(name, G):
                         current_weight = G[u][v].get('weight', 1)  # Default weight to 1 if missing
                         new_weight = current_weight * 2
                         G[u][v]['weight'] = new_weight
-                        print(f"Edge ({u}, {v}) weight increased from {current_weight} to {new_weight}.")
                     else:
                         edges_to_add.append((u, v, {'weight': 1}))  # Track edge to be added
                 else:
@@ -322,8 +258,7 @@ def update(name, G):
                         G[u][v]['weight'] = new_weight
                     else:
                         # No action needed if the edge does not exist
-                        print(f"Edge ({u}, {v}) does not exist. No action taken.")
-
+                        pass
                 # Keep track of nodes that need to be created
                 if u not in G.nodes:
                     nodes_to_create.append(u)
@@ -333,7 +268,6 @@ def update(name, G):
     # Add all nodes to the graph (if any were missing)
     for node in set(nodes_to_create):  # Use `set` to ensure unique nodes
         G.add_node(node)
-        print(f"Node '{node}' added to the graph.")
 
     # Add all edges to the graph
     for u, v, attributes in edges_to_add:
@@ -384,5 +318,4 @@ def iteraroe(name):
     """
     G = load_graph(name)
     sr = starr(name, G)
-    # plot(name)
     update(name, G)

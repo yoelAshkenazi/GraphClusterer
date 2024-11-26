@@ -11,6 +11,7 @@ import networkx as nx
 import pickle as pk
 import random
 import os
+import re
 
 wikipedia = False
 def update_wikipedia():
@@ -385,57 +386,52 @@ def analyze_clusters(G):
     return sizes
 
 
-def evaluate_clusters(G, name):
-    """
-    Evaluate the clusters of the graph.
-    :param name: the name of the dataset.
-    :param G:  the graph.
-    :return:
-    """
+def evaluate_clusters(name):
+    #Largest_cluster_percentage:
+    # Define the folder path
+    folder_path = os.path.join("Results", "Summaries", "Rafael", name)
+    num_vertices = 0  # Initialize number of vertices
+    largest_x = 0  # Initialize largest value of x
+    # Iterate through files in the folder
+    for filename in os.listdir(folder_path):
+        match = re.search(r"\((\d+) vertices\)\.txt", filename)  # Extract "x" from "(x vertices).txt"
+        if match:
+            x = int(match.group(1))
+            num_vertices += x
+            largest_x = max(largest_x, x)  # Update the largest x
+    largest_clutter_precentage = largest_x / num_vertices if num_vertices > 0 else 0  
 
-    # load the embeddings.
-    file_path = get_file_path(name)
-    embeddings = load_pkl(file_path)
-    dists = embeddings['Distances']  # distances between papers.
-    paper_ids = embeddings['IDs']  # paper ids.
+    # Average_index:
+    file_path = f"data/distances/{name}_papers_embeddings.pkl"
+    with open(file_path, 'rb') as f:
+        data = pk.load(f)
 
-    # get the total average distance.
-    avg_all_dists = 0
-    for i in range(len(paper_ids)):
-        for j in range(i + 1, len(paper_ids)):
-            avg_all_dists += dists[i, j]
-    avg_all_dists /= (len(paper_ids) * (len(paper_ids) - 1) / 2)
+    distances = data['Distances']
+    path = f"Results/starry/{name}.csv"
+    data = pd.read_csv(path)[['index', 'title']]
 
-    # get the average distance for each cluster.
-    # filter the vertices by color and type.
-    articles = [node for node in G.nodes if G.nodes()[node].get('type', '') == 'paper']
-    articles_graph = G.subgraph(articles)
-    colors = set([articles_graph.nodes()[node].get('color', 'green') for node in articles_graph.nodes])
-    sizes = []
-    avg_cluster_dists = []
-    for color in colors:
-        cluster = [node for node in G.nodes if G.nodes()[node].get('color', 'green') == color]
-        sizes.append(len(cluster))
-        avg_cluster_dist = 0
-        for i in range(len(paper_ids)):
-            for j in range(i + 1, len(paper_ids)):
-                if paper_ids[i] in cluster and paper_ids[j] in cluster:
-                    avg_cluster_dist += dists[i, j]
-        if len(cluster) == 1:
-            avg_cluster_dist = 0
-        else:
-            avg_cluster_dist /= (len(cluster) * (len(cluster) - 1) / 2)
-        avg_cluster_dists.append(avg_cluster_dist)
+    clusters_list = []
+    S = 0
+    for i in data['index']:
+        for j in data['index']:
+            S += distances[i-1][j-1]
+    for cluster_title in data['title'].unique():
+        # Filter data for the current cluster
+        cluster_data = data[data['title'] == cluster_title]
 
-    # get the average distance for the clusters.
-    avg_cluster_dists = sum(avg_cluster_dists) / len(avg_cluster_dists)
-    avg_index = avg_cluster_dists / avg_all_dists  # get the average index.
-    avg_index = round(avg_index, 5)
-    # get the percentage of papers in the largest cluster.
-    largest_cluster = max(sizes)
-    largest_cluster_percentage = largest_cluster / len(articles)
-
-    return avg_index, largest_cluster_percentage
+        # Extract node indices and scores
+        node_indices = cluster_data['index'].tolist()
+        clusters_list.append(node_indices) if len(node_indices) > 1 else None
+    
+    S = 1 / S
+    # Calculate the average index
+    avg_index = 0
+    for cluster in clusters_list:
+        for i in cluster:
+            for j in cluster:
+                avg_index +=  distances[i][j]
+    avg_index = avg_index * 0.5 * S
+    return avg_index, largest_clutter_precentage
 
 
 def evaluate_wiki_clusters(G):
@@ -499,7 +495,7 @@ def check_weight_prop(G, start, end, step, name, res, repeat):
             # re-cluster the graph.
             cluster_graph(G_copy, name, method='louvain', resolution=res, save=False)
             # evaluate the clusters.
-            avg_index, largest_cluster_percentage = evaluate_clusters(G_copy, name)
+            avg_index, largest_cluster_percentage = evaluate_clusters(name)
             avg_indexes.append(avg_index)
             largest_cluster_percentages.append(largest_cluster_percentage)
 
@@ -553,3 +549,6 @@ def plot_props(start, end, step, names: list, indexes: dict, percentages: dict):
     plt.grid()
     plt.savefig('Figures/weight_proportions_largest_perc.png')
     plt.show()
+
+
+

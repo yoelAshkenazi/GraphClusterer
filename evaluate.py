@@ -6,25 +6,29 @@ import pandas as pd
 import random
 import pickle as pkl
 import networkx as nx
-from typing import List ,Dict
+from typing import List, Dict
 import matplotlib.pyplot as plt
 import cohere  # Added Cohere import
 import os
 from dotenv import load_dotenv
 import re
 from matplotlib.patches import Patch
+import requests
+from requests.exceptions import Timeout  # Import Timeout exception
+import time  # For optional delays between retries
 
 wikipedia = False
+
 def update_wikipedia():
     global wikipedia
     wikipedia = True
-    
+
 load_dotenv()
 cohere_key = os.getenv("COHERE_API_KEY")
 
-
 # Initialize Cohere client with your API key
 co = cohere.Client(api_key=cohere_key)
+
 # Define the Evaluation Prompt Template
 EVALUATION_PROMPT_TEMPLATE = """
 You will be given one summary written for an article. Your task is to rate the summary on one metric.
@@ -100,6 +104,8 @@ Fluency(1-5): the quality of the summary in terms of grammar, spelling, punctuat
 1: Poor. The summary has many errors that make it hard to understand or sound unnatural.
 2: Fair. The summary has some errors that affect the clarity or smoothness of the text, but the main points are still comprehensible.
 3: Good. The summary has few or no errors and is easy to read and follow.
+4: Very Good. The summary is nearly flawless with minor errors that do not impede understanding.
+5: Excellent. The summary is completely fluent with perfect grammar, spelling, punctuation, and sentence structure.
 """
 
 FLUENCY_SCORE_STEPS = """
@@ -114,6 +120,38 @@ evaluation_metrics = {
     "Fluency": (FLUENCY_SCORE_CRITERIA, FLUENCY_SCORE_STEPS),
 }
 
+def generate_with_retry(co_client, model, prompt, max_tokens=100, temperature=0.0, retries=3, delay=2):
+    """
+    Generate a response from Cohere's API with retry on Timeout.
+    
+    :param co_client: Cohere client instance.
+    :param model: The Cohere model to use.
+    :param prompt: The prompt to send to the model.
+    :param max_tokens: Maximum tokens in the response.
+    :param temperature: Sampling temperature.
+    :param retries: Number of retry attempts.
+    :param delay: Delay in seconds between retries.
+    :return: The response from Cohere or None if all retries fail.
+    """
+    for attempt in range(1, retries + 1):
+        try:
+            response = co_client.generate(
+                model=model,
+                prompt=prompt,
+                max_tokens=max_tokens,
+                temperature=temperature
+            )
+            return response
+        except Timeout:
+            print(f"Timeout occurred for prompt. Retrying ({attempt}/{retries})...")
+            if attempt < retries:
+                time.sleep(delay)  # Optional: wait before retrying
+            else:
+                print("Max retries reached. Moving on.")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+            break
+    return None
 
 def metrics_evaluations(name: str, G: nx.Graph = None):
     """
@@ -128,19 +166,25 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
         summary_path = f"Results/Summaries/wikipedia/"
         for file in os.listdir('Results/Summaries/wikipedia'):
             if file.startswith(name):
-                summary_path += file
+                summary_path = os.path.join(summary_path, file)
+                break
     else:
         summary_path = f"Results/Summaries/Rafael/"
         for file in os.listdir('Results/Summaries/Rafael'):
             if file.startswith(name):
-                summary_path += file
-        
+                summary_path = os.path.join(summary_path, file)
+                break
+
     # Check if the summary directory exists and list its contents
     if not os.path.exists(summary_path):
         print(f"Error: Directory {summary_path} does not exist!")
         return None
-    
+
     clusters = os.listdir(summary_path)
+    if not clusters:
+        print(f"No summary files found in directory {summary_path}.")
+        return None
+
     # Prepare to store summaries and subgraphs
     summaries = {}
     titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
@@ -150,7 +194,7 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
     for i, title in enumerate(titles):
         decode_break = False
         summary_file_path = os.path.join(summary_path, clusters[i])
-        with open(summary_file_path, 'r') as f:
+        with open(summary_file_path, 'r', encoding='utf-8') as f:
             try:
                 summaries[title] = f.read()
             except UnicodeDecodeError:
@@ -159,8 +203,8 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
             print(f"Failed to decode summary file: {summary_file_path}")
             continue
         # Get the subgraph.
-        color = title_to_color[title]
-        nodes = [node for node in G.nodes if G.nodes()[node].get('color', 'green') == color]
+        color = title_to_color.get(title, 'green')  # Default color if not found
+        nodes = [node for node in G.nodes if G.nodes[node].get('color', 'green') == color]
 
         subgraphs[title] = G.subgraph(nodes)
 
@@ -183,18 +227,14 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
     all_fluency_scores = []
 
     for title, summary in summaries.items():
-        subgraph = subgraphs[title]
+        subgraph = subgraphs.get(title, nx.Graph())
         cluster_name = title
-        
+
         cluster_abstracts = [abstract for id_, abstract in data.values if id_ in subgraph.nodes()]
+        # Clean NaNs
+        cluster_abstracts = [abstract for abstract in cluster_abstracts if not pd.isna(abstract)]
         cluster_sample_size = max(1, int(0.2 * len(cluster_abstracts)))
 
-        cluster_abstracts = random.sample(cluster_abstracts, cluster_sample_size)
-
-        # Clean NaNs and sample 20% of the cluster size.
-        sampled_abstracts = random.sample(cluster_abstracts, cluster_sample_size)
-
-        # Determine the sample size, ensuring it's not larger than the available abstracts
         if len(cluster_abstracts) < cluster_sample_size:
             print(f"Warning: Adjusting sample size for cluster '{cluster_name}' due to small population.")
             cluster_sample_size = len(cluster_abstracts)
@@ -203,12 +243,18 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
             print(f"No abstracts found in cluster '{cluster_name}'. Skipping this cluster.")
             continue
 
+        try:
+            cluster_abstracts_sampled = random.sample(cluster_abstracts, cluster_sample_size)
+        except ValueError as e:
+            print(f"Sampling error for cluster '{cluster_name}': {e}")
+            cluster_abstracts_sampled = cluster_abstracts
+
         cluster_relevancy_scores = []
         cluster_coherence_scores = []
         cluster_consistency_scores = []
         cluster_fluency_scores = []
 
-        for abstract in sampled_abstracts:
+        for abstract in cluster_abstracts_sampled:
             # Iterate through each metric for evaluation
             for eval_type, (criteria, steps) in evaluation_metrics.items():
                 # Generate the evaluation prompt
@@ -220,26 +266,34 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
                     summary=summary,
                 )
 
-                # Call Cohere's API to evaluate the metric
-                response = co.generate(
+                # Call Cohere's API with retry
+                response = generate_with_retry(
+                    co_client=co,
                     model="command-r-plus-08-2024",  # Replace with the desired Cohere model
-                    prompt=prompt,  # Use the prompt directly instead of messages
+                    prompt=prompt,
                     max_tokens=100,
-                    temperature=0.0  # Set temperature to 0 for deterministic output
+                    temperature=0.0,
+                    retries=3,
+                    delay=2
                 )
 
-                # Extract the response text
-                score = response.generations[0].text.strip()
-
-                # Process and store the score in the corresponding list
-                if score.endswith('.'):
-                    score = score[:-1]
-                try:
-                    score = int(score[-1])
-                except (IndexError, ValueError):
-                    print(f"Unexpected score format: '{score}'. Defaulting to 0.")
-
+                if response is None:
+                    print(f"Failed to get response for metric '{eval_type}' on cluster '{cluster_name}'. Assigning score 0.")
                     score = 0
+                else:
+                    # Extract the response text
+                    score_text = response.generations[0].text.strip()
+
+                    # Process and store the score in the corresponding list
+                    if score_text.endswith('.'):
+                        score_text = score_text[:-1]
+                    try:
+                        score = int(score_text[-1])
+                        if not 1 <= score <= 5:
+                            raise ValueError("Score out of expected range.")
+                    except (IndexError, ValueError):
+                        print(f"Unexpected score format: '{score_text}'. Defaulting to 0.")
+                        score = 0
 
                 if eval_type == "Relevance":
                     cluster_relevancy_scores.append(score)
@@ -251,10 +305,10 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
                     cluster_fluency_scores.append(score)
 
         # Calculate average for each cluster.
-        avg_cluster_relevancy = sum(cluster_relevancy_scores) / len(cluster_relevancy_scores) if cluster_relevancy_scores else 0
-        avg_cluster_coherence = sum(cluster_coherence_scores) / len(cluster_coherence_scores) if cluster_coherence_scores else 0
-        avg_cluster_consistency = sum(cluster_consistency_scores) / len(cluster_consistency_scores) if cluster_consistency_scores else 0
-        avg_cluster_fluency = sum(cluster_fluency_scores) / len(cluster_fluency_scores) if cluster_fluency_scores else 0
+        avg_cluster_relevancy = (sum(cluster_relevancy_scores) / len(cluster_relevancy_scores)) if cluster_relevancy_scores else 0
+        avg_cluster_coherence = (sum(cluster_coherence_scores) / len(cluster_coherence_scores)) if cluster_coherence_scores else 0
+        avg_cluster_consistency = (sum(cluster_consistency_scores) / len(cluster_consistency_scores)) if cluster_consistency_scores else 0
+        avg_cluster_fluency = (sum(cluster_fluency_scores) / len(cluster_fluency_scores)) if cluster_fluency_scores else 0
 
         # Store these averages to later calculate the dataset-level averages.
         all_relevancy_scores.append(avg_cluster_relevancy)
@@ -263,13 +317,12 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
         all_fluency_scores.append(avg_cluster_fluency)
 
     # Calculate the overall averages across all clusters.
-    avg_relevancy = sum(all_relevancy_scores) / len(all_relevancy_scores) if all_relevancy_scores else 0
-    avg_coherence = sum(all_coherence_scores) / len(all_coherence_scores) if all_coherence_scores else 0
-    avg_consistency = sum(all_consistency_scores) / len(all_consistency_scores) if all_consistency_scores else 0
-    avg_fluency = sum(all_fluency_scores) / len(all_fluency_scores) if all_fluency_scores else 0
+    avg_relevancy = (sum(all_relevancy_scores) / len(all_relevancy_scores)) if all_relevancy_scores else 0
+    avg_coherence = (sum(all_coherence_scores) / len(all_coherence_scores)) if all_coherence_scores else 0
+    avg_consistency = (sum(all_consistency_scores) / len(all_consistency_scores)) if all_consistency_scores else 0
+    avg_fluency = (sum(all_fluency_scores) / len(all_fluency_scores)) if all_fluency_scores else 0
 
     return avg_relevancy / 5, avg_coherence / 5, avg_consistency / 5, avg_fluency / 5
-
 
 def extract_colors(graph: nx.Graph) -> Dict[str, str]:
     """
@@ -281,9 +334,8 @@ def extract_colors(graph: nx.Graph) -> Dict[str, str]:
     for node in graph.nodes:
         title = graph.nodes[node].get('title', None)
         if title is not None:
-            title_to_color[title] = graph.nodes[node]['color']
+            title_to_color[title] = graph.nodes[node].get('color', 'green')  # Default to 'green' if color not set
     return title_to_color
-
 
 def evaluate(name: str, G: nx.Graph = None) -> float:
     """
@@ -297,19 +349,24 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
         summary_path = f"Results/Summaries/wikipedia/"
         for file in os.listdir('Results/Summaries/wikipedia'):
             if file.startswith(name):
-                summary_path += file
+                summary_path = os.path.join(summary_path, file)
+                break
     else:
         summary_path = f"Results/Summaries/Rafael/"
         for file in os.listdir('Results/Summaries/Rafael'):
             if file.startswith(name):
-                summary_path += file
-    
+                summary_path = os.path.join(summary_path, file)
+                break
+
     # Check if the summary directory exists and list its contents
     if not os.path.exists(summary_path):
         print(f"Error: Directory {summary_path} does not exist!")
         return None
-    
+
     clusters = os.listdir(summary_path)
+    if not clusters:
+        print(f"No summary files found in directory {summary_path}.")
+        return None
 
     summaries = {}
     titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
@@ -318,7 +375,7 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
     for i, title in enumerate(titles):
         decode_break = False
         summary_file_path = os.path.join(summary_path, clusters[i])
-        with open(summary_file_path, 'r') as f:
+        with open(summary_file_path, 'r', encoding='utf-8') as f:
             try:
                 summaries[title] = f.read()
             except UnicodeDecodeError:
@@ -327,10 +384,9 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
             print(f"Failed to decode summary file: {summary_file_path}")
             continue
         # Get the subgraph.
-        color = title_to_color[title]
-        nodes = [node for node in G.nodes if G.nodes()[node].get('color', 'green') == color]
+        color = title_to_color.get(title, 'green')  # Default color if not found
+        nodes = [node for node in G.nodes if G.nodes[node].get('color', 'green') == color]
         subgraphs[title] = G.subgraph(nodes)
-
 
     # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
     if wikipedia:
@@ -347,19 +403,18 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
     evaluations = {}
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
     total_out_score = 0  # Total scores for the abstracts sampled outside the clusters.
+
     for title, summary in summaries.items():
         # Get the subgraph.
-        subgraph = subgraphs[title]
+        subgraph = subgraphs.get(title, nx.Graph())
         cluster_name = title
 
         # Get the abstracts from the cluster.
         cluster_abstracts = [abstract for id_, abstract in data.values if id_ in subgraph.nodes()]
-
         # Clean NaNs.
         cluster_abstracts = [abstract for abstract in cluster_abstracts if not pd.isna(abstract)]
-
-        # Determine the sample size, ensuring it's not larger than the available abstracts
         cluster_sample_size = max(1, int(0.2 * len(cluster_abstracts)))
+
         if len(cluster_abstracts) < cluster_sample_size:
             print(f"Warning: Adjusting sample size for cluster '{cluster_name}' due to small population.")
             cluster_sample_size = len(cluster_abstracts)
@@ -368,64 +423,100 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
             print(f"No abstracts found in cluster '{cluster_name}'. Skipping this cluster.")
             continue
 
-        cluster_abstracts = random.sample(cluster_abstracts, cluster_sample_size)
+        try:
+            cluster_abstracts_sampled = random.sample(cluster_abstracts, cluster_sample_size)
+        except ValueError as e:
+            print(f"Sampling error for cluster '{cluster_name}': {e}")
+            cluster_abstracts_sampled = cluster_abstracts
 
         # Get the abstracts from outside the cluster.
         outside_abstracts = [abstract for id_, abstract in data.values if id_ not in subgraph.nodes()]
-
         # Clean NaNs.
         outside_abstracts = [abstract for abstract in outside_abstracts if not pd.isna(abstract)]
 
         # Ensure that the sample size does not exceed the number of available abstracts
         if len(outside_abstracts) < cluster_sample_size:
             print(f"Warning: Adjusting sample size for outside cluster '{cluster_name}' due to small population.")
-            cluster_sample_size = len(outside_abstracts)
+            outside_sample_size = len(outside_abstracts)
+        else:
+            outside_sample_size = cluster_sample_size
 
-        outside_abstracts = random.sample(outside_abstracts, cluster_sample_size)
+        if len(outside_abstracts) == 0:
+            print(f"No outside abstracts found for cluster '{cluster_name}'. Skipping outside evaluations.")
+            continue
+
+        try:
+            outside_abstracts_sampled = random.sample(outside_abstracts, outside_sample_size)
+        except ValueError as e:
+            print(f"Sampling error for outside cluster '{cluster_name}': {e}")
+            outside_abstracts_sampled = outside_abstracts
 
         # Ask Cohere's API which abstracts are more similar to the summary.
-        for i in range(min(len(cluster_abstracts), len(outside_abstracts))):
+        for i in range(min(len(cluster_abstracts_sampled), len(outside_abstracts_sampled))):
             # Evaluate consistency for abstracts inside the cluster.
             prompt_in = f"Answer using only a number between 1 to 100: " \
                         f"How consistent is the following summary with the abstract?\n" \
                         f"Summary: {summary}\n" \
-                        f"Abstract: {cluster_abstracts[i]}\n"
+                        f"Abstract: {cluster_abstracts_sampled[i]}\n\n\n" \
+                        f"No matter what is the score you choose to give, do not explain why you gave this score. "
 
-            response_in = co.generate (
+            response_in = generate_with_retry(
+                co_client=co,
                 model="command-r-plus-08-2024",
                 prompt=prompt_in,
                 max_tokens=100,
-                temperature=0.0
+                temperature=0.0,
+                retries=3,
+                delay=2
             )
 
-            score_in_text = response_in.generations[0].text.strip()
-            try:
-                score_in = int(score_in_text.split('\n')[-1].split(':')[-1])
-            except (IndexError, ValueError):
-                print(f"Unexpected score format: '{score_in_text}'. Defaulting to 0.")
+            if response_in is None:
+                print(f"Failed to get response for inside abstract in cluster '{cluster_name}'. Assigning score 0.")
                 score_in = 0
+            else:
+                # Extract the response text
+                score_in_text = response_in.generations[0].text.strip()
+                try:
+                    score_in = int(score_in_text.split('\n')[-1].split(':')[-1])
+                    if not 1 <= score_in <= 100:
+                        raise ValueError("Score out of expected range.")
+                except (IndexError, ValueError):
+                    print(f"Unexpected score format: '{score_in_text}'. Defaulting to 0.")
+                    score_in = 0
+
             total_in_score += score_in
 
             # Evaluate consistency for abstracts outside the cluster.
             prompt_out = f"Answer using only a number between 0 to 100: " \
                          f"How consistent is the following summary with the abstract?\n" \
                          f"Summary: {summary}\n" \
-                         f"Abstract: {outside_abstracts[i]}\n"\
+                         f"Abstract: {outside_abstracts_sampled[i]}\n\n\n" \
                          f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score."
 
-            response_out = co.generate(
+            response_out = generate_with_retry(
+                co_client=co,
                 model="command-r-plus-08-2024",  # Replace with the desired Cohere model
                 prompt=prompt_out,
                 max_tokens=100,
-                temperature=0.0  # Set temperature to 0 for deterministic output
+                temperature=0.0,
+                retries=3,
+                delay=2
             )
 
-            score_out_text = response_out.generations[0].text.strip()
-            try:
-                score_out = int(score_out_text.split('\n')[-1].split(':')[-1])
-            except (IndexError, ValueError):
-                print(f"Unexpected score format: '{score_out_text}'. Defaulting to 0.")
+            if response_out is None:
+                print(f"Failed to get response for outside abstract in cluster '{cluster_name}'. Assigning score 0.")
                 score_out = 0
+            else:
+                # Extract the response text
+                score_out_text = response_out.generations[0].text.strip()
+                try:
+                    score_out = int(score_out_text.split('\n')[-1].split(':')[-1])
+                    if not 0 <= score_out <= 100:
+                        raise ValueError("Score out of expected range.")
+                except (IndexError, ValueError):
+                    print(f"Unexpected score format: '{score_out_text}'. Defaulting to 0.")
+                    score_out = 0
+
             total_out_score += score_out
 
         decision = "consistent" if total_in_score >= total_out_score else "inconsistent"
@@ -436,5 +527,3 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
               f"\nScore in: {total_in_score}\nScore out: {total_out_score}\n{'-' * 50}")
 
     return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
-
-
