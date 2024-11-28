@@ -1,8 +1,8 @@
-Letter,Cluster Title
-a,3D Concrete Printing Technology (2 vertices)
-b,3D Food Printing Technology (6 vertices)
-c,3D Printing Emerging Batteries (2 vertices)
-d,3D Printing in Medicine (9 vertices)
-e,3D Printing Technology Applications (7 vertices)
-f,Advancements in 3D Printing (6 vertices)
-g,Applications of 3D Printing (65 vertices)
+Cluster Title,Letter
+3D Concrete Printing Technology (2 vertices),A
+3D Food Printing Technology (6 vertices),B
+3D Printing Emerging Batteries (2 vertices),C
+3D Printing Technology Applications (7 vertices),D
+3D Printing in Medicine (9 vertices),E
+Advancements in 3D Printing (6 vertices),F
+Applications of 3D Printing (65 vertices),G

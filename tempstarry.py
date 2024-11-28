@@ -176,8 +176,7 @@ def starr(name: str, G: nx.Graph = None) -> float:
                 'total_in_score': score_in,
                 'total_out_score': score_out,
                 'id': id,
-                'title': cluster_name,
-                'abstract': abstract
+                'title': cluster_name
             }
             counter += 1
         decision = "consistent" if total_in_score >= total_out_score else "inconsistent"
@@ -290,34 +289,31 @@ def load_graph(name: str) -> nx.Graph:
     Load the graph with the given name.
     :param name: the name of the graph.
     :return: the graph.
+    :return:
     """
+    global wikipedia
     graph_path = None
+
     if wikipedia:
         for file in os.listdir('data/wikipedia_optimized'):
             if file.startswith(name):
-                graph_path = os.path.join('data/wikipedia_optimized', file)
-                break
+                graph_path = 'data/wikipedia_optimized/' + file
     else:
         for file in os.listdir('data/optimized_graphs'):
             if file.startswith(name):
-                graph_path = os.path.join('data/optimized_graphs', file)
-                break
+                graph_path = 'data/optimized_graphs/' + file
 
-    if graph_path is None:
-        raise FileNotFoundError(f"No graph file starts with '{name}' in 'data/optimized_graphs/' directory.")
-
-    print(name, graph_path)
-    # Load the graph.
+    # load the graph.
     with open(graph_path, 'rb') as f:
         graph = pk.load(f)
 
-    # Filter the graph in order to remove the nan nodes.
-    nodes = list(graph.nodes(data=True))
+    # filter the graph in order to remove the nan nodes.
+    nodes = graph.nodes(data=True)
     s = len(nodes)
     nodes = [node for node, data in nodes if not pd.isna(node)]
     print(
         f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
-    graph = graph.subgraph(nodes).copy()  # Ensure mutable subgraph
+    graph = graph.subgraph(nodes)
 
     return graph
 

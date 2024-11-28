@@ -305,5 +305,4 @@ def the_almighty_function(pipeline_kwargs: dict):
         
 
     for name in ALL_NAMES:
-        starry_graph.iteraroe(name)
-        plot.plot(name)
+        plot.plot(name, wikipedia)

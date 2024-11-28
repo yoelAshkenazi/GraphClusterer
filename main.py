@@ -2,10 +2,11 @@ import warnings
 import one_to_rule_them_all
 
 warnings.filterwarnings("ignore")
-WIKIPEDIA = ["apple", "car", "clock", "London", "turtle"]
+"""WIKIPEDIA = ["apple", "car", "clock", "London", "turtle"]"""
+WIKIPEDIA = ["apple"]
 """['3D printing', "additive manufacturing", "autonomous drones", "composite material", "hypersonic missile", "nuclear reactor",
  "quantum computing", "scramjet", "smart material", "wind tunnel"] """
-RAFAEL = ["autonomous drones"]
+RAFAEL = ['3D printing']
 
 if __name__ == '__main__':
     # Set the parameters for the graph and summarization.

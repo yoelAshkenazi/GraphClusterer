@@ -1,10 +1,17 @@
 import os
+import re  # Import the regex module
 import webbrowser
 import networkx as nx
 import plotly.graph_objects as go
 import pandas as pd
 
-def plot(name):
+def plot(name, wikipedia=False):
+    """
+    Plot the graph with the given name.
+    :param name: the name of the graph.
+    :param wikipedia: whether the graph is from wikipedia.
+    :return: None
+    """
     # -----------------------------
     # 1. Load Cluster Titles CSV
     # -----------------------------
@@ -55,7 +62,10 @@ def plot(name):
         cluster_title = row['Cluster Title']
 
         # Define the path to the summary text file
-        summary_txt_path = os.path.join("Results", "Summaries", "Rafael", name, f"{cluster_title}.txt")
+        if wikipedia:
+            summary_txt_path = os.path.join("Results", "Summaries", "Wikipedia", name, f"{cluster_title}.txt")
+        else:
+            summary_txt_path = os.path.join("Results", "Summaries", "Rafael", name, f"{cluster_title}.txt")
 
         # Read the summary from the text file
         try:
@@ -68,8 +78,9 @@ def plot(name):
             summary = "Error loading summary."
             print(f"Error reading summary for cluster '{cluster_title}': {e}")
 
-        # Replace all '.' with '\n' for formatting
-        formatted_summary = summary.replace('.', '.\n')
+        # Replace periods with line breaks intelligently
+        # This regex replaces a period with a newline only if it's followed by a space and a capital letter or end of string
+        formatted_summary = re.sub(r'\.(?=\s+[A-Z]|$)', '.\n', summary)
 
         # Store the formatted summary in the summaries dictionary
         summaries[letter] = formatted_summary
@@ -94,6 +105,12 @@ def plot(name):
         # -----------------------------
         # Filter rows with the current title
         cluster_data = data[data['title'] == cluster_title]
+        if wikipedia:
+            PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
+        else:
+            PATH = f'data/graphs/{name}_papers.csv'
+
+        DATA = pd.read_csv(PATH)[['id', 'abstract']]
 
         peripheral_nodes = []
 
@@ -107,14 +124,23 @@ def plot(name):
                 print(f"Warning: Index {index} not found in 'id' mapping.")
                 continue
 
-            peripheral_url = index_to_id[index]
+            peripheral_id = index_to_id[index]
+            # Fetch the abstract
+            try:
+                peripheral_abstract = data.loc[data['id'] == peripheral_id, 'abstract'].iloc[0]
+            except IndexError:
+                peripheral_abstract = "Abstract not available."
+                print(f"Warning: Abstract not found for ID '{peripheral_id}'.")
+
+            # Format the abstract by replacing '.' with '.\n' intelligently
+            formatted_abstract = re.sub(r'\.(?=\s+[A-Z]|$)', '.\n', peripheral_abstract)
 
             # Add the peripheral node
             G.add_node(
                 index,
                 label=str(index),
-                title=f"ID: {peripheral_url}",
-                url=peripheral_url,  # Peripheral node URL
+                title=f"Abstract:\n{formatted_abstract}",
+                url=formatted_abstract,  # Store the formatted abstract
                 color='#1f78b4',
                 size=30,
                 font_size=12,
@@ -171,7 +197,7 @@ def plot(name):
     node_urls = []
     node_is_central = []
     node_ids = []
-    node_summaries = []  # To hold summaries for central nodes
+    node_summaries = []  # To hold summaries for central nodes and abstracts for peripheral nodes
 
     for node, attrs in G.nodes(data=True):
         x, y = pos[node]
@@ -181,7 +207,7 @@ def plot(name):
         node_urls.append(attrs['url'])
         node_is_central.append(attrs.get('is_central', False))
         node_ids.append(node)
-        node_summaries.append(attrs['url'] if attrs.get('is_central', False) else "")  # Store summary if central
+        node_summaries.append(attrs['url'])  # Store summary or abstract
 
     # Assign colors and sizes
     node_colors = [attrs['color'] for _, attrs in G.nodes(data=True)]
@@ -221,7 +247,7 @@ def plot(name):
                             y=1,
                             xref='paper',
                             yref='paper',
-                            text='Edge Colors:<br>Red: High In Score<br>Blue: High Out Score',
+                            text='Edge Colors:<br>Red: High Out Score<br>Blue: High In Score',
                             showarrow=False,
                             align='left',
                             font=dict(
@@ -247,7 +273,7 @@ def plot(name):
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
         z-index: 1000; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
+        padding-top: 50px; /* Location of the box */
         left: 0;
         top: 0;
         width: 100%; /* Full width */
@@ -262,9 +288,13 @@ def plot(name):
         margin: auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%;
         color: #fff; /* White text */
         white-space: pre-wrap; /* Preserve whitespace and line breaks */
+        font-size: 16px; /* Increased font size for better readability */
+        max-width: 90%; /* Maximum width relative to viewport */
+        max-height: 80vh; /* Maximum height relative to viewport */
+        overflow: auto; /* Enable scrolling if content exceeds max-height */
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
     }
 
     /* The Close Button */
@@ -300,18 +330,12 @@ def plot(name):
         plot.on('plotly_click', function(data) {
             var point = data.points[0];
             var customdata = point.customdata;
-            var summary = customdata[3]; // Summary is the 4th element
-            var is_central = customdata[1];
-            
-            if (is_central) {
-                // Display the summary in the modal
-                summaryText.textContent = summary;
+            var text = customdata[3]; // Summary or abstract is the 4th element
+
+            if (text && text !== "") {
+                // Display the text in the modal
+                summaryText.textContent = text;
                 modal.style.display = "block";
-            } else {
-                var url = customdata[0];
-                if (url && url !== "#") {
-                    window.open(url, '_blank');
-                }
             }
         });
 
