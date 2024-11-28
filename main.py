@@ -15,7 +15,7 @@ if __name__ == '__main__':
     res = 0.15
     K = 5
     print_info = True
-    wikipedia = False
+    wikipedia = True
     iteration_num = 1
 
     # Set the parameters for the graph.

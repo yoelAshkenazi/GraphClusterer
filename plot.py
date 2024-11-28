@@ -1,9 +1,18 @@
 import os
-import re  # Import the regex module
+import re
 import webbrowser
 import networkx as nx
 import plotly.graph_objects as go
 import pandas as pd
+import chardet  # Ensure chardet is installed
+
+def detect_encoding(file_path):
+    with open(file_path, 'rb') as f:
+        raw_data = f.read()
+        result = chardet.detect(raw_data)
+        encoding = result['encoding']
+        confidence = result['confidence']
+        return encoding if confidence > 0.5 else 'utf-8'
 
 def plot(name, wikipedia=False):
     """
@@ -35,18 +44,23 @@ def plot(name, wikipedia=False):
         print(f"Error: CSV file '{main_csv_path}' does not exist.")
         return
 
-    data = pd.read_csv(main_csv_path)
+    main_data = pd.read_csv(main_csv_path)
 
     # -----------------------------
-    # 3. Ensure 'id' Contains Valid URLs
+    # 3. Ensure 'id' Contains Valid URLs Based on 'wikipedia' Flag
     # -----------------------------
     base_url = "https://www.example.com/"  # Modify as needed
-    data['id'] = data['id'].apply(
-        lambda x: x if str(x).startswith(('http://', 'https://')) else f"{base_url}{x}"
-    )
+    if not wikipedia:
+        main_data['id'] = main_data['id'].apply(
+            lambda x: x if str(x).startswith(('http://', 'https://')) else f"{base_url}{x}"
+        )
+    else:
+        # When wikipedia is True, 'id's are unique identifiers, not URLs
+        # Ensure 'id's are treated as strings for consistency
+        main_data['id'] = main_data['id'].astype(str)
 
-    # Create a mapping from index to id (URLs)
-    index_to_id = dict(zip(data['index'], data['id']))
+    # Create a mapping from index to id
+    index_to_id = dict(zip(main_data['index'], main_data['id']))
 
     # -----------------------------
     # 4. Initialize NetworkX Graph
@@ -67,9 +81,10 @@ def plot(name, wikipedia=False):
         else:
             summary_txt_path = os.path.join("Results", "Summaries", "Rafael", name, f"{cluster_title}.txt")
 
-        # Read the summary from the text file
+        # Detect encoding and read the summary
         try:
-            with open(summary_txt_path, 'r', encoding='utf-8') as f:
+            encoding = detect_encoding(summary_txt_path)
+            with open(summary_txt_path, 'r', encoding=encoding) as f:
                 summary = f.read().strip()
         except FileNotFoundError:
             summary = "Summary not available."
@@ -104,13 +119,19 @@ def plot(name, wikipedia=False):
         # 6. Add Peripheral Nodes and Edges
         # -----------------------------
         # Filter rows with the current title
-        cluster_data = data[data['title'] == cluster_title]
-        if wikipedia:
-            PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
-        else:
-            PATH = f'data/graphs/{name}_papers.csv'
+        cluster_data = main_data[main_data['title'] == cluster_title]
 
-        DATA = pd.read_csv(PATH)[['id', 'abstract']]
+        # Load Peripheral Data Based on Wikipedia Flag
+        if wikipedia:
+            peripheral_path = f'data/wikipedia/{name}_100_samples_nodes.csv'
+        else:
+            peripheral_path = f'data/graphs/{name}_papers.csv'
+
+        if not os.path.exists(peripheral_path):
+            print(f"Error: Peripheral data file '{peripheral_path}' does not exist.")
+            return
+
+        peripheral_data = pd.read_csv(peripheral_path)[['id', 'abstract']]
 
         peripheral_nodes = []
 
@@ -125,12 +146,12 @@ def plot(name, wikipedia=False):
                 continue
 
             peripheral_id = index_to_id[index]
-            # Fetch the abstract
+            # Fetch the abstract from the correct peripheral_data
             try:
-                peripheral_abstract = data.loc[data['id'] == peripheral_id, 'abstract'].iloc[0]
+                peripheral_abstract = peripheral_data.loc[peripheral_data['id'] == peripheral_id, 'abstract'].iloc[0]
             except IndexError:
                 peripheral_abstract = "Abstract not available."
-                print(f"Warning: Abstract not found for ID '{peripheral_id}'.")
+                print(f"Warning: Abstract not found for ID '{peripheral_id}' in '{peripheral_path}'.")
 
             # Format the abstract by replacing '.' with '.\n' intelligently
             formatted_abstract = re.sub(r'\.(?=\s+[A-Z]|$)', '.\n', peripheral_abstract)
@@ -316,7 +337,7 @@ def plot(name, wikipedia=False):
     <div id="summaryModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <p id="summaryText"></p>
+        <p id="summaryText" tabindex="-1"></p> <!-- Make it focusable -->
       </div>
     </div>
 
@@ -336,6 +357,7 @@ def plot(name, wikipedia=False):
                 // Display the text in the modal
                 summaryText.textContent = text;
                 modal.style.display = "block";
+                summaryText.focus();  // Set focus to the summary text
             }
         });
 
@@ -350,6 +372,13 @@ def plot(name, wikipedia=False):
                 modal.style.display = "none";
             }
         }
+
+        // Allow closing the modal with the Esc key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                modal.style.display = "none";
+            }
+        });
     });
     </script>
     """
