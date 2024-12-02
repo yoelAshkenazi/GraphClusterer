@@ -4,20 +4,15 @@ import os
 from typing import Dict
 import cohere
 from dotenv import load_dotenv
-import pickle as pk
 import random
 import chardet
-wikipedia = False
+
 load_dotenv()
 cohere_key = os.getenv("COHERE_API_KEY")
 
 # Initialize Cohere client with your API key
 co = cohere.Client(api_key=cohere_key)
 
-wikipedia = False
-def update_wikipedia():
-    global wikipedia
-    wikipedia = True
 
 def extract_colors(graph: nx.Graph) -> Dict[str, str]:
     """
@@ -46,36 +41,30 @@ def detect_encoding(file_path: str) -> str:
         return encoding if encoding else 'utf-8'  # Fallback to utf-8 if detection fails
 
 
-def starr(name: str, G: nx.Graph = None) -> float:
+def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
     """
-    Load the cluster summary for the given name.
+    Create the data for the STAR graph, and returns the success rate.
+    Sends the results to 'Results/starry/{name}.csv'.
     :param name: the name of the dataset.
+    :param vertices: the vertices of the graph.
     :param G: the graph.
     :return:
     """
-    map = {}
-    global wikipedia
-    if wikipedia:
-        summary_path = f"Results/Summaries/wikipedia/"
-        for file in os.listdir('Results/Summaries/wikipedia'):
-            if file.startswith(name):
-                summary_path += file
-    else:
-        summary_path = f"Results/Summaries/Rafael/"
-        for file in os.listdir('Results/Summaries/Rafael'):
-            if file.startswith(name):
-                summary_path += file
+    vertex_map = {}
+    summary_path = f"Results/Summaries/{name}/"
 
     # Check if the summary directory exists and list its contents
     if not os.path.exists(summary_path):
-        print(f"Error: Directory {summary_path} does not exist!")
-        return None
+        raise FileNotFoundError(f"Summary directory '{summary_path}' does not exist.")
 
     clusters = os.listdir(summary_path)
     summaries = {}
     titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
     title_to_color = extract_colors(G)
+    print(f"Title to color: {title_to_color}")
     subgraphs = {}
+
+    # Divide the graph into subgraphs according to the titles.
     for i, title in enumerate(titles):
         decode_break = False
         summary_file_path = os.path.join(summary_path, clusters[i])
@@ -109,23 +98,18 @@ def starr(name: str, G: nx.Graph = None) -> float:
     legend_df.to_csv(legend_output_path, index=False)
 
     # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
-    if wikipedia:
-        PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
-    else:
-        PATH = f'data/graphs/{name}_papers.csv'
-
-    # Ensure the CSV file exists
-    if not os.path.exists(PATH):
-        raise FileNotFoundError(f"The file {PATH} does not exist.")
-
-    # Read only the id and abstract columns
-    data = pd.read_csv(PATH)[['id', 'abstract']]
+    data = vertices[['id', 'abstract']]
     evaluations = {}
     counter = 1
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
     total_out_score = 0  # Total scores for the abstracts sampled outside the clusters.
 
+    # Iterate over each cluster and its corresponding subgraph
     for title, subgraph in subgraphs.items():
+
+        score_in = 0
+        score_out = 0
+
         # Get the subgraph.
         summary = summaries[title]
         cluster_name = title
@@ -142,13 +126,15 @@ def starr(name: str, G: nx.Graph = None) -> float:
         # Ask Cohere's API which abstracts are more similar to the summary.
         for id, abstract in cluster_abstracts.items():
             outside = random.choice(outside_abstracts)
+            a, b = 0, 0
             # Evaluate consistency for abstracts inside the cluster.
             prompt_in = (
                 f"Answer using only a number between 1 to 100: "
                 f"How consistent is the following summary with the abstract?\n"
                 f"Summary: {summary}\n"
                 f"Abstract: {abstract}\n"
-                f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score,"
+                f"Even if the summary is not consistent with the abstract, please provide a score between "
+                f"0 to 100, and only the score,"
                 f" and only the score, without any '.' or ',' etc."
             )
 
@@ -161,18 +147,21 @@ def starr(name: str, G: nx.Graph = None) -> float:
 
             score_in_text = response_in.generations[0].text.strip()
             try:
-                score_in = int(score_in_text.split('\n')[-1].split(':')[-1])
+                a = int(score_in_text.split('\n')[-1].split(':')[-1])
+                score_in += a
             except (IndexError, ValueError):
                 print(f"Unexpected score format: '{score_in_text}'. Defaulting to 0.")
-                score_in = 0
-            total_in_score += score_in
+
+            total_in_score += a
+
             # Evaluate consistency for abstracts outside the cluster.
             prompt_out = (
                 f"Answer using only a number between 0 to 100: "
                 f"How consistent is the following summary with the abstract?\n"
                 f"Summary: {summary}\n"
                 f"Abstract: {outside}\n"
-                f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score,"
+                f"Even if the summary is not consistent with the abstract, please provide a score between "
+                f"0 to 100, and only the score,"
                 f" and only the score, without any '.' or ',' etc."
             )
 
@@ -185,13 +174,15 @@ def starr(name: str, G: nx.Graph = None) -> float:
 
             score_out_text = response_out.generations[0].text.strip()
             try:
-                score_out = int(score_out_text.split('\n')[-1].split(':')[-1])
+                b = int(score_out_text.split('\n')[-1].split(':')[-1])
+                score_out += b
+
             except (IndexError, ValueError):
                 print(f"Unexpected score format: '{score_out_text}'. Defaulting to 0.")
-                score_out = 0
-            total_out_score += score_out
 
-            map[counter] = {
+            total_out_score += b
+
+            vertex_map[counter] = {
                 'index': counter,
                 'total_in_score': score_in,
                 'total_out_score': score_out,
@@ -200,12 +191,13 @@ def starr(name: str, G: nx.Graph = None) -> float:
                 'abstract': abstract
             }
             counter += 1
+
         decision = "consistent" if total_in_score >= total_out_score else "inconsistent"
 
         evaluations[cluster_name] = (total_in_score, total_out_score, decision)
 
         print(f"Cluster summary for cluster '{cluster_name}' is {decision} with the cluster abstracts. "
-              f"\nScore in: {total_in_score}\nScore out: {total_out_score}\n{'-' * 50}")
+              f"\nScore in: {score_in}\nScore out: {score_out}\n{'-' * 50}")
 
     # Save the map to the directory 'Results/starry/{name}.csv'
     output_dir = 'Results/starry'
@@ -213,25 +205,25 @@ def starr(name: str, G: nx.Graph = None) -> float:
     output_path = os.path.join(output_dir, f'{name}.csv')
 
     # Convert the map to a DataFrame and save it as a CSV file
-    map_df = pd.DataFrame.from_dict(map, orient='index')
+    map_df = pd.DataFrame.from_dict(vertex_map, orient='index')
     map_df.to_csv(output_path, index=False)
     return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
 
 
-def update(name, G):
+def update(name, G: nx.Graph) -> nx.Graph:
     """
     Update the graph based on the 'Results/starry/{name}.csv' evaluations.
     :param name: the name of the dataset.
     :param G: the graph to be updated.
     """
-    global wikipedia
+
     # Load the CSV file created in the 'plot' function
     csv_path = f"Results/starry/{name}.csv"
     if not os.path.exists(csv_path):
         print(f"Error: CSV file '{csv_path}' does not exist.")
         return
 
-    data = pd.read_csv(csv_path)
+    data = pd.read_csv(csv_path)  # Load the data from the CSV file
 
     # Initialize a list to store nodes that need to be created
     nodes_to_create = []
@@ -250,7 +242,7 @@ def update(name, G):
         # Create a mapping of node -> color (blue or red)
         node_colors = {}
         for i, node in enumerate(node_indices):
-            if total_in_scores[i] > total_out_scores[i]:
+            if total_in_scores[i] >= total_out_scores[i]:  # Consistent with cluster (equality is considered consistent)
                 node_colors[node] = 'blue'
             else:
                 node_colors[node] = 'red'
@@ -261,93 +253,39 @@ def update(name, G):
             for j in range(i + 1, n):  # Ensure u != v and only consider each pair once
                 u = node_indices[i]
                 v = node_indices[j]
+                vertex_i = cluster_data.iloc[i]['id']  # Get the vertex ID for node u
+                vertex_j = cluster_data.iloc[j]['id']  # Get the vertex ID for node v
 
                 # Step (b): Add edges based on node colors
                 if node_colors[u] == 'blue' and node_colors[v] == 'blue':
                     # Both u and v are blue
-                    if G.has_edge(u, v):
-                        current_weight = G[u][v].get('weight', 1)  # Default weight to 1 if missing
+                    if G.has_edge(vertex_i, vertex_j):
+                        current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
                         new_weight = current_weight * 2
-                        G[u][v]['weight'] = new_weight
+                        G[vertex_i][vertex_j]['weight'] = new_weight
                     else:
-                        edges_to_add.append((u, v, {'weight': 1}))  # Track edge to be added
+                        edges_to_add.append((vertex_i, vertex_j, {'weight': 1}))  # Track edge to be added
                 else:
                     # At least one of u or v is red
-                    if G.has_edge(u, v):
-                        current_weight = G[u][v].get('weight', 1)  # Default weight to 1 if missing
+                    if G.has_edge(vertex_i, vertex_j):
+                        current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
                         new_weight = current_weight / 2
-                        G[u][v]['weight'] = new_weight
-                    else:
-                        # No action needed if the edge does not exist
-                        pass
+                        G[vertex_i][vertex_j]['weight'] = new_weight
                 # Keep track of nodes that need to be created
-                if u not in G.nodes:
-                    nodes_to_create.append(u)
-                if v not in G.nodes:
-                    nodes_to_create.append(v)
+                if vertex_j not in G.nodes:
+                    nodes_to_create.append(vertex_j)
+                if vertex_i not in G.nodes:
+                    nodes_to_create.append(vertex_i)
 
+    print(f"Nodes to create: {nodes_to_create}")
+    print(f"Edges to add: {edges_to_add}")
     # Add all nodes to the graph (if any were missing)
     for node in set(nodes_to_create):  # Use `set` to ensure unique nodes
         G.add_node(node)
 
     # Add all edges to the graph
-    for u, v, attributes in edges_to_add:
-        G.add_edge(u, v, **attributes)
+    H = G.copy()
+    H.add_edges_from(edges_to_add)
+    G = H  # Update the graph with the new edges
 
-    # Save the updated graph
-    if wikipedia:
-        updated_graph_path = f"data/wikipedia_optimized/{name}.gpickle"
-    else:
-        updated_graph_path = f"data/optimized_graphs/{name}.gpickle"
-    with open(updated_graph_path, 'wb') as f:
-        pk.dump(G, f)
-    print(f"Updated graph saved to {updated_graph_path}")
-
-
-def load_graph(name: str) -> nx.Graph:
-    """
-    Load the graph with the given name.
-    :param name: the name of the graph.
-    :return: the graph.
-    """
-    graph_path = None
-    if wikipedia:
-        for file in os.listdir('data/wikipedia_optimized'):
-            if file.startswith(name):
-                graph_path = os.path.join('data/wikipedia_optimized', file)
-                break
-    else:
-        for file in os.listdir('data/optimized_graphs'):
-            if file.startswith(name):
-                graph_path = os.path.join('data/optimized_graphs', file)
-                break
-
-    if graph_path is None:
-        raise FileNotFoundError(f"No graph file starts with '{name}' in 'data/optimized_graphs/' directory.")
-
-    print(name, graph_path)
-    # Load the graph.
-    with open(graph_path, 'rb') as f:
-        graph = pk.load(f)
-
-    # Filter the graph in order to remove the nan nodes.
-    nodes = list(graph.nodes(data=True))
-    s = len(nodes)
-    nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(
-        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
-    graph = graph.subgraph(nodes).copy()  # Ensure mutable subgraph
-
-    return graph
-
-
-def iteraroe(name, wikipedia):
-    """
-    Complete pipeline for processing each dataset.
-    :param name: the name of the dataset.
-    """
-    if wikipedia:
-        update_wikipedia()
-    G = load_graph(name)
-    sr = starr(name, G)
-    update(name, G)
+    return G  # Return the updated graph for clustering.

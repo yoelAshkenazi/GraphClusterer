@@ -8,5 +8,6 @@ Important Rules:
 - Do not introduce any additional words to the summary.
 - Ensure the summary remains concise and free of references to the original text.
 - You will not say anything else.
+- Do not use characters that are outside the standard ASCII range.
 
 Summary input:

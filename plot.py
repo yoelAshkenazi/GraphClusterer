@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 import pandas as pd
 import chardet  # Ensure chardet is installed
 
+
 def detect_encoding(file_path):
     with open(file_path, 'rb') as f:
         raw_data = f.read()
@@ -14,11 +15,12 @@ def detect_encoding(file_path):
         confidence = result['confidence']
         return encoding if confidence > 0.5 else 'utf-8'
 
-def plot(name, wikipedia=False):
+
+def plot(name, vertices):
     """
     Plot the graph with the given name.
     :param name: the name of the graph.
-    :param wikipedia: whether the graph is from wikipedia.
+    :param vertices: the vertices of the graph.
     :return: None
     """
     # -----------------------------
@@ -26,38 +28,27 @@ def plot(name, wikipedia=False):
     # -----------------------------
     titles_csv_path = f"Results/starry/{name}_titles.csv"
     if not os.path.exists(titles_csv_path):
-        print(f"Error: CSV file '{titles_csv_path}' does not exist.")
-        return
+        raise FileNotFoundError(f"CSV file '{titles_csv_path}' does not exist.")
 
     titles_data = pd.read_csv(titles_csv_path)
     # Ensure columns are correctly named
     expected_columns = {'Letter', 'Cluster Title'}
     if not expected_columns.issubset(titles_data.columns):
-        print(f"Error: CSV file must contain columns: {expected_columns}")
-        return
+        raise ValueError(f"Columns in '{titles_csv_path}' must include {expected_columns}.")
 
     # -----------------------------
     # 2. Load Main Data CSV
     # -----------------------------
     main_csv_path = f"Results/starry/{name}.csv"
     if not os.path.exists(main_csv_path):
-        print(f"Error: CSV file '{main_csv_path}' does not exist.")
-        return
+        raise FileNotFoundError(f"CSV file '{main_csv_path}' does not exist.")
 
     main_data = pd.read_csv(main_csv_path)
 
     # -----------------------------
     # 3. Ensure 'id' Contains Valid URLs Based on 'wikipedia' Flag
     # -----------------------------
-    base_url = "https://www.example.com/"  # Modify as needed
-    if not wikipedia:
-        main_data['id'] = main_data['id'].apply(
-            lambda x: x if str(x).startswith(('http://', 'https://')) else f"{base_url}{x}"
-        )
-    else:
-        # When wikipedia is True, 'id's are unique identifiers, not URLs
-        # Ensure 'id's are treated as strings for consistency
-        main_data['id'] = main_data['id'].astype(str)
+    main_data['id'] = main_data['id'].astype(str)
 
     # Create a mapping from index to id
     index_to_id = dict(zip(main_data['index'], main_data['id']))
@@ -70,16 +61,14 @@ def plot(name, wikipedia=False):
     # -----------------------------
     # 5. Iterate Through Cluster Titles to Build the Graph
     # -----------------------------
+    summary_folder_path = f'Results/Summaries/{name}/'
     summaries = {}  # Dictionary to hold summaries for each cluster
     for idx, row in titles_data.iterrows():
         letter = row['Letter']
         cluster_title = row['Cluster Title']
 
-        # Define the path to the summary text file
-        if wikipedia:
-            summary_txt_path = os.path.join("Results", "Summaries", "Wikipedia", name, f"{cluster_title}.txt")
-        else:
-            summary_txt_path = os.path.join("Results", "Summaries", "Rafael", name, f"{cluster_title}.txt")
+        # Load the summary from the corresponding text file
+        summary_txt_path = os.path.join(summary_folder_path, f"{cluster_title}.txt")
 
         # Detect encoding and read the summary
         try:
@@ -94,7 +83,8 @@ def plot(name, wikipedia=False):
             print(f"Error reading summary for cluster '{cluster_title}': {e}")
 
         # Replace periods with line breaks intelligently
-        # This regex replaces a period with a newline only if it's followed by a space and a capital letter or end of string
+        # This regex replaces a period with a newline only if it's followed by a space and a capital
+        # letter or end of string
         formatted_summary = re.sub(r'\.(?=\s+[A-Z]|$)', '.\n', summary)
 
         # Store the formatted summary in the summaries dictionary
@@ -121,17 +111,7 @@ def plot(name, wikipedia=False):
         # Filter rows with the current title
         cluster_data = main_data[main_data['title'] == cluster_title]
 
-        # Load Peripheral Data Based on Wikipedia Flag
-        if wikipedia:
-            peripheral_path = f'data/wikipedia/{name}_100_samples_nodes.csv'
-        else:
-            peripheral_path = f'data/graphs/{name}_papers.csv'
-
-        if not os.path.exists(peripheral_path):
-            print(f"Error: Peripheral data file '{peripheral_path}' does not exist.")
-            return
-
-        peripheral_data = pd.read_csv(peripheral_path)[['id', 'abstract']]
+        peripheral_data = vertices[['id', 'abstract']]  # Extract 'id' and 'abstract' columns
 
         peripheral_nodes = []
 
@@ -151,7 +131,7 @@ def plot(name, wikipedia=False):
                 peripheral_abstract = peripheral_data.loc[peripheral_data['id'] == peripheral_id, 'abstract'].iloc[0]
             except IndexError:
                 peripheral_abstract = "Abstract not available."
-                print(f"Warning: Abstract not found for ID '{peripheral_id}' in '{peripheral_path}'.")
+                print(f"Warning: Abstract not found for ID '{peripheral_id}'.")
 
             # Format the abstract by replacing '.' with '.\n' intelligently
             formatted_abstract = re.sub(r'\.(?=\s+[A-Z]|$)', '.\n', peripheral_abstract)

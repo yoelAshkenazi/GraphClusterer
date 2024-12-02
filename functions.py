@@ -11,12 +11,14 @@ import networkx as nx
 import pickle as pk
 import random
 import os
-import re
 
 wikipedia = False
+
+
 def update_wikipedia():
     global wikipedia
     wikipedia = True
+
 
 # load a .pkl file.
 def load_pkl(file_path):
@@ -41,22 +43,12 @@ def get_file_path(name):
 
 def load_graph(name: str) -> nx.Graph:
     """
-    Load the graph with the given name.
+    Load the graph with the given name. Graphs are saved in the 'data/clustered_graphs' directory.
     :param name: the name of the graph.
     :return: the graph.
     :return:
     """
-    global wikipedia
-    graph_path = None
-
-    if wikipedia:
-        for file in os.listdir('data/wikipedia_optimized'):
-            if file.startswith(name):
-                graph_path = 'data/wikipedia_optimized/' + file
-    else:
-        for file in os.listdir('data/optimized_graphs'):
-            if file.startswith(name):
-                graph_path = 'data/optimized_graphs/' + file
+    graph_path = f'data/clustered_graphs/{name}.gpickle'  # the path to the graph.
 
     # load the graph.
     with open(graph_path, 'rb') as f:
@@ -73,10 +65,12 @@ def load_graph(name: str) -> nx.Graph:
     return graph
 
 
-def make_graph(name, **kwargs):
+def make_graph(vertices, edges, distance_matrix=None, **kwargs):
     """
     Create a graph with the given parameters.
-    :param name: file name.
+    :param vertices: the vertices of the graph.
+    :param edges: the edges of the graph.
+    :param distance_matrix: the distances between the vertices.
     :param kwargs: additional arguments for the graph.
     :return:
 
@@ -91,109 +85,54 @@ def make_graph(name, **kwargs):
 
     this will create a graph for the '3D printing' embeddings, with the given vertex sizes and colors.
     """
-    # load the embeddings.
-    file_path = get_file_path(name)
-    embeddings = load_pkl(file_path)
-    dists = kwargs.get('distance_matrix', embeddings['Distances'])
-    # distances between papers.
-    paper_ids = embeddings['IDs']  # paper ids.
+    # Unpack the parameters.
+    vertex_size = kwargs['size'] if 'size' in kwargs else 200
+    vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
+    K = kwargs['K'] if 'K' in kwargs else 1.0  # Knn parameter.
 
-    # set the parameters.
-    A = kwargs['A'] if 'A' in kwargs else 1.0
-    K = kwargs['K'] if 'K' in kwargs else None
-    default_vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
-    default_size = kwargs['size'] if 'size' in kwargs else 150
-    threshold = kwargs['distance_threshold'] if 'distance_threshold' in kwargs else 0.5
-    use_distances = kwargs.get('use_only_distances', False)  # whether to use only the distances.
-    use_original = kwargs.get('use_only_original', True)  # whether to use only the original edges.
-    proportion = kwargs.get('proportion', 0.5)  # the proportion of the original edge weights to use.
-    weight = kwargs.get('weight', 1)  # the weight of the edges.
-    # assign shapes to each type.
-    shapes = {'paper': 'o', 'author': '*', 'keyword': 'd', 'institution': 'p', 'country': 's'}
+    # Add a default shape mapping.
+    type_to_shape_map = {'paper': 's', 'author': '*', 'keyword': 'd', 'institution': 'p', 'country': 'o'}
 
     # create a graph.
     G = nx.Graph()
-    for i, paper_id in enumerate(paper_ids):  # add the papers to the graph.
-        G.add_node(paper_id, size=default_size, shape='o', type='paper', color=default_vertex_color)
-
-    # add the other types of vertices to the graph, as well as the blue edges.
-    df = pd.read_csv('data/graphs/' + name + '_graph.csv')
-    targets = df['target']
-    types = df['type']
-    ids = df['paper_id']
 
     # add the vertices to the graph.
-    if use_original:
-        for j, target in enumerate(targets):
-            if target == '':  # skip empty targets.
-                continue
-            G.add_node(target, size=default_size, shape=shapes[types[j]], type=types[j], color=default_vertex_color)
+    for i, vertex in vertices.iterrows():
 
-        for j in range(len(targets)):
-            if weight == 1:
-                G.add_edge(ids[j], targets[j], weight=(2 * A * proportion), color='blue')
-            else:
-                G.add_edge(ids[j], targets[j], weight=1, color='blue')
-            # add the blue edges with a weight of A.
+        G.add_node(vertex['id'], size=vertex_size, shape=type_to_shape_map['paper'], type='paper',
+                   color=vertex_color)
 
-    # add the red edges to the graph.
-    if use_distances:
-        for i in range(len(paper_ids)):
-            if K is not None:
-                # use KNN to add the red edges.
-                # get the K nearest neighbors.
-                indices = dists[i].argsort()[1: K + 1]  # get the K nearest neighbors not including the paper itself.
-                for j in indices:
-                    if weight == 1:
-                        G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j] * (1 - proportion)), color='red')
-                    else:
-                        G.add_edge(paper_ids[i], paper_ids[j], weight=weight, color='red')
-                    # add the red edges.
+    # add the edges to the graph. (blue edges - original)
+    # divide into two cases: 2 or 3 columns. if 2 columns, means all the edge ends are already in the vertices list.
+    # if 3 columns, means we need to add the edge ends to the vertices list.
+    if len(edges.columns) == 2:
+        for i in range(len(edges)):
+            edge = edges.iloc[i, :]
+            G.add_edge(edge[0], edge[1], weight=1, color='blue')
+
+    else:
+        sources = edges.iloc[:, 1]
+        targets = edges.iloc[:, 2]
+        types = edges.iloc[:, 3]
+
+        # Go over the edges and add them to the graph.
+        for i in range(len(sources)):
+            if targets[i] is None:  # if the target is None, skip the edge.
                 continue
 
-            for j in range(i + 1, len(paper_ids)):
-                if dists[i, j] > threshold:  # skip the zero distances.
-                    continue
+            if targets[i] not in G.nodes():  # add the target to the graph.
+                G.add_node(targets[i], size=vertex_size, shape=type_to_shape_map[types[i]], type=types[i],
+                           color=vertex_color)
+            G.add_edge(sources[i], targets[i], weight=1, color='blue')
 
-                if weight == 1:
-                    G.add_edge(paper_ids[i], paper_ids[j], weight=(dists[i, j] * (1 - proportion)), color='red')
-                else:
-                    G.add_edge(paper_ids[i], paper_ids[j], weight=weight, color='red')
-                # add the red edges.
+    # add the similarity edges to the graph. (red edges if provided)
+    if distance_matrix is not None:
+        np_dists = np.array(distance_matrix)
+        np_dists = np.argsort(np_dists, axis=1)[:, 1:K + 1]  # get the K nearest neighbors.
+        for i, vertex in vertices.iterrows():
+            for j in np_dists[i]:  # add the edges to the graph.
+                G.add_edge(vertex['id'], vertices.iloc[j]['id'], weight=1, color='red')
 
-    return G
-
-
-def make_wiki_graph(name, **kwargs):
-    """
-    Create a graph with the given parameters.
-    :param name: file name.
-    :param kwargs: additional arguments for the graph.
-    :return:
-    """
-    # load the embeddings.
-    node_path = f"data/wikipedia/{name}_100_samples_nodes.csv"
-    nodes = pd.read_csv(node_path)
-    edge_path = f"data/wikipedia/{name}_100_samples_edges.csv"
-    edges = pd.read_csv(edge_path)
-    # distances between papers.
-    paper_ids = nodes['id']  # paper ids.
-
-    # set the parameters.
-
-    default_vertex_color = kwargs['color'] if 'color' in kwargs else '#1f78b4'
-    default_size = kwargs['size'] if 'size' in kwargs else 150
-    # assign shapes to each type.
-
-    # create a graph.
-    G = nx.Graph()
-    for i, paper_id in enumerate(paper_ids):  # add the papers to the graph.
-        G.add_node(paper_id, size=default_size, shape='o', type='paper', color=default_vertex_color)
-
-    firsts = edges.iloc[:, 0]
-    seconds = edges.iloc[:, 1]
-    for i in range(len(firsts)):
-        G.add_edge(firsts[i], seconds[i], weight=1, color='blue')
     return G
 
 
@@ -223,92 +162,34 @@ def draw_graph(G, name, **kwargs):
     pos = nx.spring_layout(G)  # positions for all nodes.
 
     # randomly select a rate of vertices to draw.
-    vertices = random.sample(list(G.nodes), int(rate * len(G.nodes())))
-    G = G.subgraph(vertices)
-
-    blue_weights = [G[u][v]['weight'] * 5 for u, v in G.edges() if G[u][v]['color'] == 'blue']  # weights for blue edges.
-    red_weights = [15 * G[u][v]['weight'] for u, v in G.edges() if G[u][v]['color'] == 'red']  # weights for red edges.
-    # draw vertices with given shapes and sizes.
-    shapes = nx.get_node_attributes(G, 'shape').values()
-    # draw the vertices according to shapes.
-    for shape in shapes:
-        # get a list of nodes with the same shape.
-        vertices_ = [v for v in G.nodes() if
-                     shape == G.nodes.data()[v]['shape']]
-        # get a list of the sizes of said nodes.
-        vertex_sizes = [1000 for node in vertices_]
-        # get a list of the colors of said nodes.
-        vertex_colors = [G.nodes.data()[node]['color'] for node in vertices_]
-        nx.draw_networkx_nodes(G, pos, nodelist=vertices_, node_size=vertex_sizes,
-                               node_shape=shape, node_color=vertex_colors, alpha=0.8,
-                               linewidths=1.5, edgecolors='black')  # always draw a black border.
-
-    # draw the blue edges.
-    nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'blue'],
-                           edge_color='blue', width=blue_weights, alpha=0.75)
-    # draw the red edges. (with a weight of 10 times the original weight)
-    nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'red'],
-                           edge_color='red', width=red_weights, alpha=0.75)
-
-    if save:
-        filename = f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}'
-        try:
-            plt.savefig(f'{filename}.png')
-        except FileNotFoundError:  # create the directory if it doesn't exist.
-            import os
-            os.makedirs(f'Figures/{int(100 * rate)}_percents_shown/{method}_method/')
-            plt.savefig(f'{filename}.png')
-    plt.show()
-
-
-def draw_wiki_graph(G, name, **kwargs):
-    """
-    Draw a graph with the given colors and shapes.
-    :param G: the graph to draw.
-    :param name: the name of the graph.
-    :return:
-
-    ------------
-    Example:
-    ------------
-    name = '3D printing'
-
-    draw_kwargs = {'shown_percentage': 0.65, 'figsize': 25, 'save': True, 'method': 'louvain'}
-    functions.draw_graph(G, **draw_kwargs)
-    this will draw the graph for the '3D printing' embeddings, with the given parameters.
-    """
-    rate = kwargs['shown_percentage'] if 'shown_percentage' in kwargs else 1
-    figsize = kwargs['figsize'] if 'figsize' in kwargs else 6
-    save = kwargs['save'] if 'save' in kwargs else False
-    method = kwargs['method'] if 'method' in kwargs else 'louvain'
-
-    plt.figure(figsize=(figsize, figsize))
-    pos = nx.spring_layout(G)  # positions for all nodes.
-
-    # randomly select a rate of vertices to draw.
     vertices = random.sample(list(G.nodes), int(rate * len(G.nodes()))) if rate < 1 else list(G.nodes)
-    G = G.subgraph(vertices)
+    G = G.subgraph(vertices) if rate < 1 else G
 
-    blue_weights = [G[u][v].get('weight', 1) * 5 for u, v in G.edges() if G[u][v].get('color', 'blue')]  # weights for blue edges.
+    blue_weights = [G[u][v]['weight'] for u, v in G.edges() if G[u][v]['color'] == 'blue']  # weights for blue edges.
+    red_weights = [G[u][v]['weight'] for u, v in G.edges() if G[u][v]['color'] == 'red']  # weights for red edges.
     # draw vertices with given shapes and sizes.
     shapes = nx.get_node_attributes(G, 'shape').values()
     # draw the vertices according to shapes.
     for shape in shapes:
         # get a list of nodes with the same shape.
-        vertices_ = [v for v in G.nodes() if
-                     shape == G.nodes.data()[v]['shape']]
+        vertices_ = [v for v in G.nodes if
+                     shape == G.nodes()[v]['shape']]
         # get a list of the sizes of said nodes.
-        vertex_sizes = [1000 for node in vertices_]
+        vertex_sizes = [G.nodes()[v]['size'] for v in vertices_]
         # get a list of the colors of said nodes.
-        vertex_colors = [G.nodes.data()[node]['color'] for node in vertices_]
+        vertex_colors = [G.nodes()[node]['color'] for node in vertices_]
         nx.draw_networkx_nodes(G, pos, nodelist=vertices_, node_size=vertex_sizes,
                                node_shape=shape, node_color=vertex_colors, alpha=0.8,
                                linewidths=1.5, edgecolors='black')  # always draw a black border.
 
     # draw the blue edges.
-    nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'blue'],
-                           edge_color='blue', width=blue_weights, alpha=0.75)
-
+    if len(blue_weights) > 0:
+        nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'blue'],
+                               edge_color='blue', width=blue_weights, alpha=0.75)
+    # draw the red edges. (if they exist)
+    if len(red_weights) > 0:
+        nx.draw_networkx_edges(G, pos, edgelist=[(u, v) for u, v in G.edges() if G[u][v]['color'] == 'red'],
+                               edge_color='red', width=red_weights, alpha=0.75)
 
     if save:
         filename = f'Figures/{int(100 * rate)}_percents_shown/{method}_method/{name}'
@@ -332,52 +213,56 @@ def cluster_graph(G, name, **kwargs):
     """
 
     global wikipedia
-    # get the clustering method.
+    # Unpack the parameters.
+    method = kwargs['method'] if 'method' in kwargs else 'louvain'
     save = kwargs['save'] if 'save' in kwargs else False
-    res = kwargs['resolution'] if 'resolution' in kwargs else 1.0        
-    partition = nx.algorithms.community.louvain_communities(G, resolution=res)
+    res = kwargs['resolution'] if 'resolution' in kwargs else 1.0
 
+    # cluster the graph.
+    if method == 'louvain':
+        partition = nx.algorithms.community.louvain_communities(G, resolution=res)
+    else:
+        raise ValueError(f"Clustering method '{method}' is not supported.")
+
+    # set a random color to each cluster.
     colors = ['#' + ''.join([random.choice('0123456789ABCDEF') for _ in range(6)]) for _ in range(len(partition))]
     for i, cluster in enumerate(partition):
         for node in cluster:
             G.nodes[node]['color'] = colors[i]
 
-    if save:  # save the graph.
-        if wikipedia:
-            dirname = f'data/processed_graphs_wikipedia/'
-        else:
-            dirname = f'data/processed_graphs_Rafael/'
-        
-        filename = dirname + name + '.gpickle'
-        # dump the graph to a .pkl file.
-        try:
+    if save:
+        filename = f'data/clustered_graphs/{name}.gpickle'  # save the graph to a file.
+
+        try:  # save the graph.
             with open(filename, 'wb') as f:
                 pk.dump(G, f, protocol=pk.HIGHEST_PROTOCOL)
-            print(f"Graph for '{name}' saved successfully to '{filename}'.")
-        except FileNotFoundError:  # create the directory if it doesn't exist.
-            import os
-            os.makedirs(dirname)
+        except OSError:  # create the directory if it doesn't exist.
+            os.makedirs('data/clustered_graphs/')
             with open(filename, 'wb') as f:
                 pk.dump(G, f, protocol=pk.HIGHEST_PROTOCOL)
-            print(f"Graph for '{name}' saved successfully to '{filename}'.")
 
-    return partition
+        print(f"Graph for '{name}' saved successfully to '{filename}'.")
+
+    return partition, G
 
 
-def analyze_clusters(G):
+def analyze_clusters(name):
     """
     Analyze the clusters of the graph.
-    :param G: the graph.
-    :return: a dictionary with the amount of papers in each cluster.
+    :param name: the name of the dataset.
+    :return: a list of cluster sizes.
     """
+
+    # load the graph.
+    G = load_graph(name)
+
     # first we filter articles by vertex type.
-    articles = [node for node in G.nodes() if G.nodes.data()[node]['type'] == 'paper']
+    articles = [node for node in G.nodes if G.nodes()[node]['type'] == 'paper']
     articles_graph = G.subgraph(articles)
     graph = articles_graph
 
     # second filter divides the graph by colors.
-    nodes = graph.nodes(data=True)
-    colors = set([node[1]['color'] for node in nodes])
+    colors = set([graph.nodes()[node]['color'] for node in graph.nodes])
     sizes = []
     for color in colors:  # filter by colors.
         nodes = [node for node in graph.nodes() if graph.nodes.data()[node]['color'] == color]
@@ -386,73 +271,38 @@ def analyze_clusters(G):
     return sizes
 
 
-def evaluate_clusters(name):
-    #Largest_cluster_percentage:
-    # Define the folder path
-    folder_path = os.path.join("Results", "Summaries", "Rafael", name)
-    num_vertices = 0  # Initialize number of vertices
-    largest_x = 0  # Initialize largest value of x
-    # Iterate through files in the folder
-    for filename in os.listdir(folder_path):
-        match = re.search(r"\((\d+) vertices\)\.txt", filename)  # Extract "x" from "(x vertices).txt"
-        if match:
-            x = int(match.group(1))
-            num_vertices += x
-            largest_x = max(largest_x, x)  # Update the largest x
-    largest_clutter_precentage = largest_x / num_vertices if num_vertices > 0 else 0  
-
-    # Average_index:
-    file_path = f"data/distances/{name}_papers_embeddings.pkl"
-    with open(file_path, 'rb') as f:
-        data = pk.load(f)
-
-    distances = data['Distances']
-    path = f"Results/starry/{name}.csv"
-    data = pd.read_csv(path)[['index', 'title']]
-
-    clusters_list = []
-    S = 0
-    for i in data['index']:
-        for j in data['index']:
-            S += distances[i-1][j-1]
-    for cluster_title in data['title'].unique():
-        # Filter data for the current cluster
-        cluster_data = data[data['title'] == cluster_title]
-
-        # Extract node indices and scores
-        node_indices = cluster_data['index'].tolist()
-        clusters_list.append(node_indices) if len(node_indices) > 1 else None
-    
-    S = 1 / S
-    # Calculate the average index
-    avg_index = 0
-    for cluster in clusters_list:
-        for i in cluster:
-            for j in cluster:
-                avg_index +=  distances[i][j]
-    avg_index = avg_index * 0.5 * S
-    return avg_index, largest_clutter_precentage
-
-
-def evaluate_wiki_clusters(G):
+def evaluate_clusters(name, distance_matrix=None):
     """
     Evaluate the clusters of the graph.
-    :param G:  the graph.
-    :return:
+    :param name:  the name of the dataset.
+    :param distance_matrix:  the distance matrix.
+    :return:  The largest cluster percentage, and the average cluster distance index.
     """
-    # filter the vertices by color and type.
-    articles = [node for node in G.nodes if G.nodes.data()[node].get('shape', '') == 's']
-    articles_graph = G.subgraph(articles)
-    colors = set([node[1]['color'] for node in articles_graph.nodes(data=True)])
-    sizes = []
-    for color in colors:
-        cluster = [node for node in articles_graph.nodes if articles_graph.nodes[node]['color'] == color]
-        sizes.append(len(cluster))
-    # get the percentage of papers in the largest cluster.
-    largest_cluster = max(sizes)
-    largest_cluster_percentage = largest_cluster / len(articles)
+    sizes = analyze_clusters(name)
+    largest_cluster_percentage = max(sizes) / sum(sizes)  # get the largest cluster percentage.
 
-    return -5, largest_cluster_percentage
+    if distance_matrix is None:  # if the distance matrix is not provided, return only the largest cluster percentage.
+        return largest_cluster_percentage
+
+    # get the average cluster distance index.
+    # first we load the graph.
+    G = load_graph(name)
+    articles = [node for node in G.nodes if G.nodes.data()[node]['type'] == 'paper']
+    articles_graph = G.subgraph(articles)
+    vertex_indices = {node: i for i, node in enumerate(articles_graph.nodes)}
+    colors = set([node[1]['color'] for node in articles_graph.nodes(data=True)])  # get the colors.
+    total_d_shared_clusters = 0  # Total distance between vertices that share clusters.
+    for color in colors:
+        cluster = [vertex_indices[v] for v in articles_graph.nodes if articles_graph.nodes[v]['color'] == color]
+        for i in range(len(cluster)):
+            for j in range(i + 1, len(cluster)):
+                total_d_shared_clusters += distance_matrix[cluster[i], cluster[j]]
+
+    # Get the total average distance (average distance between any two nodes in the graph).
+    triu_dists = np.triu(distance_matrix, 0)
+    avg_index = total_d_shared_clusters / np.sum(triu_dists)  # get the average cluster distance index.
+
+    return avg_index, largest_cluster_percentage
 
 
 def check_weight_prop(G, start, end, step, name, res, repeat):
@@ -549,6 +399,3 @@ def plot_props(start, end, step, names: list, indexes: dict, percentages: dict):
     plt.grid()
     plt.savefig('Figures/weight_proportions_largest_perc.png')
     plt.show()
-
-
-

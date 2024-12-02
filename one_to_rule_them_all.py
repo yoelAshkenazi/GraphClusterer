@@ -2,18 +2,17 @@ import functions
 import warnings
 import summarize
 import evaluate
-import starry_graph
 import os
 import json
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
-import re
 import plot
+import starry_graph as sg
 
 ALL_NAMES = None
-print_info = None
 wikipedia = False
 warnings.filterwarnings("ignore")
+
 
 def update_wikipedia():
     global wikipedia
@@ -23,9 +22,13 @@ def update_wikipedia():
     wikipedia = True
 
 
-def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict, _print_info: bool = False):
+def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,
+                   _print_info: bool = False, _vertices=None, _edges=None, _distance_matrix=None):
     """
     Run the pipeline for the given name, graph_kwargs, kwargs, and draw_kwargs.
+    :param _edges:  the edges of the graph.
+    :param _vertices:  the vertices of the graph.
+    :param _distance_matrix: the distance matrix for the embeddings.
     :param _print_info: whether to print the outputs.
     :param _name: the name of the embeddings file.
     :param _graph_kwargs: the parameters for the graph.
@@ -33,20 +36,15 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
     :param _draw_kwargs: the parameters for the drawing.
     :return:
     """
-    global wikipedia
-    print(f"wikipedia: {wikipedia}")
     # print description.
     print("\n" + "-" * 50 + f"\nCreating and clustering a graph for '{_name}' dataset...\n" + "-" * 50 + "\n")
     # create the graph.
-    if wikipedia:
-        _G = functions.make_wiki_graph(_name, **_graph_kwargs)
-    else:
-        _G = functions.make_graph(_name, **_graph_kwargs)
+    _G = functions.make_graph(_vertices, _edges, _distance_matrix, **_graph_kwargs)
     if _print_info:
         print(f"Graph created for '{_name}': {_G}")  # print the graph info.
 
     # cluster the graph.
-    clusters = functions.cluster_graph(_G, _name, **_clustering_kwargs)
+    clusters, _G = functions.cluster_graph(_G, _name, **_clustering_kwargs)
     """
     # draw the graph.
     if wikipedia:
@@ -59,17 +57,21 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
     # print the results.
     if _print_info:
         print(f"{_draw_kwargs['method'].capitalize()} got {len(clusters)} "
-              f"clusters for '{_name}' graph, with distance threshold of "
-              f"{_graph_kwargs['distance_threshold']} and resolution coefficient of "
+              f"clusters for '{_name}' graph, with resolution coefficient of "
               f"{_clustering_kwargs['resolution']}.\n"
               f"Drew {int(_draw_kwargs['shown_percentage'] * 100)}% of the original graph.\n")
 
-    return functions.analyze_clusters(_G)
+    return _G
 
 
-def create_graph(_name,_graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kwargs_: dict):
+def create_graph(_name, _graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kwargs_: dict, _vertices, _edges,
+                 _distance_matrix=None):
     """
     Create the graph.
+    :param _name:  the name of the graph.
+    :param _edges:  the edges of the graph.
+    :param _vertices:  the vertices of the graph.
+    :param _distance_matrix: the distance matrix for the embeddings.
     :param _graph_kwargs_: the parameters for the graph.
     :param _clustering_kwargs_: the parameters for the clustering.
     :param _draw_kwargs_: the parameters for the drawing.
@@ -80,13 +82,17 @@ def create_graph(_name,_graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_kw
     _graph_kwargs_['proportion'] = proportion_
     _clustering_kwargs_['proportion'] = proportion_
 
-    run_graph_part(_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, print_info)
+    _G = run_graph_part(_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, False,
+                        _vertices, _edges, _distance_matrix)
+
+    return _G
 
 
-def run_summarization(_name: str) -> object:
+def run_summarization(_name: str, _vertices) -> object:
     """
     Run the summarization for the given name and summarize_kwargs.
     :param _name: the name of the dataset.
+    :param _vertices: the vertices of the graph.
     :return:
     """
     # load the graph.
@@ -94,86 +100,8 @@ def run_summarization(_name: str) -> object:
     # filter the graph by colors.
     _subgraphs = summarize.filter_by_colors(_G)
     # summarize each cluster.
-    titles = summarize.summarize_per_color(_subgraphs, _name) #
-    return titles #
-
-
-def evaluate_and_plot():
-    """
-    Evaluate and plot metrics for all combinations of names and versions.
-    Additionally, maintain a JSON file that stores the metrics, updating existing entries
-    or adding new ones as necessary.
-
-    :param json_file_path: Path to the JSON file storing metrics.
-    :return: None
-    """
-    global wikipedia
-    global ALL_NAMES
-    json_file_path="metrics.json"
-    # Initialize metrics dictionaries
-    metrics_dict = {
-        'avg_index': {},
-        'largest_cluster_percentage': {},
-        'avg_relevancy': {},
-        'avg_coherence': {},
-        'avg_consistency': {},
-        'avg_fluency': {},
-        'success_rates': {}
-    }
-
-    # Load existing metrics from JSON if the file exists
-    if os.path.exists(json_file_path):
-        try:
-            with open(json_file_path, 'r') as f:
-                existing_metrics = json.load(f)
-            print(f"Loaded existing metrics from {json_file_path}.")
-        except json.JSONDecodeError:
-            print(f"JSON file {json_file_path} is corrupted. Starting with empty metrics.")
-            existing_metrics = {}
-    else:
-        print(f"No existing JSON file found at {json_file_path}. Starting with empty metrics.")
-        existing_metrics = {}
-
-    # Iterate over all datasets and evaluate metrics
-    for _name in ALL_NAMES:
-        G = functions.load_graph(_name)
-        if wikipedia:
-            avg_idx, largest_cluster_pct = functions.evaluate_wiki_clusters(G)
-        else:
-            avg_idx, largest_cluster_pct = functions.evaluate_clusters(_name)
-        print(f"Average Index for '{_name}': {avg_idx}, Largest Cluster Percentage: {largest_cluster_pct}") ###
-
-        success_rate = evaluate.evaluate(_name, G) ###
-        print(f"Success rate for '{_name}': {success_rate}")
-        
-        relevancy, coherence, consistency, fluency = evaluate.metrics_evaluations(_name, G)
-
-        # Update metrics_dict with current evaluations
-        metrics_dict['avg_index'][_name] = avg_idx
-        metrics_dict['largest_cluster_percentage'][_name] = largest_cluster_pct
-        metrics_dict['avg_relevancy'][_name] = relevancy
-        metrics_dict['avg_coherence'][_name] = coherence
-        metrics_dict['avg_consistency'][_name] = consistency
-        metrics_dict['avg_fluency'][_name] = fluency
-        metrics_dict['success_rates'][_name] = success_rate
-
-        # Update existing_metrics with new or updated values
-        for metric in metrics_dict:
-            if metric not in existing_metrics:
-                existing_metrics[metric] = {}
-            existing_metrics[metric][_name] = metrics_dict[metric][_name]
-
-    # Save the updated metrics back to the JSON file
-    try:
-        with open(json_file_path, 'w') as f:
-            json.dump(existing_metrics, f, indent=4)
-        print(f"Metrics successfully saved to {json_file_path}.")
-    except Exception as e:
-        print(f"Failed to save metrics to {json_file_path}: {e}")
-
-    # Plot the metrics for each dataset
-    for _name in ALL_NAMES:
-        plot_bar(_name, existing_metrics)
+    titles = summarize.summarize_per_color(_subgraphs, _name, _vertices)
+    return titles
 
 
 def plot_bar(name: str, metrics_dict: dict):
@@ -181,19 +109,18 @@ def plot_bar(name: str, metrics_dict: dict):
     Create and save a bar plot for the given metrics of a specific name and version.
 
     :param name: the name of the dataset.
-    :param metrics_dict: Dictionary containing metrics for each (name, version) combination.
+    :param metrics_dict: Dictionary containing metrics the dataset.
     :return:
     """
-    global wikipedia
     # Retrieve metrics for the specific name and version
     values = [
-        metrics_dict['avg_index'].get(name, 0),  
-        metrics_dict['largest_cluster_percentage'].get(name, 0),  
-        metrics_dict['avg_relevancy'].get(name, 0),  
-        metrics_dict['avg_coherence'].get(name, 0),  
-        metrics_dict['avg_consistency'].get(name, 0),  
-        metrics_dict['avg_fluency'].get(name, 0),  
-        metrics_dict['success_rates'].get(name, 0)  
+        metrics_dict['avg_index'],
+        metrics_dict['largest_cluster_percentage'],
+        metrics_dict['avg_relevancy'],
+        metrics_dict['avg_coherence'],
+        metrics_dict['avg_consistency'],
+        metrics_dict['avg_fluency'],
+        metrics_dict['success_rates']
     ]
 
     # Define the labels for the x-axis
@@ -217,7 +144,7 @@ def plot_bar(name: str, metrics_dict: dict):
         'blue',   # Average Fluency
         'orange'  # Success Rate
     ]
-    if wikipedia:
+    if values[0] is None:  # If the avg_index is None, remove it from the plot
         values = values[1:]
         x_labels = x_labels[1:]
         colors = colors[1:]
@@ -256,16 +183,13 @@ def plot_bar(name: str, metrics_dict: dict):
     # Adjust layout to make room for the legend on the left
     plt.tight_layout()  # Adjust the left margin
 
-    # Sanitize the file name to avoid issues with spaces or special characters
-    sanitized_name = re.sub(r'[\\/*?:"<>|]', "_", name)
-
     # Define the folder path and file path
-    plot_folder = "Results/plots"  # Always save in this folder
-    plot_file_name = f"{sanitized_name}.png"  # Save the figure with the given name
-    full_path = os.path.join(plot_folder, plot_file_name)
+    full_path = f"Results/plots/"
 
     # Create the plots folder if it doesn't exist
-    os.makedirs(plot_folder, exist_ok=True)
+    os.makedirs(full_path, exist_ok=True)
+
+    full_path += f"{name}.png"
 
     # Save the plot
     try:
@@ -281,33 +205,112 @@ def plot_bar(name: str, metrics_dict: dict):
 def the_almighty_function(pipeline_kwargs: dict):
     """
     Run the pipeline for the given parameters.
-    :param kwargs: the parameters for the pipeline.
+    The pipeline has the following steps:
+    1. Create the graph. (either with embeddings or without)
+    2. Cluster the graph.
+    3. Summarize the clusters.
+    4. Evaluate the success rate.
+    5. Iteratively repeat steps 1-4.
+    6. Plot the results and make the html component.
+
+    The plot is then saved at 'Results/plots' folder, the summaries are saved at 'Results/summaries' folder,
+    and the html component is saved at 'Results/html' folder.
+
+    :param pipeline_kwargs:  The full pipeline parameters.
     :return:
     """
-    global ALL_NAMES, print_info
-    ALL_NAMES = pipeline_kwargs['ALL_NAMES']
-    print_info = pipeline_kwargs['print_info']
+
+    # Unpack the pipeline parameters
     graph_kwargs = pipeline_kwargs['graph_kwargs']
     clustering_kwargs = pipeline_kwargs['clustering_kwargs']
     draw_kwargs = pipeline_kwargs['draw_kwargs']
-    wikipedia = pipeline_kwargs['wikipedia']
+    print_info = pipeline_kwargs['print_info']
     iteration_num = pipeline_kwargs['iteration_num']
+    vertices = pipeline_kwargs['vertices']
+    edges = pipeline_kwargs['edges']
+    name = pipeline_kwargs['name']
+    distance_matrix = pipeline_kwargs.get('distance_matrix', None)
 
-    if wikipedia:
-        update_wikipedia()
+    # Create and cluster the graph.
+    create_graph(name, graph_kwargs, clustering_kwargs, draw_kwargs, vertices, edges, distance_matrix)
+
+    # Summarize the clusters
+    titles = run_summarization(name, vertices)
+
+    # Iteratively repeat the followings:
+    """
+    1. Evaluate the success rate.
+    2. Create the STAR graph.
+    3. Update the edges.
+    4. Cluster.
+    5. Summarize.
+    """
+    for i in range(iteration_num):
+
+        if print_info:  # Print the titles if necessary.
+            print(f"Cluster titles for '{name}' in iteration {i + 1}: {titles}")
+
+        # Load the graph.
+        G = functions.load_graph(name)
+
+        # Evaluate the success rate and create the STAR graph
+        sr = sg.starr(name, vertices, G)
+        print(f"Success rate for '{name}' in iteration {i+1}: {sr}")
+
+        # Update the edges.
+        G = sg.update(name, G)
+
+        # Cluster the graph.
+        functions.cluster_graph(G, name, **clustering_kwargs)
+
+        # Summarize the clusters.
+        titles = run_summarization(name, vertices)
 
     """
-    Note- The pipeline is divided into 3 parts: finding the distances, creating and clustering the graph, 
-    and summarizing each cluster. The first part is done in '2_embed_abstract.py' and '3_calc_energy.py', 
-    the second part is done in 'functions.py', and the third part is done in 'summarize.py'.
-    For parts 1 and 2 you need python >=3.8, and for part 3 you need python 3.7.
-        """
-    
-    for name in ALL_NAMES:
-        # In order to just use the plot function, make sure the summaries are updated and the csvs are updated. If not, run the create_graph, run_summarization, and iteraroe functions.
-        
-        create_graph(name, graph_kwargs, clustering_kwargs, draw_kwargs)
-        titles = run_summarization(name)
-        starry_graph.iteraroe(name, wikipedia)
-        evaluate_and_plot()
-        plot.plot(name, wikipedia)
+    Placeholder for now. Will be replaced with code to iteratively improve the summary based on the 4 textual metrics.
+    """
+    # Load the graph
+    G = functions.load_graph(name)
+
+    # Evaluate and plot the metrics
+    cluster_scores = functions.evaluate_clusters(name, distance_matrix)  # Evaluate the clusters
+    success_rate = sg.starr(name, vertices, G)  # Evaluate the success rate
+    # Evaluate the text metrics
+    relevancy, coherence, consistency, fluency = evaluate.metrics_evaluations(name, vertices, G)
+
+    # Check if the avg_index exists (i.e. we have more than one value to unpack in cluster_scores)
+    if isinstance(cluster_scores, tuple):
+        avg_index, largest_cluster_percentage = cluster_scores
+    else:
+        avg_index = None
+        largest_cluster_percentage = cluster_scores
+
+    # Update the metrics dictionary
+    metrics_dict = {
+        'avg_index': avg_index,
+        'largest_cluster_percentage': largest_cluster_percentage,
+        'avg_relevancy': relevancy,
+        'avg_coherence': coherence,
+        'avg_consistency': consistency,
+        'avg_fluency': fluency,
+        'success_rates': success_rate
+    }
+
+    # Update the JSON file with the new metrics
+    known_metrics = json.load(open("metrics.json", "r"))
+    known_metrics["avg_index"][name] = avg_index
+    known_metrics["largest_cluster_percentage"][name] = largest_cluster_percentage
+    known_metrics["avg_relevancy"][name] = relevancy
+    known_metrics["avg_coherence"][name] = coherence
+    known_metrics["avg_consistency"][name] = consistency
+    known_metrics["avg_fluency"][name] = fluency
+    known_metrics["success_rates"][name] = success_rate
+
+    with open("metrics.json", "w") as f:  # Save the updated metrics
+        json.dump(known_metrics, f, indent=4)
+
+    # Plot the metrics for the current dataset
+    plot_bar(name, metrics_dict)
+
+    # Create the html component.
+    plot.plot(name, vertices)

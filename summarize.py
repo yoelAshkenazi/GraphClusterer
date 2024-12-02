@@ -12,9 +12,12 @@ import pickle as pkl
 import replicate
 
 wikipedia = False
+
+
 def update_wikipedia():
     global wikipedia
     wikipedia = True
+
 
 def upload_graph(graph: nx.Graph, name: str) -> None:
     """
@@ -23,17 +26,13 @@ def upload_graph(graph: nx.Graph, name: str) -> None:
     :param name: the name of the graph.
     :return: None
     """
-    global wikipedia
-    if wikipedia:
-        graph_path = f"data/wikipedia_optimized/{name}.gpickle"
-    else:
-        graph_path = f"data/optimized_graphs/{name}.gpickle"
+    graph_path = f'data/clustered_graphs/{name}.gpickle'
 
     # save the graph.
     with open(graph_path, 'wb') as f:
         pkl.dump(graph, f, protocol=pkl.HIGHEST_PROTOCOL)
 
-    print(f"{'-'*50}\nGraph saved to {graph_path}.")
+    print(f"{'-'*50}\nGraph saved to '{graph_path}'.")
 
 
 def load_graph(name: str) -> nx.Graph:
@@ -43,17 +42,7 @@ def load_graph(name: str) -> nx.Graph:
     :return: the graph.
     :return:
     """
-    global wikipedia
-    graph_path = None
-
-    if wikipedia:
-        for file in os.listdir('data/wikipedia_optimized'):
-            if file.startswith(name):
-                graph_path = 'data/wikipedia_optimized/' + file
-    else:
-        for file in os.listdir('data/optimized_graphs'):
-            if file.startswith(name):
-                graph_path = 'data/optimized_graphs/' + file
+    graph_path = f'data/clustered_graphs/{name}.gpickle'  # the path to the graph.
 
     # load the graph.
     with open(graph_path, 'rb') as f:
@@ -72,25 +61,20 @@ def load_graph(name: str) -> nx.Graph:
 
 def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     """
-    Partition the graph into subgraphs according to the community colors.
+    Partition the graph into subgraphs according to the vertex colors.
     :param graph: the graph.
     :return:
     """
-    global wikipedia
-    # first we filter articles by vertex type.
-    if wikipedia:
-        articles = [node for node in graph.nodes if graph.nodes.data()[node].get('shape', '') == 's']
-    else:
-        articles = [node for node in graph.nodes if graph.nodes()[node].get('type', '') == 'paper']
+    # Filter non-paper nodes.
+    articles = [node for node in graph.nodes if graph.nodes()[node].get('type', '') == 'paper']
     articles_graph = graph.subgraph(articles)
     graph = articles_graph
 
     # second filter divides the graph by colors.
-    nodes = graph.nodes
-    colors = set([graph.nodes()[n].get('color', '') for n in nodes])    
+    colors = set([graph.nodes()[n]['color'] for n in graph.nodes])
     subgraphs = []
     for i, color in enumerate(colors):  # filter by colors.
-        nodes = [node for node in graph.nodes if graph.nodes()[node].get('color', 'green') == color]
+        nodes = [node for node in graph.nodes if graph.nodes()[node]['color'] == color]
         subgraph = graph.subgraph(nodes)
         subgraphs.append(subgraph)
         print(f"color {color} has {len(subgraph.nodes)} vertices.")
@@ -98,31 +82,25 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     return subgraphs
 
 
-def summarize_per_color(subgraphs: List[nx.Graph], name: str):
+def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataFrame) -> List[str]:
     """
-    Summarizes each subgraph's abstract texts using Cohere's API, prints the results, and optionally saves them to text files.
+    Summarizes each subgraph's abstract texts using Cohere's API, prints the results, and optionally saves them to
+    text files.
 
     :param subgraphs: List of subgraphs.
     :param name: The name of the dataset.
+    :param vertices: The vertices DataFrame.
     :return: None
     """
 
-    global wikipedia
-    # load the graph.
-    G = load_graph(name)
-    # File path construction as per user-provided method
-    if wikipedia:
-        result_file_path = f"Results/Summaries/Wikipedia/" + name + '/'
-    else:
-        result_file_path = "Results/Summaries/Rafael/" + name + '/'
-
+    result_file_path = f"Results/Summaries/{name}/"  # the path to save the results.
 
     # Ensure the directory exists
     os.makedirs(result_file_path, exist_ok=True)
 
     # Clean previous summaries by removing existing files in the directory
     if os.path.exists(result_file_path):
-        for file in os.listdir(result_file_path):
+        for file in os.listdir(result_file_path):  # remove all the files in the directory.
             os.remove(os.path.join(result_file_path, file))
 
     # Integrate dotenv to load environment variables
@@ -131,38 +109,25 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
     cohere_api_key = os.getenv("COHERE_API_KEY")
     co = cohere.Client(cohere_api_key)
 
-    api_token = os.getenv("LLAMA_API_KEY")
+    # api_token = os.getenv("LLAMA_API_KEY")
+
     # Load the abstracts from the CSV file
-    if wikipedia:
-        PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
-    else:
-        PATH = f'data/graphs/{name}_papers.csv'
-
-    # Ensure the CSV file exists
-    if not os.path.exists(PATH):
-        raise FileNotFoundError(f"The file {PATH} does not exist.")
-
-    # Read only the id and abstract columns
-    df = pd.read_csv(PATH)[['id', 'abstract']]
+    df = vertices[['id', 'abstract']]
     count_titles = 2
     titles_list = []
-    vertex_to_title_map = {}
+    vertex_to_title_map = {}  # map from vertex to title.
     # Iterate over each subgraph to generate summaries
     for i, subgraph in enumerate(subgraphs, start=1):
         # Extract the color attribute from the first node
-        color = subgraph.nodes()[list(subgraph.nodes)[0]].get('color', 'green')
-        num_nodes = len(subgraph.nodes())
-        # Skip clusters with only one node
-        if num_nodes == 1:
-            continue
+        color = subgraph.nodes()[list(subgraph.nodes)[0]]['color']
 
         # Extract abstracts corresponding to the nodes in the subgraph
         node_ids = set(subgraph.nodes())
         abstracts = df[df['id'].isin(node_ids)]['abstract'].dropna().tolist()
 
-        # If no abstracts are found, skip the cluster
-        if not abstracts:
-            print(f"Cluster {i}: No abstracts found. Skipping.")
+        # If only one abstract is present, skip summarization.
+        if len(abstracts) <= 1:
+            print(f"Cluster {i}: Insufficient abstracts, Skipping.")
             continue
 
         # Combine all abstracts into a single text block with clear delimiters and instructional prompt
@@ -170,7 +135,8 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
         with open('prompt for command-r.txt', 'r') as file:
             instructions_command_r = file.read()
         # Display summarization information
-        print(f"{'-'*50}\nSummarizing {len(abstracts)} abstracts.\nCluster color: {color}.\nNumber of vertices: {num_nodes}.")
+        print(f"{'-'*50}\nSummarizing {len(abstracts)} abstracts.\nCluster color: {color}."
+              f"\nNumber of vertices: {len(subgraph)}.")
 
         # Generate the summary using Cohere's summarize API
         response = co.generate(
@@ -180,6 +146,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
         )
         summary = response.generations[0].text.strip()
 
+        # Refine the summary by generating a title using the LLAMA API
         with open('prompt for llama.txt', 'r') as file:
             instructions_llama = file.read()
         input_params = {
@@ -191,8 +158,10 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
             input=input_params
         )
         summary = "".join(output)
+        # title = summary.replace('"', '')
 
-        with open('prompt for llama 2.txt' , 'r') as file:
+        # Generate a unique title if the title already exists
+        with open('prompt for llama 2.txt', 'r') as file:
             instructions_llama2 = file.read()
         prompt = instructions_llama2 + summary
         if titles_list:
@@ -212,6 +181,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
             count_titles += 1
         titles_list.append(title)
         # save the summary.
+        num_nodes = len(subgraph)
         vers = 'vertices' if num_nodes != 1 else 'vertex'
 
         file_name = f'{title} ({num_nodes} {vers}).txt'
@@ -219,15 +189,23 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str):
         try:
             with open(result_file_path + file_name, 'w') as f:
                 f.write(summary)
-                print(f"Summary saved to {result_file_path + file_name}") #
+                print(f"Summary saved to {result_file_path + file_name}")
         except FileNotFoundError:  # create the directory if it doesn't exist.
             os.makedirs(result_file_path)
             with open(file_name, 'w') as f:
                 f.write(summary)
+        except UnicodeEncodeError:
+            # If the summary contains characters that cannot be encoded, print the summary to the console
+            print(f"Summary for {title} ({num_nodes} {vers}) contains characters that cannot be encoded.")
+            print(summary)
+            exit()  # Exit the program to avoid further errors
         
         for v in subgraph.nodes():
             vertex_to_title_map[v] = f'{title} ({num_nodes} {vers})'
+
+    # Add the titles to the graph
+    G = load_graph(name)
     nx.set_node_attributes(G, values=vertex_to_title_map, name='title')
     upload_graph(G, name)
-    return titles_list #
+    return titles_list
         

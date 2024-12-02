@@ -4,24 +4,20 @@ This file is responsible for evaluating the summarization results using Cohere's
 """
 import pandas as pd
 import random
-import pickle as pkl
 import networkx as nx
-from typing import List, Dict
-import matplotlib.pyplot as plt
 import cohere  # Added Cohere import
 import os
 from dotenv import load_dotenv
-import re
-from matplotlib.patches import Patch
-import requests
 from requests.exceptions import Timeout  # Import Timeout exception
 import time  # For optional delays between retries
 
 wikipedia = False
 
+
 def update_wikipedia():
     global wikipedia
     wikipedia = True
+
 
 load_dotenv()
 cohere_key = os.getenv("COHERE_API_KEY")
@@ -68,7 +64,8 @@ Annotators were instructed to penalize summaries which contained redundancies an
 RELEVANCY_SCORE_STEPS = """
 1. Read the summary and the source document carefully.
 2. Compare the summary to the source document and identify the main points of the article.
-3. Assess how well the summary covers the main points of the article, and how much irrelevant or redundant information it contains.
+3. Assess how well the summary covers the main points of the article, and how much irrelevant or redundant 
+information it contains.
 4. Assign a relevance score from 1 to 5.
 """
 
@@ -82,9 +79,11 @@ coherent body of information about a topic."
 
 COHERENCE_SCORE_STEPS = """
 1. Read the article carefully and identify the main topic and key points.
-2. Read the summary and compare it to the article. Check if the summary covers the main topic and key points of the article,
+2. Read the summary and compare it to the article. Check if the summary covers the main topic and key points 
+of the article,
 and if it presents them in a clear and logical order.
-3. Assign a score for coherence on a scale of 1 to 5, where 1 is the lowest and 5 is the highest based on the Evaluation Criteria.
+3. Assign a score for coherence on a scale of 1 to 5, where 1 is the lowest and 5 is the highest based on 
+the Evaluation Criteria.
 """
 
 CONSISTENCY_SCORE_CRITERIA = """
@@ -95,14 +94,17 @@ Annotators were also asked to penalize summaries that contained hallucinated fac
 
 CONSISTENCY_SCORE_STEPS = """
 1. Read the article carefully and identify the main facts and details it presents.
-2. Read the summary and compare it to the article. Check if the summary contains any factual errors that are not supported by the article.
+2. Read the summary and compare it to the article. Check if the summary contains any factual errors that are not 
+supported by the article.
 3. Assign a score for consistency based on the Evaluation Criteria.
 """
 
 FLUENCY_SCORE_CRITERIA = """
-Fluency(1-5): the quality of the summary in terms of grammar, spelling, punctuation, word choice, and sentence structure.
+Fluency(1-5): the quality of the summary in terms of grammar, spelling, punctuation, word choice, 
+and sentence structure.
 1: Poor. The summary has many errors that make it hard to understand or sound unnatural.
-2: Fair. The summary has some errors that affect the clarity or smoothness of the text, but the main points are still comprehensible.
+2: Fair. The summary has some errors that affect the clarity or smoothness of the text, but the main points are still 
+comprehensible.
 3: Good. The summary has few or no errors and is easy to read and follow.
 4: Very Good. The summary is nearly flawless with minor errors that do not impede understanding.
 5: Excellent. The summary is completely fluent with perfect grammar, spelling, punctuation, and sentence structure.
@@ -119,6 +121,7 @@ evaluation_metrics = {
     "Consistency": (CONSISTENCY_SCORE_CRITERIA, CONSISTENCY_SCORE_STEPS),
     "Fluency": (FLUENCY_SCORE_CRITERIA, FLUENCY_SCORE_STEPS),
 }
+
 
 def generate_with_retry(co_client, model, prompt, max_tokens=100, temperature=0.0, retries=3, delay=2):
     """
@@ -153,43 +156,35 @@ def generate_with_retry(co_client, model, prompt, max_tokens=100, temperature=0.
             break
     return None
 
-def metrics_evaluations(name: str, G: nx.Graph = None):
+
+def metrics_evaluations(name: str, vertices: pd.DataFrame, G: nx.Graph = None):
     """
     Load the cluster summary for the given name and calculate average scores for relevancy, coherence, consistency,
     and fluency.
     :param name: the name of the dataset.
+    :param vertices: the vertices DataFrame.
     :param G: the graph.
     :return: Averages of the averages for relevancy, coherence, consistency, and fluency.
     """
-    global wikipedia
-    if wikipedia:
-        summary_path = f"Results/Summaries/wikipedia/"
-        for file in os.listdir('Results/Summaries/wikipedia'):
-            if file.startswith(name):
-                summary_path = os.path.join(summary_path, file)
-                break
-    else:
-        summary_path = f"Results/Summaries/Rafael/"
-        for file in os.listdir('Results/Summaries/Rafael'):
-            if file.startswith(name):
-                summary_path = os.path.join(summary_path, file)
-                break
+    summary_path = f"Results/Summaries/{name}/"
 
     # Check if the summary directory exists and list its contents
     if not os.path.exists(summary_path):
-        print(f"Error: Directory {summary_path} does not exist!")
-        return None
+        raise FileNotFoundError(f"Directory '{summary_path}' does not exist.")
 
     clusters = os.listdir(summary_path)
     if not clusters:
-        print(f"No summary files found in directory {summary_path}.")
-        return None
+        raise FileNotFoundError(f"No summary files found in directory {summary_path}.")
 
     # Prepare to store summaries and subgraphs
     summaries = {}
     titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
     title_to_color = extract_colors(G)
     subgraphs = {}
+
+    # Filter out non-paper nodes
+    articles = [node for node in G.nodes if G.nodes[node].get('type', '') == 'paper']
+    G = G.subgraph(articles)
 
     for i, title in enumerate(titles):
         decode_break = False
@@ -204,29 +199,18 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
             continue
         # Get the subgraph.
         color = title_to_color.get(title, 'green')  # Default color if not found
-        nodes = [node for node in G.nodes if G.nodes[node].get('color', 'green') == color]
+        nodes = [node for node in G.nodes if G.nodes[node]['color'] == color]
 
         subgraphs[title] = G.subgraph(nodes)
 
-    # Load the data
-    if wikipedia:
-        PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
-    else:
-        PATH = f'data/graphs/{name}_papers.csv'
-
-    # Ensure the CSV file exists
-    if not os.path.exists(PATH):
-        raise FileNotFoundError(f"The file {PATH} does not exist.")
-
-    # Read only the id and abstract columns
-    data = pd.read_csv(PATH)[['id', 'abstract']]
+    data = vertices[['id', 'abstract']]  # Read only the id and abstract columns
 
     all_relevancy_scores = []
     all_coherence_scores = []
     all_consistency_scores = []
     all_fluency_scores = []
 
-    for title, summary in summaries.items():    
+    for title, summary in summaries.items():  # Iterate through each cluster
         subgraph = subgraphs.get(title, nx.Graph())
         cluster_name = title
 
@@ -278,7 +262,8 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
                 )
 
                 if response is None:
-                    print(f"Failed to get response for metric '{eval_type}' on cluster '{cluster_name}'. Assigning score 0.")
+                    print(f"Failed to get response for metric '{eval_type}' on cluster '{cluster_name}'. "
+                          f"Assigning score 0.")
                     score = 0
                 else:
                     # Extract the response text
@@ -305,10 +290,14 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
                     cluster_fluency_scores.append(score)
 
         # Calculate average for each cluster.
-        avg_cluster_relevancy = (sum(cluster_relevancy_scores) / len(cluster_relevancy_scores)) if cluster_relevancy_scores else 0
-        avg_cluster_coherence = (sum(cluster_coherence_scores) / len(cluster_coherence_scores)) if cluster_coherence_scores else 0
-        avg_cluster_consistency = (sum(cluster_consistency_scores) / len(cluster_consistency_scores)) if cluster_consistency_scores else 0
-        avg_cluster_fluency = (sum(cluster_fluency_scores) / len(cluster_fluency_scores)) if cluster_fluency_scores else 0
+        avg_cluster_relevancy = (sum(cluster_relevancy_scores) / len(cluster_relevancy_scores)) \
+            if cluster_relevancy_scores else 0
+        avg_cluster_coherence = (sum(cluster_coherence_scores) / len(cluster_coherence_scores)) \
+            if cluster_coherence_scores else 0
+        avg_cluster_consistency = (sum(cluster_consistency_scores) / len(cluster_consistency_scores)) \
+            if cluster_consistency_scores else 0
+        avg_cluster_fluency = (sum(cluster_fluency_scores) / len(cluster_fluency_scores)) \
+            if cluster_fluency_scores else 0
 
         # Store these averages to later calculate the dataset-level averages.
         all_relevancy_scores.append(avg_cluster_relevancy)
@@ -324,7 +313,8 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
 
     return avg_relevancy / 5, avg_coherence / 5, avg_consistency / 5, avg_fluency / 5
 
-def extract_colors(graph: nx.Graph) -> Dict[str, str]:
+
+def extract_colors(graph: nx.Graph) -> dict:
     """
     Extract the colors of the clusters from the graph.
     :param graph: the graph.
@@ -337,50 +327,31 @@ def extract_colors(graph: nx.Graph) -> Dict[str, str]:
             title_to_color[title] = graph.nodes[node].get('color', 'green')  # Default to 'green' if color not set
     return title_to_color
 
-import os
-import random
-import pandas as pd
-import networkx as nx
 
-def evaluate(name: str, G: nx.Graph = None) -> float:
+def evaluate(name: str, vertices, G: nx.Graph = None) -> float:
     """
     Load the cluster summary for the given name and evaluate consistency.
     :param name: the name of the dataset.
+    :param vertices: the vertices DataFrame.
     :param G: the graph.
     :return: A float representing the evaluation score.
     """
-    global wikipedia
-    if wikipedia:
-        summary_dir = "Results/Summaries/wikipedia/"
-    else:
-        summary_dir = "Results/Summaries/Rafael/"
-    
-    # Find the summary file that starts with the given name
-    summary_path = None
-    for file in os.listdir(summary_dir):
-        if file.startswith(name):
-            summary_path = os.path.join(summary_dir, file)
-            break
-
-    if summary_path is None:
-        print(f"Error: No summary file starts with '{name}' in '{summary_dir}'!")
-        return None
+    summary_path = f"Results/Summaries/{name}/"
 
     # Check if the summary directory exists
     if not os.path.exists(summary_path):
-        print(f"Error: Directory {summary_path} does not exist!")
-        return None
+        raise FileNotFoundError(f"Directory '{summary_path}' does not exist.")
 
     clusters = os.listdir(summary_path)
     if not clusters:
-        print(f"No summary files found in directory {summary_path}.")
-        return None
+        raise FileNotFoundError(f"No summary files found in directory {summary_path}.")
 
     summaries = {}
     titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
     title_to_color = extract_colors(G)
     subgraphs = {}
-    for i, title in enumerate(titles):
+
+    for i, title in enumerate(titles):  # Iterate through each cluster
         summary_file_path = os.path.join(summary_path, clusters[i])
         try:
             with open(summary_file_path, 'r', encoding='utf-8') as f:
@@ -395,17 +366,7 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
         subgraphs[title] = G.subgraph(nodes)
 
     # Determine the path to the CSV file based on the source
-    if wikipedia:
-        PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
-    else:
-        PATH = f'data/graphs/{name}_papers.csv'
-
-    # Ensure the CSV file exists
-    if not os.path.exists(PATH):
-        raise FileNotFoundError(f"The file {PATH} does not exist.")
-
-    # Read only the id and abstract columns
-    data = pd.read_csv(PATH)[['id', 'abstract']]
+    data = vertices[['id', 'abstract']]  # Read only the id and abstract columns
 
     evaluations = {}
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
@@ -505,7 +466,8 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
                 f"How consistent is the following summary with the abstract?\n"
                 f"Summary: {summary}\n"
                 f"Abstract: {outside_abstracts_sampled[i]}\n\n\n"
-                f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score."
+                f"Even if the summary is not consistent with the abstract, please provide a score between "
+                f"0 to 100, and only the score."
             )
 
             response_out = generate_with_retry(

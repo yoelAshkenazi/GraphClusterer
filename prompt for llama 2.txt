@@ -11,5 +11,6 @@ If the text is about how to bake a cake, your answer will be "How to bake a cake
 
 Important Rules:
 Do not add to your answer any introductions such as "This is one suggestion for naming this text:" or "Here is a potential title for the text:" etc.
+Do not use characters that are outside the standard ASCII range.
 
 Text:

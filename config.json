@@ -1,0 +1,27 @@
+{
+  "graph_kwargs": {
+    "size": 2000,
+    "K": 5,
+    "color": "#1f78b4"
+  },
+
+  "clustering_kwargs": {
+    "method": "louvain",
+    "resolution": 0.5,
+    "save": true
+  },
+
+  "draw_kwargs": {
+    "save": true,
+    "method": "louvain",
+    "shown_percentage": 0.3
+  },
+
+  "name": "apple",
+  "vertices_path": "data/wikipedia/apple_nodes.csv",
+  "edges_path": "data/wikipedia/apple_edges.csv",
+
+  "use_embedding": false,
+  "iteration_num": 2,
+  "print_info": true
+}
