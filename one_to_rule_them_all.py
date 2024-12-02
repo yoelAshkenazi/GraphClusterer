@@ -302,41 +302,12 @@ def the_almighty_function(pipeline_kwargs: dict):
     the second part is done in 'functions.py', and the third part is done in 'summarize.py'.
     For parts 1 and 2 you need python >=3.8, and for part 3 you need python 3.7.
         """
-        
-
-    # Iterativaly update the graph to get better results.
-    for name in ALL_NAMES:
-        for i in range(iteration_num):
-            # Step 1: Create the graphs for all versions. (need to do only once per choice of parameters)
-            create_graph(name, graph_kwargs, clustering_kwargs, draw_kwargs)
-
-            # Step 2: Summarize the clusters.
-            if wikipedia:
-                os.makedirs("Results/Summaries/wikipedia", exist_ok=True)
-            else:
-                os.makedirs("Results/Summaries/Rafael", exist_ok=True)
-
-            # Create a dictionary to store the titles of each summary.
-            titles_dict = {}
-            print(f"Running summarization for '{name}'.")
-            titles = run_summarization(name)
-            titles_dict[name] = titles
-
-            # Save titles_dict as a JSON file
-            if wikipedia:
-                output_path = os.path.join("Results", "Summaries", "wikipedia", "Titles.json")
-            else:
-                output_path = os.path.join("Results", "Summaries", "Rafael", "Titles.json")
-
-            with open(output_path, 'w', encoding='utf-8') as f:
-                json.dump(titles_dict, f, ensure_ascii=False, indent=4)
-
-            # Step 3: Evaluate the success rate of each cluster for each dataset and iteratively update the graph.
-            starry_graph.iteraroe(name, wikipedia)
     
-    evaluate_and_plot()
     for name in ALL_NAMES:
-        # In order to just use the plot function, make sure the summaries are updated and the csvs are updated. If not, run those lines:
-        # run_summarization(name)
-        # starry_graph.iteraroe(name, wikipedia)
-        plot.plot(name)
+        # In order to just use the plot function, make sure the summaries are updated and the csvs are updated. If not, run the create_graph, run_summarization, and iteraroe functions.
+        
+        create_graph(name, graph_kwargs, clustering_kwargs, draw_kwargs)
+        titles = run_summarization(name)
+        starry_graph.iteraroe(name, wikipedia)
+        evaluate_and_plot()
+        plot.plot(name, wikipedia)

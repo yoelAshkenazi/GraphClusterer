@@ -441,7 +441,7 @@ def evaluate_wiki_clusters(G):
     :return:
     """
     # filter the vertices by color and type.
-    articles = [node for node in G.nodes if G.nodes()[node]['shape'] == 's']
+    articles = [node for node in G.nodes if G.nodes.data()[node].get('shape', '') == 's']
     articles_graph = G.subgraph(articles)
     colors = set([node[1]['color'] for node in articles_graph.nodes(data=True)])
     sizes = []

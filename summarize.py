@@ -79,7 +79,7 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     global wikipedia
     # first we filter articles by vertex type.
     if wikipedia:
-        articles = [node for node in graph.nodes() if graph.nodes.data()[node]['shape'] == 's']
+        articles = [node for node in graph.nodes if graph.nodes.data()[node].get('shape', '') == 's']
     else:
         articles = [node for node in graph.nodes if graph.nodes()[node].get('type', '') == 'paper']
     articles_graph = graph.subgraph(articles)

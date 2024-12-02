@@ -1,5 +1,5 @@
-Letter,Cluster Title
-a,Advanced Control for Hypersonics (2 vertices)
-b,Advances in Missile Technology (42 vertices)
-c,Hypersonic Missile Defense Development (50 vertices)
-d,Iraqi Missile Attacks Iran (2 vertices)
+Cluster Title,Letter
+Advances in Missile Technology (42 vertices),A
+Controlling Hypersonic Vehicles Disturbances (2 vertices),B
+Iraqi Missile Attacks Iran (2 vertices),C
+Missile Defense System Development (50 vertices),D

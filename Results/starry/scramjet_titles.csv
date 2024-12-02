@@ -1,4 +1,4 @@
-Letter,Cluster Title
-a,Optimizing Scramjet Intake Systems (7 vertices)
-b,Scramjet Engine Combustion Strategies (52 vertices)
-c,Scramjet Technology and Applications (40 vertices)
+Cluster Title,Letter
+Overview of Scramjet Engines (40 vertices),A
+Scramjet Engine Design Challenges (52 vertices),B
+Scramjet Engine Performance Optimization (7 vertices),C

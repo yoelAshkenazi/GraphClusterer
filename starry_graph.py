@@ -6,6 +6,7 @@ import cohere
 from dotenv import load_dotenv
 import pickle as pk
 import random
+import chardet
 wikipedia = False
 load_dotenv()
 cohere_key = os.getenv("COHERE_API_KEY")
@@ -30,6 +31,19 @@ def extract_colors(graph: nx.Graph) -> Dict[str, str]:
         if title is not None:
             title_to_color[title] = graph.nodes[node]['color']
     return title_to_color
+
+
+def detect_encoding(file_path: str) -> str:
+    """
+    Automatically detect the encoding of a file.
+    :param file_path: the path to the file.
+    :return: the detected encoding.
+    """
+    with open(file_path, 'rb') as f:
+        raw_data = f.read()
+        result = chardet.detect(raw_data)
+        encoding = result['encoding']
+        return encoding if encoding else 'utf-8'  # Fallback to utf-8 if detection fails
 
 
 def starr(name: str, G: nx.Graph = None) -> float:
@@ -65,17 +79,23 @@ def starr(name: str, G: nx.Graph = None) -> float:
     for i, title in enumerate(titles):
         decode_break = False
         summary_file_path = os.path.join(summary_path, clusters[i])
-        with open(summary_file_path, 'r') as f:
-            try:
+
+        # Detect the file encoding and open the file with the correct encoding
+        encoding = detect_encoding(summary_file_path)
+        try:
+            with open(summary_file_path, 'r', encoding=encoding) as f:
                 summaries[title] = f.read()
-            except UnicodeDecodeError:
-                decode_break = True
+        except UnicodeDecodeError:
+            decode_break = True
+            print(f"Failed to decode summary file: {summary_file_path} using encoding {encoding}")
+        
         if decode_break:
             print(f"Failed to decode summary file: {summary_file_path}")
             continue
+
         # Get the subgraph.
         color = title_to_color[title]
-        nodes = [node for node in G.nodes if G.nodes()[node].get('color', 'green') == color]
+        nodes = [node for node in G.nodes if G.nodes[node].get('color', 'green') == color]
         subgraphs[title] = G.subgraph(nodes).copy()  # Ensure mutable subgraph
 
     # Create legend for titles
@@ -196,7 +216,6 @@ def starr(name: str, G: nx.Graph = None) -> float:
     map_df = pd.DataFrame.from_dict(map, orient='index')
     map_df.to_csv(output_path, index=False)
     return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
-
 
 
 def update(name, G):

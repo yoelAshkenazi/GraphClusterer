@@ -226,7 +226,7 @@ def metrics_evaluations(name: str, G: nx.Graph = None):
     all_consistency_scores = []
     all_fluency_scores = []
 
-    for title, summary in summaries.items():
+    for title, summary in summaries.items():    
         subgraph = subgraphs.get(title, nx.Graph())
         cluster_name = title
 
@@ -337,28 +337,36 @@ def extract_colors(graph: nx.Graph) -> Dict[str, str]:
             title_to_color[title] = graph.nodes[node].get('color', 'green')  # Default to 'green' if color not set
     return title_to_color
 
+import os
+import random
+import pandas as pd
+import networkx as nx
+
 def evaluate(name: str, G: nx.Graph = None) -> float:
     """
-    Load the cluster summary for the given name.
+    Load the cluster summary for the given name and evaluate consistency.
     :param name: the name of the dataset.
     :param G: the graph.
-    :return:
+    :return: A float representing the evaluation score.
     """
     global wikipedia
     if wikipedia:
-        summary_path = f"Results/Summaries/wikipedia/"
-        for file in os.listdir('Results/Summaries/wikipedia'):
-            if file.startswith(name):
-                summary_path = os.path.join(summary_path, file)
-                break
+        summary_dir = "Results/Summaries/wikipedia/"
     else:
-        summary_path = f"Results/Summaries/Rafael/"
-        for file in os.listdir('Results/Summaries/Rafael'):
-            if file.startswith(name):
-                summary_path = os.path.join(summary_path, file)
-                break
+        summary_dir = "Results/Summaries/Rafael/"
+    
+    # Find the summary file that starts with the given name
+    summary_path = None
+    for file in os.listdir(summary_dir):
+        if file.startswith(name):
+            summary_path = os.path.join(summary_dir, file)
+            break
 
-    # Check if the summary directory exists and list its contents
+    if summary_path is None:
+        print(f"Error: No summary file starts with '{name}' in '{summary_dir}'!")
+        return None
+
+    # Check if the summary directory exists
     if not os.path.exists(summary_path):
         print(f"Error: Directory {summary_path} does not exist!")
         return None
@@ -373,22 +381,20 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
     title_to_color = extract_colors(G)
     subgraphs = {}
     for i, title in enumerate(titles):
-        decode_break = False
         summary_file_path = os.path.join(summary_path, clusters[i])
-        with open(summary_file_path, 'r', encoding='utf-8') as f:
-            try:
+        try:
+            with open(summary_file_path, 'r', encoding='utf-8') as f:
                 summaries[title] = f.read()
-            except UnicodeDecodeError:
-                decode_break = True
-        if decode_break:
+        except UnicodeDecodeError:
             print(f"Failed to decode summary file: {summary_file_path}")
             continue
+
         # Get the subgraph.
         color = title_to_color.get(title, 'green')  # Default color if not found
         nodes = [node for node in G.nodes if G.nodes[node].get('color', 'green') == color]
         subgraphs[title] = G.subgraph(nodes)
 
-    # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
+    # Determine the path to the CSV file based on the source
     if wikipedia:
         PATH = f'data/wikipedia/{name}_100_samples_nodes.csv'
     else:
@@ -400,6 +406,7 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
 
     # Read only the id and abstract columns
     data = pd.read_csv(PATH)[['id', 'abstract']]
+
     evaluations = {}
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
     total_out_score = 0  # Total scores for the abstracts sampled outside the clusters.
@@ -451,14 +458,22 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
             print(f"Sampling error for outside cluster '{cluster_name}': {e}")
             outside_abstracts_sampled = outside_abstracts
 
-        # Ask Cohere's API which abstracts are more similar to the summary.
-        for i in range(min(len(cluster_abstracts_sampled), len(outside_abstracts_sampled))):
+        # Initialize current scores for this cluster
+        current_score_in = 0
+        current_score_out = 0
+
+        # Determine the number of pairs to evaluate
+        num_pairs = min(len(cluster_abstracts_sampled), len(outside_abstracts_sampled))
+
+        for i in range(num_pairs):
             # Evaluate consistency for abstracts inside the cluster.
-            prompt_in = f"Answer using only a number between 1 to 100: " \
-                        f"How consistent is the following summary with the abstract?\n" \
-                        f"Summary: {summary}\n" \
-                        f"Abstract: {cluster_abstracts_sampled[i]}\n\n\n" \
-                        f"No matter what is the score you choose to give, do not explain why you gave this score. "
+            prompt_in = (
+                f"Answer using only a number between 1 to 100: "
+                f"How consistent is the following summary with the abstract?\n"
+                f"Summary: {summary}\n"
+                f"Abstract: {cluster_abstracts_sampled[i]}\n\n\n"
+                f"No matter what is the score you choose to give, do not explain why you gave this score."
+            )
 
             response_in = generate_with_retry(
                 co_client=co,
@@ -484,14 +499,14 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
                     print(f"Unexpected score format: '{score_in_text}'. Defaulting to 0.")
                     score_in = 0
 
-            total_in_score += score_in
-
             # Evaluate consistency for abstracts outside the cluster.
-            prompt_out = f"Answer using only a number between 0 to 100: " \
-                         f"How consistent is the following summary with the abstract?\n" \
-                         f"Summary: {summary}\n" \
-                         f"Abstract: {outside_abstracts_sampled[i]}\n\n\n" \
-                         f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score."
+            prompt_out = (
+                f"Answer using only a number between 0 to 100: "
+                f"How consistent is the following summary with the abstract?\n"
+                f"Summary: {summary}\n"
+                f"Abstract: {outside_abstracts_sampled[i]}\n\n\n"
+                f"Even if the summary is not consistent with the abstract, please provide a score between 0 to 100, and only the score."
+            )
 
             response_out = generate_with_retry(
                 co_client=co,
@@ -517,13 +532,27 @@ def evaluate(name: str, G: nx.Graph = None) -> float:
                     print(f"Unexpected score format: '{score_out_text}'. Defaulting to 0.")
                     score_out = 0
 
-            total_out_score += score_out
+            # Accumulate the scores for this iteration
+            current_score_in += score_in
+            current_score_out += score_out
 
-        decision = "consistent" if total_in_score >= total_out_score else "inconsistent"
+        # After processing all pairs for this cluster, add to total scores
+        total_in_score += current_score_in
+        total_out_score += current_score_out
 
-        evaluations[cluster_name] = (total_in_score, total_out_score, decision)
+        # Determine the decision based on total scores for this cluster
+        decision = "consistent" if current_score_in >= current_score_out else "inconsistent"
 
+        evaluations[cluster_name] = (current_score_in, current_score_out, decision)
+
+        # Print the summary for this cluster
         print(f"Cluster summary for cluster '{cluster_name}' is {decision} with the cluster abstracts. "
-              f"\nScore in: {total_in_score}\nScore out: {total_out_score}\n{'-' * 50}")
+              f"\nScore in: {current_score_in}\nScore out: {current_score_out}\n{'-' * 50}")
 
-    return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
+    # Calculate the final evaluation score
+    if (total_in_score + total_out_score) != 0:
+        final_score = total_in_score / (total_in_score + total_out_score)
+    else:
+        final_score = 0
+
+    return final_score
