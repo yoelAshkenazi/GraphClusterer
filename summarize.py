@@ -11,13 +11,6 @@ from dotenv import load_dotenv
 import pickle as pkl
 import replicate
 
-wikipedia = False
-
-
-def update_wikipedia():
-    global wikipedia
-    wikipedia = True
-
 
 def upload_graph(graph: nx.Graph, name: str) -> None:
     """
@@ -31,8 +24,6 @@ def upload_graph(graph: nx.Graph, name: str) -> None:
     # save the graph.
     with open(graph_path, 'wb') as f:
         pkl.dump(graph, f, protocol=pkl.HIGHEST_PROTOCOL)
-
-    print(f"{'-'*50}\nGraph saved to '{graph_path}'.")
 
 
 def load_graph(name: str) -> nx.Graph:
@@ -50,10 +41,8 @@ def load_graph(name: str) -> nx.Graph:
 
     # filter the graph in order to remove the nan nodes.
     nodes = graph.nodes(data=True)
-    s = len(nodes)
     nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(
-        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+
     graph = graph.subgraph(nodes)
 
     return graph
@@ -118,9 +107,6 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
     vertex_to_title_map = {}  # map from vertex to title.
     # Iterate over each subgraph to generate summaries
     for i, subgraph in enumerate(subgraphs, start=1):
-        # Extract the color attribute from the first node
-        color = subgraph.nodes()[list(subgraph.nodes)[0]]['color']
-
         # Extract abstracts corresponding to the nodes in the subgraph
         node_ids = set(subgraph.nodes())
         abstracts = df[df['id'].isin(node_ids)]['abstract'].dropna().tolist()
@@ -134,9 +120,6 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         combined_abstracts = " ".join([f"<New Text:> {abstract}" for j, abstract in enumerate(abstracts)])
         with open('prompt for command-r.txt', 'r') as file:
             instructions_command_r = file.read()
-        # Display summarization information
-        print(f"{'-'*50}\nSummarizing {len(abstracts)} abstracts.\nCluster color: {color}."
-              f"\nNumber of vertices: {len(subgraph)}.")
 
         # Generate the summary using Cohere's summarize API
         response = co.generate(
@@ -158,7 +141,6 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
             input=input_params
         )
         summary = "".join(output)
-        # title = summary.replace('"', '')
 
         # Generate a unique title if the title already exists
         with open('prompt for llama 2.txt', 'r') as file:
@@ -176,6 +158,9 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         )
         title = "".join(output)
         title = title.replace('"', '')
+
+        print(f"Cluster {i}: {title} ({len(abstracts)} textual vertices)")
+
         if title in titles_list:
             title = f"{title} ({count_titles})"
             count_titles += 1
@@ -189,15 +174,17 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         try:
             with open(result_file_path + file_name, 'w') as f:
                 f.write(summary)
-                print(f"Summary saved to {result_file_path + file_name}")
+                # print(f"Summary saved to {result_file_path + file_name}")
         except FileNotFoundError:  # create the directory if it doesn't exist.
             os.makedirs(result_file_path)
             with open(file_name, 'w') as f:
                 f.write(summary)
         except UnicodeEncodeError:
-            # If the summary contains characters that cannot be encoded, print the summary to the console
-            print(f"Summary for {title} ({num_nodes} {vers}) contains characters that cannot be encoded.")
-            print(summary)
+            # make the summary encoding compatible
+            summary = summary.encode('ascii', 'ignore').decode()
+            with open(result_file_path + file_name, 'w') as f:
+                f.write(summary)
+                # print(f"Summary saved to {result_file_path + file_name}")
             exit()  # Exit the program to avoid further errors
         
         for v in subgraph.nodes():

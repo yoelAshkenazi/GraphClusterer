@@ -61,7 +61,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
     summaries = {}
     titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
     title_to_color = extract_colors(G)
-    print(f"Title to color: {title_to_color}")
+
     subgraphs = {}
 
     # Divide the graph into subgraphs according to the titles.
@@ -184,8 +184,8 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
 
             vertex_map[counter] = {
                 'index': counter,
-                'total_in_score': score_in,
-                'total_out_score': score_out,
+                'total_in_score': a,  # The score for the abstract sampled inside the cluster.
+                'total_out_score': b,  # The score for the abstract sampled outside the cluster.
                 'id': id,
                 'title': cluster_name,
                 'abstract': abstract
@@ -196,8 +196,8 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
 
         evaluations[cluster_name] = (total_in_score, total_out_score, decision)
 
-        print(f"Cluster summary for cluster '{cluster_name}' is {decision} with the cluster abstracts. "
-              f"\nScore in: {score_in}\nScore out: {score_out}\n{'-' * 50}")
+        # print(f"Cluster summary for cluster '{cluster_name}' is {decision} with the cluster abstracts. "
+        #       f"\nScore in: {score_in}\nScore out: {score_out}\n{'-' * 50}")
 
     # Save the map to the directory 'Results/starry/{name}.csv'
     output_dir = 'Results/starry'
@@ -277,8 +277,8 @@ def update(name, G: nx.Graph) -> nx.Graph:
                 if vertex_i not in G.nodes:
                     nodes_to_create.append(vertex_i)
 
-    print(f"Nodes to create: {nodes_to_create}")
-    print(f"Edges to add: {edges_to_add}")
+    # print(f"Nodes to create: {nodes_to_create}")
+    # print(f"Edges to add: {edges_to_add}")
     # Add all nodes to the graph (if any were missing)
     for node in set(nodes_to_create):  # Use `set` to ensure unique nodes
         G.add_node(node)

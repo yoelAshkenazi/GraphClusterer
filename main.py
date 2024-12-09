@@ -1,14 +1,15 @@
 import warnings
 
 import pandas as pd
+import pickle as pkl
+
 import one_to_rule_them_all
 
 warnings.filterwarnings("ignore")
-"""WIKIPEDIA = ["apple", "car", "clock", "London", "turtle"]"""
-WIKIPEDIA = ["clock"]
-"""['3D printing', "additive manufacturing", "autonomous drones", "composite material", "hypersonic missile", 
-"nuclear reactor", "quantum computing", "scramjet", "smart material", "wind tunnel"] """
-RAFAEL = ['hypersonic missile']
+WIKIPEDIA = ["apple", "car", "clock", "London", "turtle"]
+REFAEL = ['3D printing', "additive manufacturing", "autonomous drones", "composite material", "hypersonic missile",
+          "nuclear reactor", "quantum computing", "scramjet", "smart material", "wind tunnel"]
+ALL_NAMES = WIKIPEDIA + REFAEL
 
 
 def load_params(config_file_path):
@@ -16,6 +17,14 @@ def load_params(config_file_path):
     with open(config_file_path, 'r') as _f:
         _params = json.load(_f)
     return _params
+
+
+def get_distance_matrix(path_):
+    if path_ == "":  # If the path is empty, return None.
+        return None
+    with open(path_, 'rb') as f:  # Load the distances.
+        distances_ = pkl.load(f)
+    return distances_  # Return the distances.
 
 
 if __name__ == '__main__':
@@ -30,22 +39,34 @@ if __name__ == '__main__':
         'iteration_num': params['iteration_num'],
         'vertices': pd.read_csv(params['vertices_path']),
         'edges': pd.read_csv(params['edges_path']),
+        'distance_matrix': get_distance_matrix(params['distance_matrix_path']),
         'name': params['name'],
     }
 
-    if params['use_embedding']:
-        import pickle as pkl
-        path = f'data/distances/{params['name']}_papers_embeddings.pkl'  # Path to the distances file.
-        try:
-            with open(path, 'rb') as f:
-                distances = pkl.load(f)
-            pipeline_kwargs['distance_matrix'] = distances['Distances']  # Load the distances.
-        except FileNotFoundError:  # If the file is not found, the embedding will be computed.
-            pipeline_kwargs['use_embedding'] = True
-            """placeholder for now. Later will be replaced with code to '2_embed_abstract.py' and '3_embed_graph.py' 
-            to compute both the embeddings and distances.
-            """
-    else:
-        pipeline_kwargs['distance_matrix'] = None  # If the embedding is not used, the distance matrix is None.
+    USED_NAMES = ['apple']  # Names that are used in the pipeline.
     # Run the pipeline.
-    one_to_rule_them_all.the_almighty_function(pipeline_kwargs)
+    try:
+        for name in REFAEL:
+            if name in USED_NAMES:
+                continue
+            print(f"Running {name}...")
+            pipeline_kwargs['name'] = name
+            if name in REFAEL:
+                pipeline_kwargs['vertices'] = pd.read_csv(f'data/graphs/{name}_papers.csv')  # Load the vertices.
+                pipeline_kwargs['edges'] = pd.read_csv(f'data/graphs/{name}_graph.csv')  # Load the edges.
+                pipeline_kwargs['distance_matrix'] = get_distance_matrix(  # Load the distances.
+                    f'data/distances/{name}_energy_distance_matrix.pkl')
+
+            elif name in WIKIPEDIA:
+                pipeline_kwargs['vertices'] = pd.read_csv(f'data/wikipedia/{name}_nodes.csv')  # Load the vertices.
+                pipeline_kwargs['edges'] = pd.read_csv(f'data/wikipedia/{name}_edges.csv')  # Load the edges.
+                pipeline_kwargs['distance_matrix'] = None  # Not using distances yet.
+
+            one_to_rule_them_all.the_almighty_function(pipeline_kwargs)  # Run the pipeline.
+
+            USED_NAMES.append(name)  # Add the name to the used names.
+
+    except Exception as e:
+        print(f"Error in {name}: {e}")
+        print(f"Used names: {USED_NAMES[:-1]}")  # Print the used names.
+        raise e

@@ -12,13 +12,6 @@ import pickle as pk
 import random
 import os
 
-wikipedia = False
-
-
-def update_wikipedia():
-    global wikipedia
-    wikipedia = True
-
 
 # load a .pkl file.
 def load_pkl(file_path):
@@ -56,10 +49,8 @@ def load_graph(name: str) -> nx.Graph:
 
     # filter the graph in order to remove the nan nodes.
     nodes = graph.nodes(data=True)
-    s = len(nodes)
     nodes = [node for node, data in nodes if not pd.isna(node)]
-    print(
-        f"Successfully removed {s - len(nodes)} nan {'vertex' if s - len(nodes) == 1 else 'vertices'} from the graph.")
+
     graph = graph.subgraph(nodes)
 
     return graph
@@ -212,7 +203,6 @@ def cluster_graph(G, name, **kwargs):
     :return:
     """
 
-    global wikipedia
     # Unpack the parameters.
     method = kwargs['method'] if 'method' in kwargs else 'louvain'
     save = kwargs['save'] if 'save' in kwargs else False
@@ -241,7 +231,7 @@ def cluster_graph(G, name, **kwargs):
             with open(filename, 'wb') as f:
                 pk.dump(G, f, protocol=pk.HIGHEST_PROTOCOL)
 
-        print(f"Graph for '{name}' saved successfully to '{filename}'.")
+        # print(f"Graph for '{name}' saved successfully to '{filename}'.")
 
     return partition, G
 

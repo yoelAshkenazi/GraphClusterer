@@ -9,17 +9,7 @@ from matplotlib.patches import Patch
 import plot
 import starry_graph as sg
 
-ALL_NAMES = None
-wikipedia = False
 warnings.filterwarnings("ignore")
-
-
-def update_wikipedia():
-    global wikipedia
-    functions.update_wikipedia()
-    summarize.update_wikipedia()
-    evaluate.update_wikipedia()
-    wikipedia = True
 
 
 def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _draw_kwargs: dict,
@@ -36,8 +26,7 @@ def run_graph_part(_name: str, _graph_kwargs: dict, _clustering_kwargs: dict, _d
     :param _draw_kwargs: the parameters for the drawing.
     :return:
     """
-    # print description.
-    print("\n" + "-" * 50 + f"\nCreating and clustering a graph for '{_name}' dataset...\n" + "-" * 50 + "\n")
+
     # create the graph.
     _G = functions.make_graph(_vertices, _edges, _distance_matrix, **_graph_kwargs)
     if _print_info:
@@ -221,15 +210,30 @@ def the_almighty_function(pipeline_kwargs: dict):
     """
 
     # Unpack the pipeline parameters
-    graph_kwargs = pipeline_kwargs['graph_kwargs']
-    clustering_kwargs = pipeline_kwargs['clustering_kwargs']
-    draw_kwargs = pipeline_kwargs['draw_kwargs']
-    print_info = pipeline_kwargs['print_info']
-    iteration_num = pipeline_kwargs['iteration_num']
-    vertices = pipeline_kwargs['vertices']
-    edges = pipeline_kwargs['edges']
-    name = pipeline_kwargs['name']
+    graph_kwargs = pipeline_kwargs.get('graph_kwargs', {
+        "size": 2000,
+        "K": 5,
+        "color": "#1f78b4"
+    })
+    clustering_kwargs = pipeline_kwargs.get('clustering_kwargs', {
+        "method": "louvain",
+        "resolution": 0.5,
+        "save": True
+    })
+    draw_kwargs = pipeline_kwargs.get('draw_kwargs', {
+        "save": True,
+        "method": "louvain",
+        "shown_percentage": 0.3
+    })
+    print_info = pipeline_kwargs.get('print_info', False)
+    iteration_num = pipeline_kwargs.get('iteration_num', 1)
+    vertices = pipeline_kwargs.get('vertices', None)
+    edges = pipeline_kwargs.get('edges', None)
+    name = pipeline_kwargs.get('name', "")
     distance_matrix = pipeline_kwargs.get('distance_matrix', None)
+
+    assert vertices is not None, "Vertices must be provided."
+    assert edges is not None, "Edges must be provided."
 
     # Create and cluster the graph.
     create_graph(name, graph_kwargs, clustering_kwargs, draw_kwargs, vertices, edges, distance_matrix)
@@ -255,7 +259,9 @@ def the_almighty_function(pipeline_kwargs: dict):
 
         # Evaluate the success rate and create the STAR graph
         sr = sg.starr(name, vertices, G)
-        print(f"Success rate for '{name}' in iteration {i+1}: {sr}")
+        if print_info:
+            print(f"Success rate for '{name}' in iteration {i+1}: {sr}")
+            print("Updating the edges...")
 
         # Update the edges.
         G = sg.update(name, G)

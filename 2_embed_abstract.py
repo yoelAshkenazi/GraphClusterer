@@ -10,7 +10,7 @@ from sentence_transformers import SentenceTransformer
 import warnings
 warnings.filterwarnings("ignore")
 
-DATA_PATH = 'data/graphs'
+DATA_PATH = 'data/wikipedia'
 EMBEDDINGS_PATH = 'data/embeddings'
 
 # Load the model
@@ -21,7 +21,7 @@ model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
 for file_name in os.listdir(DATA_PATH):
     print(file_name)
     # Skip the graph files
-    if "graph" in file_name:
+    if "edges" in file_name:
         continue
     # Get full path
     file_path = join(DATA_PATH, file_name)

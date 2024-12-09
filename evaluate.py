@@ -11,13 +11,6 @@ from dotenv import load_dotenv
 from requests.exceptions import Timeout  # Import Timeout exception
 import time  # For optional delays between retries
 
-wikipedia = False
-
-
-def update_wikipedia():
-    global wikipedia
-    wikipedia = True
-
 
 load_dotenv()
 cohere_key = os.getenv("COHERE_API_KEY")
