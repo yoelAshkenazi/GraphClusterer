@@ -4,6 +4,7 @@ This file is responsible for evaluating the summarization results using Cohere's
 """
 import pandas as pd
 import random
+import numpy as np
 import networkx as nx
 import cohere  # Added Cohere import
 import os
@@ -198,10 +199,11 @@ def metrics_evaluations(name: str, vertices: pd.DataFrame, G: nx.Graph = None):
 
     data = vertices[['id', 'abstract']]  # Read only the id and abstract columns
 
-    all_relevancy_scores = []
-    all_coherence_scores = []
-    all_consistency_scores = []
-    all_fluency_scores = []
+    # Initialize lists to store the average scores for each cluster
+    all_relevancy_scores = {title: 0 for title in titles}
+    all_coherence_scores = {title: 0 for title in titles}
+    all_consistency_scores = {title: 0 for title in titles}
+    all_fluency_scores = {title: 0 for title in titles}
 
     for title, summary in summaries.items():  # Iterate through each cluster
         subgraph = subgraphs.get(title, nx.Graph())
@@ -293,18 +295,24 @@ def metrics_evaluations(name: str, vertices: pd.DataFrame, G: nx.Graph = None):
             if cluster_fluency_scores else 0
 
         # Store these averages to later calculate the dataset-level averages.
-        all_relevancy_scores.append(avg_cluster_relevancy)
-        all_coherence_scores.append(avg_cluster_coherence)
-        all_consistency_scores.append(avg_cluster_consistency)
-        all_fluency_scores.append(avg_cluster_fluency)
+        all_relevancy_scores[title] = avg_cluster_relevancy / 5
+        all_coherence_scores[title] = avg_cluster_coherence / 5
+        all_consistency_scores[title] = avg_cluster_consistency / 5
+        all_fluency_scores[title] = avg_cluster_fluency / 5
 
     # Calculate the overall averages across all clusters.
-    avg_relevancy = (sum(all_relevancy_scores) / len(all_relevancy_scores)) if all_relevancy_scores else 0
-    avg_coherence = (sum(all_coherence_scores) / len(all_coherence_scores)) if all_coherence_scores else 0
-    avg_consistency = (sum(all_consistency_scores) / len(all_consistency_scores)) if all_consistency_scores else 0
-    avg_fluency = (sum(all_fluency_scores) / len(all_fluency_scores)) if all_fluency_scores else 0
+    avg_relevancy = max(0, np.mean(list(all_relevancy_scores.values())))
+    avg_coherence = max(0, np.mean(list(all_coherence_scores.values())))
+    avg_consistency = max(0, np.mean(list(all_consistency_scores.values())))
+    avg_fluency = max(0, np.mean(list(all_fluency_scores.values())))
 
-    return avg_relevancy / 5, avg_coherence / 5, avg_consistency / 5, avg_fluency / 5
+    # Return an additional dictionary with the cluster-level averages ({title: [scores]})
+    titles_to_scores = {
+        title: [all_relevancy_scores[title], all_coherence_scores[title], all_consistency_scores[title],
+                all_fluency_scores[title]] for title in titles
+    }
+
+    return avg_relevancy, avg_coherence, avg_consistency, avg_fluency, titles_to_scores
 
 
 def extract_colors(graph: nx.Graph) -> dict:

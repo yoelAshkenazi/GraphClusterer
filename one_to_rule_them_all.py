@@ -261,7 +261,7 @@ def the_almighty_function(pipeline_kwargs: dict):
         sr = sg.starr(name, vertices, G)
         if print_info:
             print(f"Success rate for '{name}' in iteration {i+1}: {sr}")
-            print("Updating the edges...")
+            print(50*"-")
 
         # Update the edges.
         G = sg.update(name, G)
@@ -281,8 +281,18 @@ def the_almighty_function(pipeline_kwargs: dict):
     # Evaluate and plot the metrics
     cluster_scores = functions.evaluate_clusters(name, distance_matrix)  # Evaluate the clusters
     success_rate = sg.starr(name, vertices, G)  # Evaluate the success rate
-    # Evaluate the text metrics
-    relevancy, coherence, consistency, fluency = evaluate.metrics_evaluations(name, vertices, G)
+
+    # Improve the summaries iteratively
+    for iter_ in range(iteration_num):
+        rel, coh, con, flu, scores = evaluate.metrics_evaluations(name, vertices, G)
+        if print_info:
+            print(f"Metrics for '{name}' in iteration {iter_ + 1}:")
+            print(f"Relevancy: {rel:.2f}, Coherence: {coh:.2f}, Consistency: {con:.2f}, Fluency: {flu:.2f}")
+            print(50 * "-")
+        summarize.improve_summaries(name, vertices, scores)
+
+    # Update the metrics dictionary
+    rel, coh, con, flu, _ = evaluate.metrics_evaluations(name, vertices, G)
 
     # Check if the avg_index exists (i.e. we have more than one value to unpack in cluster_scores)
     if isinstance(cluster_scores, tuple):
@@ -295,10 +305,10 @@ def the_almighty_function(pipeline_kwargs: dict):
     metrics_dict = {
         'avg_index': avg_index,
         'largest_cluster_percentage': largest_cluster_percentage,
-        'avg_relevancy': relevancy,
-        'avg_coherence': coherence,
-        'avg_consistency': consistency,
-        'avg_fluency': fluency,
+        'avg_relevancy': rel,
+        'avg_coherence': coh,
+        'avg_consistency': con,
+        'avg_fluency': flu,
         'success_rates': success_rate
     }
 
@@ -306,10 +316,10 @@ def the_almighty_function(pipeline_kwargs: dict):
     known_metrics = json.load(open("metrics.json", "r"))
     known_metrics["avg_index"][name] = avg_index
     known_metrics["largest_cluster_percentage"][name] = largest_cluster_percentage
-    known_metrics["avg_relevancy"][name] = relevancy
-    known_metrics["avg_coherence"][name] = coherence
-    known_metrics["avg_consistency"][name] = consistency
-    known_metrics["avg_fluency"][name] = fluency
+    known_metrics["avg_relevancy"][name] = rel
+    known_metrics["avg_coherence"][name] = coh
+    known_metrics["avg_consistency"][name] = con
+    known_metrics["avg_fluency"][name] = flu
     known_metrics["success_rates"][name] = success_rate
 
     with open("metrics.json", "w") as f:  # Save the updated metrics

@@ -17,11 +17,11 @@
     "shown_percentage": 0.3
   },
 
-  "name": "3D printing",
-  "vertices_path": "data/graphs/3D printing_papers.csv",
-  "edges_path": "data/graphs/3D printing_graph.csv",
-  "distance_matrix_path": "data/distances/3D printing_energy_distance_matrix.pkl",
+  "name": "clock",
+  "vertices_path": "data/wikipedia/clock_nodes.csv",
+  "edges_path": "data/wikipedia/clock_edges.csv",
+  "distance_matrix_path": "",
 
-  "iteration_num": 4,
+  "iteration_num": 2,
   "print_info": true
 }

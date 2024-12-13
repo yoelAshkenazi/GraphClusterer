@@ -43,30 +43,5 @@ if __name__ == '__main__':
         'name': params['name'],
     }
 
-    USED_NAMES = ['apple']  # Names that are used in the pipeline.
     # Run the pipeline.
-    try:
-        for name in REFAEL:
-            if name in USED_NAMES:
-                continue
-            print(f"Running {name}...")
-            pipeline_kwargs['name'] = name
-            if name in REFAEL:
-                pipeline_kwargs['vertices'] = pd.read_csv(f'data/graphs/{name}_papers.csv')  # Load the vertices.
-                pipeline_kwargs['edges'] = pd.read_csv(f'data/graphs/{name}_graph.csv')  # Load the edges.
-                pipeline_kwargs['distance_matrix'] = get_distance_matrix(  # Load the distances.
-                    f'data/distances/{name}_energy_distance_matrix.pkl')
-
-            elif name in WIKIPEDIA:
-                pipeline_kwargs['vertices'] = pd.read_csv(f'data/wikipedia/{name}_nodes.csv')  # Load the vertices.
-                pipeline_kwargs['edges'] = pd.read_csv(f'data/wikipedia/{name}_edges.csv')  # Load the edges.
-                pipeline_kwargs['distance_matrix'] = None  # Not using distances yet.
-
-            one_to_rule_them_all.the_almighty_function(pipeline_kwargs)  # Run the pipeline.
-
-            USED_NAMES.append(name)  # Add the name to the used names.
-
-    except Exception as e:
-        print(f"Error in {name}: {e}")
-        print(f"Used names: {USED_NAMES[:-1]}")  # Print the used names.
-        raise e
+    one_to_rule_them_all.the_almighty_function(pipeline_kwargs)
