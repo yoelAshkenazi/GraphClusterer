@@ -19,16 +19,56 @@ Our python package contains a full pipeline that performs the above operations (
 -  [Quick tour](#quick-tour)
 
 ## Installation
-We do not have an official python package manager installation available yet. However, 
-this repository is public, and one can clone the repository and open it in any IDE that accepts git.
-
+In a clean environment, simply type
+```python
+pip install GraphClusterer
+```
+to download our python package, or alternatively clone this repository if you wish to manually tune the pipeline (recommended).
+There is one difference between the usage of the package compared to the clone repository, which is a change in the `.env` file that is required for the repository, compared to the inclusion of the API keys needed as strings in the `config.json` file when using the package (see example in [Quick tour](#quick-tour)).
 
 ## Quick tour
-To immediately use our package, you only need to run three functions (two if you wish to skip the final evaluations).<br>
-You need to have your data in one of the following formats:
-  1. a prepared graph of texts in ''.gpickle'' format.
-  2. two csv files to make the graph from: vertex metadata and edges.
+To immediately use our package, you only need to use two functions.<br>
 
+In order to use the package (or cloned repository) you need to prepare a configuration file in advanced (see [`config.json`](https://github.com/yoelAshkenazi/GraphClusterer/blob/master/config.json)).
+There are two use cases: 
+1. cloned repository: you also need to have a `.env` file in the same directory as `main.py`, in which the API keys for llama and cohere are kept like the example here:
+  ```.env
+COHERE_API_KEY=[your API key for cohere (string format)]
+REPLICATE_API_TOKEN=[your API token for llama (string format)]
+```
+2. python package: you also need to include the following arguments in your `config.json` file:
+   ```config.json
+   'cohere_key': [your API key for cohere (string format)],
+   'llama_key': [your API key for llama (string format)]
+   ```
+
+In both cases, your `main.py` code should be like:
+```python
+params = load_params(config_path)
+# Set the parameters for the pipeline.
+pipeline_kwargs = {
+   'graph_kwargs': params['graph_kwargs'],
+   'clustering_kwargs': params['clustering_kwargs'],
+   'draw_kwargs': params['draw_kwargs'],
+   'print_info': params['print_info'],
+   'iteration_num': params['iteration_num'],
+   'vertices': pd.read_csv(params['vertices_path']),
+   'edges': pd.read_csv(params['edges_path']),
+   'distance_matrix': get_distance_matrix(params['distance_matrix_path']),
+   'name': params['name'],
+    }
+
+# Run the pipeline.
+one_to_rule_them_all.the_almighty_function(pipeline_kwargs)
+```
+
+Alternatively, you can manually perform each sub-task in our pipeline using the following functions:
+1. Create the graph with two edge colors: `functions.make_graph(**graph_kwargs)`
+2. Cluster the graph: `functions.cluster_graph(**clustering_kwargs)`
+3. Summarize each cluster: `summarize.summarize_per_color(**kwargs)` (need to divide the graph into clusters and input a list of subgraphs)
+4. Evaluate the clusters and summaries: several functions in the `evaluate` module (see [here](https://github.com/yoelAshkenazi/GraphClusterer/blob/master/evaluate.py)
+
+You can also use the old versions and follow these instructions:
 ### Case 1
 In this case you can skip the graph processing part, and go straight to the [clustering](#clustering) part.
 The prepared graph needs to include the followings:
