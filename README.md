@@ -66,7 +66,7 @@ Alternatively, you can manually perform each sub-task in our pipeline using the 
 1. Create the graph with two edge colors: `functions.make_graph(**graph_kwargs)`
 2. Cluster the graph: `functions.cluster_graph(**clustering_kwargs)`
 3. Summarize each cluster: `summarize.summarize_per_color(**kwargs)` (need to divide the graph into clusters and input a list of subgraphs)
-4. Evaluate the clusters and summaries: several functions in the `evaluate` module (see [here](https://github.com/yoelAshkenazi/GraphClusterer/blob/master/evaluate.py)
+4. Evaluate the clusters and summaries: several functions in the `evaluate` module (see [here](https://github.com/yoelAshkenazi/GraphClusterer/blob/master/evaluate.py))
 
 You can also use the old versions and follow these instructions:
 ### Case 1
@@ -224,7 +224,7 @@ The summary scores measure how understandable a summary is as a text. For that f
 
 
 The estimation is made with an LLM judge (we used '`command-r`', but other models perform similarly here).
-The scripts we used for each of the four metrics are from [this repository](https://github.com/microsoft/promptflow/tree/main/examples/flows/evaluation/eval-summarization).
+The scripts we used for each of the four metrics are from [this repository](https://github.com/microsoft/promptflow/tree/main/examples/flows/evaluation/eval-summarization) and [this tutorial](https://cookbook.openai.com/examples/evaluation/how_to_eval_abstractive_summarization).
 
 
 #### Consistency index
