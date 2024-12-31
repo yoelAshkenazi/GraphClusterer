@@ -16,6 +16,7 @@ Our python package contains a full pipeline that performs the above operations (
 ## Table of Contents
 
 -  [Installation](#installation)
+-  [Running example](#running-example)
 -  [Quick tour](#quick-tour)
 
 ## Installation
@@ -25,6 +26,142 @@ pip install GraphClusterer
 ```
 to download our python package, or alternatively clone this repository if you wish to manually tune the pipeline (recommended).
 There is one difference between the usage of the package compared to the clone repository, which is a change in the `.env` file that is required for the repository, compared to the inclusion of the API keys needed as strings in the `config.json` file when using the package (see example in [Quick tour](#quick-tour)).
+
+## Running example
+There are two ways to run and use our project.
+1. using the python package (GraphClusterer)
+2. using a cloned version of this repository
+```input
+|-- vertices.csv
+|-- edges.csv
+|-- config.json
+|-- distance_matrix.pkl (optional)
+|-- .env (required for the second case)
+`-- main.py
+```
+And after running the code, the following directories will be added:
+```output
+|-- data
+|   `-- clusteder_graphs
+|       `-- name.gpickle
+|
+|-- Results
+|   |-- Summaries
+|   |   `-- name
+|   |       |-- title_1.txt
+|   |       |-- ...
+|   |       `-- title_n.txt
+|   |
+|   |-- starry
+|   |   |-- name.csv
+|   |   `-- name_titles.csv
+|   |
+|   |-- plots
+|   |   `-- name.png
+|   |
+|   `-- html
+|       `-- name.html
+|
+`-- metrics.json
+```
+If `distance_matrix` is provided and valid (see [file formats](#file-formats) below), the following directories will be added to `data` after running:
+```
+data
+|-- embeddings
+|   `-- vertices_file_name_embeddings.pkl
+|
+`-- kde_values
+    `-- name.pkl
+```
+Which cache the embedding vectors for each sentence, and the KDE values for filtering (**NEED TO FULLY INTEGRATE MANUAL FILTERING INTO THE PIPELINE**).
+
+### File formats
+
+#### main.py
+Here's an example script for the main file in the first case usage (the python package). If you intend on using the cloned repository, you can use the `main.py` file [here](https://github.com/yoelAshkenazi/GraphClusterer/blob/master/main.py).
+```python
+from GraphClusterer.one_to_rule_them_all import the_almighty_function  # make the main function available.
+from GraphClusterer.main import load_params, get_distance_matrix
+import pandas as pd
+
+
+if __name__ == '__main__':
+    params = load_params('config.json')
+
+    # Set the parameters for the pipeline.
+    pipeline_kwargs = {
+        'graph_kwargs': params['graph_kwargs'],
+        'clustering_kwargs': params['clustering_kwargs'],
+        'draw_kwargs': params['draw_kwargs'],
+        'print_info': params['print_info'],
+        'iteration_num': params['iteration_num'],
+        'vertices': pd.read_csv(params['vertices_path']),
+        'edges': pd.read_csv(params['edges_path']),
+        'distance_matrix': get_distance_matrix(params['distance_matrix_path']),
+        'name': params['name'],
+        'key': params['cohere_key'],
+        'llama_key': params['llama_key']
+    }
+
+    # Run the pipeline.
+    the_almighty_function(pipeline_kwargs)
+```
+
+### config.json
+The `config.json` file requires core elements, and additional keys when using the python package, in order to avoid the usage of a `.env` file.
+```json
+{
+  "graph_kwargs": {
+    "size": 2000,
+    "K": 5,
+    "color": "#1f78b4"
+  },
+
+  "clustering_kwargs": {
+    "method": "louvain",
+    "resolution": 0.5,
+    "save": true
+  },
+
+  "draw_kwargs": {
+    "save": true,
+    "method": "louvain",
+    "shown_percentage": 0.3
+  },
+
+  "name": "clock",
+  "vertices_path": "clock_nodes.csv",
+  "edges_path": "clock_edges.csv",
+  "distance_matrix_path": "optional path to distance_matrix.pkl",
+
+  "iteration_num": 1,
+  "print_info": true,
+  "cohere_key": "your Cohere API key here",
+  "llama_key": "your Llama API key here"
+}
+```
+
+### .env
+When using the cloned repository, you must have a `.env` file in the same working directory as `main.py`.
+```.env
+COHERE_API_KEY="your Cohere API key here"
+REPLICATE_API_TOKEN="your Llama API key here"
+```
+
+### vertices.csv
+The pipeline expects a vertices file with the following structure for each line (text can be empty).
+`id` | `abstract` (includes the text to summarize) | `additional attributes` (e.g. color, language, shape etc. Used for debugs and plotting. Each attribute in its own column)
+:---: | :---: | :---:
+vertex_1_id | vertex_1_abstract_text | vertex_1_attributes
+
+### edges.csv
+The pipeline expects a file containing the original edges (for distance-based edges see [here](#)). Each edge (row in the file) should have either 2 or 3 columns (if 3, all rows need to have 3 columns).
+- The 2 column case occurs when only textual vertices are introduced in the graph.
+- The 3 column case occurs when there are additional vertices without text in the edges file. In that case, the new vertices are added to the graph with their specified type (in the third column).
+
+### distance_matrix.pkl
+The distance matrix needs to be an array of size `NxN`, where N is the number of textual vertices (rows in `vertices.csv`). If provided, the distance matrix is used to add a second type of edges ([red edges](#introduction)).
+
 
 ## Quick tour
 To immediately use our package, you only need to use two functions.<br>
@@ -235,5 +372,11 @@ In order to estimate this metric, for each cluster we sampled texts from within 
 <img src="https://github.com/user-attachments/assets/c1d93f94-d081-4a8d-97a2-919c8c810ad3" alt="0" width="600px">
 
 ### Results
-<img src="https://github.com/user-attachments/assets/a6be5c2f-b1a4-4dd3-b792-1662560bc237" alt="composite material" width="600px">
+At the end, there are two results files:
+1. The Scores plot, which is saved both as a figure at `Results/plots/name.png`, and in a scores dictionary at `metrics.json` for further analysis if needed.
 
+<img src="https://github.com/user-attachments/assets/5ab46dec-c4d3-4bbf-8959-ab813372b186" alt="3D printing" width="600px">
+
+2. The interactive HTML graph, which is saved at `Results/html/name.html`
+
+<img src="https://github.com/user-attachments/assets/29aad46e-6205-4e4f-9e1a-6740a22d32f7" alt="html preview" width="600px">
