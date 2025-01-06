@@ -67,30 +67,27 @@ def create_graph(_name, _graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_k
     :return:
     """
 
-    proportion_ = 0.5
-    _graph_kwargs_['proportion'] = proportion_
-    _clustering_kwargs_['proportion'] = proportion_
-
     _G = run_graph_part(_name, _graph_kwargs_, _clustering_kwargs_, _draw_kwargs_, False,
                         _vertices, _edges, _distance_matrix)
 
     return _G
 
 
-def run_summarization(_name: str, _vertices, aspects) -> object:
+def run_summarization(_name: str, _vertices, aspects, _print_info) -> object:
     """
     Run the summarization for the given name and summarize_kwargs.
     :param _name: the name of the dataset.
     :param _vertices: the vertices of the graph.
     :param aspects: the aspects to focus on.
+    :param _print_info: whether to print the outputs.
     :return:
     """
     # load the graph.
     _G = summarize.load_graph(_name)
     # filter the graph by colors.
-    _subgraphs = summarize.filter_by_colors(_G)
+    _subgraphs = summarize.filter_by_colors(_G, _print_info)
     # summarize each cluster.
-    titles = summarize.summarize_per_color(_subgraphs, _name, _vertices, aspects)
+    titles = summarize.summarize_per_color(_subgraphs, _name, _vertices, aspects, _print_info)
     return titles
 
 
@@ -221,13 +218,13 @@ def the_almighty_function(pipeline_kwargs: dict):
         "resolution": 0.5,
         "save": True
     })
-    draw_kwargs = pipeline_kwargs.get('draw_kwargs', {
+    """draw_kwargs = pipeline_kwargs.get('draw_kwargs', {
         "save": True,
         "method": "louvain",
         "shown_percentage": 0.3
-    })
+    })"""
     print_info = pipeline_kwargs.get('print_info', False)
-    iteration_num = pipeline_kwargs.get('iteration_num', 1)
+    iteration_num = pipeline_kwargs.get('iteration_num', 1)  # default is 1
     vertices = pipeline_kwargs.get('vertices', None)
     edges = pipeline_kwargs.get('edges', None)
     name = pipeline_kwargs.get('name', "")
@@ -237,27 +234,28 @@ def the_almighty_function(pipeline_kwargs: dict):
     assert vertices is not None, "Vertices must be provided."
     assert edges is not None, "Edges must be provided."
 
-    # Create and cluster the graph.
-    create_graph(name, graph_kwargs, clustering_kwargs, draw_kwargs, vertices, edges, distance_matrix)
+    # Create the graph.
+    G = functions.make_graph(vertices, edges, distance_matrix, **graph_kwargs)
 
-    # Summarize the clusters
-    titles = run_summarization(name, vertices, aspects)
+    if print_info:
+        print("Starting weights of the graph:", sum([G[u][v]['weight'] for u, v in G.edges()]))
 
     # Iteratively repeat the followings:
     """
-    1. Evaluate the success rate.
-    2. Create the STAR graph.
-    3. Update the edges.
-    4. Cluster.
-    5. Summarize.
+    1. Cluster the graph.
+    2. Summarize the clusters.
+    3. Evaluate the success rate.
+    4. Update the edges using STAR graph.
     """
     for i in range(iteration_num):
 
-        if print_info:  # Print the titles if necessary.
-            print(f"Cluster titles for '{name}' in iteration {i + 1}: {titles}")
+        # Cluster the graph.
+        functions.cluster_graph(G, name, **clustering_kwargs)
 
-        # Load the graph.
-        G = functions.load_graph(name)
+        # Summarize the clusters.
+        run_summarization(name, vertices, aspects, print_info)
+
+        G = functions.load_graph(name)  # Load the graph
 
         # Evaluate the success rate and create the STAR graph
         sr = sg.starr(name, vertices, G)
@@ -267,22 +265,14 @@ def the_almighty_function(pipeline_kwargs: dict):
 
         # Update the edges.
         G = sg.update(name, G)
+        if print_info:
+            print(f"Total weight of the graph after updating: {sum([G[u][v]['weight'] for u, v in G.edges()])}")
 
-        # Cluster the graph.
-        functions.cluster_graph(G, name, **clustering_kwargs)
-
-        # Summarize the clusters.
-        titles = run_summarization(name, vertices, aspects)
-
-    """
-    Placeholder for now. Will be replaced with code to iteratively improve the summary based on the 4 textual metrics.
-    """
     # Load the graph
     G = functions.load_graph(name)
 
     # Evaluate and plot the metrics
     cluster_scores = functions.evaluate_clusters(name, distance_matrix)  # Evaluate the clusters
-    success_rate = sg.starr(name, vertices, G)  # Evaluate the success rate
 
     # Improve the summaries iteratively
     for iter_ in range(iteration_num):
@@ -294,7 +284,6 @@ def the_almighty_function(pipeline_kwargs: dict):
         summarize.improve_summaries(name, vertices, scores)
 
     # Update the metrics dictionary
-    rel, coh, con, flu, _ = evaluate.metrics_evaluations(name, vertices, G)
 
     # Check if the avg_index exists (i.e. we have more than one value to unpack in cluster_scores)
     if isinstance(cluster_scores, tuple):
@@ -311,7 +300,7 @@ def the_almighty_function(pipeline_kwargs: dict):
         'avg_coherence': coh,
         'avg_consistency': con,
         'avg_fluency': flu,
-        'success_rates': success_rate
+        'success_rates': sr
     }
 
     # Update the JSON file with the new metrics
@@ -322,7 +311,7 @@ def the_almighty_function(pipeline_kwargs: dict):
     known_metrics["avg_coherence"][name] = coh
     known_metrics["avg_consistency"][name] = con
     known_metrics["avg_fluency"][name] = flu
-    known_metrics["success_rates"][name] = success_rate
+    known_metrics["success_rates"][name] = sr
 
     with open("metrics.json", "w") as f:  # Save the updated metrics
         json.dump(known_metrics, f, indent=4)

@@ -48,10 +48,11 @@ def load_graph(name: str) -> nx.Graph:
     return graph
 
 
-def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
+def filter_by_colors(graph: nx.Graph, print_info: str) -> List[nx.Graph]:
     """
     Partition the graph into subgraphs according to the vertex colors.
     :param graph: the graph.
+    :param print_info: whether to print the information.
     :return:
     """
     # Filter non-paper nodes.
@@ -66,12 +67,14 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
         nodes = [node for node in graph.nodes if graph.nodes()[node]['color'] == color]
         subgraph = graph.subgraph(nodes)
         subgraphs.append(subgraph)
-        print(f"color {color} has {len(subgraph.nodes)} vertices.")
+        if print_info:  # If to print the information.
+            print(f"color {color} has {len(subgraph.nodes)} vertices.")
 
     return subgraphs
 
 
-def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataFrame, aspects: List) -> List[str]:
+def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataFrame, aspects: List, print_info: bool) \
+        -> List[str]:
     """
     Summarizes each subgraph's abstract texts using Cohere's API, prints the results, and optionally saves them to
     text files.
@@ -80,9 +83,11 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
     :param name: The name of the dataset.
     :param vertices: The vertices DataFrame.
     :param aspects: The aspects to focus on.
+    :param print_info: Whether to print the information.
     :return: None
     """
-
+    if aspects is None:
+        aspects = []
     result_file_path = f"Results/Summaries/{name}/"  # the path to save the results.
 
     # Ensure the directory exists
@@ -111,10 +116,11 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         # Extract abstracts corresponding to the nodes in the subgraph
         node_ids = set(subgraph.nodes())
         abstracts = df[df['id'].isin(node_ids)]['abstract'].dropna().tolist()
+        color = subgraph.nodes[list(subgraph.nodes())[0]]['color']  # get the color of the subgraph.
 
         # If only one abstract is present, skip summarization.
-        if len(abstracts) <= 1:
-            print(f"Cluster {i}: Insufficient abstracts, Skipping.")
+        if len(abstracts) <= 1 and print_info:
+            print(f"Cluster {color}: Insufficient abstracts, Skipping.")
             continue
 
         # Combine all abstracts into a single text block with clear delimiters and instructional prompt
@@ -169,7 +175,8 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         title = "".join(output)
         title = title.replace('"', '')
 
-        print(f"Cluster {i}: {title} ({len(abstracts)} textual vertices)")
+        if print_info:  # If to print the information.
+            print(f"Cluster {color}: {title} ({len(abstracts)} textual vertices)")
 
         if title in titles_list:
             title = f"{title} ({count_titles})"

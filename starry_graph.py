@@ -261,7 +261,7 @@ def update(name, G: nx.Graph) -> nx.Graph:
                     # Both u and v are blue
                     if G.has_edge(vertex_i, vertex_j):
                         current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
-                        new_weight = current_weight * 2
+                        new_weight = current_weight * 1.2  # Increase weight by 25%
                         G[vertex_i][vertex_j]['weight'] = new_weight
                     else:
                         edges_to_add.append((vertex_i, vertex_j, {'weight': 1}))  # Track edge to be added
@@ -269,7 +269,7 @@ def update(name, G: nx.Graph) -> nx.Graph:
                     # At least one of u or v is red
                     if G.has_edge(vertex_i, vertex_j):
                         current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
-                        new_weight = current_weight / 2
+                        new_weight = current_weight * 0.8  # Decrease weight by 25%
                         G[vertex_i][vertex_j]['weight'] = new_weight
                 # Keep track of nodes that need to be created
                 if vertex_j not in G.nodes:

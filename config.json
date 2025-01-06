@@ -17,9 +17,9 @@
     "shown_percentage": 0.3
   },
 
-  "name": "clock",
-  "vertices_path": "data/wikipedia/clock_nodes.csv",
-  "edges_path": "data/wikipedia/clock_edges.csv",
+  "name": "apple",
+  "vertices_path": "data/wikipedia/apple_nodes.csv",
+  "edges_path": "data/wikipedia/apple_edges.csv",
   "distance_matrix_path": "",
 
   "iteration_num": 2,
