@@ -43,5 +43,9 @@ if __name__ == '__main__':
         'name': params['name'],
     }
 
+    if params["allow_user_prompt"]:  # If the user prompt is allowed.
+        user_aspects = input("Enter the aspects you want to focus on, separated by commas: ").split(",")
+        pipeline_kwargs['aspects'] = user_aspects
+
     # Run the pipeline.
     one_to_rule_them_all.the_almighty_function(pipeline_kwargs)

@@ -71,7 +71,7 @@ def filter_by_colors(graph: nx.Graph) -> List[nx.Graph]:
     return subgraphs
 
 
-def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataFrame) -> List[str]:
+def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataFrame, aspects: List) -> List[str]:
     """
     Summarizes each subgraph's abstract texts using Cohere's API, prints the results, and optionally saves them to
     text files.
@@ -79,6 +79,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
     :param subgraphs: List of subgraphs.
     :param name: The name of the dataset.
     :param vertices: The vertices DataFrame.
+    :param aspects: The aspects to focus on.
     :return: None
     """
 
@@ -120,6 +121,15 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         combined_abstracts = " ".join([f"<New Text:> {abstract}" for j, abstract in enumerate(abstracts)])
         with open('prompt for command-r.txt', 'r') as file:
             instructions_command_r = file.read()
+
+        if len(aspects) > 0:  # If aspects are given.
+            aspects_str = ", ".join(aspects)
+            aspects_instruction = "In your summary, focus on the following aspects: " + aspects_str + "."
+
+            # Inject the aspects instruction into the prompt, in the one before the last line.
+            instructions_command_r = instructions_command_r.split('\n')
+            instructions_command_r[-2] = aspects_instruction
+            instructions_command_r = '\n'.join(instructions_command_r)
 
         # Generate the summary using Cohere's summarize API
         response = co.generate(

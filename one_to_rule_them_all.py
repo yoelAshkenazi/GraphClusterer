@@ -77,11 +77,12 @@ def create_graph(_name, _graph_kwargs_: dict, _clustering_kwargs_: dict, _draw_k
     return _G
 
 
-def run_summarization(_name: str, _vertices) -> object:
+def run_summarization(_name: str, _vertices, aspects) -> object:
     """
     Run the summarization for the given name and summarize_kwargs.
     :param _name: the name of the dataset.
     :param _vertices: the vertices of the graph.
+    :param aspects: the aspects to focus on.
     :return:
     """
     # load the graph.
@@ -89,7 +90,7 @@ def run_summarization(_name: str, _vertices) -> object:
     # filter the graph by colors.
     _subgraphs = summarize.filter_by_colors(_G)
     # summarize each cluster.
-    titles = summarize.summarize_per_color(_subgraphs, _name, _vertices)
+    titles = summarize.summarize_per_color(_subgraphs, _name, _vertices, aspects)
     return titles
 
 
@@ -231,6 +232,7 @@ def the_almighty_function(pipeline_kwargs: dict):
     edges = pipeline_kwargs.get('edges', None)
     name = pipeline_kwargs.get('name', "")
     distance_matrix = pipeline_kwargs.get('distance_matrix', None)
+    aspects = pipeline_kwargs.get('aspects', None)  # expecting a list of aspects
 
     assert vertices is not None, "Vertices must be provided."
     assert edges is not None, "Edges must be provided."
@@ -239,7 +241,7 @@ def the_almighty_function(pipeline_kwargs: dict):
     create_graph(name, graph_kwargs, clustering_kwargs, draw_kwargs, vertices, edges, distance_matrix)
 
     # Summarize the clusters
-    titles = run_summarization(name, vertices)
+    titles = run_summarization(name, vertices, aspects)
 
     # Iteratively repeat the followings:
     """
@@ -270,7 +272,7 @@ def the_almighty_function(pipeline_kwargs: dict):
         functions.cluster_graph(G, name, **clustering_kwargs)
 
         # Summarize the clusters.
-        titles = run_summarization(name, vertices)
+        titles = run_summarization(name, vertices, aspects)
 
     """
     Placeholder for now. Will be replaced with code to iteratively improve the summary based on the 4 textual metrics.

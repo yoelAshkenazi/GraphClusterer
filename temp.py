@@ -1,12 +1,14 @@
+import pandas
 import pickle as pkl
-from scipy.stats import gaussian_kde
-import numpy as np
-from sklearn.decomposition import PCA
-from sklearn.metrics import mean_squared_error
-import functions
-G = functions.load_graph('3D printing')
 
-abstracts = [n for n in G.nodes if G.nodes()[n]['type'] == 'paper']
-G = G.subgraph(abstracts)
+import pandas as pd
 
-print(G.nodes(data=True))
+data = pd.read_parquet('data/posts_content_parsed.parquet')
+
+# Make an 'id' column starting at 1.
+data['id'] = range(1, len(data) + 1)
+# Change the column name from 'content' to 'abstract'.
+data = data.rename(columns={'content': 'abstract'})
+
+# Save the data to a csv file.
+data.to_csv('data/posts_content_parsed.csv', index=False)

@@ -23,5 +23,6 @@
   "distance_matrix_path": "",
 
   "iteration_num": 2,
-  "print_info": true
+  "print_info": true,
+  "allow_user_prompt": true
 }
