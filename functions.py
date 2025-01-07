@@ -84,6 +84,8 @@ def make_graph(vertices, edges, distance_matrix=None, **kwargs):
     # Add a default shape mapping.
     type_to_shape_map = {'paper': 's', 'author': '*', 'keyword': 'd', 'institution': 'p', 'country': 'o'}
 
+    assert (edges is not None) or (distance_matrix is not None), "Either edges or distance matrix must be provided."
+
     # create a graph.
     G = nx.Graph()
 
@@ -96,25 +98,26 @@ def make_graph(vertices, edges, distance_matrix=None, **kwargs):
     # add the edges to the graph. (blue edges - original)
     # divide into two cases: 2 or 3 columns. if 2 columns, means all the edge ends are already in the vertices list.
     # if 3 columns, means we need to add the edge ends to the vertices list.
-    if len(edges.columns) == 2:
-        for i in range(len(edges)):
-            edge = edges.iloc[i, :]
-            G.add_edge(edge[0], edge[1], weight=1, color='blue')
+    if edges is not None:  # if the edges are provided.
+        if len(edges.columns) == 2:
+            for i in range(len(edges)):
+                edge = edges.iloc[i, :]
+                G.add_edge(edge[0], edge[1], weight=1, color='blue')
 
-    else:
-        sources = edges.iloc[:, 1]
-        targets = edges.iloc[:, 2]
-        types = edges.iloc[:, 3]
+        else:
+            sources = edges.iloc[:, 1]
+            targets = edges.iloc[:, 2]
+            types = edges.iloc[:, 3]
 
-        # Go over the edges and add them to the graph.
-        for i in range(len(sources)):
-            if targets[i] is None:  # if the target is None, skip the edge.
-                continue
+            # Go over the edges and add them to the graph.
+            for i in range(len(sources)):
+                if targets[i] is None:  # if the target is None, skip the edge.
+                    continue
 
-            if targets[i] not in G.nodes():  # add the target to the graph.
-                G.add_node(targets[i], size=vertex_size, shape=type_to_shape_map[types[i]], type=types[i],
-                           color=vertex_color)
-            G.add_edge(sources[i], targets[i], weight=1, color='blue')
+                if targets[i] not in G.nodes():  # add the target to the graph.
+                    G.add_node(targets[i], size=vertex_size, shape=type_to_shape_map[types[i]], type=types[i],
+                               color=vertex_color)
+                G.add_edge(sources[i], targets[i], weight=1, color='blue')
 
     # add the similarity edges to the graph. (red edges if provided)
     if distance_matrix is not None:

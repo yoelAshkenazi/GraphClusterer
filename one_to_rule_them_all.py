@@ -232,7 +232,6 @@ def the_almighty_function(pipeline_kwargs: dict):
     aspects = pipeline_kwargs.get('aspects', None)  # expecting a list of aspects
 
     assert vertices is not None, "Vertices must be provided."
-    assert edges is not None, "Edges must be provided."
 
     # Create the graph.
     G = functions.make_graph(vertices, edges, distance_matrix, **graph_kwargs)

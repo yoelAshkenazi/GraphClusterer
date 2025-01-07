@@ -17,12 +17,12 @@
     "shown_percentage": 0.3
   },
 
-  "name": "apple",
-  "vertices_path": "data/wikipedia/apple_nodes.csv",
-  "edges_path": "data/wikipedia/apple_edges.csv",
-  "distance_matrix_path": "",
+  "name": "posts dataset",
+  "vertices_path": "data/posts_content_parsed.csv",
+  "edges_path": "",
+  "distance_matrix_path": "data/distances/posts_content_parsed_energy_distance_matrix.pkl",
 
   "iteration_num": 2,
   "print_info": true,
-  "allow_user_prompt": true
+  "allow_user_prompt": false
 }
