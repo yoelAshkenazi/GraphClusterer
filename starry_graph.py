@@ -83,13 +83,21 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
             continue
 
         # Get the subgraph.
-        color = title_to_color[title]
+        color = title_to_color.get(title, '__killSwitch__')  # Get the color of the cluster. (Default to kill switch)
+        if color == '__killSwitch__':  # In case of a kill switch, break the update loop and return -1 as a kill switch
+            print("Kill switch activated. Stopping update process.")
+            return -1
         nodes = [node for node in G.nodes if G.nodes[node].get('color', 'green') == color]
         subgraphs[title] = G.subgraph(nodes).copy()  # Ensure mutable subgraph
 
     # Create legend for titles
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    title_legend = {title: alphabet[i] for i, title in enumerate(sorted(set(titles)))}
+    def make_titles(title_list) -> Dict[str, str]:
+        title_legend_ = {}
+        for i_, title_ in enumerate(title_list):
+            title_legend_[title_] = f"{i_ + 1}"
+        return title_legend_
+
+    title_legend = make_titles(titles)
 
     # Save legend to CSV
     legend_output_path = f"Results/starry/{name}_titles.csv"

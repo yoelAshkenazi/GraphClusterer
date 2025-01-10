@@ -7,7 +7,7 @@
 
   "clustering_kwargs": {
     "method": "louvain",
-    "resolution": 0.5,
+    "resolution": 0.8,
     "save": true
   },
 
@@ -17,10 +17,10 @@
     "shown_percentage": 0.3
   },
 
-  "name": "posts dataset",
-  "vertices_path": "data/posts_content_parsed.csv",
+  "name": "posts_5k_sampled",
+  "vertices_path": "data/posts_5k_sampled.csv",
   "edges_path": "",
-  "distance_matrix_path": "data/distances/posts_content_parsed_energy_distance_matrix.pkl",
+  "distance_matrix_path": "data/distances/posts_5k_sampled_energy_distance_matrix.pkl",
 
   "iteration_num": 2,
   "print_info": true,

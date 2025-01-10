@@ -16,3 +16,10 @@ data/embeddings/posts_content_parsed_embeddings.pkl
 data/kde_values/posts_content_parsed.pkl
 data/distances/posts_content_parsed_energy_distance_matrix.pkl
 data/clustered_graphs/posts dataset.gpickle
+
+# Ignore the posts_5k data.
+data/posts_5k_sampled.csv
+data/embeddings/posts_5k_sampled_embeddings.pkl
+data/kde_values/posts_5k_sampled.pkl
+data/distances/posts_5k_sampled_energy_distance_matrix.pkl
+data/clustered_graphs/posts_5k_sampled.gpickle

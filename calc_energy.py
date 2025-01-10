@@ -4,6 +4,7 @@ import numpy as np
 import dcor
 from copy import deepcopy
 from scipy.stats import gaussian_kde
+from embed_abstract import make_embedding_file  # Change to relative import in pip version
 from sklearn.decomposition import PCA
 
 
@@ -15,8 +16,10 @@ def load_embedding(ds_name, embeddings_dir='data/embeddings'):
             embedding_path = os.path.join(embeddings_dir, _embedding)
             break
 
-    if embedding_path is None:
-        raise FileNotFoundError(f"No embedding file found starting with '{ds_name}' in {embeddings_dir}")
+    if embedding_path is None or not os.path.exists(embedding_path):  # If the embedding file does not exist, create it.
+        path = input(f"Embedding file for {ds_name} does not exist. Enter the path to the dataset: ")
+        embedding_dct = make_embedding_file(ds_name, path)
+        return embedding_dct
 
     with open(embedding_path, 'rb') as f:
         embedding_dct = pickle.load(f)

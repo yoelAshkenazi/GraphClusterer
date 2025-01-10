@@ -123,6 +123,11 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
             print(f"Cluster {color}: Insufficient abstracts, Skipping.")
             continue
 
+        # If there are too many abstracts (over 1000), select a random subset of 1000 abstracts.
+        if len(abstracts) > 1000:
+            import random
+            abstracts = random.sample(abstracts, 1000)
+
         # Combine all abstracts into a single text block with clear delimiters and instructional prompt
         combined_abstracts = " ".join([f"<New Text:> {abstract}" for j, abstract in enumerate(abstracts)])
         with open('prompt for command-r.txt', 'r') as file:
@@ -162,8 +167,9 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         with open('prompt for llama 2.txt', 'r') as file:
             instructions_llama2 = file.read()
         prompt = instructions_llama2 + summary
-        if titles_list:
-            prompt += f"\n\nTry ao avoid giving one of those titles: {titles_list}"
+        if titles_list:  # If there are already titles.
+            prompt += (f"\n\nTry to avoid giving one of those titles: {titles_list}\n"
+                       f"Your suggested title must be in English!")
         input_params = {
             "prompt": prompt,
             "max_tokens": 300
@@ -174,6 +180,9 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         )
         title = "".join(output)
         title = title.replace('"', '')
+
+        # Make sure the title is up to 4 words.
+        title = " ".join(title.split()[:4])
 
         if print_info:  # If to print the information.
             print(f"Cluster {color}: {title} ({len(abstracts)} textual vertices)")
@@ -189,17 +198,17 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         file_name = f'{title} ({num_nodes} {vers}).txt'
 
         try:
-            with open(result_file_path + file_name, 'w') as f:
+            with open(result_file_path + file_name, 'w', encoding='utf-8') as f:
                 f.write(summary)
                 # print(f"Summary saved to {result_file_path + file_name}")
         except FileNotFoundError:  # create the directory if it doesn't exist.
             os.makedirs(result_file_path)
-            with open(file_name, 'w') as f:
+            with open(file_name, 'w', encoding='utf-8') as f:
                 f.write(summary)
         except UnicodeEncodeError:
             # make the summary encoding compatible
             summary = summary.encode('ascii', 'ignore').decode()
-            with open(result_file_path + file_name, 'w') as f:
+            with open(result_file_path + file_name, 'w', encoding='utf-8') as f:
                 f.write(summary)
                 # print(f"Summary saved to {result_file_path + file_name}")
 
@@ -255,6 +264,12 @@ def improve_summary(summary, data, scores, score_names, name):
     # Create a list of texts to summarize.
     texts = data['abstract'].tolist()  # Get the abstracts.
     texts = [abstract for abstract in texts if pd.notna(abstract)]  # Remove NaN values.
+
+    # if there are too many texts (over 1000), select a random subset of 1000 texts.
+    if len(texts) > 1000:
+        import random
+        texts = random.sample(texts, 1000)
+
     texts = [f"<New Text:> {text}" for text in texts]  # Add the prompt to each text.
     TEXTS = " ".join(texts)  # Combine the texts.
 
@@ -298,11 +313,11 @@ def improve_summary(summary, data, scores, score_names, name):
 
     # Save the summary. (after improving all necessary scores)
     try:
-        with open(f'Results/Summaries/{name}', 'w') as f:
+        with open(f'Results/Summaries/{name}', 'w', encoding="utf-8") as f:
             f.write(summary)
     except UnicodeEncodeError:
         summary = summary.encode('ascii', 'ignore').decode()
-        with open(f'Results/Summaries/{name}', 'w') as f:
+        with open(f'Results/Summaries/{name}', 'w', encoding='utf-8') as f:
             f.write(summary)
 
     return summary  # Return the summary.

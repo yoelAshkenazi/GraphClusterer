@@ -3,12 +3,11 @@ import pickle as pkl
 
 import pandas as pd
 
-data = pd.read_parquet('data/posts_content_parsed.parquet')
+data = pd.read_csv('data/posts_content_parsed.csv')
 
-# Make an 'id' column starting at 1.
-data['id'] = range(1, len(data) + 1)
-# Change the column name from 'content' to 'abstract'.
-data = data.rename(columns={'content': 'abstract'})
+# make a smaller version with 5000 rows selected randomly
+data_sample = data.sample(5000)
+data_sample['id'] = range(1, 5001)
 
-# Save the data to a csv file.
-data.to_csv('data/posts_content_parsed.csv', index=False)
+# save to csv.
+data_sample.to_csv('data/posts_5k_sampled.csv', index=False)

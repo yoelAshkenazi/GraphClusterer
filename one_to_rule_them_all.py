@@ -236,9 +236,6 @@ def the_almighty_function(pipeline_kwargs: dict):
     # Create the graph.
     G = functions.make_graph(vertices, edges, distance_matrix, **graph_kwargs)
 
-    if print_info:
-        print("Starting weights of the graph:", sum([G[u][v]['weight'] for u, v in G.edges()]))
-
     # Iteratively repeat the followings:
     """
     1. Cluster the graph.
@@ -246,26 +243,43 @@ def the_almighty_function(pipeline_kwargs: dict):
     3. Evaluate the success rate.
     4. Update the edges using STAR graph.
     """
+    kill_switch = False
     for i in range(iteration_num):
-
+        if print_info:
+            print(f"Starting iteration {i+1}...")
+            print(f"Clustering the graph for '{name}'...")
         # Cluster the graph.
         functions.cluster_graph(G, name, **clustering_kwargs)
 
+        if print_info:
+            print(50*"-")
+            print(f"Summarizing the clusters for '{name}'...")
         # Summarize the clusters.
         run_summarization(name, vertices, aspects, print_info)
 
         G = functions.load_graph(name)  # Load the graph
 
         # Evaluate the success rate and create the STAR graph
-        sr = sg.starr(name, vertices, G)
         if print_info:
-            print(f"Success rate for '{name}' in iteration {i+1}: {sr}")
             print(50*"-")
+            print(f"Evaluating the success rate for '{name}'...")
+        sr = sg.starr(name, vertices, G)
+
+        # Check if the kill switch is activated
+        if sr == -1:
+            kill_switch = True
+            break  # Should already have a fully summarized graph.
+
+        if print_info:
+            print(f"Success rate for '{name}' in iteration {i+1}: {sr:.4f}")
+            print(50*"-")
+            print(f"Updating the edges using STAR graph for '{name}'...")
 
         # Update the edges.
         G = sg.update(name, G)
         if print_info:
-            print(f"Total weight of the graph after updating: {sum([G[u][v]['weight'] for u, v in G.edges()])}")
+            print("Edges updated using STAR graph.")
+            print(50*"-")
 
     # Load the graph
     G = functions.load_graph(name)
@@ -279,7 +293,9 @@ def the_almighty_function(pipeline_kwargs: dict):
         if print_info:
             print(f"Metrics for '{name}' in iteration {iter_ + 1}:")
             print(f"Relevancy: {rel:.2f}, Coherence: {coh:.2f}, Consistency: {con:.2f}, Fluency: {flu:.2f}")
-            print(50 * "-")
+            print(50 * "-" if iter_ < iteration_num - 1 else "")
+        if kill_switch:
+            break
         summarize.improve_summaries(name, vertices, scores)
 
     # Update the metrics dictionary
