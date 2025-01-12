@@ -1,6 +1,6 @@
 {
     "avg_index": {
-        "3D printing": 0.13736614479317336,
+        "3D printing": 0.1619395119826644,
         "additive manufacturing": 0.14312863770814743,
         "composite material": 0.36145995574356654,
         "autonomous drones": 0.12588533102986604,
@@ -17,7 +17,7 @@
         "turtle": -5
     },
     "largest_cluster_percentage": {
-        "3D printing": 0.24,
+        "3D printing": 0.26,
         "additive manufacturing": 0.25,
         "composite material": 0.45,
         "autonomous drones": 0.16,
@@ -34,7 +34,7 @@
         "turtle": 0.57
     },
     "avg_relevancy": {
-        "3D printing": 0.7333333333333334,
+        "3D printing": 0.6885714285714286,
         "additive manufacturing": 0.7344444444444443,
         "composite material": 0.7657142857142857,
         "autonomous drones": 0.5791666666666667,
@@ -51,7 +51,7 @@
         "turtle": 0.35
     },
     "avg_coherence": {
-        "3D printing": 0.7270833333333333,
+        "3D printing": 0.6799999999999999,
         "additive manufacturing": 0.7477777777777778,
         "composite material": 0.6742857142857143,
         "autonomous drones": 0.475,
@@ -68,7 +68,7 @@
         "turtle": 0.25
     },
     "avg_consistency": {
-        "3D printing": 0.5541666666666667,
+        "3D printing": 0.5466666666666666,
         "additive manufacturing": 0.49444444444444446,
         "composite material": 0.5599999999999999,
         "autonomous drones": 0.25,
@@ -85,7 +85,7 @@
         "turtle": 0.2
     },
     "avg_fluency": {
-        "3D printing": 0.975,
+        "3D printing": 0.8695238095238096,
         "additive manufacturing": 0.96,
         "composite material": 0.8685714285714287,
         "autonomous drones": 0.925,
@@ -102,7 +102,7 @@
         "turtle": 0.85
     },
     "success_rates": {
-        "3D printing": 0.8740132617619198,
+        "3D printing": 0.862434725848564,
         "additive manufacturing": 0.7695500581105761,
         "composite material": 0.9852558542931483,
         "autonomous drones": 0.8443256090314913,

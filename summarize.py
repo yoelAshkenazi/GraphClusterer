@@ -181,9 +181,6 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         title = "".join(output)
         title = title.replace('"', '')
 
-        # Make sure the title is up to 4 words.
-        title = " ".join(title.split()[:4])
-
         if print_info:  # If to print the information.
             print(f"Cluster {color}: {title} ({len(abstracts)} textual vertices)")
 

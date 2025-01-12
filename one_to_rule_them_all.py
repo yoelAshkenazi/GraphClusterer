@@ -236,6 +236,9 @@ def the_almighty_function(pipeline_kwargs: dict):
     # Create the graph.
     G = functions.make_graph(vertices, edges, distance_matrix, **graph_kwargs)
 
+    # Set initial values for rel, coh, con, flu, sr.
+    rel, coh, con, flu, sr = 0, 0, 0, 0, 0
+
     # Iteratively repeat the followings:
     """
     1. Cluster the graph.
@@ -267,6 +270,7 @@ def the_almighty_function(pipeline_kwargs: dict):
 
         # Check if the kill switch is activated
         if sr == -1:
+            sr = 0  # Set the success rate to 0
             kill_switch = True
             break  # Should already have a fully summarized graph.
 

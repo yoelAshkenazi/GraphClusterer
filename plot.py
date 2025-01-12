@@ -32,7 +32,7 @@ def plot(name, vertices):
 
     titles_data = pd.read_csv(titles_csv_path)
     # Ensure columns are correctly named
-    expected_columns = {'Letter', 'Cluster Title'}
+    expected_columns = {'Symbol', 'Cluster Title'}
     if not expected_columns.issubset(titles_data.columns):
         raise ValueError(f"Columns in '{titles_csv_path}' must include {expected_columns}.")
 
@@ -64,7 +64,7 @@ def plot(name, vertices):
     summary_folder_path = f'Results/Summaries/{name}/'
     summaries = {}  # Dictionary to hold summaries for each cluster
     for idx, row in titles_data.iterrows():
-        letter = row['Letter']
+        letter = row['Symbol']
         cluster_title = row['Cluster Title']
 
         # Load the summary from the corresponding text file

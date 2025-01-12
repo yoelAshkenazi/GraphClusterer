@@ -49,6 +49,7 @@ def load_params(config_file_path=''):
             "print_info": True,
             "allow_user_prompt": True
 
+            # Add input user API keys to the dictionary but not the file (for security reasons) in the pip version.
         }
 
         with open(config_file_path, 'w') as _f:
@@ -77,29 +78,41 @@ def get_distance_matrix(path_, name_):
     return distances_  # Return the distances.
 
 
-if __name__ == '__main__':
-
-    config_path = sys.argv[1] if len(sys.argv) > 1 else 'config.json'
-
-    params = load_params(config_path)
+def run_full_pipeline(_config_path=""):
+    """
+    Run the full pipeline.
+    :param _config_path:  The path to the config file. If empty, will ask the user for the path, and if still empty, use
+    the default config file.
+    :return:
+    """
+    if _config_path == "":
+        _config_path = input("Enter the path to the config file: ")
+        if _config_path == "":
+            _config_path = 'config.json'
+    _params = load_params(_config_path)
 
     # Set the parameters for the pipeline.
-    pipeline_kwargs = {
-        'graph_kwargs': params['graph_kwargs'],
-        'clustering_kwargs': params['clustering_kwargs'],
-        'draw_kwargs': params['draw_kwargs'],
-        'print_info': params['print_info'],
-        'iteration_num': params['iteration_num'],
-        'vertices': pd.read_csv(params['vertices_path']),
-        'edges': pd.read_csv(params['edges_path']) if params['edges_path'] != "" else None,
-        'distance_matrix': get_distance_matrix(params['distance_matrix_path'], params['name']),
-        'name': params['name'],
+    _pipeline_kwargs = {
+        'graph_kwargs': _params['graph_kwargs'],
+        'clustering_kwargs': _params['clustering_kwargs'],
+        'draw_kwargs': _params['draw_kwargs'],
+        'print_info': _params['print_info'],
+        'iteration_num': _params['iteration_num'],
+        'vertices': pd.read_csv(_params['vertices_path']),
+        'edges': pd.read_csv(_params['edges_path']) if _params['edges_path'] != "" else None,
+        'distance_matrix': get_distance_matrix(_params['distance_matrix_path'], _params['name']),
+        'name': _params['name'],
     }
 
-    if params["allow_user_prompt"]:  # If the user prompt is allowed.
+    if _params["allow_user_prompt"]:  # If the user prompt is allowed.
         user_aspects = input("Enter the aspects you want to focus on, separated by commas: ").split(",")
-        pipeline_kwargs['aspects'] = user_aspects
+        _pipeline_kwargs['aspects'] = user_aspects
 
     # Run the pipeline.
     print("Starting the pipeline...\n\n\n")
-    one_to_rule_them_all.the_almighty_function(pipeline_kwargs)
+    one_to_rule_them_all.the_almighty_function(_pipeline_kwargs)
+
+
+if __name__ == '__main__':
+
+    run_full_pipeline()
