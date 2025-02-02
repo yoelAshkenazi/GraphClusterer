@@ -70,6 +70,7 @@ def get_distance_matrix(path_, name_):
         dir_name = 'data/distances'
         output_name = name_ + '_energy_distance_matrix.pkl'
         os.makedirs(dir_name, exist_ok=True)
+        print(f"Saving the distance matrix to {dir_name}/{output_name}")
         with open(dir_name + '/' + output_name, 'wb') as f:
             pkl.dump(dists, f)
         return dists
@@ -115,4 +116,4 @@ def run_full_pipeline(_config_path=""):
 
 if __name__ == '__main__':
 
-    run_full_pipeline()
+    run_full_pipeline('config.json')

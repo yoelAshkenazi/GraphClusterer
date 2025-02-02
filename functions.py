@@ -125,7 +125,7 @@ def make_graph(vertices, edges, distance_matrix=None, **kwargs):
         np_dists = np.argsort(np_dists, axis=1)[:, 1:K + 1]  # get the K nearest neighbors.
         for i, vertex in vertices.iterrows():
             for j in np_dists[i]:  # add the edges to the graph.
-                G.add_edge(vertex['id'], vertices.iloc[j]['id'], weight=1, color='red')
+                G.add_edge(vertex['id'], vertices.iloc[j + 1]['id'], weight=1, color='red')
 
     return G
 

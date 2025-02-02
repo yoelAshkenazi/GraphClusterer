@@ -293,13 +293,16 @@ def the_almighty_function(pipeline_kwargs: dict):
 
     # Improve the summaries iteratively
     for iter_ in range(iteration_num):
+
+        if kill_switch:
+            break  # Skip the rest of the iterations
+
         rel, coh, con, flu, scores = evaluate.metrics_evaluations(name, vertices, G)
         if print_info:
             print(f"Metrics for '{name}' in iteration {iter_ + 1}:")
             print(f"Relevancy: {rel:.2f}, Coherence: {coh:.2f}, Consistency: {con:.2f}, Fluency: {flu:.2f}")
             print(50 * "-" if iter_ < iteration_num - 1 else "")
-        if kill_switch:
-            break
+
         summarize.improve_summaries(name, vertices, scores)
 
     # Update the metrics dictionary

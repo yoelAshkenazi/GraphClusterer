@@ -146,7 +146,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
         response = co.generate(
             model='command-r-plus-08-2024',
             prompt=instructions_command_r + combined_abstracts,
-            max_tokens=500
+            max_tokens=1000
         )
         summary = response.generations[0].text.strip()
 
@@ -155,7 +155,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
             instructions_llama = file.read()
         input_params = {
             "prompt": instructions_llama + summary,
-            "max_tokens": 500
+            "max_tokens": 1000
         }
         output = replicate.run(
             "meta/meta-llama-3.1-405b-instruct",
@@ -334,7 +334,7 @@ def improve_summaries(name, vertices, titles_to_scores):
 
     for title, scores in titles_to_scores.items():
         # Get the summary.
-        with open(f"Results/Summaries/{name}/{title}.txt", 'r') as file:
+        with open(f"Results/Summaries/{name}/{title}.txt", 'r', encoding='utf-8') as file:
             summary = file.read()
 
         # Get the relevant data.

@@ -1,3 +1,5 @@
+from time import sleep
+
 import networkx as nx
 import pandas as pd
 import os
@@ -12,6 +14,14 @@ cohere_key = os.getenv("COHERE_API_KEY")
 
 # Initialize Cohere client with your API key
 co = cohere.Client(api_key=cohere_key)
+
+
+def reconnect(key: str):
+    """
+    Reconnect to the Cohere API.
+    :param key: the API key.
+    """
+    return cohere.Client(api_key=key)
 
 
 def extract_colors(graph: nx.Graph) -> Dict[str, str]:
@@ -94,7 +104,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
     def make_titles(title_list) -> Dict[str, str]:
         title_legend_ = {}
         for i_, title_ in enumerate(title_list):
-            title_legend_[title_] = f"{i_ + 1}"
+            title_legend_[title_] = f"Cluster {i_ + 1}"
         return title_legend_
 
     title_legend = make_titles(titles)
@@ -112,8 +122,14 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
     total_out_score = 0  # Total scores for the abstracts sampled outside the clusters.
 
+    api_count = 0
+
     # Iterate over each cluster and its corresponding subgraph
     for title, subgraph in subgraphs.items():
+
+        # reconnect to API
+        co_ = reconnect(cohere_key)
+        api_count = 0
 
         score_in = 0
         score_out = 0
@@ -133,6 +149,13 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
         outside_abstracts = [abstract for abstract in outside_abstracts if not pd.isna(abstract)]
         # Ask Cohere's API which abstracts are more similar to the summary.
         for id, abstract in cluster_abstracts.items():
+
+            api_count += 1  # Increment the API count
+            if api_count % 150 == 0:  # Sleep for 5 seconds every 150 API calls
+                print(f"Sleeping for 5 seconds to avoid API rate limit ({api_count} calls)...")
+                sleep(5)
+                co_ = reconnect(cohere_key)  # Reinitialize the Cohere client
+
             outside = random.choice(outside_abstracts)
             a, b = 0, 0
             # Evaluate consistency for abstracts inside the cluster.
@@ -146,7 +169,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
                 f" and only the score, without any '.' or ',' etc."
             )
 
-            response_in = co.generate(
+            response_in = co_.generate(
                 model="command-r-plus-08-2024",
                 prompt=prompt_in,
                 max_tokens=100,
@@ -173,7 +196,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
                 f" and only the score, without any '.' or ',' etc."
             )
 
-            response_out = co.generate(
+            response_out = co_.generate(
                 model="command-r-plus-08-2024",  # Replace with the desired Cohere model
                 prompt=prompt_out,
                 max_tokens=100,
@@ -269,7 +292,7 @@ def update(name, G: nx.Graph) -> nx.Graph:
                     # Both u and v are blue
                     if G.has_edge(vertex_i, vertex_j):
                         current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
-                        new_weight = current_weight * 1.2  # Increase weight by 20%
+                        new_weight = current_weight * 1.5  # Increase weight by 50%
                         G[vertex_i][vertex_j]['weight'] = new_weight
                     else:
                         edges_to_add.append((vertex_i, vertex_j, {'weight': 1}))  # Track edge to be added
@@ -277,7 +300,7 @@ def update(name, G: nx.Graph) -> nx.Graph:
                     # At least one of u or v is red
                     if G.has_edge(vertex_i, vertex_j):
                         current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
-                        new_weight = current_weight * 0.8  # Decrease weight by 20%
+                        new_weight = current_weight * 0.5  # Decrease weight by 50%
                         G[vertex_i][vertex_j]['weight'] = new_weight
                 # Keep track of nodes that need to be created
                 if vertex_j not in G.nodes:

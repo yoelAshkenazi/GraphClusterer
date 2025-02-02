@@ -1,1 +1,24 @@
-{"graph_kwargs": {"size": 2000, "K": 5, "color": "#1f78b4"}, "clustering_kwargs": {"method": "louvain", "resolution": 0.5, "save": true}, "draw_kwargs": {"save": true, "method": "louvain", "shown_percentage": 0.3}, "name": "3D printing", "vertices_path": "data/graphs/3D printing_papers.csv", "edges_path": "data/graphs/3D printing_graph.csv", "distance_matrix_path": "data/distances/3D printing_energy_distance_matrix.pkl", "iteration_num": 2, "print_info": true, "allow_user_prompt": true}
+{
+  "graph_kwargs": {
+    "size": 2000,
+    "K": 5,
+    "color": "#1f78b4"
+  },
+  "clustering_kwargs": {
+    "method": "louvain",
+    "resolution": 2.0,
+    "save": true
+  },
+  "draw_kwargs": {
+    "save": true,
+    "method": "louvain",
+    "shown_percentage": 0.3
+  },
+  "name": "posts_1k_sampled",
+  "vertices_path": "data/posts_1k_sampled.csv",
+  "edges_path": "",
+  "distance_matrix_path": "data/distances/posts_1k_sampled_energy_distance_matrix.pkl",
+  "iteration_num": 2,
+  "print_info": true,
+  "allow_user_prompt": false
+}
