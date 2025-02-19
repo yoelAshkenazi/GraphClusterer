@@ -58,6 +58,8 @@ def plot(name, vertices):
     # -----------------------------
     G = nx.Graph()
 
+    good_vertices = 0
+
     # -----------------------------
     # 5. Iterate Through Cluster Titles to Build the Graph
     # -----------------------------
@@ -113,6 +115,9 @@ def plot(name, vertices):
 
         peripheral_data = vertices[['id', 'abstract']]  # Extract 'id' and 'abstract' columns
 
+        # Make sure the ids are strings
+        peripheral_data['id'] = peripheral_data['id'].astype(str)
+
         peripheral_nodes = []
 
         for _, peripheral_row in cluster_data.iterrows():
@@ -129,9 +134,13 @@ def plot(name, vertices):
             # Fetch the abstract from the correct peripheral_data
             try:
                 peripheral_abstract = peripheral_data.loc[peripheral_data['id'] == peripheral_id, 'abstract'].iloc[0]
+                good_vertices += 1
             except IndexError:
                 peripheral_abstract = "Abstract not available."
-                print(f"Warning: Abstract not found for ID '{peripheral_id}'.")
+                print(f"Warning: Abstract not found for ID '{peripheral_id}'. {index_to_id[index]}")
+                print(peripheral_data.loc[peripheral_data['id'] == peripheral_id].iloc[0])
+                print(f'Good vertices: {good_vertices}')
+                exit()
 
             # Format the abstract by replacing '.' with '.\n' intelligently
             formatted_abstract = re.sub(r'\.(?=\s+[A-Z]|$)', '.\n', peripheral_abstract)

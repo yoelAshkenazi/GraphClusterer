@@ -14,7 +14,9 @@
         "car": -5,
         "clock": null,
         "London": -5,
-        "turtle": -5
+        "turtle": -5,
+        "posts_1k_sampled": 0.03868696265625777,
+        "newsgroups_1k_sampled": 0.07487231489744378
     },
     "largest_cluster_percentage": {
         "3D printing": 0.26,
@@ -31,7 +33,9 @@
         "car": 0.68,
         "clock": 0.37,
         "London": 0.85,
-        "turtle": 0.57
+        "turtle": 0.57,
+        "posts_1k_sampled": 0.096,
+        "newsgroups_1k_sampled": 0.137
     },
     "avg_relevancy": {
         "3D printing": 0.6885714285714286,
@@ -48,7 +52,9 @@
         "car": 0.36,
         "clock": 0.4693333333333333,
         "London": 0.5857142857142856,
-        "turtle": 0.35
+        "turtle": 0.35,
+        "posts_1k_sampled": 0.39503457015152926,
+        "newsgroups_1k_sampled": 0.34195044903926486
     },
     "avg_coherence": {
         "3D printing": 0.6799999999999999,
@@ -65,7 +71,9 @@
         "car": 0.26,
         "clock": 0.44266666666666665,
         "London": 0.34285714285714286,
-        "turtle": 0.25
+        "turtle": 0.25,
+        "posts_1k_sampled": 0.48403013707107284,
+        "newsgroups_1k_sampled": 0.24524749373433585
     },
     "avg_consistency": {
         "3D printing": 0.5466666666666666,
@@ -82,7 +90,9 @@
         "car": 0.2,
         "clock": 0.3466666666666667,
         "London": 0.26666666666666666,
-        "turtle": 0.2
+        "turtle": 0.2,
+        "posts_1k_sampled": 0.33664983164983164,
+        "newsgroups_1k_sampled": 0.22905501601225287
     },
     "avg_fluency": {
         "3D printing": 0.8695238095238096,
@@ -99,7 +109,9 @@
         "car": 0.37666666666666665,
         "clock": 0.7173333333333334,
         "London": 0.6,
-        "turtle": 0.85
+        "turtle": 0.85,
+        "posts_1k_sampled": 0.7387186540987711,
+        "newsgroups_1k_sampled": 0.6157945210247842
     },
     "success_rates": {
         "3D printing": 0.862434725848564,
@@ -116,6 +128,8 @@
         "car": 1.0,
         "clock": 1.0,
         "London": 0.9862825788751715,
-        "turtle": 1.0
+        "turtle": 1.0,
+        "posts_1k_sampled": 0.8046709129511678,
+        "newsgroups_1k_sampled": 0.8894577612287643
     }
 }

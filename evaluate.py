@@ -17,7 +17,7 @@ load_dotenv()
 cohere_key = os.getenv("COHERE_API_KEY")
 
 # Initialize Cohere client with your API key
-co = cohere.Client(api_key=cohere_key)
+# co = cohere.Client(api_key=cohere_key)
 
 # Define the Evaluation Prompt Template
 EVALUATION_PROMPT_TEMPLATE = """
@@ -206,6 +206,10 @@ def metrics_evaluations(name: str, vertices: pd.DataFrame, G: nx.Graph = None):
     all_fluency_scores = {title: 0 for title in titles}
 
     for title, summary in summaries.items():  # Iterate through each cluster
+
+        # Initialize Cohere client with your API key
+        co = cohere.Client(api_key=cohere_key)
+
         subgraph = subgraphs.get(title, nx.Graph())
         cluster_name = title
 
@@ -374,6 +378,10 @@ def evaluate(name: str, vertices, G: nx.Graph = None) -> float:
     total_out_score = 0  # Total scores for the abstracts sampled outside the clusters.
 
     for title, summary in summaries.items():
+
+        # Initialize Cohere client with your API key
+        co = cohere.Client(api_key=cohere_key)
+
         # Get the subgraph.
         subgraph = subgraphs.get(title, nx.Graph())
         cluster_name = title

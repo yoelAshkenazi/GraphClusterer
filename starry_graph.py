@@ -96,6 +96,8 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
         color = title_to_color.get(title, '__killSwitch__')  # Get the color of the cluster. (Default to kill switch)
         if color == '__killSwitch__':  # In case of a kill switch, break the update loop and return -1 as a kill switch
             print("Kill switch activated. Stopping update process.")
+            print(f"Failed to find color for title '{title}'.")
+            print(title_to_color)
             return -1
         nodes = [node for node in G.nodes if G.nodes[node].get('color', 'green') == color]
         subgraphs[title] = G.subgraph(nodes).copy()  # Ensure mutable subgraph
@@ -122,7 +124,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
     total_out_score = 0  # Total scores for the abstracts sampled outside the clusters.
 
-    api_count = 0
+    # api_count = 0
 
     # Iterate over each cluster and its corresponding subgraph
     for title, subgraph in subgraphs.items():

@@ -12,6 +12,19 @@ import pickle as pkl
 import replicate
 
 
+# Integrate dotenv to load environment variables
+load_dotenv()
+
+cohere_api_key = os.getenv("COHERE_API_KEY")
+
+def reconnect(key: str):
+    """
+    Reconnect to the Cohere API.
+    :param key: the API key.
+    """
+    return cohere.Client(api_key=key)
+
+
 def upload_graph(graph: nx.Graph, name: str) -> None:
     """
     Upload the graph to the given path.
@@ -102,7 +115,6 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
     load_dotenv()
 
     cohere_api_key = os.getenv("COHERE_API_KEY")
-    co = cohere.Client(cohere_api_key)
 
     # api_token = os.getenv("LLAMA_API_KEY")
 
@@ -113,6 +125,9 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
     vertex_to_title_map = {}  # map from vertex to title.
     # Iterate over each subgraph to generate summaries
     for i, subgraph in enumerate(subgraphs, start=1):
+
+        co = reconnect(cohere_api_key)
+
         # Extract abstracts corresponding to the nodes in the subgraph
         node_ids = set(subgraph.nodes())
         abstracts = df[df['id'].isin(node_ids)]['abstract'].dropna().tolist()
@@ -252,11 +267,7 @@ def improve_summary(summary, data, scores, score_names, name):
              Summary:{SUMMARY}
              """
 
-    # Integrate dotenv to load environment variables
-    load_dotenv()
-
-    cohere_api_key = os.getenv("COHERE_API_KEY")
-    co = cohere.Client(cohere_api_key)
+    co = reconnect(cohere_api_key)
 
     # Create a list of texts to summarize.
     texts = data['abstract'].tolist()  # Get the abstracts.
