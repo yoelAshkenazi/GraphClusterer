@@ -16,7 +16,7 @@
         "London": -5,
         "turtle": -5,
         "posts_1k_sampled": 0.03868696265625777,
-        "newsgroups_1k_sampled": 0.07487231489744378
+        "newsgroups_1k_sampled": 0.06058896300530573
     },
     "largest_cluster_percentage": {
         "3D printing": 0.26,
@@ -35,7 +35,7 @@
         "London": 0.85,
         "turtle": 0.57,
         "posts_1k_sampled": 0.096,
-        "newsgroups_1k_sampled": 0.137
+        "newsgroups_1k_sampled": 0.11
     },
     "avg_relevancy": {
         "3D printing": 0.6885714285714286,
@@ -54,7 +54,7 @@
         "London": 0.5857142857142856,
         "turtle": 0.35,
         "posts_1k_sampled": 0.39503457015152926,
-        "newsgroups_1k_sampled": 0.34195044903926486
+        "newsgroups_1k_sampled": 0.3699697290822162
     },
     "avg_coherence": {
         "3D printing": 0.6799999999999999,
@@ -73,7 +73,7 @@
         "London": 0.34285714285714286,
         "turtle": 0.25,
         "posts_1k_sampled": 0.48403013707107284,
-        "newsgroups_1k_sampled": 0.24524749373433585
+        "newsgroups_1k_sampled": 0.27037593984962416
     },
     "avg_consistency": {
         "3D printing": 0.5466666666666666,
@@ -92,7 +92,7 @@
         "London": 0.26666666666666666,
         "turtle": 0.2,
         "posts_1k_sampled": 0.33664983164983164,
-        "newsgroups_1k_sampled": 0.22905501601225287
+        "newsgroups_1k_sampled": 0.2879085445094217
     },
     "avg_fluency": {
         "3D printing": 0.8695238095238096,
@@ -111,7 +111,7 @@
         "London": 0.6,
         "turtle": 0.85,
         "posts_1k_sampled": 0.7387186540987711,
-        "newsgroups_1k_sampled": 0.6157945210247842
+        "newsgroups_1k_sampled": 0.6866934750358384
     },
     "success_rates": {
         "3D printing": 0.862434725848564,
@@ -130,6 +130,18 @@
         "London": 0.9862825788751715,
         "turtle": 1.0,
         "posts_1k_sampled": 0.8046709129511678,
-        "newsgroups_1k_sampled": 0.8894577612287643
+        "newsgroups_1k_sampled": 0.9737938215897258
+    },
+    "silhouette_score": {
+        "newsgroups_1k_sampled": -0.02281840426907448
+    },
+    "purity_score": {
+        "newsgroups_1k_sampled": 0.156
+    },
+    "v_measure_score": {
+        "newsgroups_1k_sampled": 0.06413324555913706
+    },
+    "jaccard_index": {
+        "newsgroups_1k_sampled": 0.03145951521402785
     }
 }

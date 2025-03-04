@@ -5,20 +5,21 @@
     "color": "#1f78b4"
   },
   "clustering_kwargs": {
-    "method": "louvain",
-    "resolution": 2.0,
+    "method": "leiden",
+    "resolution": 2.7,
     "save": true
   },
   "draw_kwargs": {
     "save": true,
-    "method": "louvain",
+    "method": "leiden",
     "shown_percentage": 0.3
   },
   "name": "newsgroups_1k_sampled",
   "vertices_path": "data/newsgroups_1k_sampled.csv",
   "edges_path": "",
   "distance_matrix_path": "data/distances/newsgroups_1k_sampled_energy_distance_matrix.pkl",
-  "iteration_num": 2,
+  "iteration_num": 3 ,
+  "update_factor": 0.5,
   "print_info": true,
   "allow_user_prompt": false
 }

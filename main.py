@@ -6,7 +6,7 @@ import sys
 import os
 import json
 
-import one_to_rule_them_all  # Change to relative import if needed.
+import one_to_rule_them_all # Change to relative import if needed.
 import calc_energy  # Change to relative import if needed.
 
 warnings.filterwarnings("ignore")
@@ -117,3 +117,20 @@ def run_full_pipeline(_config_path=""):
 if __name__ == '__main__':
 
     run_full_pipeline('config.json')
+
+    # send a mail when the code is done
+    import smtplib
+
+    FROM = 'yoelashkenazi12@gmail.com'
+    TO = ['yoelashkenazi12@gmail.com']
+    SUBJECT = 'The code has finished running'
+    TEXT = 'The code has finished running'
+
+    # Prepare actual message
+    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+
+    # Send the mail
+    server = smtplib.SMTP()
+    server.sendmail(FROM, TO, message)
+    server.quit()

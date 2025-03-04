@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 import plot
 import starry_graph as sg
+import numpy as np
+import pandas as pd
 
 warnings.filterwarnings("ignore")
 
@@ -189,6 +191,280 @@ def plot_bar(name: str, metrics_dict: dict):
     plt.close()  # Clear the figure to free memory
 
 
+def compute_silhouette_score(_name: str, _vertices, _distance_matrix, **kwargs):
+    """
+    Compute the silhouette score for the given name and distance matrix. The score is given by the formula:
+    silhouette_score = (b - a) / max(a, b)
+
+    where:
+    a = mean intra-cluster distance
+    b = mean nearest-cluster distance
+    :param _name: the name of the dataset.
+    :param _vertices: the vertices of the graph.
+    :param _distance_matrix: the distance matrix for the embeddings.
+    :param kwargs: additional parameters.
+    :return:
+    """
+
+    # import the sklearn silhouette score.
+    from sklearn.metrics import silhouette_score
+
+    print_info = kwargs.get('print_info', False)  # Whether to print the results
+
+    # Load the graph
+    G = functions.load_graph(_name)
+
+    # assign labels to the vertices based on the colors
+    labels = [G.nodes[v]['color'] for v in G.nodes]
+    color_to_int_map = {color: i for i, color in enumerate(set(labels))}
+    # make sure the smallest is 0
+    labels = [color_to_int_map[color] for color in labels]
+    dists = _distance_matrix  # Load the distance matrix
+
+    # Compute the silhouette score
+    score = silhouette_score(dists, labels, metric='precomputed')
+
+    if print_info:
+        print(f"Silhouette coefficient: {score:.4f}")
+
+    """# find the clusters as subgraphs of G
+    clusters = {}
+    for node in G.nodes(data=True):
+        if node[1]['color'] not in clusters:
+            clusters[node[1]['color']] = []
+        clusters[node[1]['color']].append(node[0])
+
+    # for each vertex, calculate the average distance between the vertex and all other vertices in the cluster,
+    # and the average distance between it and all vertices in the closest cluster to it.
+    cluster_coefs = {cluster: [] for cluster in clusters}
+    coefs = []
+    for v in G.nodes:
+        cluster = clusters[G.nodes[v]['color']]  # get the cluster of the vertex
+
+        if len(cluster) == 1:
+            coefs.append(0)  # if the cluster has only one vertex, skip it
+            cluster_coefs[G.nodes[v]['color']].append(0)
+            continue
+
+        # calculate the average distance between the vertex and all other vertices in the cluster
+        avg_dist_in_cluster = np.mean([dists[v][u] for u in cluster if u != v])
+
+        # calculate the average distance between the vertex and all vertices in the closest cluster to it
+        min_avg_dist = np.inf
+        for c in clusters:
+            if c == G.nodes[v]['color']:
+                continue
+            avg_dist = np.mean([dists[v][u] for u in clusters[c]])
+            if avg_dist < min_avg_dist:
+                min_avg_dist = avg_dist
+
+        # compute the silhouette coefficient
+        coef = (min_avg_dist - avg_dist_in_cluster) / max(min_avg_dist, avg_dist_in_cluster)
+
+        coefs.append(coef)
+        cluster_coefs[G.nodes[v]['color']].append(coef)
+
+    if print_info:
+        # print the silhouette coefficient for each cluster
+        for cluster in cluster_coefs:
+            print(f"Silhouette coefficient for cluster {cluster}: {np.mean(cluster_coefs[cluster]):.4f}")
+
+    # print the silhouette coefficient for the whole graph
+    total_avg_coef = np.mean(coefs)
+    print(f"Total silhouette coefficient: {total_avg_coef:.4f}")
+
+    return total_avg_coef"""
+
+    return score
+
+
+def compute_purity_score(_name: str, _vertices, **kwargs):
+    """
+    Compute the purity score for the given clustered graph:
+    purity = (1 / N) * sum(max(Pi))
+
+    where:
+    N = total number of vertices
+    Pi = number of vertices in cluster i that belong to the majority class of cluster i
+    :param _name: the name of the dataset.
+    :param _vertices: the vertices of the graph.
+    :param kwargs:  additional parameters.
+    :return:
+    """
+    print_info = kwargs.get('print_info', False)  # Whether to print the results
+
+    # Load the graph
+    G = functions.load_graph(_name)
+
+    # Check if there is a class label for the vertices, and if not, return None
+    if 'label' not in _vertices.columns:
+        return None
+
+    # Divide the graph into clusters
+    clusters = {}
+    for node in G.nodes(data=True):
+        if node[1]['color'] not in clusters:
+            clusters[node[1]['color']] = []
+        clusters[node[1]['color']].append(node[0])
+
+    # make a dictionary {vertex: prediction} by using the color as a prediction (enumerated)
+    predicted_labels = {}
+    for i, cluster in enumerate(clusters):
+        for vertex in clusters[cluster]:
+            predicted_labels[vertex] = i
+
+    df = _vertices.copy().loc[predicted_labels.keys()]  # get the vertices with predictions
+    df['cluster'] = df.index.map(predicted_labels)  # add the cluster column
+
+    contingency_table = pd.crosstab(df['label'], df['cluster'])  # create the contingency table
+
+    max_correct_assignments = contingency_table.max(axis=1).sum()
+
+    # Compute the purity score
+    purity = max_correct_assignments / len(df)
+
+    if print_info:
+        print(f"Purity score: {purity:.4f}")
+
+    """# Find the majority class for each cluster
+    majority_classes = {}
+    for cluster in clusters:
+        cluster_vertices = clusters[cluster]
+        labels = _vertices.loc[cluster_vertices, 'label']
+        # find the maximum occurring class in the cluster, and the number of occurrences
+        majority_class = labels.value_counts().idxmax()
+        majority_classes[cluster] = len(labels[labels == majority_class])
+
+        if print_info:
+            print(f"Cluster {cluster} has {len(clusters[cluster])} vertices, with majority class: {majority_class} of "
+                  f"{len(labels[labels == majority_class])} vertices.")
+
+    # Compute the purity score
+    N = len(G.nodes)
+    purity = 0
+    for cluster in clusters:
+        purity += majority_classes[cluster]  # add the majority class of the cluster
+
+    purity /= N
+
+    if print_info:
+        print(f"Purity score for '{_name}' graph: {purity:.4f}")"""
+
+    return purity
+
+
+def compute_vmeasure_score(_name: str, _vertices, **kwargs):
+    """
+    Compute the V-measure score for the given clustered graph:
+    v_measure = (2 * homogeneity * completeness) / (homogeneity + completeness)
+
+    where:
+    homogeneity = 1 - H(C|K) / H(C)
+    completeness = 1 - H(K|C) / H(K)
+    :param _name: the name of the dataset.
+    :param _vertices:  the vertices of the graph.
+    :param kwargs:  additional parameters.
+    :return:
+    """
+
+    print_info = kwargs.get('print_info', False)  # Whether to print the results
+
+    # use the pre-built method from scikit-learn
+    from sklearn.metrics.cluster import v_measure_score
+
+    # Load the graph
+    G = functions.load_graph(_name)
+
+    # Divide the graph into clusters
+    clusters = {}
+    for node in G.nodes(data=True):
+        if node[1]['color'] not in clusters:
+            clusters[node[1]['color']] = []
+        clusters[node[1]['color']].append(node[0])
+
+    # Check if there is a class label for the vertices, and if not, return None
+    if 'label' not in _vertices.columns:
+        return None
+
+    # assign predicted labels to clusters.
+    predicted_labels = {}
+    for i, cluster in enumerate(clusters):
+        for vertex in clusters[cluster]:
+            predicted_labels[vertex] = i
+
+    true_labels = []
+    pred_list = []
+    for vertex in G.nodes:
+        true_labels.append(_vertices.loc[vertex, 'label'])
+        pred_list.append(predicted_labels[vertex])
+
+    # Compute the V-measure score
+    v_measure = v_measure_score(true_labels, pred_list)
+
+    if print_info:
+        print(f"V-measure score: {v_measure:.4f}")
+
+    return v_measure
+
+
+def compute_jaccard_index(_name: str, _vertices, **kwargs):
+    """
+    Compute the Jaccard index for the given clustered graph:
+    Jaccard index = |A ∩ B| / |A ∪ B|
+
+    where:
+    A = true labels
+    B = predicted labels
+
+    :param _name:
+    :param _vertices:
+    :param kwargs:
+    :return:
+    """
+
+    print_info = kwargs.get('print_info', False)  # Whether to print the results
+
+    # Load the graph
+    G = functions.load_graph(_name)
+
+    # Divide the graph into clusters
+    clusters = {}
+    for node in G.nodes(data=True):
+        if node[1]['color'] not in clusters:
+            clusters[node[1]['color']] = []
+        clusters[node[1]['color']].append(node[0])
+
+    # Check if there is a class label for the vertices, and if not, return None
+    if 'label' not in _vertices.columns:
+        return None
+
+    # assign predicted labels to clusters.
+    predicted_labels = {}
+    for i, cluster in enumerate(clusters):
+        for vertex in clusters[cluster]:
+            predicted_labels[vertex] = i
+
+    true_labels = []
+    pred_list = []
+    for vertex in G.nodes:
+        true_labels.append(_vertices.loc[vertex, 'label'])
+        pred_list.append(predicted_labels[vertex])
+
+    # Compute the Jaccard index
+    true_labels = np.array(true_labels)
+    pred_list = np.array(pred_list)
+
+    # Compute the Jaccard index
+    intersection = np.sum(true_labels == pred_list)
+    union = len(true_labels) + len(pred_list) - intersection
+    jaccard_index = intersection / union
+
+    if print_info:
+        print(f"Jaccard index: {jaccard_index:.4f}")
+
+    return jaccard_index
+
+
 def the_almighty_function(pipeline_kwargs: dict):
     """
     Run the pipeline for the given parameters.
@@ -230,14 +506,15 @@ def the_almighty_function(pipeline_kwargs: dict):
     name = pipeline_kwargs.get('name', "")
     distance_matrix = pipeline_kwargs.get('distance_matrix', None)
     aspects = pipeline_kwargs.get('aspects', None)  # expecting a list of aspects
+    update_factor = pipeline_kwargs.get('update_factor', 0.5)  # default is 0.5
 
     assert vertices is not None, "Vertices must be provided."
 
     # Create the graph.
     G = functions.make_graph(vertices, edges, distance_matrix, **graph_kwargs)
 
-    # Set initial values for rel, coh, con, flu, sr.
-    rel, coh, con, flu, sr = 0, 0, 0, 0, 0
+    # Set initial values for sr.
+    sr = 0
 
     # Iteratively repeat the followings:
     """
@@ -250,7 +527,7 @@ def the_almighty_function(pipeline_kwargs: dict):
     for i in range(iteration_num):
         if print_info:
             print(f"Starting iteration {i+1}...")
-            print(f"Clustering the graph for '{name}'...")
+            print(f"Clustering the graph for '{name}' using method '{clustering_kwargs["method"]}'...")
         # Cluster the graph.
         functions.cluster_graph(G, name, **clustering_kwargs)
 
@@ -260,33 +537,36 @@ def the_almighty_function(pipeline_kwargs: dict):
         # Summarize the clusters.
         run_summarization(name, vertices, aspects, print_info)
 
-        G = functions.load_graph(name)  # Load the graph
+        G = functions.load_graph(name)  # Load the graph (after assigning clusters according to the summaries)
 
         # Evaluate the success rate and create the STAR graph
         if print_info:
             print(50*"-")
             print(f"Evaluating the success rate for '{name}'...")
-        sr = sg.starr(name, vertices, G)
+        sr_new = sg.starr(name, vertices, G)
 
         # Check if the kill switch is activated
-        if sr == -1:
-            sr = 0  # Set the success rate to 0
+        if sr_new == -1:
             kill_switch = True
             break  # Should already have a fully summarized graph.
 
         if print_info:
-            print(f"Success rate for '{name}' in iteration {i+1}: {sr:.4f}")
+            print(f"Success rate for '{name}' in iteration {i+1}: {sr_new:.4f}")
             print(50*"-")
             print(f"Updating the edges using STAR graph for '{name}'...")
 
         # Update the edges.
-        G = sg.update(name, G)
+        G = sg.update(name, G, update_factor)
+        sr = sr_new  # Update the success rate
         if print_info:
             print("Edges updated using STAR graph.")
             print(50*"-")
 
     # Load the graph
     G = functions.load_graph(name)
+
+    # Initialize the metrics
+    rel, coh, con, flu = 0, 0, 0, 0  # Initialize the metrics
 
     # Evaluate and plot the metrics
     cluster_scores = functions.evaluate_clusters(name, distance_matrix)  # Evaluate the clusters
@@ -297,12 +577,23 @@ def the_almighty_function(pipeline_kwargs: dict):
         if kill_switch:
             break  # Skip the rest of the iterations
 
-        rel, coh, con, flu, scores = evaluate.metrics_evaluations(name, vertices, G)
+        # compute the metrics
+        rel_new, coh_new, con_new, flu_new, scores = evaluate.metrics_evaluations(name, vertices, G)
         if print_info:
             print(f"Metrics for '{name}' in iteration {iter_ + 1}:")
-            print(f"Relevancy: {rel:.2f}, Coherence: {coh:.2f}, Consistency: {con:.2f}, Fluency: {flu:.2f}")
+            print(f"Relevancy: {rel_new:.2f}, Coherence: {coh_new:.2f}, "
+                  f"Consistency: {con_new:.2f}, Fluency: {flu_new:.2f}")
             print(50 * "-" if iter_ < iteration_num - 1 else "")
 
+        rel_flag = 1 if rel_new > rel else 0
+        coh_flag = 1 if coh_new > coh else 0
+        con_flag = 1 if con_new > con else 0
+        flu_flag = 1 if flu_new > flu else 0
+
+        if sum([rel_flag, coh_flag, con_flag, flu_flag]) < 3:  # If less than 3 metrics have improved, break
+            break
+
+        rel, coh, con, flu = rel_new, coh_new, con_new, flu_new  # Update the metrics
         summarize.improve_summaries(name, vertices, scores)
 
     # Update the metrics dictionary
@@ -335,7 +626,36 @@ def the_almighty_function(pipeline_kwargs: dict):
     known_metrics["avg_fluency"][name] = flu
     known_metrics["success_rates"][name] = sr
 
-    with open("metrics.json", "w") as f:  # Save the updated metrics
+    # Compute the silhouette score
+    sil_score = compute_silhouette_score(name, vertices, distance_matrix, print_info=print_info)
+
+    # Compute the purity score
+    purity_score = compute_purity_score(name, vertices, print_info=print_info)
+
+    # Compute the V-measure score
+    v_measure_score = compute_vmeasure_score(name, vertices, print_info=print_info)
+
+    # Compute the Jaccard index
+    jaccard_index = compute_jaccard_index(name, vertices, print_info=print_info)
+
+    # save the silhouette score, purity score, v_measure_score, and jaccard index to a csv file
+    lst = [sil_score, purity_score, v_measure_score, jaccard_index]
+    # get the number of clusters.
+    n_clusters = len(set(G.nodes()[v]['color'] for v in G.nodes))
+    lst.append(n_clusters)
+    with open(f'{name}_metrics.csv', 'a') as f:
+        # headers
+        f.write("Silhouette Score, Purity Score, V-measure Score, Jaccard Index, # of clusters\n")
+        f.write(f"{lst[0]}, {lst[1]}, {lst[2]}, {lst[3]}, {lst[-1]}\n")
+
+    # Update the metrics dictionary with the new scores
+    known_metrics["silhouette_score"][name] = sil_score
+    known_metrics["purity_score"][name] = purity_score
+    known_metrics["v_measure_score"][name] = v_measure_score
+    known_metrics["jaccard_index"][name] = jaccard_index
+
+    # Save the updated metrics to the JSON file
+    with open("metrics.json", "w") as f:
         json.dump(known_metrics, f, indent=4)
 
     # Plot the metrics for the current dataset

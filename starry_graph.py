@@ -243,12 +243,17 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
     return total_in_score / (total_in_score + total_out_score) if (total_in_score + total_out_score) != 0 else 0
 
 
-def update(name, G: nx.Graph) -> nx.Graph:
+def update(name, G: nx.Graph, factor: float = 0.5) -> nx.Graph:
     """
     Update the graph based on the 'Results/starry/{name}.csv' evaluations.
     :param name: the name of the dataset.
     :param G: the graph to be updated.
+    :param factor: the factor by which to update the weights.
     """
+
+    if factor < 0 or factor > 1:  # Ensure the factor is between 0 and 1
+        print("Error: Factor must be between 0 and 1. Defaulting to 0.5.")
+        factor = 0.5
 
     # Load the CSV file created in the 'plot' function
     csv_path = f"Results/starry/{name}.csv"
@@ -294,7 +299,7 @@ def update(name, G: nx.Graph) -> nx.Graph:
                     # Both u and v are blue
                     if G.has_edge(vertex_i, vertex_j):
                         current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
-                        new_weight = current_weight * 1.5  # Increase weight by 50%
+                        new_weight = current_weight * (1 + factor)  # Increase weight by the factor
                         G[vertex_i][vertex_j]['weight'] = new_weight
                     else:
                         edges_to_add.append((vertex_i, vertex_j, {'weight': 1}))  # Track edge to be added
@@ -302,7 +307,7 @@ def update(name, G: nx.Graph) -> nx.Graph:
                     # At least one of u or v is red
                     if G.has_edge(vertex_i, vertex_j):
                         current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
-                        new_weight = current_weight * 0.5  # Decrease weight by 50%
+                        new_weight = current_weight * (1 - factor)  # Decrease weight by the factor
                         G[vertex_i][vertex_j]['weight'] = new_weight
                 # Keep track of nodes that need to be created
                 if vertex_j not in G.nodes:

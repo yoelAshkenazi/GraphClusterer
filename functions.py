@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import pickle as pk
 import random
+import leidenalg as la
+import igraph as ig
 import os
 
 
@@ -210,10 +212,28 @@ def cluster_graph(G, name, **kwargs):
     method = kwargs['method'] if 'method' in kwargs else 'louvain'
     save = kwargs['save'] if 'save' in kwargs else False
     res = kwargs['resolution'] if 'resolution' in kwargs else 1.0
+    theta = kwargs['theta'] if 'theta' in kwargs else 0.1
 
     # cluster the graph.
     if method == 'louvain':
         partition = nx.algorithms.community.louvain_communities(G, resolution=res)
+    elif method == 'leiden':
+        # use the leiden algorithm.
+        # index the vertices of G, and make a gopy graph in 'igraph' format for the leiden algorithm.
+        vertex_indices = {node: i for i, node in enumerate(G.nodes)}
+        G_copy = nx.convert_node_labels_to_integers(G)
+
+        # create an igraph graph.
+        H = ig.Graph.from_networkx(G_copy)
+
+        # cluster the graph.
+        partition = la.find_partition(H, la.RBConfigurationVertexPartition, weights='weight', resolution_parameter=res,
+                                      n_iterations=-1, seed=0)
+        partition = [list(cluster) for cluster in partition]
+
+        # get the partition in the original graph format.
+        partition = [[list(G.nodes)[node] for node in cluster] for cluster in partition]
+
     else:
         raise ValueError(f"Clustering method '{method}' is not supported.")
 

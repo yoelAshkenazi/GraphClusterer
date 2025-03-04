@@ -1,24 +1,28 @@
 import pandas
 import pickle as pkl
-
+import networkx as nx
+import numpy as np
+import functions
 import pandas as pd
+from one_to_rule_them_all import (compute_purity_score, compute_vmeasure_score,
+                                  compute_silhouette_score, compute_jaccard_index)
 
+name = 'newsgroups_1k_sampled'
+G = functions.load_graph('newsgroups_1k_sampled')
 
-# data = pd.read_csv('data/newsgroups.csv')
-#
-# # Rename the content column to 'abstract'
-# data = data.rename(columns={'text': 'abstract'})
-#
-# data.to_csv('data/newsgroups.csv', index=False)
-#
-# # make a smaller version with 1000 rows selected randomly
-# data_sample = data.sample(1000)
-# data_sample['id'] = [str(i) for i in range(1000)]
-#
-# # save to csv.
-# data_sample.to_csv('data/newsgroups_1k_sampled.csv', index=False)
+vertices = pd.read_csv('data/newsgroups_1k_sampled.csv')
 
-data = pd.read_csv('data/newsgroups_1k_sampled.csv')[['id', 'abstract']]
-data['id'] = data['id'].astype(str)
+dists = pkl.load(open('data/distances/newsgroups_1k_sampled_energy_distance_matrix.pkl', 'rb'))
 
-print(data.loc[data['id'] == '10', 'abstract'].iloc[0])
+print(compute_vmeasure_score(name, vertices, print_info=True))
+
+print(compute_purity_score(name, vertices, print_info=True))
+
+print(compute_silhouette_score(name, vertices, dists, print_info=True))
+
+print(compute_jaccard_index(name, vertices, print_info=True))
+
+# print the amount of clusters.
+clusters = set(G.nodes()[v]['color'] for v in G.nodes)
+
+print(f"Number of clusters: {len(clusters)}")
