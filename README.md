@@ -80,32 +80,29 @@ Which cache the embedding vectors for each sentence, and the KDE values for filt
 #### main.py
 Here's an example script for the main file in the first case usage (the python package). If you intend on using the cloned repository, you can use the `main.py` file [here](https://github.com/yoelAshkenazi/GraphClusterer/blob/master/main.py).
 ```python
-from GraphClusterer.one_to_rule_them_all import the_almighty_function  # make the main function available.
-from GraphClusterer.main import load_params, get_distance_matrix
-import pandas as pd
 
+from GraphClusterer.main import run_pipeline
 
 if __name__ == '__main__':
-    params = load_params('config.json')
 
-    # Set the parameters for the pipeline.
-    pipeline_kwargs = {
-        'graph_kwargs': params['graph_kwargs'],
-        'clustering_kwargs': params['clustering_kwargs'],
-        'draw_kwargs': params['draw_kwargs'],
-        'print_info': params['print_info'],
-        'iteration_num': params['iteration_num'],
-        'vertices': pd.read_csv(params['vertices_path']),
-        'edges': pd.read_csv(params['edges_path']),
-        'distance_matrix': get_distance_matrix(params['distance_matrix_path']),
-        'name': params['name'],
-        'key': params['cohere_key'],
-        'llama_key': params['llama_key']
-    }
-
-    # Run the pipeline.
-    the_almighty_function(pipeline_kwargs)
+    run_pipeline()
 ```
+
+You can execute the function with no arguments firstly, in order to have the directory tree needed, and also a default dataset. However, We also allow a generic LLMProvider class to be a part of the input in later executions, thus allowing the usage of other LLMs in the pipeline. The requested class must include the following methods:
+```python
+
+class LLMProvider:
+   def __init__(self, **kwargs):...  # build method.
+   def generage_response(self, prompt, max_tokens):...  # generate a response of at most max_tokens length to the given prompt.
+   def reconnect(self):...  # if using an API service, reconnect to the service to avoid overloads. If using a local model, this function can return self.
+```
+
+And respectively, the `run_pipeline` method can accept the following:
+```python
+run_pipeline(params: Dict, summary_model: LLMProvider, refinement_model: LLMProvider)
+```
+
+If `summary_model` is not provided, the pipeline will use the [`Cohere`](https://docs.cohere.com/v2/reference/about) LLM be default, and if `refinement_model` is not provided, the `Llama` LLM will be used.
 
 ### config.json
 The `config.json` file requires core elements, and additional keys when using the python package, in order to avoid the usage of a `.env` file.
@@ -136,6 +133,7 @@ The `config.json` file requires core elements, and additional keys when using th
 
   "iteration_num": 1,
   "print_info": true,
+  "update_factor": 0.5,
   "cohere_key": "your Cohere API key here",
   "llama_key": "your Llama API key here"
 }
