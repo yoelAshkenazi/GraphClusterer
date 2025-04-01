@@ -4,6 +4,8 @@ PRIMERA_model
 
 venv
 
+data/embeddings_bert
+
 myenv
 
 optuna
@@ -37,4 +39,11 @@ data/newsgroups_1k_sampled.csv
 data/embeddings/newsgroups_1k_sampled_embeddings.pkl
 data/distances/newsgroups_1k_sampled_energy_distance_matrix.pkl
 data/kde_values/newsgroups_1k_sampled.pkl
-# data/clustered_graphs/newsgroups_1k_sampled.gpickle
+data/clustered_graphs/newsgroups_1k_sampled.gpickle
+
+# ignore the newsgroup 5k
+data/newsgroups_5k_sampled.csv
+data/embeddings/newsgroups_5k_sampled_embeddings.pkl
+data/distances/newsgroups_5k_sampled_energy_distance_matrix.pkl
+data/kde_values/newsgroups_5k_sampled.pkl
+data/clustered_graphs/newsgroups_5k_sampled.gpickle

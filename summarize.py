@@ -119,7 +119,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
     # api_token = os.getenv("LLAMA_API_KEY")
 
     # Load the abstracts from the CSV file
-    df = vertices[['id', 'abstract']]
+    df = vertices[['id', 'summary']]  # todo- check summary vs abstract.
     count_titles = 2
     titles_list = []
     vertex_to_title_map = {}  # map from vertex to title.
@@ -130,7 +130,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
 
         # Extract abstracts corresponding to the nodes in the subgraph
         node_ids = set(subgraph.nodes())
-        abstracts = df[df['id'].isin(node_ids)]['abstract'].dropna().tolist()
+        abstracts = df[df['id'].isin(node_ids)]['summary'].dropna().tolist()  # todo - check summary vs abstract.
         color = subgraph.nodes[list(subgraph.nodes())[0]]['color']  # get the color of the subgraph.
 
         # If only one abstract is present, skip summarization.
@@ -157,13 +157,28 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
             instructions_command_r[-2] = aspects_instruction
             instructions_command_r = '\n'.join(instructions_command_r)
 
+        # make sure the combined length of the texts doesn't exceed the maximum allowed by the API.
+        if len(combined_abstracts) > 100000:
+            combined_abstracts = combined_abstracts[:100000]
+            combined_abstracts = combined_abstracts[:combined_abstracts.rfind('<New Text:>')]  # remove the last text.
+
         # Generate the summary using Cohere's summarize API
-        response = co.generate(
-            model='command-r-plus-08-2024',
-            prompt=instructions_command_r + combined_abstracts,
-            max_tokens=1000
-        )
-        summary = response.generations[0].text.strip()
+        bad_response_flag = False
+        try:
+            response = co.generate(
+                model='command-r-plus-08-2024',
+                prompt=instructions_command_r + combined_abstracts,
+                max_tokens=1000,
+            )
+        except Exception as e:  # If an error occurred.
+            bad_response_flag = True
+            print(f"Error in Cohere API: {e}.\nSkipping.")
+            summary = ('An error occurred while generating the summary.\n'
+                       'Please check the logs for more information.')
+            co = reconnect(cohere_api_key)  # Reconnect to the API.
+
+        if not bad_response_flag:
+            summary = response.generations[0].text.strip()
 
         # Refine the summary by generating a title using the LLAMA API
         with open('prompt for llama.txt', 'r') as file:
@@ -189,12 +204,21 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
             "prompt": prompt,
             "max_tokens": 300
         }
-        output = replicate.run(
-            "meta/meta-llama-3.1-405b-instruct",
-            input=input_params
-        )
+        try:
+            output = replicate.run(
+                "meta/meta-llama-3.1-405b-instruct",
+                input=input_params
+            )
+        except Exception as e:
+            print(f"Error in LLAMA API: {e}.\nSkipping.")
+            output = ['Generic Title']
+            continue
         title = "".join(output)
         title = title.replace('"', '')
+
+        # make sure the title doesn't end with a newline character or a '.'.
+        if title[-1] in ['\n', '.', ' ']:
+            title = title[:-1]
 
         if print_info:  # If to print the information.
             print(f"Cluster {color}: {title} ({len(abstracts)} textual vertices)")
@@ -214,7 +238,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
                 f.write(summary)
                 # print(f"Summary saved to {result_file_path + file_name}")
         except FileNotFoundError:  # create the directory if it doesn't exist.
-            os.makedirs(result_file_path)
+            os.makedirs(result_file_path, exist_ok=True)
             with open(file_name, 'w', encoding='utf-8') as f:
                 f.write(summary)
         except UnicodeEncodeError:
@@ -294,30 +318,41 @@ def improve_summary(summary, data, scores, score_names, name):
         if TASK_DESCRIPTION == "":
             TASK_DESCRIPTION = f"Your task is to improve the summary's {name}."
 
-        # Combine the prompt with the texts.
-        prompt = PROMPT.format(TASK_DESCRIPTION=TASK_DESCRIPTION, TEXTS=TEXTS, SUMMARY=summary)
+        else:
+            TASK_DESCRIPTION += f'\nAlso, you need to improve the summary\'s {name}.'
 
-        # Generate the summary using Cohere's summarize API
+    # Combine the prompt with the texts.
+    prompt = PROMPT.format(TASK_DESCRIPTION=TASK_DESCRIPTION, TEXTS=TEXTS, SUMMARY=summary)
+
+    # Generate the summary using Cohere's summarize API
+    break_flag = False
+    try:
         response = co.generate(
             model='command-r-plus-08-2024',
             prompt=prompt,
             max_tokens=500
         )
-
         summary = response.generations[0].text.strip()  # Get the summary.
 
+    except Exception as e:
+        print(f"Error in Cohere API: {e}.\nKeeping summary unchanged.")
+        break_flag = True  # skip the llama model.
+
+    if not break_flag:
         # Refine the summary using Llama.
         input_params = {
             "prompt": instructions_llama + summary,
             "max_tokens": 500
         }
 
-        output = replicate.run(
-            "meta/meta-llama-3.1-405b-instruct",
-            input=input_params,
-        )
-
-        summary = "".join(output)  # Get the summary.
+        try:
+            output = replicate.run(
+                "meta/meta-llama-3.1-405b-instruct",
+                input=input_params,
+            )
+            summary = "".join(output)  # Get the summary.
+        except Exception as e:
+            print(f"Error in LLAMA API: {e}.\nKeeping summary unchanged.")
 
     # Save the summary. (after improving all necessary scores)
     try:
@@ -356,3 +391,41 @@ def improve_summaries(name, vertices, titles_to_scores):
 
         # Improve the summary.
         improve_summary(summary, data, scores, SCORE_NAMES, name)
+
+
+def summarize_text(s: str):
+    """
+    Summarize the given text.
+    :param s:  the text to summarize.
+    :return:
+    """
+
+    INSTRUCTIONS = ("In this task you are required to summarize the given text. \n"
+                    "Your summary must be between 5-10 sentences long. \n"
+                    "Your summary must be as coherent as possible, and must not use phrases"
+                    "like 'in this text'.\n Your summary must not include sentences and information "
+                    "that is outside the text. \nYou may use sentences from the text without citing them.")
+
+    co = reconnect(cohere_api_key)
+    if not isinstance(s, str):  # If the text is None, return None.
+        return None
+
+    l_s = len(s.split(' '))  # Get the number of words in the text.
+
+    if l_s > 300:  # must summarize.
+        flag = True
+        while flag:
+            try:
+                response = co.generate(
+                    model='command-r-plus-08-2024',
+                    prompt=INSTRUCTIONS + s,
+                    max_tokens=500
+                )
+                flag = False
+            except Exception as e:
+                co = reconnect(cohere_api_key)
+
+        summary = response.generations[0].text.strip()
+        return summary
+
+    return s  # Return the text as is.

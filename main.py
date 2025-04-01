@@ -6,7 +6,7 @@ import sys
 import os
 import json
 
-import one_to_rule_them_all # Change to relative import if needed.
+import one_to_rule_them_all  # Change to relative import if needed.
 import calc_energy  # Change to relative import if needed.
 
 warnings.filterwarnings("ignore")
@@ -62,17 +62,13 @@ def load_params(config_file_path=''):
     return _params
 
 
-def get_distance_matrix(path_, name_):
+def get_distance_matrix(path_, name_, method='approx'):
     if path_ == "" or not os.path.exists(path_):  # If the path is empty or wrong, create a new distance matrix.
         print("No distance matrix provided. Creating a distance matrix...")
-        dists = calc_energy.compute_energy_distance_matrix(name_, 0.9, 5.0, 5)
-        # Save the distance matrix to path.
-        dir_name = 'data/distances'
-        output_name = name_ + '_energy_distance_matrix.pkl'
-        os.makedirs(dir_name, exist_ok=True)
-        print(f"Saving the distance matrix to {dir_name}/{output_name}")
-        with open(dir_name + '/' + output_name, 'wb') as f:
-            pkl.dump(dists, f)
+        if method == 'approx':  # use approximation
+            dists = calc_energy.make_distance_matrix(name_, 1)
+        else:
+            dists = calc_energy.compute_energy_distance_matrix(name_, 0.9, 5.0, 5)
         return dists
     with open(path_, 'rb') as f:  # Load the distances.
         distances_ = pkl.load(f)
@@ -94,6 +90,7 @@ def run_full_pipeline(_config_path=""):
 
     # Set the parameters for the pipeline.
     _pipeline_kwargs = {
+        'vertices_path': _params['vertices_path'],
         'graph_kwargs': _params['graph_kwargs'],
         'clustering_kwargs': _params['clustering_kwargs'],
         'draw_kwargs': _params['draw_kwargs'],
@@ -117,20 +114,3 @@ def run_full_pipeline(_config_path=""):
 if __name__ == '__main__':
 
     run_full_pipeline('config.json')
-
-    # send a mail when the code is done
-    import smtplib
-
-    FROM = 'yoelashkenazi12@gmail.com'
-    TO = ['yoelashkenazi12@gmail.com']
-    SUBJECT = 'The code has finished running'
-    TEXT = 'The code has finished running'
-
-    # Prepare actual message
-    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-
-    # Send the mail
-    server = smtplib.SMTP()
-    server.sendmail(FROM, TO, message)
-    server.quit()

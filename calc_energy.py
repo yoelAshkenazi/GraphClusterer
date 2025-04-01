@@ -2,10 +2,12 @@ import os
 import pickle
 import numpy as np
 import dcor
+from typing import List
 from copy import deepcopy
 from scipy.stats import gaussian_kde
 from embed_abstract import make_embedding_file  # Change to relative import in pip version
 from sklearn.decomposition import PCA
+from sklearn.neighbors import BallTree
 
 
 def load_embedding(ds_name, embeddings_dir='data/embeddings'):
@@ -155,6 +157,117 @@ def compute_energy_distance_matrix(ds_name, _lb, _ub, n_components_=5):
             pickle.dump(energy_distance_matrix, f)
 
     return energy_distance_matrix
+
+
+def min_max_normalize_non_diagonal(matrix):
+    # Ensure the matrix is a NumPy array
+    matrix = np.array(matrix, dtype=np.float64)
+
+    # Get the non-diagonal elements
+    mask = ~np.eye(matrix.shape[0], dtype=bool)
+    non_diag_elements = matrix[mask]
+
+    # Get actual min and max values of the non-diagonal elements
+    min_val = non_diag_elements.min()
+    max_val = non_diag_elements.max()
+
+    # Avoid division by zero in case all values are the same
+    if max_val > min_val:
+        scaled = (non_diag_elements - min_val) / (max_val - min_val) * (1 - 1e-8) + 1e-8
+    else:
+        scaled = np.full_like(non_diag_elements, (1e-8 + 1) / 2)
+
+    # Assign the scaled values back to the original matrix
+    matrix[mask] = scaled
+
+    return matrix
+
+
+def compute_probability_matrix(embedding_arrays: List[np.ndarray]) -> np.ndarray:
+    """
+    Computes p(i, j) where each entry counts the number of times a vector in set i has its
+    closest neighbor in set j, ensuring that a vector is never matched to itself.
+
+    Args:
+        embedding_arrays (List[np.ndarray]): List of NumPy arrays, each containing embeddings as rows.
+
+    Returns:
+        np.ndarray: A probability matrix p(i, j) of shape (num_sets, num_sets).
+    """
+    num_sets = len(embedding_arrays)
+    count_matrix = np.zeros((num_sets, num_sets))  # Initialize count matrix
+
+    for i in range(num_sets):
+        # Exclude embeddings from set i
+        other_sets = [embedding_arrays[j] for j in range(num_sets) if j != i]
+        all_vectors = np.vstack(other_sets)  # Merge remaining sets
+        set_indices = np.concatenate([[j] * len(embedding_arrays[j]) for j in range(num_sets) if j != i])
+
+        # Build BallTree for other sets
+        tree = BallTree(all_vectors, metric="euclidean")
+
+        if i % 20 == 0:
+            print(f"Processing set {i}/{num_sets}...")
+
+        # Query the tree for each vector in set i
+        for v in embedding_arrays[i]:
+            _, closest_idx = tree.query([v], k=1)  # Find the closest neighbor (since i's vectors are excluded)
+            closest_set = set_indices[closest_idx[0][0]]
+            count_matrix[i, closest_set] += 1  # Increment count
+
+    # make the count matrix symmetric
+    count_matrix = (count_matrix + count_matrix.T) / 2
+
+    column_sums = count_matrix.sum(axis=0, keepdims=True)  # Sum of each column
+
+    count_matrix = count_matrix / column_sums  # Normalize each column
+
+    return count_matrix
+
+
+def probability_to_distance(prob_matrix: np.ndarray, alpha: float = 1.0) -> np.ndarray:
+    """
+    Converts a probability matrix to a distance matrix using the formula:
+    distance(i, j) = exp(-alpha * probability(i, j))
+
+    Args:
+        prob_matrix (np.ndarray): A probability matrix of shape (num_sets, num_sets).
+        alpha (float): A scaling factor for the distances.
+
+    Returns:
+        np.ndarray: A distance matrix of shape (num_sets, num_sets).
+    """
+    return np.exp(-alpha * prob_matrix)
+
+
+def make_distance_matrix(ds_name: str, alpha: float = 1.0) -> np.ndarray:
+    """
+    Computes a distance matrix from a list of embedding arrays.
+
+    Args:
+        ds_name (str): Name of the dataset.
+        alpha (float): A scaling factor for the distances.
+
+    Returns:
+        np.ndarray: A distance matrix of shape (num_sets, num_sets).
+    """
+
+    embedding_dict = load_embedding(ds_name)
+
+    embedding_arrays = [embedding_dict[key] for key in embedding_dict]
+    prob_matrix = compute_probability_matrix(embedding_arrays)
+    dist_matrix = probability_to_distance(prob_matrix, alpha)
+
+    # normalize.
+    dist_matrix = min_max_normalize_non_diagonal(dist_matrix)
+
+    # save the distance matrix to a file
+    filename = 'data/distances_app/' + ds_name + '_distance_matrix.pkl'
+    os.makedirs('data/distances_app/', exist_ok=True)  # Create directory if it does not exist
+    with open(filename, 'wb') as f:
+        pickle.dump(dist_matrix, f)
+
+    return dist_matrix
 
 
 """DS_NAMES = ['apple', 'car', 'clock', 'London', 'turtle', '3D printing', 'additive manufacturing', 'autonomous drones',

@@ -9,7 +9,7 @@ from matplotlib.patches import Patch
 import plot
 import starry_graph as sg
 import numpy as np
-import pandas as pd
+import networkx as nx
 
 warnings.filterwarnings("ignore")
 
@@ -105,34 +105,49 @@ def plot_bar(name: str, metrics_dict: dict):
     values = [
         metrics_dict['avg_index'],
         metrics_dict['largest_cluster_percentage'],
+        metrics_dict['purity_score'],
         metrics_dict['avg_relevancy'],
         metrics_dict['avg_coherence'],
         metrics_dict['avg_consistency'],
         metrics_dict['avg_fluency'],
-        metrics_dict['success_rates']
+        metrics_dict['success_rates'],
     ]
 
     # Define the labels for the x-axis
     x_labels = [
         "Average\nIndex",
         "Largest\nCluster\nPercentage",
+        "Purity",
         "Average\nRelevancy",
         "Average\nCoherence",
         "Average\nConsistency",
         "Average\nFluency",
-        "Success\nRate"
+        "Success\nRate",
     ]
 
     # Define colors for each bar
     colors = [
-        'red',    # Average Index
-        'red',    # Largest Cluster Percentage
-        'blue',   # Average Relevancy
-        'blue',   # Average Coherence
-        'blue',   # Average Consistency
-        'blue',   # Average Fluency
-        'orange'  # Success Rate
+        'red',  # Average Index
+        'red',  # Largest Cluster Percentage
+        'red',  # Purity (cluster analysis)
+        'blue',  # Average Relevancy
+        'blue',  # Average Coherence
+        'blue',  # Average Consistency
+        'blue',  # Average Fluency
+        'orange',  # Success Rate
     ]
+
+    scores = dict(zip(x_labels, zip(values, colors)))
+    x_labels = []
+    values = []
+    colors = []
+    for k, v in scores.items():
+        print(f"{k}: {v}")
+        if v[0] is not None:
+            x_labels.append(k)
+            values.append(v[0])
+            colors.append(v[1])
+
     if values[0] is None:  # If the avg_index is None, remove it from the plot
         values = values[1:]
         x_labels = x_labels[1:]
@@ -222,6 +237,7 @@ def compute_silhouette_score(_name: str, _vertices, _distance_matrix, **kwargs):
     dists = _distance_matrix  # Load the distance matrix
 
     # Compute the silhouette score
+    np.fill_diagonal(dists, 0)  # Set the diagonal to 0
     score = silhouette_score(dists, labels, metric='precomputed')
 
     if print_info:
@@ -300,57 +316,44 @@ def compute_purity_score(_name: str, _vertices, **kwargs):
     if 'label' not in _vertices.columns:
         return None
 
-    # Divide the graph into clusters
-    clusters = {}
-    for node in G.nodes(data=True):
-        if node[1]['color'] not in clusters:
-            clusters[node[1]['color']] = []
-        clusters[node[1]['color']].append(node[0])
+    # separate the graph into clusters.
+    clusters = set(nx.get_node_attributes(G, 'color').values())
+    clusters = {cluster: [node for node, color in nx.get_node_attributes(G, 'color').items() if color == cluster]
+                for cluster in clusters}
 
-    # make a dictionary {vertex: prediction} by using the color as a prediction (enumerated)
-    predicted_labels = {}
+    vertex_to_cluster = {}
+    for i, (cluster, nodes) in enumerate(clusters.items()):
+        for node in nodes:
+            vertex_to_cluster[node] = i
+
+    verts_with_predictions = _vertices.copy()  # Copy the vertices dataframe.
+
+    # Add the predictions to the vertices dataframe.
+    verts_with_predictions['prediction'] = [vertex_to_cluster[node] for node in verts_with_predictions['id']]
+
+    # save the vertices with predictions to a csv file.
+    # verts_with_predictions.to_csv('data/newsgroups_with_predictions.csv', index=False)
+
+    # print in order.
+    total = 0
     for i, cluster in enumerate(clusters):
-        for vertex in clusters[cluster]:
-            predicted_labels[vertex] = i
-
-    df = _vertices.copy().loc[predicted_labels.keys()]  # get the vertices with predictions
-    df['cluster'] = df.index.map(predicted_labels)  # add the cluster column
-
-    contingency_table = pd.crosstab(df['label'], df['cluster'])  # create the contingency table
-
-    max_correct_assignments = contingency_table.max(axis=1).sum()
-
-    # Compute the purity score
-    purity = max_correct_assignments / len(df)
-
-    if print_info:
-        print(f"Purity score: {purity:.4f}")
-
-    """# Find the majority class for each cluster
-    majority_classes = {}
-    for cluster in clusters:
-        cluster_vertices = clusters[cluster]
-        labels = _vertices.loc[cluster_vertices, 'label']
-        # find the maximum occurring class in the cluster, and the number of occurrences
-        majority_class = labels.value_counts().idxmax()
-        majority_classes[cluster] = len(labels[labels == majority_class])
-
+        # get the vertices in the cluster.
+        vertices_in_cluster = verts_with_predictions[verts_with_predictions['prediction'] == i]
+        # get the most common label in the cluster.
+        most_common_label = vertices_in_cluster['label'].mode().values[0]
+        # get the purity score. (the number of vertices with the most common label divided by the number
+        # of vertices in the cluster)
+        n_most_common = len(vertices_in_cluster[vertices_in_cluster['label'] == most_common_label])
+        total += n_most_common
+        purity = n_most_common / len(vertices_in_cluster)
         if print_info:
-            print(f"Cluster {cluster} has {len(clusters[cluster])} vertices, with majority class: {majority_class} of "
-                  f"{len(labels[labels == majority_class])} vertices.")
+            print(f'Cluster {cluster}: Purity: {purity:.2f} ({len(vertices_in_cluster)} vertices, {n_most_common}'
+                  f' with the common label), Most common label: {most_common_label}')
 
-    # Compute the purity score
-    N = len(G.nodes)
-    purity = 0
-    for cluster in clusters:
-        purity += majority_classes[cluster]  # add the majority class of the cluster
+    total_purity = total / len(verts_with_predictions)
+    print(f'Total purity: {total_purity:.2f}')
 
-    purity /= N
-
-    if print_info:
-        print(f"Purity score for '{_name}' graph: {purity:.4f}")"""
-
-    return purity
+    return total_purity
 
 
 def compute_vmeasure_score(_name: str, _vertices, **kwargs):
@@ -510,6 +513,14 @@ def the_almighty_function(pipeline_kwargs: dict):
 
     assert vertices is not None, "Vertices must be provided."
 
+    # Summarize each text beforehand if 'summary' is not a column in the data.
+    if 'summary' not in vertices.columns:
+        print('Summarizing the text...')
+        vertices['summary'] = [summarize.summarize_text(s) for s in vertices['abstract']]
+
+        # save to the vertices file.
+        vertices.to_csv(pipeline_kwargs['vertices_path'], index=False)
+
     # Create the graph.
     G = functions.make_graph(vertices, edges, distance_matrix, **graph_kwargs)
 
@@ -525,14 +536,15 @@ def the_almighty_function(pipeline_kwargs: dict):
     """
     kill_switch = False
     for i in range(iteration_num):
+
         if print_info:
-            print(f"Starting iteration {i+1}...")
+            print(f"Starting iteration {i + 1}...")
             print(f"Clustering the graph for '{name}' using method '{clustering_kwargs["method"]}'...")
-        # Cluster the graph.
+            # Cluster the graph.
         functions.cluster_graph(G, name, **clustering_kwargs)
 
         if print_info:
-            print(50*"-")
+            print(50 * "-")
             print(f"Summarizing the clusters for '{name}'...")
         # Summarize the clusters.
         run_summarization(name, vertices, aspects, print_info)
@@ -541,7 +553,7 @@ def the_almighty_function(pipeline_kwargs: dict):
 
         # Evaluate the success rate and create the STAR graph
         if print_info:
-            print(50*"-")
+            print(50 * "-")
             print(f"Evaluating the success rate for '{name}'...")
         sr_new = sg.starr(name, vertices, G)
 
@@ -551,8 +563,8 @@ def the_almighty_function(pipeline_kwargs: dict):
             break  # Should already have a fully summarized graph.
 
         if print_info:
-            print(f"Success rate for '{name}' in iteration {i+1}: {sr_new:.4f}")
-            print(50*"-")
+            print(f"Success rate for '{name}' in iteration {i + 1}: {sr_new:.4f}")
+            print(50 * "-")
             print(f"Updating the edges using STAR graph for '{name}'...")
 
         # Update the edges.
@@ -560,9 +572,26 @@ def the_almighty_function(pipeline_kwargs: dict):
         sr = sr_new  # Update the success rate
         if print_info:
             print("Edges updated using STAR graph.")
-            print(50*"-")
+            print(50 * "-")
 
     # Load the graph
+    G = functions.load_graph(name)
+
+    if print_info:
+        print(f"Clustering the graph for '{name}' using method '{clustering_kwargs["method"]}'...")
+        print(50 * "-")
+
+    # Cluster the graph.
+    functions.cluster_graph(G, name, **clustering_kwargs)
+
+    if print_info:
+        print(f"Summarizing the clusters for '{name}'...")
+        print(50 * "-")
+
+    # Summarize the clusters.
+    run_summarization(name, vertices, aspects, print_info)
+
+    # re-load the graph.
     G = functions.load_graph(name)
 
     # Initialize the metrics
@@ -631,6 +660,7 @@ def the_almighty_function(pipeline_kwargs: dict):
 
     # Compute the purity score
     purity_score = compute_purity_score(name, vertices, print_info=print_info)
+    metrics_dict['purity_score'] = purity_score
 
     # Compute the V-measure score
     v_measure_score = compute_vmeasure_score(name, vertices, print_info=print_info)

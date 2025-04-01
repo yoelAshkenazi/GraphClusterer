@@ -118,7 +118,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
     legend_df.to_csv(legend_output_path, index=False)
 
     # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
-    data = vertices[['id', 'abstract']]
+    data = vertices[['id', 'summary']]  # todo- check summary vs abstract.
     evaluations = {}
     counter = 1
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
@@ -139,13 +139,13 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
         # Get the subgraph.
         summary = summaries[title]
         cluster_name = title
-        # Get the abstracts from the cluster.
-        cluster_abstracts = {row['id']: row['abstract'] for id, row in data.iterrows() if row['id'] in subgraph.nodes}
+        # Get the abstracts from the cluster.  # todo- check summary vs abstract.
+        cluster_abstracts = {row['id']: row['summary'] for id, row in data.iterrows() if row['id'] in subgraph.nodes}
         # Clean NaNs.
         cluster_abstracts = {id: abstract for id, abstract in cluster_abstracts.items() if not pd.isna(abstract)}
 
         # Get the abstracts from outside the cluster.
-        outside_abstracts = [row['abstract'] for _, row in data.iterrows() if row['id'] not in subgraph.nodes]
+        outside_abstracts = [row['summary'] for _, row in data.iterrows() if row['id'] not in subgraph.nodes]
 
         # Clean NaNs.
         outside_abstracts = [abstract for abstract in outside_abstracts if not pd.isna(abstract)]
@@ -171,14 +171,22 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
                 f" and only the score, without any '.' or ',' etc."
             )
 
-            response_in = co_.generate(
-                model="command-r-plus-08-2024",
-                prompt=prompt_in,
-                max_tokens=100,
-                temperature=0.0
-            )
-
-            score_in_text = response_in.generations[0].text.strip()
+            try:
+                response_in = co_.generate(
+                    model="command-r-plus-08-2024",
+                    prompt=prompt_in,
+                    max_tokens=100,
+                    temperature=0.0
+                )
+            except Exception as e:
+                print(f"Error: {e}")
+                response_in = score_in_text = 0  # Default to 0
+                co_ = reconnect(cohere_key)  # Reconnect to the API and
+            try:
+                score_in_text = response_in.generations[0].text.strip()
+            except Exception as e:
+                print(f"Error: {e}")
+                score_in_text = "0"  # Default to 0
             try:
                 a = int(score_in_text.split('\n')[-1].split(':')[-1])
                 score_in += a
@@ -198,14 +206,22 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
                 f" and only the score, without any '.' or ',' etc."
             )
 
-            response_out = co_.generate(
-                model="command-r-plus-08-2024",  # Replace with the desired Cohere model
-                prompt=prompt_out,
-                max_tokens=100,
-                temperature=0.0  # Set temperature to 0 for deterministic output
-            )
-
-            score_out_text = response_out.generations[0].text.strip()
+            try:
+                response_out = co_.generate(
+                    model="command-r-plus-08-2024",  # Replace with the desired Cohere model
+                    prompt=prompt_out,
+                    max_tokens=100,
+                    temperature=0.0  # Set temperature to 0 for deterministic output
+                )
+            except Exception as e:
+                print(f"Error: {e}")
+                response_out = score_out_text = 0  # Default to 0
+                co_ = reconnect(cohere_key)  # Reconnect to the API and
+            try:
+                score_out_text = response_out.generations[0].text.strip()
+            except Exception as e:
+                print(f"Error: {e}")
+                score_out_text = "0"  # Default to 0
             try:
                 b = int(score_out_text.split('\n')[-1].split(':')[-1])
                 score_out += b
@@ -301,8 +317,8 @@ def update(name, G: nx.Graph, factor: float = 0.5) -> nx.Graph:
                         current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
                         new_weight = current_weight * (1 + factor)  # Increase weight by the factor
                         G[vertex_i][vertex_j]['weight'] = new_weight
-                    else:
-                        edges_to_add.append((vertex_i, vertex_j, {'weight': 1}))  # Track edge to be added
+                    """else:
+                        edges_to_add.append((vertex_i, vertex_j, {'weight': 1}))  # Track edge to be added"""
                 else:
                     # At least one of u or v is red
                     if G.has_edge(vertex_i, vertex_j):

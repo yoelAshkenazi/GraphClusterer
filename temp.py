@@ -4,25 +4,25 @@ import networkx as nx
 import numpy as np
 import functions
 import pandas as pd
+import json
 from one_to_rule_them_all import (compute_purity_score, compute_vmeasure_score,
-                                  compute_silhouette_score, compute_jaccard_index)
+                                  compute_silhouette_score, compute_jaccard_index, plot_bar)
+from plot import plot
 
-name = 'newsgroups_1k_sampled'
-G = functions.load_graph('newsgroups_1k_sampled')
+# Sample 5k vertices from the newsgroups dataset.
+# df = pd.read_csv('data/Terrorism_1000_samples_nodes.csv')
+# # sampled_df = df.sample(5000)
+# sampled_df = df
+# # change the 'content' column to 'abstract'. (with the same texts)
+# sampled_df = sampled_df.rename(columns={'content': 'abstract', 'id': 'page name'})
+# sampled_df['id'] = range(1000)
+#
+# sampled_df.to_csv('data/terrorism_wiki.csv', index=False)
 
-vertices = pd.read_csv('data/newsgroups_1k_sampled.csv')
+metrics_dict = json.load(open("metrics.json", 'r'))
 
-dists = pkl.load(open('data/distances/newsgroups_1k_sampled_energy_distance_matrix.pkl', 'rb'))
+scores = {}
+for k, v in metrics_dict.items():
+    scores[k] = v['terrorism_wiki']
 
-print(compute_vmeasure_score(name, vertices, print_info=True))
-
-print(compute_purity_score(name, vertices, print_info=True))
-
-print(compute_silhouette_score(name, vertices, dists, print_info=True))
-
-print(compute_jaccard_index(name, vertices, print_info=True))
-
-# print the amount of clusters.
-clusters = set(G.nodes()[v]['color'] for v in G.nodes)
-
-print(f"Number of clusters: {len(clusters)}")
+plot_bar('Terrorism_wiki', scores)

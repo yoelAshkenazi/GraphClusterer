@@ -227,8 +227,9 @@ def cluster_graph(G, name, **kwargs):
         H = ig.Graph.from_networkx(G_copy)
 
         # cluster the graph.
-        partition = la.find_partition(H, la.RBConfigurationVertexPartition, weights='weight', resolution_parameter=res,
-                                      n_iterations=-1, seed=0)
+        partition = la.find_partition(H, la.RBConfigurationVertexPartition, weights=H.es['weight'],
+                                      resolution_parameter=res,
+                                      n_iterations=-1)
         partition = [list(cluster) for cluster in partition]
 
         # get the partition in the original graph format.

@@ -113,7 +113,7 @@ def plot(name, vertices):
         # Filter rows with the current title
         cluster_data = main_data[main_data['title'] == cluster_title]
 
-        peripheral_data = vertices[['id', 'abstract']]  # Extract 'id' and 'abstract' columns
+        peripheral_data = vertices[['id', 'summary']]  # Extract 'id' and 'abstract' columns  # todo: check summary.
 
         # Make sure the ids are strings
         peripheral_data['id'] = peripheral_data['id'].astype(str)
@@ -133,7 +133,8 @@ def plot(name, vertices):
             peripheral_id = index_to_id[index]
             # Fetch the abstract from the correct peripheral_data
             try:
-                peripheral_abstract = peripheral_data.loc[peripheral_data['id'] == peripheral_id, 'abstract'].iloc[0]
+                # todo - check summary vs abstract.
+                peripheral_abstract = peripheral_data.loc[peripheral_data['id'] == peripheral_id, 'summary'].iloc[0]
                 good_vertices += 1
             except IndexError:
                 peripheral_abstract = "Abstract not available."

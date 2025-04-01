@@ -15,8 +15,9 @@
         "clock": null,
         "London": -5,
         "turtle": -5,
-        "posts_1k_sampled": 0.03868696265625777,
-        "newsgroups_1k_sampled": 0.06058896300530573
+        "posts_1k_sampled": 0.028933947122552487,
+        "newsgroups_1k_sampled": 0.014389781060699694,
+        "terrorism_wiki": 0.02878483704479466
     },
     "largest_cluster_percentage": {
         "3D printing": 0.26,
@@ -34,8 +35,9 @@
         "clock": 0.37,
         "London": 0.85,
         "turtle": 0.57,
-        "posts_1k_sampled": 0.096,
-        "newsgroups_1k_sampled": 0.11
+        "posts_1k_sampled": 0.088,
+        "newsgroups_1k_sampled": 0.036,
+        "terrorism_wiki": 0.062
     },
     "avg_relevancy": {
         "3D printing": 0.6885714285714286,
@@ -53,8 +55,9 @@
         "clock": 0.4693333333333333,
         "London": 0.5857142857142856,
         "turtle": 0.35,
-        "posts_1k_sampled": 0.39503457015152926,
-        "newsgroups_1k_sampled": 0.3699697290822162
+        "posts_1k_sampled": 0.4195709862892525,
+        "newsgroups_1k_sampled": 0.48766666666666664,
+        "terrorism_wiki": 0.39153439153439157
     },
     "avg_coherence": {
         "3D printing": 0.6799999999999999,
@@ -72,8 +75,9 @@
         "clock": 0.44266666666666665,
         "London": 0.34285714285714286,
         "turtle": 0.25,
-        "posts_1k_sampled": 0.48403013707107284,
-        "newsgroups_1k_sampled": 0.27037593984962416
+        "posts_1k_sampled": 0.5576097105508871,
+        "newsgroups_1k_sampled": 0.3290476190476191,
+        "terrorism_wiki": 0.27589743589743587
     },
     "avg_consistency": {
         "3D printing": 0.5466666666666666,
@@ -91,8 +95,9 @@
         "clock": 0.3466666666666667,
         "London": 0.26666666666666666,
         "turtle": 0.2,
-        "posts_1k_sampled": 0.33664983164983164,
-        "newsgroups_1k_sampled": 0.2879085445094217
+        "posts_1k_sampled": 0.36235932969679097,
+        "newsgroups_1k_sampled": 0.3501904761904762,
+        "terrorism_wiki": 0.28179487179487167
     },
     "avg_fluency": {
         "3D printing": 0.8695238095238096,
@@ -110,8 +115,9 @@
         "clock": 0.7173333333333334,
         "London": 0.6,
         "turtle": 0.85,
-        "posts_1k_sampled": 0.7387186540987711,
-        "newsgroups_1k_sampled": 0.6866934750358384
+        "posts_1k_sampled": 0.8713017838714433,
+        "newsgroups_1k_sampled": 0.7336802721088436,
+        "terrorism_wiki": 0.6205535205535205
     },
     "success_rates": {
         "3D printing": 0.862434725848564,
@@ -129,19 +135,28 @@
         "clock": 1.0,
         "London": 0.9862825788751715,
         "turtle": 1.0,
-        "posts_1k_sampled": 0.8046709129511678,
-        "newsgroups_1k_sampled": 0.9737938215897258
+        "posts_1k_sampled": 0.9415101474851885,
+        "newsgroups_1k_sampled": 0.9922003779198327,
+        "terrorism_wiki": 0.99723291626564
     },
     "silhouette_score": {
-        "newsgroups_1k_sampled": -0.02281840426907448
+        "newsgroups_1k_sampled": -0.005580570138588646,
+        "terrorism_wiki": 0.01515851467409985,
+        "posts_1k_sampled": 0.01923300104069678
     },
     "purity_score": {
-        "newsgroups_1k_sampled": 0.156
+        "newsgroups_1k_sampled": 0.203,
+        "terrorism_wiki": null,
+        "posts_1k_sampled": null
     },
     "v_measure_score": {
-        "newsgroups_1k_sampled": 0.06413324555913706
+        "newsgroups_1k_sampled": 0.21185410413925598,
+        "terrorism_wiki": null,
+        "posts_1k_sampled": null
     },
     "jaccard_index": {
-        "newsgroups_1k_sampled": 0.03145951521402785
+        "newsgroups_1k_sampled": 0.006036217303822937,
+        "terrorism_wiki": null,
+        "posts_1k_sampled": null
     }
 }

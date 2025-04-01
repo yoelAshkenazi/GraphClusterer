@@ -6,7 +6,8 @@
   },
   "clustering_kwargs": {
     "method": "leiden",
-    "resolution": 2.7,
+    "resolution": 2.5,
+    "theta": 0.1,
     "save": true
   },
   "draw_kwargs": {
@@ -14,11 +15,11 @@
     "method": "leiden",
     "shown_percentage": 0.3
   },
-  "name": "newsgroups_1k_sampled",
-  "vertices_path": "data/newsgroups_1k_sampled.csv",
+  "name": "posts_1k_sampled",
+  "vertices_path": "data/posts_1k_sampled.csv",
   "edges_path": "",
-  "distance_matrix_path": "data/distances/newsgroups_1k_sampled_energy_distance_matrix.pkl",
-  "iteration_num": 3 ,
+  "distance_matrix_path": "data/distances_app/posts_1k_sampled_distance_matrix.pkl",
+  "iteration_num": 2,
   "update_factor": 0.5,
   "print_info": true,
   "allow_user_prompt": false
