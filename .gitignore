@@ -47,3 +47,10 @@ data/embeddings/newsgroups_5k_sampled_embeddings.pkl
 data/distances/newsgroups_5k_sampled_energy_distance_matrix.pkl
 data/kde_values/newsgroups_5k_sampled.pkl
 data/clustered_graphs/newsgroups_5k_sampled.gpickle
+
+# Ignore the terrorism_wiki data
+data/terrorism_wiki.csv
+data/embeddings/terrorism_wiki_embeddings.pkl
+data/clustered_graphs/terrorism_wiki.gpickle
+# ignore the new distances.
+data/distances_app
