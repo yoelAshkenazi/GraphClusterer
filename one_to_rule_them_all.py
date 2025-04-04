@@ -10,6 +10,7 @@ import plot
 import starry_graph as sg
 import numpy as np
 import networkx as nx
+import random
 
 warnings.filterwarnings("ignore")
 
@@ -180,7 +181,7 @@ def plot_bar(name: str, metrics_dict: dict):
         Patch(facecolor='blue', edgecolor='black', label='Text Analysis'),
         Patch(facecolor='orange', edgecolor='black', label='Connection to Origin')
     ]
-    
+
     # Position the legend on the left
     plt.legend(handles=legend_elements, fontsize=12, loc='upper left', bbox_to_anchor=(0, 1))
 
@@ -340,7 +341,38 @@ def compute_purity_score(_name: str, _vertices, **kwargs):
         # get the vertices in the cluster.
         vertices_in_cluster = verts_with_predictions[verts_with_predictions['prediction'] == i]
         # get the most common label in the cluster.
-        most_common_label = vertices_in_cluster['label'].mode().values[0]
+        # get the values in the label column.
+        labels = vertices_in_cluster['label']
+        # it there is only one label per vertex, the mode will return that label.
+        # check that all of the labels are integer.
+        if all(isinstance(label, int) for label in labels):
+            most_common_label = labels.mode().values()[0]
+        # else - multiple labels per vertex, so we need to get the most common label.
+        else:
+            # for each vertex, add a count to every label it has.
+            label_counts = {}
+            for label in labels:
+                # make a list of the integers in the label.
+                # remove '[' and ']' from the label.
+                # split by ', ' and convert to int.
+                label = label.replace('[', '').replace(']', '').split(', ')
+                label = [int(val) for val in label]
+                for val in label:
+                    if val not in label_counts:
+                        label_counts[val] = 0
+                    label_counts[val] += 1
+            # get the most common label.
+            most_common_label = label_counts[list(label_counts.keys())[0]]
+            for k, v in label_counts.items():
+                if v > most_common_label:
+                    most_common_label = v
+
+            print(f"Most common label: {most_common_label}, "
+                  f"cluster size: {len(vertices_in_cluster)}")
+
+            total += most_common_label
+            continue
+
         # get the purity score. (the number of vertices with the most common label divided by the number
         # of vertices in the cluster)
         n_most_common = len(vertices_in_cluster[vertices_in_cluster['label'] == most_common_label])
@@ -536,11 +568,10 @@ def the_almighty_function(pipeline_kwargs: dict):
     """
     kill_switch = False
     for i in range(iteration_num):
-
         if print_info:
             print(f"Starting iteration {i + 1}...")
             print(f"Clustering the graph for '{name}' using method '{clustering_kwargs["method"]}'...")
-            # Cluster the graph.
+        # Cluster the graph.
         functions.cluster_graph(G, name, **clustering_kwargs)
 
         if print_info:
@@ -575,23 +606,6 @@ def the_almighty_function(pipeline_kwargs: dict):
             print(50 * "-")
 
     # Load the graph
-    G = functions.load_graph(name)
-
-    if print_info:
-        print(f"Clustering the graph for '{name}' using method '{clustering_kwargs["method"]}'...")
-        print(50 * "-")
-
-    # Cluster the graph.
-    functions.cluster_graph(G, name, **clustering_kwargs)
-
-    if print_info:
-        print(f"Summarizing the clusters for '{name}'...")
-        print(50 * "-")
-
-    # Summarize the clusters.
-    run_summarization(name, vertices, aspects, print_info)
-
-    # re-load the graph.
     G = functions.load_graph(name)
 
     # Initialize the metrics

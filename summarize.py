@@ -258,7 +258,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
     return titles_list
 
 
-def improve_summary(summary, data, scores, score_names, name):
+def improve_summary(summary, data, scores, score_names, name, title):
     """
     Re-create the summary with a focused prompt on the scores, so that the scores will be higher later.
     :param summary: the summary.
@@ -266,6 +266,7 @@ def improve_summary(summary, data, scores, score_names, name):
     :param scores: the scores.
     :param score_names: the names of the scores.
     :param name: the name of the file.
+    :param title: the title of the summary.
     :return: the improved summary.
     """
 
@@ -310,22 +311,21 @@ def improve_summary(summary, data, scores, score_names, name):
         instructions_llama = file.read()
 
     TASK_DESCRIPTION = ""
-    for score, name in zip(scores, score_names):  # For each score.
+    for score, name_ in zip(scores, score_names):  # For each score.
 
         if score >= 0.8:  # If the score is high enough, continue.
             continue
 
         if TASK_DESCRIPTION == "":
-            TASK_DESCRIPTION = f"Your task is to improve the summary's {name}."
+            TASK_DESCRIPTION = f"Your task is to improve the summary's {name_}.\n"
 
         else:
-            TASK_DESCRIPTION += f'\nAlso, you need to improve the summary\'s {name}.'
+            TASK_DESCRIPTION += f'Also, you need to improve the summary\'s {name_}.\n'
 
     # Combine the prompt with the texts.
     prompt = PROMPT.format(TASK_DESCRIPTION=TASK_DESCRIPTION, TEXTS=TEXTS, SUMMARY=summary)
 
     # Generate the summary using Cohere's summarize API
-    break_flag = False
     try:
         response = co.generate(
             model='command-r-plus-08-2024',
@@ -336,32 +336,39 @@ def improve_summary(summary, data, scores, score_names, name):
 
     except Exception as e:
         print(f"Error in Cohere API: {e}.\nKeeping summary unchanged.")
-        break_flag = True  # skip the llama model.
+        return
 
-    if not break_flag:
-        # Refine the summary using Llama.
-        input_params = {
-            "prompt": instructions_llama + summary,
-            "max_tokens": 500
-        }
+    # Refine the summary using Llama.
+    input_params = {
+        "prompt": instructions_llama + summary,
+        "max_tokens": 500
+    }
 
-        try:
-            output = replicate.run(
-                "meta/meta-llama-3.1-405b-instruct",
-                input=input_params,
-            )
-            summary = "".join(output)  # Get the summary.
-        except Exception as e:
-            print(f"Error in LLAMA API: {e}.\nKeeping summary unchanged.")
+    try:
+        output = replicate.run(
+            "meta/meta-llama-3.1-405b-instruct",
+            input=input_params,
+        )
+        summary = "".join(output)  # Get the summary.
+    except Exception as e:
+        print(f"Error in LLAMA API: {e}.\nKeeping summary unchanged.")
+        return
 
     # Save the summary. (after improving all necessary scores)
+    path = f'Results/Summaries/{name}/{title}.txt'  # the path to save the results.
+    # Make sure the path leads to an empty file.
+    if os.path.exists(path):
+        os.remove(path)
     try:
-        with open(f'Results/Summaries/{name}', 'w', encoding="utf-8") as f:
+        with open(path, 'w', encoding="utf-8") as f:
             f.write(summary)
     except UnicodeEncodeError:
         summary = summary.encode('ascii', 'ignore').decode()
-        with open(f'Results/Summaries/{name}', 'w', encoding='utf-8') as f:
+        with open(path, 'w', encoding='utf-8') as f:
             f.write(summary)
+    except FileNotFoundError:
+        print(f"File not found: {name} {title}.")
+        exit(4)
 
     return summary  # Return the summary.
 
@@ -390,7 +397,7 @@ def improve_summaries(name, vertices, titles_to_scores):
         data = vertices[vertices['id'].isin(relevant_ids)]
 
         # Improve the summary.
-        improve_summary(summary, data, scores, SCORE_NAMES, name)
+        improve_summary(summary, data, scores, SCORE_NAMES, name, title)
 
 
 def summarize_text(s: str):

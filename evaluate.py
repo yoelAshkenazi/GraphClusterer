@@ -172,7 +172,7 @@ def metrics_evaluations(name: str, vertices: pd.DataFrame, G: nx.Graph = None):
 
     # Prepare to store summaries and subgraphs
     summaries = {}
-    titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
+    titles = [cluster.replace('.txt', '') for cluster in clusters]  # Get the titles.
     title_to_color = extract_colors(G)
     subgraphs = {}
 

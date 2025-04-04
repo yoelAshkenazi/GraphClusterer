@@ -1,6 +1,6 @@
 {
     "avg_index": {
-        "3D printing": 0.1619395119826644,
+        "3D printing": 0.04953698018067414,
         "additive manufacturing": 0.14312863770814743,
         "composite material": 0.36145995574356654,
         "autonomous drones": 0.12588533102986604,
@@ -17,10 +17,11 @@
         "turtle": -5,
         "posts_1k_sampled": 0.028933947122552487,
         "newsgroups_1k_sampled": 0.014389781060699694,
-        "terrorism_wiki": 0.02878483704479466
+        "terrorism_wiki": 0.027306777845184427,
+        "reuters_1k": 0.03259830724244274
     },
     "largest_cluster_percentage": {
-        "3D printing": 0.26,
+        "3D printing": 0.09,
         "additive manufacturing": 0.25,
         "composite material": 0.45,
         "autonomous drones": 0.16,
@@ -37,10 +38,11 @@
         "turtle": 0.57,
         "posts_1k_sampled": 0.088,
         "newsgroups_1k_sampled": 0.036,
-        "terrorism_wiki": 0.062
+        "terrorism_wiki": 0.064,
+        "reuters_1k": 0.089
     },
     "avg_relevancy": {
-        "3D printing": 0.6885714285714286,
+        "3D printing": 0.623529411764706,
         "additive manufacturing": 0.7344444444444443,
         "composite material": 0.7657142857142857,
         "autonomous drones": 0.5791666666666667,
@@ -57,10 +59,11 @@
         "turtle": 0.35,
         "posts_1k_sampled": 0.4195709862892525,
         "newsgroups_1k_sampled": 0.48766666666666664,
-        "terrorism_wiki": 0.39153439153439157
+        "terrorism_wiki": 0.3906155632984902,
+        "reuters_1k": 0.5005946329148944
     },
     "avg_coherence": {
-        "3D printing": 0.6799999999999999,
+        "3D printing": 0.611764705882353,
         "additive manufacturing": 0.7477777777777778,
         "composite material": 0.6742857142857143,
         "autonomous drones": 0.475,
@@ -77,10 +80,11 @@
         "turtle": 0.25,
         "posts_1k_sampled": 0.5576097105508871,
         "newsgroups_1k_sampled": 0.3290476190476191,
-        "terrorism_wiki": 0.27589743589743587
+        "terrorism_wiki": 0.2922067363530778,
+        "reuters_1k": 0.5036173358232181
     },
     "avg_consistency": {
-        "3D printing": 0.5466666666666666,
+        "3D printing": 0.5176470588235293,
         "additive manufacturing": 0.49444444444444446,
         "composite material": 0.5599999999999999,
         "autonomous drones": 0.25,
@@ -97,10 +101,11 @@
         "turtle": 0.2,
         "posts_1k_sampled": 0.36235932969679097,
         "newsgroups_1k_sampled": 0.3501904761904762,
-        "terrorism_wiki": 0.28179487179487167
+        "terrorism_wiki": 0.21788617886178863,
+        "reuters_1k": 0.2866049382716049
     },
     "avg_fluency": {
-        "3D printing": 0.8695238095238096,
+        "3D printing": 0.9294117647058824,
         "additive manufacturing": 0.96,
         "composite material": 0.8685714285714287,
         "autonomous drones": 0.925,
@@ -117,10 +122,11 @@
         "turtle": 0.85,
         "posts_1k_sampled": 0.8713017838714433,
         "newsgroups_1k_sampled": 0.7336802721088436,
-        "terrorism_wiki": 0.6205535205535205
+        "terrorism_wiki": 0.6316666666666666,
+        "reuters_1k": 0.909532714320296
     },
     "success_rates": {
-        "3D printing": 0.862434725848564,
+        "3D printing": 0.8280188186095139,
         "additive manufacturing": 0.7695500581105761,
         "composite material": 0.9852558542931483,
         "autonomous drones": 0.8443256090314913,
@@ -137,26 +143,35 @@
         "turtle": 1.0,
         "posts_1k_sampled": 0.9415101474851885,
         "newsgroups_1k_sampled": 0.9922003779198327,
-        "terrorism_wiki": 0.99723291626564
+        "terrorism_wiki": 0.9912701654073923,
+        "reuters_1k": 0.9988063027216298
     },
     "silhouette_score": {
         "newsgroups_1k_sampled": -0.005580570138588646,
-        "terrorism_wiki": 0.01515851467409985,
-        "posts_1k_sampled": 0.01923300104069678
+        "terrorism_wiki": 0.01354666873750646,
+        "posts_1k_sampled": 0.01923300104069678,
+        "reuters_1k": 0.026000486902207697,
+        "3D printing": 0.007234025546919162
     },
     "purity_score": {
         "newsgroups_1k_sampled": 0.203,
         "terrorism_wiki": null,
-        "posts_1k_sampled": null
+        "posts_1k_sampled": null,
+        "reuters_1k": 0.556,
+        "3D printing": null
     },
     "v_measure_score": {
         "newsgroups_1k_sampled": 0.21185410413925598,
         "terrorism_wiki": null,
-        "posts_1k_sampled": null
+        "posts_1k_sampled": null,
+        "reuters_1k": 0.3871375162817294,
+        "3D printing": null
     },
     "jaccard_index": {
         "newsgroups_1k_sampled": 0.006036217303822937,
         "terrorism_wiki": null,
-        "posts_1k_sampled": null
+        "posts_1k_sampled": null,
+        "reuters_1k": 0.0,
+        "3D printing": null
     }
 }

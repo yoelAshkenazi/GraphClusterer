@@ -69,7 +69,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
 
     clusters = os.listdir(summary_path)
     summaries = {}
-    titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
+    titles = [cluster.replace(".txt", '') for cluster in clusters]  # Get the titles.
     title_to_color = extract_colors(G)
 
     subgraphs = {}
@@ -118,7 +118,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
     legend_df.to_csv(legend_output_path, index=False)
 
     # For each summary and cluster pairs, sample abstracts from the cluster and outside the cluster.
-    data = vertices[['id', 'summary']]  # todo- check summary vs abstract.
+    data = vertices[['id', 'summary']]
     evaluations = {}
     counter = 1
     total_in_score = 0  # Total scores for the abstracts sampled inside the clusters.
@@ -127,7 +127,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
     # api_count = 0
 
     # Iterate over each cluster and its corresponding subgraph
-    for title, subgraph in subgraphs.items():
+    for i, (title, subgraph) in enumerate(subgraphs.items(), start=1):
 
         # reconnect to API
         co_ = reconnect(cohere_key)
@@ -179,19 +179,15 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
                     temperature=0.0
                 )
             except Exception as e:
-                print(f"Error: {e}")
-                response_in = score_in_text = 0  # Default to 0
+                print(f"Error in cluster {i}: {e}")
+                response_in = 0  # Default to 0
                 co_ = reconnect(cohere_key)  # Reconnect to the API and
-            try:
+            if isinstance(response_in, int):
+                a = response_in
+            else:
                 score_in_text = response_in.generations[0].text.strip()
-            except Exception as e:
-                print(f"Error: {e}")
-                score_in_text = "0"  # Default to 0
-            try:
                 a = int(score_in_text.split('\n')[-1].split(':')[-1])
                 score_in += a
-            except (IndexError, ValueError):
-                print(f"Unexpected score format: '{score_in_text}'. Defaulting to 0.")
 
             total_in_score += a
 
@@ -214,20 +210,15 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
                     temperature=0.0  # Set temperature to 0 for deterministic output
                 )
             except Exception as e:
-                print(f"Error: {e}")
-                response_out = score_out_text = 0  # Default to 0
+                print(f"Error in cluster {i}: {e}")
+                response_out = 0  # Default to 0
                 co_ = reconnect(cohere_key)  # Reconnect to the API and
-            try:
+            if isinstance(response_out, int):
+                b = response_out
+            else:
                 score_out_text = response_out.generations[0].text.strip()
-            except Exception as e:
-                print(f"Error: {e}")
-                score_out_text = "0"  # Default to 0
-            try:
                 b = int(score_out_text.split('\n')[-1].split(':')[-1])
                 score_out += b
-
-            except (IndexError, ValueError):
-                print(f"Unexpected score format: '{score_out_text}'. Defaulting to 0.")
 
             total_out_score += b
 

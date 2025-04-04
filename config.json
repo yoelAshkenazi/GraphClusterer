@@ -15,10 +15,10 @@
     "method": "leiden",
     "shown_percentage": 0.3
   },
-  "name": "posts_1k_sampled",
-  "vertices_path": "data/posts_1k_sampled.csv",
+  "name": "terrorism_wiki",
+  "vertices_path": "data/terrorism_wiki.csv",
   "edges_path": "",
-  "distance_matrix_path": "data/distances_app/posts_1k_sampled_distance_matrix.pkl",
+  "distance_matrix_path": "",
   "iteration_num": 2,
   "update_factor": 0.5,
   "print_info": true,

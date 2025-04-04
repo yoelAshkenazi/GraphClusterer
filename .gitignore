@@ -52,5 +52,11 @@ data/clustered_graphs/newsgroups_5k_sampled.gpickle
 data/terrorism_wiki.csv
 data/embeddings/terrorism_wiki_embeddings.pkl
 data/clustered_graphs/terrorism_wiki.gpickle
+
 # ignore the new distances.
 data/distances_app
+data/clustered_graphs/reuters_1k.gpickle
+data/reuters.csv
+data/embeddings/reuters_1k_embeddings.pkl
+
+
