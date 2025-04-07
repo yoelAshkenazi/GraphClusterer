@@ -15,7 +15,7 @@
         "clock": null,
         "London": -5,
         "turtle": -5,
-        "posts_1k_sampled": 0.028933947122552487,
+        "posts_1k_sampled": 0.03041030688431686,
         "newsgroups_1k_sampled": 0.014389781060699694,
         "terrorism_wiki": 0.027306777845184427,
         "reuters_1k": 0.03259830724244274
@@ -36,7 +36,7 @@
         "clock": 0.37,
         "London": 0.85,
         "turtle": 0.57,
-        "posts_1k_sampled": 0.088,
+        "posts_1k_sampled": 0.089,
         "newsgroups_1k_sampled": 0.036,
         "terrorism_wiki": 0.064,
         "reuters_1k": 0.089
@@ -57,7 +57,7 @@
         "clock": 0.4693333333333333,
         "London": 0.5857142857142856,
         "turtle": 0.35,
-        "posts_1k_sampled": 0.4195709862892525,
+        "posts_1k_sampled": 0.41720345280969534,
         "newsgroups_1k_sampled": 0.48766666666666664,
         "terrorism_wiki": 0.3906155632984902,
         "reuters_1k": 0.5005946329148944
@@ -78,7 +78,7 @@
         "clock": 0.44266666666666665,
         "London": 0.34285714285714286,
         "turtle": 0.25,
-        "posts_1k_sampled": 0.5576097105508871,
+        "posts_1k_sampled": 0.5729560395586806,
         "newsgroups_1k_sampled": 0.3290476190476191,
         "terrorism_wiki": 0.2922067363530778,
         "reuters_1k": 0.5036173358232181
@@ -99,7 +99,7 @@
         "clock": 0.3466666666666667,
         "London": 0.26666666666666666,
         "turtle": 0.2,
-        "posts_1k_sampled": 0.36235932969679097,
+        "posts_1k_sampled": 0.3697982049962842,
         "newsgroups_1k_sampled": 0.3501904761904762,
         "terrorism_wiki": 0.21788617886178863,
         "reuters_1k": 0.2866049382716049
@@ -120,7 +120,7 @@
         "clock": 0.7173333333333334,
         "London": 0.6,
         "turtle": 0.85,
-        "posts_1k_sampled": 0.8713017838714433,
+        "posts_1k_sampled": 0.8544937975190077,
         "newsgroups_1k_sampled": 0.7336802721088436,
         "terrorism_wiki": 0.6316666666666666,
         "reuters_1k": 0.909532714320296
@@ -141,7 +141,7 @@
         "clock": 1.0,
         "London": 0.9862825788751715,
         "turtle": 1.0,
-        "posts_1k_sampled": 0.9415101474851885,
+        "posts_1k_sampled": 0.9189105058365759,
         "newsgroups_1k_sampled": 0.9922003779198327,
         "terrorism_wiki": 0.9912701654073923,
         "reuters_1k": 0.9988063027216298
@@ -149,7 +149,7 @@
     "silhouette_score": {
         "newsgroups_1k_sampled": -0.005580570138588646,
         "terrorism_wiki": 0.01354666873750646,
-        "posts_1k_sampled": 0.01923300104069678,
+        "posts_1k_sampled": 0.018183454337517134,
         "reuters_1k": 0.026000486902207697,
         "3D printing": 0.007234025546919162
     },

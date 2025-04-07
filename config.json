@@ -6,7 +6,7 @@
   },
   "clustering_kwargs": {
     "method": "leiden",
-    "resolution": 2.5,
+    "resolution": 4,
     "theta": 0.1,
     "save": true
   },
@@ -15,10 +15,10 @@
     "method": "leiden",
     "shown_percentage": 0.3
   },
-  "name": "terrorism_wiki",
-  "vertices_path": "data/terrorism_wiki.csv",
+  "name": "newsgroups_1k_sampled",
+  "vertices_path": "data/newsgroups_1k_sampled.csv",
   "edges_path": "",
-  "distance_matrix_path": "",
+  "distance_matrix_path": "data/distances_app/newsgroups_1k_sampled_distance_matrix.pkl",
   "iteration_num": 2,
   "update_factor": 0.5,
   "print_info": true,

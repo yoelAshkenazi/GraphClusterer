@@ -17,7 +17,12 @@ from functions import evaluate_clusters
 # sampled_df['id'] = range(1000)
 #
 # sampled_df.to_csv('data/reuters_1k.csv', index=False)
+name = "posts_1k_sampled"
+metrics_dct = json.load(open('metrics.json', 'r'))
+scores = {}
+for k, v in metrics_dct.items():
+    scores[k] = v.get(name, None)
+vertices = pd.read_csv(f'data/{name}.csv')
 
-vertices = pd.read_csv('data/reuters_1k.csv')
-
-plot("reuters_1k", vertices)
+plot_bar(name, scores, vertices)
+plot(name, vertices)

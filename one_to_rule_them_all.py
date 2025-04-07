@@ -10,7 +10,7 @@ import plot
 import starry_graph as sg
 import numpy as np
 import networkx as nx
-import random
+import pandas as pd
 
 warnings.filterwarnings("ignore")
 
@@ -94,12 +94,13 @@ def run_summarization(_name: str, _vertices, aspects, _print_info) -> object:
     return titles
 
 
-def plot_bar(name: str, metrics_dict: dict):
+def plot_bar(name: str, metrics_dict: dict, vertices: pd.DataFrame = None):
     """
     Create and save a bar plot for the given metrics of a specific name and version.
 
     :param name: the name of the dataset.
     :param metrics_dict: Dictionary containing metrics the dataset.
+    :param vertices: the vertices of the graph. (needed if purity is a valid score)
     :return:
     """
     # Retrieve metrics for the specific name and version
@@ -148,6 +149,13 @@ def plot_bar(name: str, metrics_dict: dict):
             x_labels.append(k)
             values.append(v[0])
             colors.append(v[1])
+            if k == "Purity":
+                perm_vertices = vertices.copy()
+                perm_vertices['label'] = np.random.permutation(perm_vertices['label']).tolist()
+                perm_purity = compute_purity_score(name, perm_vertices)
+                values.append(perm_purity)
+                x_labels.append("Random\nPurity")
+                colors.append('#FAA0A0')
 
     if values[0] is None:  # If the avg_index is None, remove it from the plot
         values = values[1:]
@@ -344,9 +352,12 @@ def compute_purity_score(_name: str, _vertices, **kwargs):
         # get the values in the label column.
         labels = vertices_in_cluster['label']
         # it there is only one label per vertex, the mode will return that label.
-        # check that all of the labels are integer.
+        # check that all the labels are integer.
         if all(isinstance(label, int) for label in labels):
-            most_common_label = labels.mode().values()[0]
+            # turn the labels into a numpy array.
+            labels = np.array(labels)
+            # get the most common label.
+            most_common_label = np.bincount(labels).argmax()
         # else - multiple labels per vertex, so we need to get the most common label.
         else:
             # for each vertex, add a count to every label it has.
