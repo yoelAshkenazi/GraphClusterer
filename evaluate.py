@@ -352,7 +352,7 @@ def evaluate(name: str, vertices, G: nx.Graph = None) -> float:
         raise FileNotFoundError(f"No summary files found in directory {summary_path}.")
 
     summaries = {}
-    titles = [cluster.split('.')[0] for cluster in clusters]  # Get the titles.
+    titles = [cluster.replace('.txt', '') for cluster in clusters]  # Get the titles.
     title_to_color = extract_colors(G)
     subgraphs = {}
 

@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.neighbors import BallTree, KernelDensity
 from scipy.spatial.distance import cdist
-from typing import List
+from typing import List, Dict
 import pickle as pkl
 import pandas as pd
 from one_to_rule_them_all import compute_silhouette_score

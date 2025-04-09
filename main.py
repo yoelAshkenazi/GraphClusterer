@@ -2,7 +2,6 @@ import warnings
 
 import pandas as pd
 import pickle as pkl
-import sys
 import os
 import json
 
@@ -114,4 +113,3 @@ def run_full_pipeline(_config_path=""):
 if __name__ == '__main__':
 
     run_full_pipeline('config.json')
-    #todo- fix the bug with the starry method (so the summaries are loaded properly to the plot)

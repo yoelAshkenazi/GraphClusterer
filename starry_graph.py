@@ -139,7 +139,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
         # Get the subgraph.
         summary = summaries[title]
         cluster_name = title
-        # Get the abstracts from the cluster.  # todo- check summary vs abstract.
+        # Get the abstracts from the cluster.
         cluster_abstracts = {row['id']: row['summary'] for id, row in data.iterrows() if row['id'] in subgraph.nodes}
         # Clean NaNs.
         cluster_abstracts = {id: abstract for id, abstract in cluster_abstracts.items() if not pd.isna(abstract)}
@@ -159,7 +159,7 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
                 co_ = reconnect(cohere_key)  # Reinitialize the Cohere client
 
             outside = random.choice(outside_abstracts)
-            a, b = 0, 0
+
             # Evaluate consistency for abstracts inside the cluster.
             prompt_in = (
                 f"Answer using only a number between 1 to 100: "
@@ -178,16 +178,13 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
                     max_tokens=100,
                     temperature=0.0
                 )
-            except Exception as e:
-                print(f"Error in cluster {i}: {e}")
-                response_in = 0  # Default to 0
-                co_ = reconnect(cohere_key)  # Reconnect to the API and
-            if isinstance(response_in, int):
-                a = response_in
-            else:
                 score_in_text = response_in.generations[0].text.strip()
                 a = int(score_in_text.split('\n')[-1].split(':')[-1])
                 score_in += a
+            except Exception as e:
+                print(f"Error in cluster {i}: {e}")
+                a = 0  # Default to 0
+                co_ = reconnect(cohere_key)  # Reconnect to the API
 
             total_in_score += a
 
@@ -209,16 +206,13 @@ def starr(name: str, vertices: pd.DataFrame, G: nx.Graph = None) -> float:
                     max_tokens=100,
                     temperature=0.0  # Set temperature to 0 for deterministic output
                 )
-            except Exception as e:
-                print(f"Error in cluster {i}: {e}")
-                response_out = 0  # Default to 0
-                co_ = reconnect(cohere_key)  # Reconnect to the API and
-            if isinstance(response_out, int):
-                b = response_out
-            else:
                 score_out_text = response_out.generations[0].text.strip()
                 b = int(score_out_text.split('\n')[-1].split(':')[-1])
                 score_out += b
+            except Exception as e:
+                print(f"Error in cluster {i}: {e}")
+                b = 0  # Default to 0
+                co_ = reconnect(cohere_key)  # Reconnect to the API and
 
             total_out_score += b
 
@@ -308,8 +302,6 @@ def update(name, G: nx.Graph, factor: float = 0.5) -> nx.Graph:
                         current_weight = G[vertex_i][vertex_j].get('weight', 1)  # Default weight to 1 if missing
                         new_weight = current_weight * (1 + factor)  # Increase weight by the factor
                         G[vertex_i][vertex_j]['weight'] = new_weight
-                    """else:
-                        edges_to_add.append((vertex_i, vertex_j, {'weight': 1}))  # Track edge to be added"""
                 else:
                     # At least one of u or v is red
                     if G.has_edge(vertex_i, vertex_j):

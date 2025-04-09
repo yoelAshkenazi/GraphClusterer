@@ -17,6 +17,7 @@ load_dotenv()
 
 cohere_api_key = os.getenv("COHERE_API_KEY")
 
+
 def reconnect(key: str):
     """
     Reconnect to the Cohere API.
@@ -119,7 +120,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
     # api_token = os.getenv("LLAMA_API_KEY")
 
     # Load the abstracts from the CSV file
-    df = vertices[['id', 'summary']]  # todo- check summary vs abstract.
+    df = vertices[['id', 'summary']]
     count_titles = 2
     titles_list = []
     vertex_to_title_map = {}  # map from vertex to title.
@@ -130,7 +131,7 @@ def summarize_per_color(subgraphs: List[nx.Graph], name: str, vertices: pd.DataF
 
         # Extract abstracts corresponding to the nodes in the subgraph
         node_ids = set(subgraph.nodes())
-        abstracts = df[df['id'].isin(node_ids)]['summary'].dropna().tolist()  # todo - check summary vs abstract.
+        abstracts = df[df['id'].isin(node_ids)]['summary'].dropna().tolist()
         color = subgraph.nodes[list(subgraph.nodes())[0]]['color']  # get the color of the subgraph.
 
         # If only one abstract is present, skip summarization.
@@ -411,7 +412,7 @@ def summarize_text(s: str):
                     "Your summary must be between 5-10 sentences long. \n"
                     "Your summary must be as coherent as possible, and must not use phrases"
                     "like 'in this text'.\n Your summary must not include sentences and information "
-                    "that is outside the text. \nYou may use sentences from the text without citing them.")
+                    "that is outside the text. \nYou may use sentences from the text without citing them.\n")
 
     co = reconnect(cohere_api_key)
     if not isinstance(s, str):  # If the text is None, return None.

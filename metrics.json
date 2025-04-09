@@ -1,6 +1,6 @@
 {
     "avg_index": {
-        "3D printing": 0.04953698018067414,
+        "3D printing": 0.06291389467001718,
         "additive manufacturing": 0.14312863770814743,
         "composite material": 0.36145995574356654,
         "autonomous drones": 0.12588533102986604,
@@ -21,7 +21,7 @@
         "reuters_1k": 0.03259830724244274
     },
     "largest_cluster_percentage": {
-        "3D printing": 0.09,
+        "3D printing": 0.11,
         "additive manufacturing": 0.25,
         "composite material": 0.45,
         "autonomous drones": 0.16,
@@ -42,7 +42,7 @@
         "reuters_1k": 0.089
     },
     "avg_relevancy": {
-        "3D printing": 0.623529411764706,
+        "3D printing": 0.6428571428571429,
         "additive manufacturing": 0.7344444444444443,
         "composite material": 0.7657142857142857,
         "autonomous drones": 0.5791666666666667,
@@ -63,7 +63,7 @@
         "reuters_1k": 0.5005946329148944
     },
     "avg_coherence": {
-        "3D printing": 0.611764705882353,
+        "3D printing": 0.5785714285714285,
         "additive manufacturing": 0.7477777777777778,
         "composite material": 0.6742857142857143,
         "autonomous drones": 0.475,
@@ -84,7 +84,7 @@
         "reuters_1k": 0.5036173358232181
     },
     "avg_consistency": {
-        "3D printing": 0.5176470588235293,
+        "3D printing": 0.45714285714285713,
         "additive manufacturing": 0.49444444444444446,
         "composite material": 0.5599999999999999,
         "autonomous drones": 0.25,
@@ -105,7 +105,7 @@
         "reuters_1k": 0.2866049382716049
     },
     "avg_fluency": {
-        "3D printing": 0.9294117647058824,
+        "3D printing": 0.9142857142857144,
         "additive manufacturing": 0.96,
         "composite material": 0.8685714285714287,
         "autonomous drones": 0.925,
@@ -126,7 +126,7 @@
         "reuters_1k": 0.909532714320296
     },
     "success_rates": {
-        "3D printing": 0.8280188186095139,
+        "3D printing": 0.8792217327459618,
         "additive manufacturing": 0.7695500581105761,
         "composite material": 0.9852558542931483,
         "autonomous drones": 0.8443256090314913,
@@ -151,7 +151,7 @@
         "terrorism_wiki": 0.01354666873750646,
         "posts_1k_sampled": 0.018183454337517134,
         "reuters_1k": 0.026000486902207697,
-        "3D printing": 0.007234025546919162
+        "3D printing": 0.005367303994038566
     },
     "purity_score": {
         "newsgroups_1k_sampled": 0.203,

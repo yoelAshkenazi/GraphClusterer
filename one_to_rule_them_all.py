@@ -252,54 +252,6 @@ def compute_silhouette_score(_name: str, _vertices, _distance_matrix, **kwargs):
     if print_info:
         print(f"Silhouette coefficient: {score:.4f}")
 
-    """# find the clusters as subgraphs of G
-    clusters = {}
-    for node in G.nodes(data=True):
-        if node[1]['color'] not in clusters:
-            clusters[node[1]['color']] = []
-        clusters[node[1]['color']].append(node[0])
-
-    # for each vertex, calculate the average distance between the vertex and all other vertices in the cluster,
-    # and the average distance between it and all vertices in the closest cluster to it.
-    cluster_coefs = {cluster: [] for cluster in clusters}
-    coefs = []
-    for v in G.nodes:
-        cluster = clusters[G.nodes[v]['color']]  # get the cluster of the vertex
-
-        if len(cluster) == 1:
-            coefs.append(0)  # if the cluster has only one vertex, skip it
-            cluster_coefs[G.nodes[v]['color']].append(0)
-            continue
-
-        # calculate the average distance between the vertex and all other vertices in the cluster
-        avg_dist_in_cluster = np.mean([dists[v][u] for u in cluster if u != v])
-
-        # calculate the average distance between the vertex and all vertices in the closest cluster to it
-        min_avg_dist = np.inf
-        for c in clusters:
-            if c == G.nodes[v]['color']:
-                continue
-            avg_dist = np.mean([dists[v][u] for u in clusters[c]])
-            if avg_dist < min_avg_dist:
-                min_avg_dist = avg_dist
-
-        # compute the silhouette coefficient
-        coef = (min_avg_dist - avg_dist_in_cluster) / max(min_avg_dist, avg_dist_in_cluster)
-
-        coefs.append(coef)
-        cluster_coefs[G.nodes[v]['color']].append(coef)
-
-    if print_info:
-        # print the silhouette coefficient for each cluster
-        for cluster in cluster_coefs:
-            print(f"Silhouette coefficient for cluster {cluster}: {np.mean(cluster_coefs[cluster]):.4f}")
-
-    # print the silhouette coefficient for the whole graph
-    total_avg_coef = np.mean(coefs)
-    print(f"Total silhouette coefficient: {total_avg_coef:.4f}")
-
-    return total_avg_coef"""
-
     return score
 
 
@@ -714,7 +666,7 @@ def the_almighty_function(pipeline_kwargs: dict):
         json.dump(known_metrics, f, indent=4)
 
     # Plot the metrics for the current dataset
-    plot_bar(name, metrics_dict)
+    plot_bar(name, metrics_dict, vertices)
 
     # Create the html component.
     plot.plot(name, vertices)
